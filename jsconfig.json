@@ -1,7 +1,22 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/public/*": ["public/*"],
+      "@/app/*": ["src/app/*"],
+      "@/DB/*": ["src/DB/*"],
+      "@/utils/*": ["src/utils/*"],
+      "@/helper/*": ["src/utils/helper/*"],
+      "@/validation/*": ["src/utils/validation/*"],
+      "@/models/*": ["src/models/*"],
+      "@/layout/*": ["src/components/layout/*"],
+      "@/atoms/*": ["src/components/atoms/*"],
+      "@/molecules/*": ["src/components/molecules/*"],
+      "@/organisms/*": ["src/components/organisms/*"],
+      "@/templates/*": ["src/components/templates/*"],
+      "@/context/*": ["src/context/*"],
+      "@/providers/*": ["src/providers/*"],
+      "@/constants/*": ["src/constants/*"]
     }
   }
 }
