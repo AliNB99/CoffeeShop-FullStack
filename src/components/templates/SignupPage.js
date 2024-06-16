@@ -72,10 +72,10 @@ function SignupPage() {
     <div className="h-screen w-full flex items-center justify-center">
       <form
         action={(formData) => actionHandler(formData)}
-        className="relative w-96 h-fit p-6 space-y-2 md:shadow-medium rounded-lg"
+        className="relative w-96 h-fit p-6 space-y-1 md:shadow-medium rounded-lg"
       >
         <Logo className="hidden md:block absolute -translate-y-1/2 top-0 left-0 right-0 mx-auto size-16 text-orange-300" />
-        <h1 className="text-center py-6 md:py-3 text-orange-300 drop-shadow-md text-3xl font-bold">
+        <h1 className="text-center py-6 md:py-4 text-orange-300 drop-shadow-md text-3xl font-bold">
           ثبت نام
         </h1>
         {authFormAmount.map((i, index) => (
@@ -93,7 +93,7 @@ function SignupPage() {
           />
         ))}
 
-        <div className="flex items-center gap-2 pb-3 md:pb-0">
+        <div className="flex items-center gap-2 pb-5">
           <input
             type="checkbox"
             name="isAccepted"
@@ -101,11 +101,11 @@ function SignupPage() {
             onChange={changeHandler}
           />
           <p
-            className={`text-sm ${
+            className={`${
               warning.isAccepted && touched.isAccepted
                 ? "after:content-['*']"
                 : ""
-            } after:text-red-500 after:text-xl text-zinc-700 dark:text-zinc-200`}
+            } after:text-red-500 after:text-xl text-sm text-zinc-700 dark:text-zinc-200`}
           >
             من
             <Link
@@ -120,7 +120,12 @@ function SignupPage() {
         {isLoading ? (
           <Loader color="#FDBA74" size={10} />
         ) : (
-          <Button bgColor="bg-orange-300" color="text-white" type="submit">
+          <Button
+            width="w-full"
+            bgColor="bg-orange-300"
+            color="text-white"
+            type="submit"
+          >
             ثبت نام
           </Button>
         )}

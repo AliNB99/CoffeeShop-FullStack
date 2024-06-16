@@ -9,7 +9,7 @@ function AdminLayout({ children, role }) {
           <AdminHeader />
           <DashboardSidebar role={role} />
         </div>
-        <div className="w-full flex justify-center mt-16 p-2 lg:mt-0">
+        <div className="w-full flex justify-center mt-16 lg:mt-0">
           {children}
         </div>
       </div>

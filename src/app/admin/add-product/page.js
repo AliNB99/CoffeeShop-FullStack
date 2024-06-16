@@ -1,7 +1,8 @@
+import ProductForm from "@/organisms/common/ProductForm";
 import React from "react";
 
 function AddProduct() {
-  return <div>AddProduct</div>;
+  return <ProductForm />;
 }
 
 export default AddProduct;

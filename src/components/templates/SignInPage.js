@@ -66,10 +66,10 @@ function SignInPage() {
     <div className="h-screen w-full flex items-center justify-center">
       <form
         onSubmit={submitHandler}
-        className="relative w-96 h-fit p-6 space-y-2 md:shadow-medium rounded-lg"
+        className="relative w-96 h-fit p-6 space-y-1 md:shadow-medium rounded-lg"
       >
         <Logo className="hidden md:block absolute -translate-y-1/2 top-0 left-0 right-0 mx-auto size-16 text-orange-300" />
-        <h1 className="text-center py-6 md:py-3 text-orange-300 drop-shadow-md text-3xl font-bold">
+        <h1 className="text-center py-6 md:py-4 text-orange-300 drop-shadow-md text-3xl font-bold">
           ورود
         </h1>
         <InputForm
@@ -98,9 +98,16 @@ function SignInPage() {
         {isLoading ? (
           <Loader color="#FDBA74" size={10} />
         ) : (
-          <Button bgColor="bg-orange-300" color="text-white" type="submit">
-            ورود
-          </Button>
+          <div>
+            <Button
+              width="w-full"
+              bgColor="bg-orange-300"
+              color="text-white"
+              type="submit"
+            >
+              ورود
+            </Button>
+          </div>
         )}
         <div className="flex items-center justify-center gap-1 text-sm pt-3">
           <span className="text-zinc-500 dark:text-zinc-200">

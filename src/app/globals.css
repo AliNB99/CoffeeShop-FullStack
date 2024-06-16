@@ -90,6 +90,10 @@
     }
   }
 
+  .input-form {
+    @apply w-full outline-none rounded-lg bg-white dark:bg-zinc-900 px-3 border-2 dark:border-zinc-700 shadow-normal p-2;
+  }
+
   @media screen and (min-width: 1280px) {
     html.dark .products {
       background-image: url("../../public/images/products-bg.png");

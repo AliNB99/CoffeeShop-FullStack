@@ -4,6 +4,7 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
 function InputForm({
+  id,
   name,
   type,
   error,
@@ -27,14 +28,19 @@ function InputForm({
 
   return (
     <div className="relative">
-      <div className="flex flex-col w-full h-[72px] md:h-[84px] gap-2">
+      <div
+        className={`flex flex-col w-full ${
+          textarea ? "h-60" : "h-[75px]"
+        } gap-2`}
+      >
         {textarea ? (
           <textarea
-            className={`w-full h-52 outline-none rounded-lg bg-white dark:bg-zinc-900 px-3 border-2 shadow-normal p-2 ${
+            id={id}
+            className={`input-form h-52 ${
               error && touched[name]
                 ? "dark:border-red-400 border-red-300"
-                : "dark:border-zinc-700"
-            }`}
+                : "dark:border-zinc-700 focus:border-blue-400 dark:focus:border-blue-300"
+            } `}
             name={name}
             value={form[name]}
             onBlur={fucusHandler}
@@ -43,11 +49,12 @@ function InputForm({
           />
         ) : (
           <input
+            id={id}
             type={type === "password" ? (showPass ? "text" : "password") : type}
-            className={`w-full h-12 md:h-14 outline-none rounded-lg bg-white dark:bg-zinc-900 px-3 border-2 shadow-normal p-2 ${
+            className={`input-form h-12 ${
               error && touched[name]
                 ? "dark:border-red-400 border-red-300"
-                : "dark:border-zinc-700"
+                : "dark:border-zinc-700 focus:border-blue-400 dark:focus:border-blue-400"
             }`}
             name={name}
             value={form[name]}

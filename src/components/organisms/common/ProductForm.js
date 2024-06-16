@@ -10,7 +10,6 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "src/components/atoms/Loader";
-import TitlePage from "src/components/atoms/TitlePage";
 import Button from "@/atoms/Button";
 
 function ProductForm({ product }) {
@@ -75,36 +74,29 @@ function ProductForm({ product }) {
 
   return (
     <div className="admin-page">
-      <form className="flex flex-col gap-10 lg:w-[75%]">
-        {product ? (
-          <TitlePage
-            title="ویرایش محصول"
-            borderColor="border-green-400"
-            color="text-green-400"
-          />
-        ) : (
-          <TitlePage
-            title="ثبت محصول"
-            borderColor="border-blue-400"
-            color="text-blue-400"
-          />
-        )}
+      <form className="flex flex-col gap-5 lg:w-[75%]">
         {addProductForm.map((i, index) => (
-          <InputForm
-            placeholder={i.placeholder}
-            key={index}
-            type={i.type}
-            name={i.name}
-            label={i.label}
-            form={form}
-            touched={touched}
-            setForm={setForm}
-            setTouched={setTouched}
-            error={warning[i.name]}
-            textarea={i.textarea}
-            max={i.max}
-            min={i.min}
-          />
+          <div className="space-y-2">
+            <label htmlFor={i.name} className="font-bold">
+              {i.label}
+            </label>
+            <InputForm
+              id={i.name}
+              placeholder={i.placeholder}
+              key={index}
+              type={i.type}
+              name={i.name}
+              label={i.label}
+              form={form}
+              touched={touched}
+              setForm={setForm}
+              setTouched={setTouched}
+              error={warning[i.name]}
+              textarea={i.textarea}
+              max={i.max}
+              min={i.min}
+            />
+          </div>
         ))}
         <div>
           <AddSpecifications
@@ -133,8 +125,9 @@ function ProductForm({ product }) {
           />
         </div>
         {/* add images */}
-
-        <AddImage form={form} setForm={setForm} />
+        <>
+          <AddImage form={form} setForm={setForm} />
+        </>
 
         {isLoading ? (
           <Loader color="#3B82F6" size={10} />
@@ -143,17 +136,19 @@ function ProductForm({ product }) {
             type="submit"
             color="text-green-500"
             bgColor="bg-green-100"
-            title="ویرایش"
             clickHandler={submitHandler}
-          />
+          >
+            ویرایش
+          </Button>
         ) : (
           <Button
             type="submit"
             color="text-blue-500"
             bgColor="bg-blue-100"
-            title="ثبت"
             clickHandler={submitHandler}
-          />
+          >
+            ثبت
+          </Button>
         )}
       </form>
     </div>

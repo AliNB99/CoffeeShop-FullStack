@@ -18,7 +18,7 @@ function DashboardSidebar({ role }) {
     <aside
       className={`fixed lg:relative ${
         isShow.sidebar ? "right-0" : "-right-64"
-      } lg:right-0 top-0 h-full overflow-y-auto w-64 lg:w-72 bg-white dark:bg-zinc-700 shadow-xl transition-all z-30 p-4`}
+      } lg:right-0 top-0 min-h-full overflow-y-auto w-64 lg:w-72 bg-white dark:bg-zinc-700 shadow-xl transition-all z-30 p-4`}
     >
       <div className="flex lg:hidden items-center justify-end py-2">
         <button
