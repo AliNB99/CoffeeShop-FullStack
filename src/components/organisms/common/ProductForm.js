@@ -86,7 +86,6 @@ function ProductForm({ product }) {
               key={index}
               type={i.type}
               name={i.name}
-              label={i.label}
               form={form}
               touched={touched}
               setForm={setForm}
@@ -106,7 +105,7 @@ function ProductForm({ product }) {
             touched={touched}
           />
         </div>
-        <div className="flex flex-col md:flex-row gap-5">
+        <div className="flex flex-col md:flex-row gap-5 my-10">
           <AddPropertyList
             color="text-green-500"
             bgColor="bg-green-100"
@@ -125,9 +124,8 @@ function ProductForm({ product }) {
           />
         </div>
         {/* add images */}
-        <>
-          <AddImage form={form} setForm={setForm} />
-        </>
+
+        <AddImage form={form} setForm={setForm} />
 
         {isLoading ? (
           <Loader color="#3B82F6" size={10} />

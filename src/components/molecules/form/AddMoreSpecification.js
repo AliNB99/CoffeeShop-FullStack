@@ -4,6 +4,7 @@ import {
   CheckIcon,
   PlusCircleIcon,
   TrashIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
@@ -82,16 +83,16 @@ function AddMoreSpecification({ addItem, setAddItem, form, setForm }) {
             <Button
               clickHandler={removeHandler}
               type="button"
-              color="text-orange-500"
+              color="text-orange-600"
               bgColor="bg-orange-100"
               borderColor="border-orange-200"
             >
-              <TrashIcon />
+              <XMarkIcon />
             </Button>
             <Button
               clickHandler={addSpecificationHandler}
               type="button"
-              color="text-green-500"
+              color="text-green-600"
               bgColor="bg-green-100"
               borderColor="border-green-200"
             >

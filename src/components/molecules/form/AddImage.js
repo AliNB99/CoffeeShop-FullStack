@@ -77,6 +77,7 @@ function AddImage({ form, setForm }) {
       <div className="flex sm:flex-wrap gap-2 sm:gap-4 items-center w-full min-h-44 py-5 sm:h-auto overflow-x-auto">
         <div className="group">
           <input
+            name="images"
             id="file"
             type="file"
             className="hidden"
