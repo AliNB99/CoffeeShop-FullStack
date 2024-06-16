@@ -1,4 +1,4 @@
-import { navbarItem } from "@/constants/navbar";
+import { navbarItem } from "@/constants/other";
 import {
   HomeIcon,
   XMarkIcon,
@@ -12,7 +12,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Logo, LogoType } from "@/utils/svg";
-import DarkModeToggle from "../../DarkModeToggle";
+import DarkModeToggle from "../../common/DarkModeToggle";
 import StoreDropDownMobile from "./StoreDropDownMobile";
 import { signOut } from "next-auth/react";
 

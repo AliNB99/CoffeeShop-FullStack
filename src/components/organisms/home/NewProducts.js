@@ -1,8 +1,8 @@
-import CartProduct from "../CartProduct";
+import CartProduct from "../common/CartProduct";
 import connectDB from "@/DB/connectDB";
 import toast from "react-hot-toast";
 import Product from "@/models/Product";
-import TitleSection from "@/molecules/TitleSection";
+import TitleSection from "@/molecules/common/TitleSection";
 
 async function NewProducts() {
   try {

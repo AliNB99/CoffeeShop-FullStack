@@ -1,5 +1,5 @@
 import Header from "@/layout/Header";
-import Overlay from "@/molecules/Overlay";
+import Overlay from "@/molecules/common/Overlay";
 // import Footer from "@/layout/Footer";
 
 async function Layout({ children }) {

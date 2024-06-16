@@ -1,10 +1,12 @@
 "use client";
 
 import { showContext } from "@/context/ShowContextProvider";
+import { usePathname } from "next/navigation";
 import { useContext, useEffect } from "react";
 
 function Overlay() {
   const { isShow, setIsShow } = useContext(showContext);
+  const pathName = usePathname();
 
   const hiddenOverlay = () => {
     const data = Object.keys(isShow);
@@ -21,7 +23,11 @@ function Overlay() {
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  });
+
+  useEffect(() => {
+    hiddenOverlay();
+  }, [pathName]);
 
   return (
     <div

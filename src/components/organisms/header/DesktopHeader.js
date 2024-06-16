@@ -1,7 +1,7 @@
 "use client";
 
-import { navbarItem } from "@/constants/navbar";
-import DarkModeToggle from "@/molecules/DarkModeToggle";
+import { navbarItem } from "@/constants/other";
+import DarkModeToggle from "@/molecules/common/DarkModeToggle";
 import StoreDropDown from "@/molecules/header/desktop/StoreDropDown";
 import UserDropDown from "@/molecules/header/desktop/UserDropDown";
 import {

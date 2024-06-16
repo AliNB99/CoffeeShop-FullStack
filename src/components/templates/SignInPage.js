@@ -5,16 +5,17 @@ import { formRegisterValidation } from "@/utils/validation/auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Logo } from "@/utils/svg";
 import toast from "react-hot-toast";
 import Button from "@/atoms/Button";
 import InputForm from "@/molecules/form/InputForm";
 import Loader from "@/atoms/Loader";
+import { Logo } from "@/utils/svg";
+import useLoading from "src/hooks/useLoading";
 
 function SignInPage() {
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, startLoading, stopLoading] = useLoading();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -33,19 +34,17 @@ function SignInPage() {
       return setTouched({
         email: true,
         password: true,
-        confirmPassword: true,
-        isAccepted: true,
       });
     }
 
-    setIsLoading(true);
+    startLoading();
     const res = await signIn("credentials", {
       email: form.email,
       password: form.password,
       redirect: false,
     });
 
-    setIsLoading(false);
+    stopLoading();
     if (res.error) {
       return toast.error(res.error);
     } else {
@@ -67,7 +66,7 @@ function SignInPage() {
     <div className="h-screen w-full flex items-center justify-center">
       <form
         onSubmit={submitHandler}
-        className="relative w-96 h-fit p-6 space-y-6 md:shadow-medium rounded-lg"
+        className="relative w-96 h-fit p-6 space-y-2 md:shadow-medium rounded-lg"
       >
         <Logo className="hidden md:block absolute -translate-y-1/2 top-0 left-0 right-0 mx-auto size-16 text-orange-300" />
         <h1 className="text-center py-6 md:py-3 text-orange-300 drop-shadow-md text-3xl font-bold">
@@ -99,7 +98,7 @@ function SignInPage() {
         {isLoading ? (
           <Loader color="#FDBA74" size={10} />
         ) : (
-          <Button bgColor="bg-orange-300" color="text-white">
+          <Button bgColor="bg-orange-300" color="text-white" type="submit">
             ورود
           </Button>
         )}

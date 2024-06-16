@@ -21,3 +21,8 @@ export const storeDesktopItem = [
   { title: "کپسول قهوه", link: "/" },
   { title: "قهوه زینو برزیلی", link: "/" },
 ];
+
+export const categoryList = {
+  coffee: "قهوه ها",
+  accessory: "لوازم جانبی",
+};

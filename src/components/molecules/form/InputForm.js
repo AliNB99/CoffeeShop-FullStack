@@ -15,7 +15,6 @@ function InputForm({
   textarea,
 }) {
   const [showPass, setShowPass] = useState(false);
-  console.log([name, form[name]]);
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -28,7 +27,7 @@ function InputForm({
 
   return (
     <div className="relative">
-      <div className="flex flex-col w-full gap-2">
+      <div className="flex flex-col w-full h-[72px] md:h-[84px] gap-2">
         {textarea ? (
           <textarea
             className={`w-full h-52 outline-none rounded-lg bg-white dark:bg-zinc-900 px-3 border-2 shadow-normal p-2 ${
@@ -59,7 +58,7 @@ function InputForm({
         )}
         {/* show error text in under input */}
         {touched[name] ? (
-          <span className="text-xs md:text-sm text-red-600 dark:text-red-400 mr-2 rounded-sm">
+          <span className="text-xs text-red-600 dark:text-red-400 mr-2 rounded-sm">
             {error}
           </span>
         ) : null}

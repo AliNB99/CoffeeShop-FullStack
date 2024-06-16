@@ -1,27 +1,31 @@
-import User from "@/models/User";
-import connectDB from "@/DB/connectDB";
-import { NextResponse } from "next/server";
-import { hashingPassword } from "@/utils/validation/auth";
+"use server";
 
-export async function POST(req) {
+import connectDB from "@/DB/connectDB";
+import User from "@/models/User";
+import { hashingPassword } from "@/utils/validation/auth";
+import { revalidatePath } from "next/cache";
+
+export const signupAction = async (formData) => {
+  const email = formData.get("email");
+  const password = formData.get("password");
+
   try {
     await connectDB();
-    const { email, password } = await req.json();
 
     if (!email || !password) {
-      return NextResponse.json({
+      return {
         error: "لطفا ایمیل و پسورد خود را وارد نمایید",
         status: 422,
-      });
+      };
     }
 
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
-      return NextResponse.json({
+      return {
         error: "شما قبلا حساب ایجاد کرده اید",
         status: 422,
-      });
+      };
     }
 
     const hashedPassword = await hashingPassword(password);
@@ -31,16 +35,16 @@ export async function POST(req) {
       password: hashedPassword,
     });
     console.log(newUser);
-
-    return NextResponse.json({
+    revalidatePath("/signin");
+    return {
       message: "حساب کاربری با موفقیت ایجاد شد",
       status: 201,
-    });
-  } catch (error) {
-    console.log(error);
-    return NextResponse.json({
-      error: "مشکلی در سرور رخ داده است",
+    };
+  } catch (err) {
+    console.log(err);
+    return {
+      message: "مشکلی در سمت سرور پیش آمده است.",
       status: 500,
-    });
+    };
   }
-}
+};
