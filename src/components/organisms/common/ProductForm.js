@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Loader from "src/components/atoms/Loader";
 import Button from "@/atoms/Button";
+import TitlePage from "@/atoms/TitlePage";
 
 function ProductForm({ product }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -34,7 +35,7 @@ function ProductForm({ product }) {
   useEffect(() => {
     if (product) {
       setForm(product);
-      console.log(product);
+      console.log("first")
     }
   }, []);
 
@@ -75,8 +76,17 @@ function ProductForm({ product }) {
   return (
     <div className="admin-page">
       <form className="flex flex-col gap-5 lg:w-[75%]">
+        {product ? (
+          <TitlePage color="text-green-500" borderColor="border-green-500">
+            ویرایش محصول
+          </TitlePage>
+        ) : (
+          <TitlePage color="text-blue-500" borderColor="border-blue-500">
+            ثبت محصول
+          </TitlePage>
+        )}
         {addProductForm.map((i, index) => (
-          <div className="space-y-2">
+          <div key={index} className="space-y-2">
             <label htmlFor={i.name} className="font-bold">
               {i.label}
             </label>
@@ -99,6 +109,7 @@ function ProductForm({ product }) {
         ))}
         <div>
           <AddSpecifications
+            product={product}
             form={form}
             setForm={setForm}
             warning={warning}
@@ -128,7 +139,11 @@ function ProductForm({ product }) {
         <AddImage form={form} setForm={setForm} />
 
         {isLoading ? (
-          <Loader color="#3B82F6" size={10} />
+          product ? (
+            <Loader color="#22C55E" size={10} />
+          ) : (
+            <Loader color="#3B82F6" size={10} />
+          )
         ) : product ? (
           <Button
             type="submit"

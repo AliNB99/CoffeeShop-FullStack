@@ -9,7 +9,6 @@ function Input({
   required,
   touched,
 }) {
-  console.log(required);
   return (
     <div className="relative w-full">
       {label && (

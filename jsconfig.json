@@ -3,6 +3,7 @@
     "baseUrl": ".",
     "paths": {
       "@/public/*": ["public/*"],
+      "@/redux/*": ["src/redux/*"],
       "@/app/*": ["src/app/*"],
       "@/DB/*": ["src/DB/*"],
       "@/utils/*": ["src/utils/*"],

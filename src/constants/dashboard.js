@@ -81,4 +81,54 @@ export const addAccessoryItem = [
   { title: "وزن محصول (گرم)", value: "", placeholder: "مثلا: 250 گرم" },
 ];
 
-
+export const headCellProductTable = [
+  {
+    id: "id",
+    numeric: true,
+    disablePadding: false,
+    label: "شماره",
+    width: 20,
+  },
+  {
+    id: "title",
+    numeric: false,
+    disablePadding: true,
+    label: "نام محصول",
+    width: 200,
+  },
+  {
+    id: "quantity",
+    numeric: true,
+    disablePadding: false,
+    label: "تعداد",
+    width: 30,
+  },
+  {
+    id: "price",
+    numeric: true,
+    disablePadding: false,
+    label: "قیمت(تومان)",
+    width: 100,
+  },
+  {
+    id: "discount",
+    numeric: true,
+    disablePadding: false,
+    label: "تخفیف(درصد)",
+    width: 30,
+  },
+  {
+    id: "available",
+    numeric: false,
+    disablePadding: false,
+    label: "وضعیت",
+    width: 30,
+  },
+  {
+    id: "image",
+    numeric: true,
+    disablePadding: false,
+    label: "عکس",
+    width: 50,
+  },
+];

@@ -94,6 +94,14 @@
     @apply w-full outline-none rounded-lg bg-white dark:bg-zinc-900 px-3 border-2 dark:border-zinc-700 shadow-normal p-2;
   }
 
+  .cart-btn {
+    @apply bg-gray-100 dark:bg-zinc-800 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full;
+  }
+
+  .cart-btn:hover {
+    @apply bg-teal-600 dark:bg-emerald-500;
+  }
+
   @media screen and (min-width: 1280px) {
     html.dark .products {
       background-image: url("../../public/images/products-bg.png");

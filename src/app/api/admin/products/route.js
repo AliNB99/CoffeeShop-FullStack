@@ -135,3 +135,41 @@ export async function PATCH(req) {
     return NextResponse.json({ status: 500, error: "مشکلی پیش آمده است" });
   }
 }
+
+export async function DELETE(req) {
+  try {
+    const session = await getServerSession(req);
+    if (!session) {
+      return NextResponse.json({
+        status: 401,
+        error: "ابتدا وارد حساب خود شوید",
+      });
+    }
+    await connectDB();
+
+    const user = await User.findOne({ email: session.user.email });
+
+    if (!user) {
+      return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
+    }
+
+    if (user.role !== "ADMIN") {
+      return NextResponse.json({
+        status: 403,
+        error: "دسترسی شما برای این کار محدود شده است",
+      });
+    }
+
+    const productIds = await req.json();
+    console.log(productIds);
+    await Product.deleteMany({
+      _id: { $in: productIds },
+    });
+    return NextResponse.json({
+      status: 200,
+      message: "محصول با موفقیت حذف شد",
+    });
+  } catch (error) {
+    return NextResponse.json({ status: 500, error: "مشکلی پیش آمده است" });
+  }
+}

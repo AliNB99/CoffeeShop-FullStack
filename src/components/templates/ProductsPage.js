@@ -8,7 +8,7 @@ function ProductsPage({ category, products }) {
   return (
     <div className="space-top">
       <div className="flex flex-col gap-5 xl:flex-row">
-        <sidebar className="min-w-64 h-fit bg-white dark:bg-zinc-700 p-5 rounded-2xl shadow-medium ">
+        <sidebar className="min-w-[300px] h-fit bg-white dark:bg-zinc-700 p-5 rounded-2xl shadow-medium ">
           <div className="mb-3 flex items-center gap-2 text-orange-200">
             <Squares2X2Icon />
             <h3 className="font-bold">دسته بندی</h3>
@@ -40,14 +40,7 @@ function ProductsPage({ category, products }) {
         {products.length ? (
           <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
             {products.map((i) => (
-              <CartProduct
-                key={i._id}
-                title={i.title}
-                price={i.price}
-                images={i.images}
-                discount={i.discount}
-                id={i._id}
-              />
+              <CartProduct data={i} />
             ))}
           </div>
         ) : (

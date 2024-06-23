@@ -1,4 +1,4 @@
-function ItemSeller({ children, icon }) {
+function StoreFeatures({ children, icon }) {
   return (
     <div className="flex items-center gap-2">
       {icon}
@@ -9,4 +9,4 @@ function ItemSeller({ children, icon }) {
   );
 }
 
-export default ItemSeller;
+export default StoreFeatures;

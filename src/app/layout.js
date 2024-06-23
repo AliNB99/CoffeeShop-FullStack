@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import NextAuthProvider from "@/utils/NextAuthProvider";
 import NextThemeProvider from "@/providers/ThemeProvider";
 import ShowContextProvider from "@/context/ShowContextProvider";
+import CartProvider from "@/redux/CartProviders";
 
 export const metadata = {
   title: "Golden Coffee",
@@ -23,8 +24,10 @@ export default async function RootLayout({ children }) {
         <NextThemeProvider>
           <NextAuthProvider>
             <ShowContextProvider>
-              <Layout>{children}</Layout>
-              <Toaster />
+              <CartProvider>
+                <Layout>{children}</Layout>
+                <Toaster />
+              </CartProvider>
             </ShowContextProvider>
           </NextAuthProvider>
         </NextThemeProvider>

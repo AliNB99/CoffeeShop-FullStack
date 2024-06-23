@@ -7,29 +7,40 @@ import AddMoreSpecification from "@/molecules/form/AddMoreSpecification";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 
-function AddSpecifications({ form, setForm, warning, touched }) {
-  // add more item in specifications in form
-  const [addItem, setAddItem] = useState(null);
-  const [categoryItem, setCategoryItem] = useState({});
-
+function AddSpecifications({ product, form, setForm, warning, touched }) {
   // set specification value based on category
+  const [listCategory, setListCategory] = useState(null);
+
   useEffect(() => {
-    // When a value is not recorded in the form
+    if (product) {
+      setForm({ ...form, specifications: [...product.specifications] });
+      setListCategory(
+        product.category === "coffee" ? addCoffeeItem : addAccessoryItem
+      );
+    }
+  }, [product]);
+
+  useEffect(() => {
     if (form.category === "coffee") {
-      setForm({ ...form, specifications: addCoffeeItem });
-      setCategoryItem(addCoffeeItem);
+      setForm({
+        ...form,
+        specifications:
+          product?.category === "coffee"
+            ? product.specifications
+            : addCoffeeItem,
+      });
+      setListCategory(addCoffeeItem);
     } else {
-      setForm({ ...form, specifications: addAccessoryItem });
-      setCategoryItem(addAccessoryItem);
+      setForm({
+        ...form,
+        specifications:
+          product?.category === "accessory"
+            ? product.specifications
+            : addAccessoryItem,
+      });
+      setListCategory(addAccessoryItem);
     }
   }, [form.category]);
-
-  useEffect(() => {
-    if (form.specifications.length) {
-      setCategoryItem(form.specifications);
-      return;
-    }
-  });
 
   // change value in specification input in form
   const changeHandler = (e, index) => {
@@ -58,14 +69,11 @@ function AddSpecifications({ form, setForm, warning, touched }) {
         <ul className="w-full grid sm:grid-cols-2 gap-6 sm:gap-4">
           {form.specifications.map((i, index) => (
             <li key={index}>
-              {console.log(index, categoryItem.length)}
               <div className="flex items-end gap-1">
                 <Input
                   touched={touched.specifications}
                   warning={warning}
-                  required={
-                    index+1 < form.specifications.length ? true : false
-                  }
+                  required={index < 6 ? true : false}
                   label={i.title}
                   placeholder={i.placeholder}
                   type="text"
@@ -73,7 +81,7 @@ function AddSpecifications({ form, setForm, warning, touched }) {
                   changeHandler={(e) => changeHandler(e, index)}
                 />
 
-                {index > categoryItem.length - 1 && (
+                {index + 1 > listCategory.length && (
                   <Button
                     color="text-red-500"
                     bgColor="bg-red-100"
@@ -94,12 +102,7 @@ function AddSpecifications({ form, setForm, warning, touched }) {
         </div>
       )}
 
-      <AddMoreSpecification
-        addItem={addItem}
-        setAddItem={setAddItem}
-        form={form}
-        setForm={setForm}
-      />
+      <AddMoreSpecification form={form} setForm={setForm} />
     </div>
   );
 }

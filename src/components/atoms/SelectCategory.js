@@ -4,7 +4,6 @@ function SelectCategory({ form, setForm }) {
     setForm({ ...form, category: e.target.value });
   };
 
-
   return (
     <div className="flex flex-col gap-2">
       <label>دسته بندی</label>

@@ -1,15 +1,23 @@
 "use client";
 
+import CartButton from "@/molecules/common/CartButton";
 import { sp } from "@/utils/helper/replaceNumber";
 import { LogoType } from "@/utils/svg";
-import { ShoppingCartIcon, StarIcon } from "@heroicons/react/24/outline";
+import { StarIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
-function CartProduct({ title, price, images, discount, id }) {
+function CartProduct({ data }) {
+  const { title, price, images, discount, _id } = data;
+  const router = useRouter();
+
+  const showDetailHandler = () => {
+    router.push(`/products/${_id}`);
+  };
+
   return (
-    <Link
-      href={`/products/${id}/${title.split(" ").join("-")}`}
+    <div
+      onClick={showDetailHandler}
       className="rounded-2xl bg-white dark:bg-zinc-700 p-2 md:p-5 hover:shadow-medium dark:hover:shadow-zinc-500 transition-all"
     >
       <div className="relative flex justify-center">
@@ -55,18 +63,13 @@ function CartProduct({ title, price, images, discount, id }) {
         </div>
       </div>
       <div className="flex items-center justify-between mt-4">
-        <button className="bg-gray-100 dark:bg-zinc-800 flex items-center justify-center w-7 h-7 md:w-10 md:h-10 rounded-full hover:bg-teal-600 hover:dark:bg-emerald-500 group">
-          <ShoppingCartIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all" />
-        </button>
-        <div className="flex items-center text-yellow-500">
-          <StarIcon className="w-3 h-3 lg:w-5 lg:h-5" />
-          <StarIcon className="w-3 h-3 lg:w-5 lg:h-5" />
-          <StarIcon className="w-3 h-3 lg:w-5 lg:h-5" />
-          <StarIcon className="w-3 h-3 lg:w-5 lg:h-5" />
-          <StarIcon className="w-3 h-3 lg:w-5 lg:h-5" />
+        <CartButton data={data} />
+        <div className="flex gap-1 text-yellow-500">
+          <span className="text-xs md:text-lg">2.5</span>
+          <StarIcon className="w-3 h-3 md:w-5 md:h-5" />
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

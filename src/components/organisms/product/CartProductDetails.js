@@ -2,25 +2,28 @@ import { sp } from "@/utils/helper/replaceNumber";
 import {
   CheckBadgeIcon,
   RocketLaunchIcon,
-  ShoppingCartIcon,
   TruckIcon,
 } from "@heroicons/react/24/outline";
-import { Logo } from "@/utils/svg";
-import ItemSeller from "./ItemSeller";
-import Button from "@/atoms/Button";
 
-function CartDetails({ discount, price }) {
+import { StarIcon } from "@heroicons/react/24/solid";
+
+import { Logo } from "@/utils/svg";
+import StoreFeatures from "../../molecules/product/StoreFeatures";
+import CartButton from "@/molecules/common/CartButton";
+
+function CartProductDetails({ product }) {
+  const { discount, price } = product;
   return (
-    <div className="bg-white border-2 dark:border-zinc-700 dark:bg-zinc-800 w-full lg:w-72 flex flex-col justify-between rounded-2xl p-4">
+    <div className="bg-white border-2 dark:border-zinc-700 dark:bg-zinc-700/60 w-full lg:w-72 flex flex-col justify-between rounded-2xl p-4">
       <div className="divide-y-2 dark:divide-zinc-700">
         <div className="flex flex-col gap-3 pb-4">
           <h4 className="font-bold">فروشنده</h4>
-          <ItemSeller icon={<Logo className="text-orange-300" />}>
+          <StoreFeatures icon={<Logo className="text-orange-300" />}>
             گلدن کافه (Golden Coffee)
-          </ItemSeller>
-          <ItemSeller icon={<CheckBadgeIcon className="text-green-400" />}>
+          </StoreFeatures>
+          <StoreFeatures icon={<CheckBadgeIcon className="text-green-400" />}>
             گارانتی اصالت و سلامت فیزیکی کالا
-          </ItemSeller>
+          </StoreFeatures>
         </div>
         <div className="p-2 lg:py-4 flex flex-col items-end gap-2">
           <div className="pt-2">
@@ -46,25 +49,23 @@ function CartDetails({ discount, price }) {
           </div>
         </div>
         <div className="py-4 space-y-2">
-          <ItemSeller icon={<TruckIcon className="text-blue-400" />}>
+          <StoreFeatures icon={<TruckIcon className="text-blue-400" />}>
             ارسال سریع سوپرمارکتی کافی گلد
-          </ItemSeller>
-          <ItemSeller icon={<RocketLaunchIcon className="text-red-400" />}>
+          </StoreFeatures>
+          <StoreFeatures icon={<RocketLaunchIcon className="text-red-400" />}>
             ارسال امروز (فعلا در شهر تهران و کرج)
-          </ItemSeller>
+          </StoreFeatures>
         </div>
       </div>
-      <Button
-        fontSize="text-base"
-        type="button"
-        color="text-white"
-        bgColor="bg-teal-600"
-      >
-        <ShoppingCartIcon />
-        <span>افزودن به سبد خرید</span>
-      </Button>
+      <div className="flex items-center justify-between">
+        <CartButton data={product} />
+        <div className="flex gap-1 text-yellow-500">
+          <span className="text-xs md:text-lg">2.5</span>
+          <StarIcon className="w-3 h-3 md:w-5 md:h-5" />
+        </div>
+      </div>
     </div>
   );
 }
 
-export default CartDetails;
+export default CartProductDetails;

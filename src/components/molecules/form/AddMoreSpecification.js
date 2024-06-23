@@ -3,12 +3,12 @@ import Input from "@/atoms/Input";
 import {
   CheckIcon,
   PlusCircleIcon,
-  TrashIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { useState } from "react";
 
-function AddMoreSpecification({ addItem, setAddItem, form, setForm }) {
+function AddMoreSpecification({ form, setForm }) {
+  const [addItem, setAddItem] = useState(null);
   const [warning, setWarning] = useState(null);
   // add more item in specifications in form
   const changeItemHandler = (e) => {
@@ -20,6 +20,7 @@ function AddMoreSpecification({ addItem, setAddItem, form, setForm }) {
     if (!addItem.title || !addItem.value) {
       return setWarning("لطفا مقادیر را کامل وارد نمایید");
     }
+    console.log(form.specifications)
     setForm({ ...form, specifications: [...form.specifications, addItem] });
     setAddItem(null);
     setWarning(null);

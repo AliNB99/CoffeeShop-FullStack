@@ -19,7 +19,6 @@ function SliderProductImage({ images }) {
   return (
     <>
       <Swiper
-        // install Swiper modules
         style={{
           "--swiper-navigation-color": "gray",
           "--swiper-pagination-color": "gray",
@@ -38,7 +37,13 @@ function SliderProductImage({ images }) {
         {images.map((img, index) => (
           <SwiperSlide key={index}>
             <div className="flex justify-center items-center mb-5">
-              <Image src={img} width={300} height={300} alt={img} loading="lazy" />
+              <Image
+                src={img}
+                width={300}
+                height={300}
+                alt={img}
+                loading="lazy"
+              />
             </div>
           </SwiperSlide>
         ))}
@@ -55,7 +60,13 @@ function SliderProductImage({ images }) {
         {images.map((img, index) => (
           <SwiperSlide key={index}>
             <div className="flex justify-center items-center h-full p-1">
-              <Image src={img} width={100} height={100} alt={img} loading="lazy"/>
+              <Image
+                src={img}
+                width={100}
+                height={100}
+                alt={img}
+                loading="lazy"
+              />
             </div>
           </SwiperSlide>
         ))}

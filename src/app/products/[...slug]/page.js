@@ -11,9 +11,9 @@ async function ProductDetail({ params: { slug } }) {
     console.log(error);
   }
 
-  const products = await Product.findOne({ _id: id });
+  const product = await Product.findOne({ _id: id });
 
-  return <ProductDetailPage products={JSON.parse(JSON.stringify(products))} />;
+  return <ProductDetailPage product={JSON.parse(JSON.stringify(product))} />;
 }
 
 export default ProductDetail;
