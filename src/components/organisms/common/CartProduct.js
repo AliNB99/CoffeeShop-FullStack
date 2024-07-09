@@ -1,5 +1,6 @@
 "use client";
 
+import CustomImage from "@/atoms/CustomImage";
 import CartButton from "@/molecules/common/CartButton";
 import { sp } from "@/utils/helper/replaceNumber";
 import { LogoType } from "@/utils/svg";
@@ -22,15 +23,15 @@ function CartProduct({ data }) {
     >
       <div className="relative flex justify-center">
         {images.length ? (
-          <Image
-            src={images[0]}
-            className="w-32 h-32 lg:w-64 lg:h-64 rounded-2xl transition-opacity opacity-0 duration-[1s]"
-            width={300}
-            height={300}
-            loading="lazy"
-            onLoad={(img) => img.target.classList.remove("opacity-0")}
-            alt="product image"
-          />
+          <div className="w-32 h-32 lg:w-64 lg:h-64 flex items-center justify-center">
+            <CustomImage
+              src={images[0]}
+              width={300}
+              height={300}
+              alt="product image"
+              className="w-32 h-32 lg:w-64 lg:h-64 rounded-2xl transition-opacity opacity-0 duration-[1s]"
+            />
+          </div>
         ) : (
           <div>
             <LogoType className="w-fit h-32 lg:w-52 lg:h-64 opacity-20" />

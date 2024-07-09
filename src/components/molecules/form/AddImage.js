@@ -11,29 +11,20 @@ import toast from "react-hot-toast";
 import Loader from "src/components/atoms/Loader";
 import useLoading from "src/hooks/useLoading";
 import { UploadClient } from "@uploadcare/upload-client";
-import Image from "next/image";
-import { useEffect } from "react";
-import { Skeleton } from "@mui/material";
-import { BarLoader } from "react-spinners";
+import CustomImage from "@/atoms/CustomImage";
 
 function AddImage({ form, setForm }) {
   const { isLoading, startLoading, stopLoading } = useLoading({
     uploadImg: false,
-    loadedImg: false,
   });
   const client = new UploadClient({
     publicKey: process.env.NEXT_PUBLIC_API_KEY,
   });
 
-  useEffect(() => {
-    console.log(isLoading);
-  }, [isLoading]);
-
   // function to upload a photo inside uploadCare
   const imageChangeHandler = async (e) => {
     const images = Object.values(e.target.files);
-    startLoading("uploadImg");
-    startLoading("loadedImg");
+    images.length && startLoading("uploadImg");
     images.map(async (file) => {
       try {
         const data = await client.uploadFile(file);
@@ -61,12 +52,6 @@ function AddImage({ form, setForm }) {
     const item = newImages.splice(index, 1)[0];
     newImages.unshift(item);
     setForm({ ...form, images: newImages });
-  };
-
-  const loadedImgHandler = (e) => {
-    e.target.classList.remove("opacity-0");
-    stopLoading("loadedImg");
-    console.log(e);
   };
 
   return (
@@ -98,7 +83,7 @@ function AddImage({ form, setForm }) {
             className="relative flex items-center justify-center border-2 border-zinc-300 dark:border-zinc-600 group-hover:border-zinc-400 cursor-pointer border-dashed h-32 w-32 rounded-lg transition-all"
           >
             {isLoading.uploadImg ? (
-              <Loader color="#EF4444" size={10} />
+              <Loader color="#EF4444" size={8} />
             ) : (
               <div>
                 <PhotoIcon className="size-10 text-zinc-400 opacity-50 dark:text-zinc-600 group-hover:opacity-100 transition-all" />
@@ -121,16 +106,13 @@ function AddImage({ form, setForm }) {
             {isLoading.loadedImg && (
               <Loader model="bar" size={1} color="#ccc" />
             )}
-            <Image
+            <CustomImage
               src={img}
               width={100}
               height={100}
-              alt="image product"
-              loading="lazy"
-              onLoad={loadedImgHandler}
-              // className={`${isLoading.loadedImg ? "hidden" : ""}`}
+              className="transition-opacity opacity-0 duration-[1s]"
+              alt="product image"
             />
-
             <button
               type="button"
               onClick={(e) => deleteHandler(e, index)}

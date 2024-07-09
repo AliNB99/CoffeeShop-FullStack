@@ -13,6 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { useState } from "react";
 import Image from "next/image";
+import CustomImage from "@/atoms/CustomImage";
 
 function SliderProductImage({ images }) {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
@@ -36,15 +37,13 @@ function SliderProductImage({ images }) {
       >
         {images.map((img, index) => (
           <SwiperSlide key={index}>
-            <div className="flex justify-center items-center mb-5">
-              <Image
+            <div className="h-full flex justify-center items-center mb-5">
+              <CustomImage
                 src={img}
                 width={300}
                 height={300}
                 alt={img}
-                loading="lazy"
                 className="transition-opacity opacity-0 duration-[1s]"
-                onLoad={(img) => img.target.classList.remove("opacity-0")}
               />
             </div>
           </SwiperSlide>
@@ -62,14 +61,12 @@ function SliderProductImage({ images }) {
         {images.map((img, index) => (
           <SwiperSlide key={index}>
             <div className="flex justify-center items-center h-full p-1">
-              <Image
+              <CustomImage
                 src={img}
                 width={100}
                 height={100}
                 alt={img}
-                loading="lazy"
                 className="transition-opacity opacity-0 duration-[1s]"
-                onLoad={(img) => img.target.classList.remove("opacity-0")}
               />
             </div>
           </SwiperSlide>

@@ -71,8 +71,8 @@ export const addCoffeeItem = [
   { title: "برنده", value: "", placeholder: "مثلا: بن مانو" },
   { title: "وزن (گرم)", value: "", placeholder: "مثلا: 250 گرم" },
   { title: "تاریخ تولید", value: "", placeholder: "مثلا: 1402/01/05" },
-  { title: "نوع قهوه", value: "", placeholder: "مثلا:قهوه آسیاب شده " },
-  { title: "نسبت قهوه (عربیکا / روبستا)", value: "", placeholder: "70/30" },
+  { title: "نوع قهوه", value: "", placeholder: "مثلا: قهوه آسیاب شده " },
+  { title: "نسبت قهوه (عربیکا / روبستا)", value: "", placeholder: "مثلا: 70/30" },
   { title: "دستگاه سازگار", value: "", placeholder: "مثلا: موکاپات" },
 ];
 
