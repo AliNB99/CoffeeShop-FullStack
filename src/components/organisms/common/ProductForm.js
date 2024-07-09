@@ -1,20 +1,24 @@
 "use client";
 
+import toast from "react-hot-toast";
+import Button from "@/atoms/Button";
+import TitlePage from "@/atoms/TitlePage";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import useLoading from "src/hooks/useLoading";
+import Loader from "src/components/atoms/Loader";
 import { addProductForm } from "@/constants/dashboard";
 import AddImage from "src/components/molecules/form/AddImage";
 import InputForm from "src/components/molecules/form/InputForm";
-import AddPropertyList from "src/components/organisms/admin/AddPropertyList";
-import AddSpecifications from "src/components/organisms/admin/AddSpecifications";
 import { formProductValidation } from "@/utils/validation/dashboard";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
-import Loader from "src/components/atoms/Loader";
-import Button from "@/atoms/Button";
-import TitlePage from "@/atoms/TitlePage";
+import { addProductService, editProductService } from "src/services/admin";
+import AddSpecifications from "src/components/organisms/admin/AddSpecifications";
+import AddPropertyList from "src/components/organisms/admin/AddPropertyList";
 
 function ProductForm({ product }) {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading, startLoading, stopLoading } = useLoading({
+    submitForm: false,
+  });
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
   const [form, setForm] = useState({
@@ -35,7 +39,6 @@ function ProductForm({ product }) {
   useEffect(() => {
     if (product) {
       setForm(product);
-      console.log("first")
     }
   }, []);
 
@@ -56,21 +59,16 @@ function ProductForm({ product }) {
         specifications: true,
       });
     }
-    setIsLoading(true);
-    const res = await fetch("/api/admin/products", {
-      method: product ? "PATCH" : "POST",
-      body: product
-        ? JSON.stringify({ ...form, _id: productId })
-        : JSON.stringify(form),
-      headers: { "Content-Type": "application/json" },
-    });
-    const result = await res.json();
-    setIsLoading(false);
-    if (result.error) {
-      return toast.error(result.error);
-    } else {
-      return toast.success(result.message);
-    }
+    startLoading("submitForm");
+    const data = product
+      ? await editProductService(form, productId)
+      : await addProductService(form);
+
+    stopLoading("submitForm");
+
+    data.data.error
+      ? toast.error(data.data.error)
+      : toast.success(data.data.message);
   };
 
   return (
@@ -85,6 +83,7 @@ function ProductForm({ product }) {
             ثبت محصول
           </TitlePage>
         )}
+
         {addProductForm.map((i, index) => (
           <div key={index} className="space-y-2">
             <label htmlFor={i.name} className="font-bold">
@@ -138,7 +137,7 @@ function ProductForm({ product }) {
 
         <AddImage form={form} setForm={setForm} />
 
-        {isLoading ? (
+        {isLoading.submitForm ? (
           product ? (
             <Loader color="#22C55E" size={10} />
           ) : (

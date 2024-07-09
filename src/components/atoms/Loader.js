@@ -1,11 +1,15 @@
 "use client";
 
-import { BeatLoader } from "react-spinners";
+import { BarLoader, BeatLoader } from "react-spinners";
 
-function Loader({ color, size }) {
+function Loader({ color, size, model = "beat" }) {
   return (
     <div className="w-full flex items-center justify-center p-4">
-      <BeatLoader color={color} size={size} />
+      {model === "beat" ? (
+        <BeatLoader color={color} size={size} />
+      ) : (
+        <BarLoader color={color} size={size} />
+      )}
     </div>
   );
 }

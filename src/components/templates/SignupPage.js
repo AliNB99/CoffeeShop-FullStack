@@ -19,7 +19,9 @@ import useLoading from "src/hooks/useLoading";
 function SignupPage() {
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
-  const [isLoading, startLoading, stopLoading] = useLoading();
+  const { isLoading, startLoading, stopLoading } = useLoading({
+    submitForm: false,
+  });
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -48,10 +50,10 @@ function SignupPage() {
     }
 
     try {
-      startLoading();
+      startLoading("submitForm");
       const res = await signupAction(formData);
       console.log(res);
-      stopLoading();
+      stopLoading("submitForm");
       if (res.error) {
         return toast.error(res.error);
       } else {
@@ -117,7 +119,7 @@ function SignupPage() {
             کافی گلد را میپذیرم
           </p>
         </div>
-        {isLoading ? (
+        {isLoading.submitForm ? (
           <Loader color="#FDBA74" size={10} />
         ) : (
           <Button

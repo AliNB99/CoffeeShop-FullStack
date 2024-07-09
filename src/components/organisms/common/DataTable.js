@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
 import { alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
@@ -18,6 +18,16 @@ import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
 import Tooltip from "@mui/material/Tooltip";
+import { visuallyHidden } from "@mui/utils";
+import { headCellProductTable } from "@/constants/dashboard";
+import Image from "next/image";
+import { LogoType, NoData } from "@/utils/svg";
+import Link from "next/link";
+import { sp } from "@/utils/helper/replaceNumber";
+import { useRouter, useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
+import CircularProgress from "@mui/material/CircularProgress";
+import SearchTable from "@/molecules/admin/SearchTable";
 import {
   ArrowsRightLeftIcon,
   CheckCircleIcon,
@@ -28,15 +38,6 @@ import {
   PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { visuallyHidden } from "@mui/utils";
-import { headCellProductTable } from "@/constants/dashboard";
-import Image from "next/image";
-import { LogoType, NoData } from "@/utils/svg";
-import Link from "next/link";
-import { sp } from "@/utils/helper/replaceNumber";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
-import CircularProgress from "@mui/material/CircularProgress";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -80,7 +81,7 @@ function EnhancedTableHead(props) {
   };
 
   return (
-    <TableHead className="sticky top-0 bg-indigo-100/60 dark:bg-zinc-700 z-10">
+    <TableHead className="sticky top-0 bg-indigo-100 dark:bg-zinc-700 z-10">
       <TableRow>
         <TableCell padding="checkbox">
           <Checkbox
@@ -101,18 +102,24 @@ function EnhancedTableHead(props) {
             sortDirection={orderBy === headCell.id ? order : false}
             width={headCell.width}
           >
-            <TableSortLabel
-              active={orderBy === headCell.id}
-              direction={orderBy === headCell.id ? order : "asc"}
-              onClick={createSortHandler(headCell.id)}
-            >
-              {headCell.label}
-              {orderBy === headCell.id && (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === "desc" ? "sorted descending" : "sorted ascending"}
-                </Box>
-              )}
-            </TableSortLabel>
+            {headCell.id !== "image" ? (
+              <TableSortLabel
+                active={orderBy === headCell.id}
+                direction={orderBy === headCell.id ? order : "asc"}
+                onClick={createSortHandler(headCell.id)}
+              >
+                {headCell.label}
+                {orderBy === headCell.id && (
+                  <Box component="span" sx={visuallyHidden}>
+                    {order === "desc"
+                      ? "sorted descending"
+                      : "sorted ascending"}
+                  </Box>
+                )}
+              </TableSortLabel>
+            ) : (
+              <>{headCell.label}</>
+            )}
           </TableCell>
         ))}
       </TableRow>
@@ -136,11 +143,18 @@ function EnhancedTableToolbar({
   showProductHandler,
   editProductHandler,
 }) {
+  const [showSearch, setShowSearch] = useState(false);
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState({
     changeStatus: false,
     deleteProduct: false,
   });
-  const [showSearch, setShowSearch] = useState(false);
+
+  useEffect(() => {
+    if (searchParams.get("search")) {
+      setShowSearch(true);
+    }
+  }, []);
 
   return (
     <Toolbar
@@ -174,16 +188,22 @@ function EnhancedTableToolbar({
               </Link>
             </IconButton>
           </Tooltip>
-          <Tooltip title="جستجو">
+          <Tooltip className="relative ml-2" title="جستجو">
             <div className="flex items-center gap-3">
               <IconButton onClick={() => setShowSearch((show) => !show)}>
                 <MagnifyingGlassIcon />
               </IconButton>
-              {showSearch && (
-                <input className="border-2 focus:border-indigo-200 outline-none dark:border-zinc-700 dark:bg-inherit w-56 md:w-96 px-3 h-9 shadow-normal rounded-md transition-shadow" />
-              )}
             </div>
           </Tooltip>
+          <div
+            className={`absolute transition-all ${
+              showSearch
+                ? "right-24"
+                : "hidden md:block md:right-96 md:invisible"
+            }`}
+          >
+            <SearchTable />
+          </div>
         </Box>
       )}
 
@@ -247,6 +267,8 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function DataTable({ products }) {
+  console.log({ show: "data table" });
+
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
   const [selected, setSelected] = useState([]);
@@ -280,19 +302,22 @@ export default function DataTable({ products }) {
     }
   };
 
-  const deleteProductHandler = async (e) => {
+  const deleteProductHandler = async (e, setLoading) => {
     e.stopPropagation();
+    setLoading((prev) => ({ ...prev, deleteProduct: true }));
     const res = await fetch("/api/admin/products", {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(selected),
     });
     const data = await res.json();
+    setLoading((prev) => ({ ...prev, deleteProduct: false }));
     if (data.error) {
-      return toast.error(data.error);
+      toast.error(data.error);
     } else {
+      setSelected([]);
       router.refresh();
-      return toast.success(data.message);
+      toast.success(data.message);
     }
   };
 
@@ -345,9 +370,13 @@ export default function DataTable({ products }) {
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
 
-  const visibleRows = stableSort(products, getComparator(order, orderBy)).slice(
-    page * rowsPerPage,
-    page * rowsPerPage + rowsPerPage
+  const visibleRows = useMemo(
+    () =>
+      stableSort(products, getComparator(order, orderBy)).slice(
+        page * rowsPerPage,
+        page * rowsPerPage + rowsPerPage
+      ),
+    [products, order, orderBy, page, rowsPerPage]
   );
 
   return (
@@ -396,9 +425,9 @@ export default function DataTable({ products }) {
                       tabIndex={-1}
                       selected={isItemSelected}
                       sx={{ cursor: "pointer" }}
-                      className={
+                      className={`h-[84px] ${
                         index % 2 ? "bg-orange-50/40 dark:bg-zinc-800/50" : ""
-                      }
+                      }`}
                     >
                       <TableCell padding="checkbox">
                         <Checkbox
@@ -410,7 +439,9 @@ export default function DataTable({ products }) {
                           }}
                         />
                       </TableCell>
-                      <TableCell align="center">{index + 1}</TableCell>
+                      <TableCell align="center">
+                        {rowsPerPage * page + index + 1}
+                      </TableCell>
                       <TableCell
                         align="right"
                         sx={{ fontWeight: "bold", minWidth: 200 }}
@@ -421,23 +452,32 @@ export default function DataTable({ products }) {
                       <TableCell align="center">{sp(row.price)}</TableCell>
                       <TableCell align="center">{row.discount}</TableCell>
                       <TableCell align="center">
-                        {row.available ? (
-                          <CheckCircleIcon className="text-green-400" />
-                        ) : (
-                          <NoSymbolIcon className="text-red-400" />
-                        )}
+                        <div className="flex items-center justify-center">
+                          {row.available ? (
+                            <CheckCircleIcon className="text-green-400" />
+                          ) : (
+                            <NoSymbolIcon className="text-red-400" />
+                          )}
+                        </div>
                       </TableCell>
                       <TableCell>
-                        {row.images.length ? (
-                          <Image
-                            src={row.images[0]}
-                            width={50}
-                            height={50}
-                            alt="first image product"
-                          />
-                        ) : (
-                          <LogoType className="w-10 h-10" />
-                        )}
+                        <div className="flex items-center justify-center min-w-20">
+                          {row.images.length ? (
+                            <Image
+                              src={row.images[0]}
+                              width={50}
+                              height={50}
+                              loading="lazy"
+                              alt="first image product"
+                              className="border-2 border-zinc-300 dark:border-zinc-600 rounded-full p-1 "
+                              onLoad={(img) =>
+                                img.target.classList.remove("opacity-0")
+                              }
+                            />
+                          ) : (
+                            <LogoType className="w-10 h-10" />
+                          )}
+                        </div>
                       </TableCell>
                     </TableRow>
                   );
@@ -463,6 +503,25 @@ export default function DataTable({ products }) {
           </Table>
         </TableContainer>
         <TablePagination
+          className="flex justify-start"
+          sx={{
+            ".MuiTablePagination-toolbar": {
+              gap: "10px",
+            },
+            ".MuiTablePagination-displayedRows": {
+              fontWeight: "bold",
+              wordSpacing: "10px",
+            },
+            ".MuiTablePagination-actions": {
+              display: "flex",
+              flexDirection: "row-reverse",
+              color: "#818CF8",
+            },
+            ".MuiTablePagination-select": {
+              border: "1px solid #818CF8",
+              borderRadius: "10px",
+            },
+          }}
           rowsPerPageOptions={[10, 25, 50]}
           component="div"
           count={products.length}

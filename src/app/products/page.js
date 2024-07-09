@@ -1,6 +1,7 @@
 import connectDB from "@/DB/connectDB";
 import Product from "@/models/Product";
 import ProductsPage from "@/templates/ProductsPage";
+import CategorySidebar from "@/organisms/product/CategorySidebar";
 
 async function Products(context) {
   try {
@@ -9,18 +10,24 @@ async function Products(context) {
     console.log(error);
   }
 
-  const category = context.searchParams.category;
-  let products = await Product.find({ available: true });
+  const {
+    searchParams: { category },
+  } = context;
 
-  if (category) {
-    products = products.filter((product) => product.category === category);
-  }
+  const products = category
+    ? await Product.find({ available: true, category })
+    : await Product.find({ available: true });
 
   return (
-    <ProductsPage
-      category={category}
-      products={JSON.parse(JSON.stringify(products))}
-    />
+    <main className="space-top">
+      <div className="flex flex-col gap-5 xl:flex-row">
+        <CategorySidebar category={category} />
+        <ProductsPage
+          products={JSON.parse(JSON.stringify(products))}
+          category={category}
+        />
+      </div>
+    </main>
   );
 }
 

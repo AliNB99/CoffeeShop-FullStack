@@ -2,7 +2,6 @@
 
 import TitlePage from "@/atoms/TitlePage";
 import DataTable from "@/organisms/common/DataTable";
-import { useState } from "react";
 
 function AllProductsPage({ products }) {
   return (
@@ -10,7 +9,6 @@ function AllProductsPage({ products }) {
       <TitlePage color="text-indigo-400" borderColor="border-indigo-400">
         جدول مدیریت محصولات
       </TitlePage>
-
       <DataTable products={products} />
     </div>
   );

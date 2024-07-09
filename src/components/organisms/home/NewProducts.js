@@ -24,7 +24,7 @@ async function NewProducts() {
       {!!data.length ? (
         <div className="container grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-5 mt-12">
           {JSON.parse(JSON.stringify(data)).map((i) => (
-            <CartProduct data={i} />
+            <CartProduct key={i._id} data={i} />
           ))}
         </div>
       ) : (

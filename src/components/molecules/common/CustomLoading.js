@@ -1,7 +1,7 @@
 import Loader from "src/components/atoms/Loader";
 import { LogoType } from "@/utils/svg";
 
-function Loading() {
+function CustomLoading() {
   return (
     <div className="h-screen w-full flex items-center justify-self-center">
       <div className="w-full flex flex-col items-center justify-center">
@@ -12,4 +12,4 @@ function Loading() {
   );
 }
 
-export default Loading;
+export default CustomLoading;

@@ -1,12 +1,13 @@
 import { useState } from "react";
 
-function useLoading(initialValue = false) {
+function useLoading(initialValue) {
   const [isLoading, setIsLoading] = useState(initialValue);
+  const startLoading = (item) =>
+    setIsLoading((values) => ({ ...values, [item]: true }));
+  const stopLoading = (item) =>
+    setIsLoading((values) => ({ ...values, [item]: false }));
 
-  const startLoading = () => setIsLoading(true);
-  const stopLoading = () => setIsLoading(false);
-
-  return [isLoading, startLoading, stopLoading];
+  return { isLoading, startLoading, stopLoading };
 }
 
 export default useLoading;

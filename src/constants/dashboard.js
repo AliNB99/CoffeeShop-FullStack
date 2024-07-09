@@ -129,6 +129,6 @@ export const headCellProductTable = [
     numeric: true,
     disablePadding: false,
     label: "عکس",
-    width: 50,
+    width: 100,
   },
 ];

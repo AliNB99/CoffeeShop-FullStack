@@ -43,6 +43,8 @@ function SliderProductImage({ images }) {
                 height={300}
                 alt={img}
                 loading="lazy"
+                className="transition-opacity opacity-0 duration-[1s]"
+                onLoad={(img) => img.target.classList.remove("opacity-0")}
               />
             </div>
           </SwiperSlide>
@@ -66,6 +68,8 @@ function SliderProductImage({ images }) {
                 height={100}
                 alt={img}
                 loading="lazy"
+                className="transition-opacity opacity-0 duration-[1s]"
+                onLoad={(img) => img.target.classList.remove("opacity-0")}
               />
             </div>
           </SwiperSlide>

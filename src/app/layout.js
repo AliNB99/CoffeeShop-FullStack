@@ -7,9 +7,9 @@ import { Dana, Morabba } from "@/utils/fonts";
 // for change darkMode
 import { Toaster } from "react-hot-toast";
 import NextAuthProvider from "@/utils/NextAuthProvider";
-import NextThemeProvider from "@/providers/ThemeProvider";
+import NextThemeProvider from "@/providers/NextThemeProvider";
 import ShowContextProvider from "@/context/ShowContextProvider";
-import CartProvider from "@/redux/CartProviders";
+import ReduxProvider from "@/redux/ReduxProvider";
 
 export const metadata = {
   title: "Golden Coffee",
@@ -24,10 +24,10 @@ export default async function RootLayout({ children }) {
         <NextThemeProvider>
           <NextAuthProvider>
             <ShowContextProvider>
-              <CartProvider>
+              <ReduxProvider>
                 <Layout>{children}</Layout>
                 <Toaster />
-              </CartProvider>
+              </ReduxProvider>
             </ShowContextProvider>
           </NextAuthProvider>
         </NextThemeProvider>

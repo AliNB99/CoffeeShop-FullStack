@@ -1,7 +1,7 @@
-import Loading from "@/molecules/common/Loading";
+import CustomLoading from "@/molecules/common/CustomLoading";
 
-function loading() {
-  return <Loading />;
+function LoadingDetailPage() {
+  return <CustomLoading />;
 }
 
-export default loading;
+export default LoadingDetailPage;

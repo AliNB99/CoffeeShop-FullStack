@@ -5,24 +5,31 @@ import { ThemeProvider, createTheme } from "@mui/material";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 import AdminHeader from "src/components/organisms/admin/AdminHeader";
+import { faIR } from "@mui/material/locale";
 
-const lightTheme = createTheme({
-  palette: {
-    mode: "light",
+const lightTheme = createTheme(
+  {
+    palette: {
+      mode: "light",
+    },
+    typography: {
+      fontFamily: "",
+    },
   },
-  typography: {
-    fontFamily: "",
-  },
-});
+  faIR
+);
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
+const darkTheme = createTheme(
+  {
+    palette: {
+      mode: "dark",
+    },
+    typography: {
+      fontFamily: "",
+    },
   },
-  typography: {
-    fontFamily: "",
-  },
-});
+  faIR
+);
 
 function AdminLayout({ children, role }) {
   const { theme, setTheme } = useTheme();

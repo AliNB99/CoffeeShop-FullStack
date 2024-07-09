@@ -15,7 +15,9 @@ import useLoading from "src/hooks/useLoading";
 function SignInPage() {
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
-  const [isLoading, startLoading, stopLoading] = useLoading();
+  const { isLoading, startLoading, stopLoading } = useLoading({
+    submitForm: false,
+  });
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -37,14 +39,14 @@ function SignInPage() {
       });
     }
 
-    startLoading();
+    startLoading("submitForm");
     const res = await signIn("credentials", {
       email: form.email,
       password: form.password,
       redirect: false,
     });
 
-    stopLoading();
+    stopLoading("submitForm");
     if (res.error) {
       return toast.error(res.error);
     } else {
@@ -95,7 +97,7 @@ function SignInPage() {
           error={warning.password}
         />
 
-        {isLoading ? (
+        {isLoading.submitForm ? (
           <Loader color="#FDBA74" size={10} />
         ) : (
           <div>

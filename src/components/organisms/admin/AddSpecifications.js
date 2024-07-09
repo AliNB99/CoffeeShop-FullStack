@@ -59,7 +59,7 @@ function AddSpecifications({ product, form, setForm, warning, touched }) {
   return (
     <div className="w-full">
       <h4 className="mb-5 font-bold">مشخصات</h4>
-      <div className="flex flex-col gap-5 justify-between mb-5 sm:mb-10">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-5 sm:mb-10">
         <SelectCategory form={form} setForm={setForm} />
         {touched.specifications && (
           <span className="text-red-500 text-sm">{warning.specifications}</span>

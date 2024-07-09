@@ -34,7 +34,6 @@ export const signupAction = async (formData) => {
       email,
       password: hashedPassword,
     });
-    console.log(newUser);
     revalidatePath("/signin");
     return {
       message: "حساب کاربری با موفقیت ایجاد شد",

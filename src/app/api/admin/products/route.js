@@ -14,9 +14,7 @@ export async function POST(req) {
       });
     }
     await connectDB();
-
     const user = await User.findOne({ email: session.user.email });
-
     if (!user) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
@@ -28,6 +26,7 @@ export async function POST(req) {
       });
     }
 
+    const data = await req.json();
     const {
       title,
       description,
@@ -39,9 +38,7 @@ export async function POST(req) {
       advantages,
       disadvantages,
       specifications,
-    } = await req.json();
-
-    console.log(discount);
+    } = data.body;
 
     if (!title || !description || !quantity || !price || !category) {
       return NextResponse.json({
@@ -97,6 +94,8 @@ export async function PATCH(req) {
       });
     }
 
+    const data = await req.json();
+
     const {
       title,
       description,
@@ -110,7 +109,7 @@ export async function PATCH(req) {
       disadvantages,
       specifications,
       _id,
-    } = await req.json();
+    } = data;
 
     const product = await Product.findOne({ _id });
 
@@ -171,5 +170,16 @@ export async function DELETE(req) {
     });
   } catch (error) {
     return NextResponse.json({ status: 500, error: "مشکلی پیش آمده است" });
+  }
+}
+
+export async function GET(req) {
+  try {
+    await connectDB();
+
+    const products = await Product.find({});
+    return NextResponse.json({ data: products });
+  } catch (error) {
+    console.log(error);
   }
 }

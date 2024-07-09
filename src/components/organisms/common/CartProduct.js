@@ -18,16 +18,17 @@ function CartProduct({ data }) {
   return (
     <div
       onClick={showDetailHandler}
-      className="rounded-2xl bg-white dark:bg-zinc-700 p-2 md:p-5 hover:shadow-medium dark:hover:shadow-zinc-500 transition-all"
+      className="rounded-2xl cursor-pointer bg-white dark:bg-zinc-700 p-2 md:p-5 hover:shadow-medium dark:hover:shadow-zinc-500 transition-all"
     >
       <div className="relative flex justify-center">
         {images.length ? (
           <Image
             src={images[0]}
-            className="w-32 h-32 lg:w-64 lg:h-64 rounded-2xl"
+            className="w-32 h-32 lg:w-64 lg:h-64 rounded-2xl transition-opacity opacity-0 duration-[1s]"
             width={300}
             height={300}
             loading="lazy"
+            onLoad={(img) => img.target.classList.remove("opacity-0")}
             alt="product image"
           />
         ) : (

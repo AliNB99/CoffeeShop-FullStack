@@ -36,7 +36,7 @@ function AddPropertyList({ color, bgColor, name, title, form, setForm }) {
 
       <div className="w-full space-y-2">
         {form[name].map((i, index) => (
-          <div className="flex items-center gap-1">
+          <div key={index} className="flex items-center gap-1">
             <Input
               placeholder="توضیحات را وارد نمایید"
               type="text"

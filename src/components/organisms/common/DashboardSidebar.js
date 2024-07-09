@@ -35,7 +35,8 @@ function DashboardSidebar({ role }) {
           height={60}
           loading="lazy"
           alt="avatar"
-          className="border-2 border-zinc-300 dark:border-zinc-600 rounded-full p-1"
+          className="border-2 border-zinc-300 dark:border-zinc-600 rounded-full p-1 "
+          onLoad={(img) => img.target.classList.remove("opacity-0")}
         />
         <div className="flex flex-col items-center">
           <h4>علی بلبلی</h4>
