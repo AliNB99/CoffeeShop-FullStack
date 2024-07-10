@@ -15,14 +15,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 function DesktopHeader({ role }) {
-  // To not display the header in the admin sections and the login and registration form
-  const pathName = usePathname();
-  if (
-    pathName
-      .split("/")
-      .find((i) => i === "admin" || i === "signin" || i === "signup")
-  )
-    return;
+ 
 
   return (
     <header className="hidden md:flex items-center fixed top-9 right-0 left-0 z-50 w-[98%] lg:w-[90%] h-24 px-5 lg:px-10 py-5 mx-auto bg-black/50 rounded-3xl backdrop-blur">

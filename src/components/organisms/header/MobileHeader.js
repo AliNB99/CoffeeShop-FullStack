@@ -13,15 +13,6 @@ import { LogoType } from "@/utils/svg";
 function MobileHeader({ role }) {
   const { isShow, showItem } = useContext(showContext);
 
-  const pathName = usePathname();
-
-  if (
-    pathName
-      .split("/")
-      .find((i) => i === "admin" || i === "signin" || i === "signup")
-  )
-    return;
-
   return (
     <header className="sticky top-0 left-0 z-20 w-full shadow-md flex items-center justify-between p-4 md:hidden h-16 bg-white dark:bg-zinc-700">
       <button onClick={() => showItem("sidebar")}>

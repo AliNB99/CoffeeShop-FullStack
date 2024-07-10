@@ -1,5 +1,4 @@
 import useLoading from "src/hooks/useLoading";
-import Loader from "./Loader";
 import { useEffect } from "react";
 import { setLoadingImg } from "@/utils/helper/helper";
 import Image from "next/image";
