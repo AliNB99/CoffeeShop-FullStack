@@ -12,5 +12,3 @@ export const editProductService = (body, _id) => {
     _id,
   });
 };
-
-

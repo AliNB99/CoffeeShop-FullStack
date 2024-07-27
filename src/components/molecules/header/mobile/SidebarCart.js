@@ -1,15 +1,15 @@
 import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-function SidebarCart({ isShow, showItem }) {
+function SidebarCart({ showElement, onShowElement }) {
   return (
     <nav
       className={`fixed ${
-        isShow.cartSidebar ? "left-0" : "-left-64"
+        showElement.cartSidebar ? "left-0" : "-left-64"
       } top-0 p-4 bg-white dark:bg-zinc-700 w-64 h-screen overflow-y-auto z-20 transition-all`}
     >
       <div className="flex items-center justify-between pb-5 border-b border-gray-200 dark:border-b-white/20">
         <button
-          onClick={() => showItem("cartSidebar")}
+          onClick={() => onShowElement({ element: "cartSidebar" })}
           className="bg-zinc-100 dark:bg-zinc-600/50 rounded-full p-1 transition-all"
         >
           <XMarkIcon className="text-zinc-600 dark:text-white" />

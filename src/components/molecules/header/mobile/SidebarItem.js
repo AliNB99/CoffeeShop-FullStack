@@ -16,13 +16,11 @@ import DarkModeToggle from "../../common/DarkModeToggle";
 import StoreDropDownMobile from "./StoreDropDownMobile";
 import { signOut } from "next-auth/react";
 
-function SidebarItem({ isShow, showItem, role }) {
-  // function for show
-
+function SidebarItem({ showElement, onShowElement, role }) {
   return (
     <nav
       className={`fixed ${
-        isShow.sidebar ? "right-0" : "-right-64"
+        showElement.sidebar ? "right-0" : "-right-64"
       } top-0 p-4 z-20 bg-white dark:bg-zinc-700 w-64 h-screen overflow-y-auto transition-all`}
     >
       {/* logo and cross Btn */}
@@ -33,7 +31,7 @@ function SidebarItem({ isShow, showItem, role }) {
         </div>
         <button
           className="bg-zinc-100 dark:bg-zinc-600/50 text-zinc-600 dark:text-white rounded-full p-1 transition-all"
-          onClick={() => showItem("sidebar")}
+          onClick={() => onShowElement({ element: "sidebar" })}
         >
           <XMarkIcon />
         </button>
@@ -58,16 +56,18 @@ function SidebarItem({ isShow, showItem, role }) {
               </Link>
               <button
                 className="bg-zinc-100 dark:bg-zinc-600/50 text-zinc-600 dark:text-white rounded-full p-1 transition-all"
-                onClick={() => showItem("storeItem")}
+                onClick={() =>
+                  onShowElement({ element: "storeItem", overlay: true })
+                }
               >
                 <ChevronDownIcon
                   className={`w-4 h-4 cursor-pointer transition-all ease-linear ${
-                    isShow.storeItem ? "rotate-180" : ""
+                    showElement.storeItem ? "rotate-180" : ""
                   }`}
                 />
               </button>
             </div>
-            <StoreDropDownMobile isShow={isShow} />
+            <StoreDropDownMobile showElement={showElement} />
           </li>
           {navbarItem.map((i, index) => (
             <li key={index}>
@@ -85,7 +85,7 @@ function SidebarItem({ isShow, showItem, role }) {
       {/* login & ThemeToggle & Shopping Cart */}
       <div className="space-y-6 child:flex child:items-center child:gap-x-2 pr-4 text-orange-300 py-9">
         {role ? (
-          role === "ADMIN" ? (
+          role === "OWNER" || role === "ADMIN" ? (
             <Link href="/admin">
               <BriefcaseIcon />
               <span>پنل ادمین</span>

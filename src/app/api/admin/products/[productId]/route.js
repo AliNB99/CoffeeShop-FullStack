@@ -21,7 +21,7 @@ export async function PATCH(req, context) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
 
-    if (user.role !== "ADMIN") {
+    if (user.role !== "OWNER" || user.role !== "ADMIN") {
       return NextResponse.json({
         status: 403,
         error: "دسترسی شما برای این کار محدود شده است",
@@ -33,7 +33,7 @@ export async function PATCH(req, context) {
 
     const product = await Product.findOne({ _id: productId });
 
-    product.available = !product.available;
+    product.isAvailable = !product.isAvailable;
     product.save();
 
     return NextResponse.json({
@@ -41,6 +41,7 @@ export async function PATCH(req, context) {
       message: "تغییرات با موفقیت انجام شد",
     });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ status: 500, error: "مشکلی پیش آمده است" });
   }
 }

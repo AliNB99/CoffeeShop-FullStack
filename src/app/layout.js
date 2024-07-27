@@ -10,6 +10,8 @@ import NextAuthProvider from "@/utils/NextAuthProvider";
 import NextThemeProvider from "@/providers/NextThemeProvider";
 import ShowContextProvider from "@/context/ShowContextProvider";
 import ReduxProvider from "@/redux/ReduxProvider";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 export const metadata = {
   title: "Golden Coffee",
@@ -25,8 +27,11 @@ export default async function RootLayout({ children }) {
           <NextAuthProvider>
             <ShowContextProvider>
               <ReduxProvider>
-                <Layout>{children}</Layout>
-                <Toaster />
+                <ReactQueryProvider>
+                  <Layout>{children}</Layout>
+                  <Toaster />
+                  <ReactQueryDevtools />
+                </ReactQueryProvider>
               </ReduxProvider>
             </ShowContextProvider>
           </NextAuthProvider>

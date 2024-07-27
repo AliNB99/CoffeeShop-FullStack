@@ -11,7 +11,7 @@ function Error({ error, reset }) {
   }, [error]);
 
   const pathName = usePathname();
-  const router = useRouter();
+  const { push } = useRouter();
 
   return (
     <div className="h-screen flex flex-col items-center justify-center gap-5">
@@ -31,7 +31,7 @@ function Error({ error, reset }) {
           <button
             title="صفحه اصلی"
             className="text-orange-300 border-2 p-2 border-orange-300 shadow-sm transition-all rounded-full font-semibold"
-            onClick={() => router.push("/")}
+            onClick={() => push("/")}
           >
             <HomeIcon className="size-7" />
           </button>

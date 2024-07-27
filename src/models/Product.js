@@ -34,7 +34,7 @@ const ProductSchema = new Schema(
 
     specifications: [{ title: String, value: String }],
 
-    available: {
+    isAvailable: {
       type: Boolean,
       default: true,
     },

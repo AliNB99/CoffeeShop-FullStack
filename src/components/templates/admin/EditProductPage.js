@@ -1,7 +1,15 @@
+import TitlePage from "@/atoms/TitlePage";
 import ProductForm from "@/organisms/common/ProductForm";
 
-async function EditProductPage({ data }) {
-  return <ProductForm product={data} />;
+function EditProductPage({ data }) {
+  return (
+    <div className="admin-page space-y-5">
+      <TitlePage color="text-green-500" borderColor="border-green-500">
+        ویرایش محصول
+      </TitlePage>
+      <ProductForm product={data} />
+    </div>
+  );
 }
 
 export default EditProductPage;

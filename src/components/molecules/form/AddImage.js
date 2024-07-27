@@ -9,34 +9,24 @@ import {
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import toast from "react-hot-toast";
 import Loader from "src/components/atoms/Loader";
-import useLoading from "src/hooks/useLoading";
-import { UploadClient } from "@uploadcare/upload-client";
 import CustomImage from "@/atoms/CustomImage";
+import { useAddImages } from "src/hooks/useQuery/mutations";
 
 function AddImage({ form, setForm }) {
-  const { isLoading, startLoading, stopLoading } = useLoading({
-    uploadImg: false,
-  });
-  const client = new UploadClient({
-    publicKey: process.env.NEXT_PUBLIC_API_KEY,
-  });
+  const { isPending, isError, mutateAsync } = useAddImages();
 
   // function to upload a photo inside uploadCare
   const imageChangeHandler = async (e) => {
     const images = Object.values(e.target.files);
-    images.length && startLoading("uploadImg");
     images.map(async (file) => {
-      try {
-        const data = await client.uploadFile(file);
-        stopLoading("uploadImg");
-        setForm((form) => ({
-          ...form,
-          images: [...form.images, data.cdnUrl],
-        }));
-      } catch (error) {
-        stopLoading();
-        toast.error("مشکلی در ارسال عکس ها پیش آمده است");
-      }
+      const data = await mutateAsync(file);
+
+      !isError
+        ? setForm((form) => ({
+            ...form,
+            images: [...form.images, data.cdnUrl],
+          }))
+        : toast.error("مشکلی در افزودن عکس پیش آمده است.");
     });
   };
 
@@ -82,7 +72,7 @@ function AddImage({ form, setForm }) {
             htmlFor="file"
             className="relative flex items-center justify-center border-2 border-zinc-300 dark:border-zinc-600 group-hover:border-zinc-400 cursor-pointer border-dashed h-32 w-32 rounded-lg transition-all"
           >
-            {isLoading.uploadImg ? (
+            {isPending ? (
               <Loader color="#EF4444" size={8} />
             ) : (
               <div>
@@ -103,9 +93,6 @@ function AddImage({ form, setForm }) {
                 : "border-zinc-300 dark:border-zinc-600"
             }`}
           >
-            {isLoading.loadedImg && (
-              <Loader model="bar" size={1} color="#ccc" />
-            )}
             <CustomImage
               src={img}
               width={100}

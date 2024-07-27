@@ -14,17 +14,24 @@ const initialValue = {
 
 function ShowContextProvider({ children }) {
   // show item sidebar in dashboard and homePage
-  const showItem = (name) => {
-    setIsShow((isShow) => ({
-      ...isShow,
-      [name]: !isShow[name],
-      overlay: !isShow.overlay,
-    }));
+  const onShowElement = ({ element, overlay }) => {
+    overlay
+      ? setShowElement((showElement) => ({
+          ...showElement,
+          [element]: !showElement[element],
+        }))
+      : setShowElement((showElement) => ({
+          ...showElement,
+          [element]: !showElement[element],
+          overlay: !showElement.overlay,
+        }));
   };
 
-  const [isShow, setIsShow] = useState(initialValue);
+  const [showElement, setShowElement] = useState(initialValue);
   return (
-    <showContext.Provider value={{ isShow, setIsShow, showItem }}>
+    <showContext.Provider
+      value={{ showElement, setShowElement, onShowElement }}
+    >
       {children}
     </showContext.Provider>
   );

@@ -15,10 +15,16 @@ async function layout({ children }) {
     console.log(error);
   }
 
-  const user = await User.findOne({ email: session.user.email });
-  if (user.role === "USER") redirect("/");
+  const user = await User.findOne({ email: session.user.email }).select(
+    "-password"
+  );
+  if (user?.role === "USER") redirect("/");
 
-  return <AdminLayout role={user.role}>{children}</AdminLayout>;
+  return (
+    <AdminLayout user={JSON.parse(JSON.stringify(user))}>
+      {children}
+    </AdminLayout>
+  );
 }
 
 export default layout;

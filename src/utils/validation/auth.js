@@ -1,10 +1,12 @@
 import { compare, hash } from "bcryptjs";
 
 const RegexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+const RegexName = /^[ آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئs]+$/;
 
 // validation login and signup form
 export function formRegisterValidation(form, type) {
-  const { email, password, confirmPassword, isAccepted } = form;
+  const { firstName, lastName, email, password, confirmPassword, isAccepted } =
+    form;
 
   const warning = {};
 
@@ -25,6 +27,22 @@ export function formRegisterValidation(form, type) {
   }
 
   if (type === "signup") {
+    if (!firstName) {
+      warning.firstName = "لطفا نام خود را وارد نمایید";
+    } else if (!RegexName.test(firstName)) {
+      warning.firstName = "لطفا نام را با حروف فارسی وارد نمایید";
+    } else {
+      delete warning.firstName;
+    }
+    
+    if (!lastName) {
+      warning.lastName = "لطفا نام خانوادگی خود را وارد نمایید";
+    } else if (!RegexName.test(lastName)) {
+      warning.lastName = "لطفا نام خانوادگی را با حروف فارسی وارد نمایید";
+    } else {
+      delete warning.lastName;
+    }
+
     if (!confirmPassword) {
       warning.confirmPassword = "لطفا رمز عبور خود را تایید نمایید";
     } else if (confirmPassword !== password) {

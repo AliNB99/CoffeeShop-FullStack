@@ -5,14 +5,14 @@ import { usePathname } from "next/navigation";
 import { useContext, useEffect } from "react";
 
 function Overlay() {
-  const { isShow, setIsShow } = useContext(showContext);
+  const { showElement, setShowElement } = useContext(showContext);
   const pathName = usePathname();
 
   const hiddenOverlay = () => {
-    const data = Object.keys(isShow);
+    const data = Object.keys(showElement);
     const result = {};
     data.map((i) => (result[i] = false));
-    setIsShow(result);
+    setShowElement(result);
   };
 
   useEffect(() => {
@@ -33,7 +33,7 @@ function Overlay() {
     <div
       onClick={hiddenOverlay}
       className={`${
-        isShow.overlay ? "block" : "hidden"
+        showElement.overlay ? "block" : "hidden"
       } fixed inset-0 bg-black/40 z-10 backdrop-blur`}
     ></div>
   );

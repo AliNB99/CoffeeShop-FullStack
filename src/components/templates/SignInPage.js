@@ -1,29 +1,27 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { formRegisterValidation } from "@/utils/validation/auth";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import Button from "@/atoms/Button";
-import InputForm from "@/molecules/form/InputForm";
 import Loader from "@/atoms/Loader";
 import { Logo } from "@/utils/svg";
-import useLoading from "src/hooks/useLoading";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import InputForm from "@/molecules/form/InputForm";
+import { formRegisterValidation } from "@/utils/validation/auth";
+import { useSubmitSignin } from "src/hooks/useQuery/mutations";
 
 function SignInPage() {
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
-  const { isLoading, startLoading, stopLoading } = useLoading({
-    submitForm: false,
-  });
   const [form, setForm] = useState({
     email: "",
     password: "",
   });
 
-  const router = useRouter();
+  const { push, refresh } = useRouter();
+
+  const { isPending, mutateAsync } = useSubmitSignin();
 
   useEffect(() => {
     setWarning(formRegisterValidation(form));
@@ -39,16 +37,10 @@ function SignInPage() {
       });
     }
 
-    startLoading("submitForm");
-    const res = await signIn("credentials", {
-      email: form.email,
-      password: form.password,
-      redirect: false,
-    });
+    const data = await mutateAsync(form);
 
-    stopLoading("submitForm");
-    if (res.error) {
-      return toast.error(res.error);
+    if (data.error) {
+      return toast.error(data.error);
     } else {
       toast.success("ورود به حساب کاربری با موفقیت انجام شد");
       setForm({
@@ -59,8 +51,8 @@ function SignInPage() {
         email: false,
         password: false,
       });
-      router.push("/");
-      router.refresh();
+      push("/");
+      refresh();
     }
   };
 
@@ -68,7 +60,7 @@ function SignInPage() {
     <div className="h-screen w-full flex items-center justify-center">
       <form
         onSubmit={submitHandler}
-        className="relative w-96 h-fit p-6 space-y-1 md:shadow-medium rounded-lg"
+        className="relative w-96 h-fit p-5 space-y-1 md:shadow-medium rounded-lg"
       >
         <Logo className="hidden md:block absolute -translate-y-1/2 top-0 left-0 right-0 mx-auto size-16 text-orange-300" />
         <h1 className="text-center py-6 md:py-4 text-orange-300 drop-shadow-md text-3xl font-bold">
@@ -97,7 +89,7 @@ function SignInPage() {
           error={warning.password}
         />
 
-        {isLoading.submitForm ? (
+        {isPending ? (
           <Loader color="#FDBA74" size={10} />
         ) : (
           <div>
@@ -111,7 +103,7 @@ function SignInPage() {
             </Button>
           </div>
         )}
-        <div className="flex items-center justify-center gap-1 text-sm pt-3">
+        <div className="flex items-center justify-center gap-1 text-sm pt-4">
           <span className="text-zinc-500 dark:text-zinc-200">
             آیا شما ثبت نام نکرده اید؟
           </span>

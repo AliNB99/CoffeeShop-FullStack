@@ -22,11 +22,31 @@ export const userDashboardItem = [
 ////// ADMIN CONSTANT /////
 
 export const adminDashboardItem = [
-  { title: "پیشخوان", link: "/admin", icon: <BriefcaseIcon /> },
-  { title: "محصولات", link: "/admin/all-products", icon: <ShoppingBagIcon /> },
-  { title: "کاربران", link: "/admin/customers", icon: <UsersIcon /> },
-  { title: "کامنت ها", link: "/", icon: <ChatBubbleLeftRightIcon /> },
-  { title: "تیکت ها", link: "/", icon: <ClipboardDocumentCheckIcon /> },
+  {
+    title: "پیشخوان",
+    link: "/admin",
+    icon: <BriefcaseIcon />,
+  },
+  {
+    title: "محصولات",
+    link: "/admin/products-list",
+    icon: <ShoppingBagIcon />,
+  },
+  {
+    title: "کاربران",
+    link: "/admin/user-list",
+    icon: <UsersIcon />,
+  },
+  {
+    title: "کامنت ها",
+    link: "/",
+    icon: <ChatBubbleLeftRightIcon />,
+  },
+  {
+    title: "تیکت ها",
+    link: "/",
+    icon: <ClipboardDocumentCheckIcon />,
+  },
 ];
 
 export const addProductForm = [
@@ -72,7 +92,11 @@ export const addCoffeeItem = [
   { title: "وزن (گرم)", value: "", placeholder: "مثلا: 250 گرم" },
   { title: "تاریخ تولید", value: "", placeholder: "مثلا: 1402/01/05" },
   { title: "نوع قهوه", value: "", placeholder: "مثلا: قهوه آسیاب شده " },
-  { title: "نسبت قهوه (عربیکا / روبستا)", value: "", placeholder: "مثلا: 70/30" },
+  {
+    title: "نسبت قهوه (عربیکا / روبستا)",
+    value: "",
+    placeholder: "مثلا: 70/30",
+  },
   { title: "دستگاه سازگار", value: "", placeholder: "مثلا: موکاپات" },
 ];
 
@@ -118,7 +142,7 @@ export const headCellProductTable = [
     width: 30,
   },
   {
-    id: "available",
+    id: "isAvailable",
     numeric: false,
     disablePadding: false,
     label: "وضعیت",
@@ -132,3 +156,29 @@ export const headCellProductTable = [
     width: 100,
   },
 ];
+
+export const columnsUserTable = [
+  { name: "شماره", uid: "id" },
+  { name: "نام کاربری", uid: "name" },
+  { name: "نقش", uid: "role", sortable: true },
+  { name: "ایمیل", uid: "email", sortable: true },
+  { name: "وضعیت", uid: "status", sortable: true },
+  { name: "ابزار مدیریت", uid: "actions" },
+];
+
+export const statusOptions = [
+  { name: "مجاز", uid: "مجاز" },
+  { name: "غیرمجاز", uid: "غیرمجاز" },
+];
+
+export const roleColorMap = {
+  OWNER: "primary",
+  ADMIN: "success",
+  USER: "warning",
+};
+
+export const roleTitle = {
+  OWNER: "مالک",
+  ADMIN: "مدیر",
+  USER: "کاربر",
+};

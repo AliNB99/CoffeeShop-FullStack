@@ -12,11 +12,8 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 function DesktopHeader({ role }) {
- 
-
   return (
     <header className="hidden md:flex items-center fixed top-9 right-0 left-0 z-50 w-[98%] lg:w-[90%] h-24 px-5 lg:px-10 py-5 mx-auto bg-black/50 rounded-3xl backdrop-blur">
       <div className="w-full flex justify-between items-center">

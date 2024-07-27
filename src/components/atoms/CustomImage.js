@@ -26,7 +26,7 @@ function CustomImage({ src, width, height, alt, className }) {
         />
       </div>
 
-      {isLoading.loadedImg && <Logo className="w-1/2 h-1/2 opacity-20" />}
+      {isLoading.loadedImg && <Logo className="w-1/2 h-1/2 opacity-10" />}
     </>
   );
 }

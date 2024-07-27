@@ -5,15 +5,14 @@ import CartButton from "@/molecules/common/CartButton";
 import { sp } from "@/utils/helper/replaceNumber";
 import { LogoType } from "@/utils/svg";
 import { StarIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 function CartProduct({ data }) {
   const { title, price, images, discount, _id } = data;
-  const router = useRouter();
+  const { push } = useRouter();
 
   const showDetailHandler = () => {
-    router.push(`/products/${_id}`);
+    push(`/products/${_id}`);
   };
 
   return (

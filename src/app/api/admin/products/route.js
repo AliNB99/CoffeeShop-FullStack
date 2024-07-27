@@ -19,26 +19,27 @@ export async function POST(req) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
 
-    if (user.role !== "ADMIN") {
+    if (user.role !== "OWNER" || user.role !== "ADMIN") {
       return NextResponse.json({
         status: 403,
         error: "دسترسی شما برای این کار محدود شده است",
       });
     }
 
-    const data = await req.json();
     const {
-      title,
-      description,
-      quantity,
-      price,
-      images,
-      category,
-      discount,
-      advantages,
-      disadvantages,
-      specifications,
-    } = data.body;
+      data: {
+        title,
+        description,
+        quantity,
+        price,
+        images,
+        category,
+        discount,
+        advantages,
+        disadvantages,
+        specifications,
+      },
+    } = await req.json();
 
     if (!title || !description || !quantity || !price || !category) {
       return NextResponse.json({
@@ -66,6 +67,7 @@ export async function POST(req) {
       message: "محصول با موفقیت ثبت شد",
     });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ status: 500, error: "مشکلی پیش آمده است" });
   }
 }
@@ -87,7 +89,7 @@ export async function PATCH(req) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
 
-    if (user.role !== "ADMIN") {
+    if (user.role !== "OWNER" || user.role !== "ADMIN") {
       return NextResponse.json({
         status: 403,
         error: "دسترسی شما برای این کار محدود شده است",
@@ -104,7 +106,7 @@ export async function PATCH(req) {
       images,
       category,
       discount,
-      available,
+      isAvailable,
       advantages,
       disadvantages,
       specifications,
@@ -123,7 +125,7 @@ export async function PATCH(req) {
     product.advantages = advantages;
     product.disadvantages = disadvantages;
     product.specifications = specifications;
-    product.available = available;
+    product.isAvailable = isAvailable;
     product.save();
 
     return NextResponse.json({
@@ -131,6 +133,7 @@ export async function PATCH(req) {
       message: "تغییرات با موفقیت انجام شد",
     });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ status: 500, error: "مشکلی پیش آمده است" });
   }
 }
@@ -152,7 +155,7 @@ export async function DELETE(req) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
 
-    if (user.role !== "ADMIN") {
+    if (user.role !== "OWNER" || user.role !== "ADMIN") {
       return NextResponse.json({
         status: 403,
         error: "دسترسی شما برای این کار محدود شده است",
@@ -160,7 +163,7 @@ export async function DELETE(req) {
     }
 
     const productIds = await req.json();
-    console.log(productIds);
+
     await Product.deleteMany({
       _id: { $in: productIds },
     });
@@ -169,6 +172,7 @@ export async function DELETE(req) {
       message: "محصول با موفقیت حذف شد",
     });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({ status: 500, error: "مشکلی پیش آمده است" });
   }
 }

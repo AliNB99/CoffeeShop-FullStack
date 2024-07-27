@@ -3,8 +3,13 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    color: unset;
+    background-color: unset;
+  }
+
   body {
-    @apply font-Dana bg-gray-100 dark:bg-zinc-800;
+    @apply font-Dana bg-gray-100 dark:bg-zinc-800 dark:text-white;
   }
 
   svg {

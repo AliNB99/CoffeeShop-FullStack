@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 // toast for show alert
 import toast from "react-hot-toast";
@@ -13,21 +12,25 @@ import InputForm from "@/molecules/form/InputForm";
 import Loader from "@/atoms/Loader";
 import Button from "@/atoms/Button";
 import { Logo } from "@/utils/svg/index";
-import { signupAction } from "src/action/authAction";
-import useLoading from "src/hooks/useLoading";
+import { useRouter } from "next/navigation";
+import { useSubmitSignup } from "src/hooks/useQuery/mutations";
 
 function SignupPage() {
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
-  const { isLoading, startLoading, stopLoading } = useLoading({
-    submitForm: false,
-  });
+
+  const { push } = useRouter();
+
   const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
     email: "",
     password: "",
     confirmPassword: "",
     isAccepted: false,
   });
+
+  const { isPending, mutateAsync } = useSubmitSignup();
 
   useEffect(() => {
     setWarning(formRegisterValidation(form, "signup"));
@@ -38,46 +41,44 @@ function SignupPage() {
     setForm((form) => ({ ...form, [name]: checked }));
   };
 
-  const actionHandler = async (formData) => {
+  const actionHandler = async (e) => {
+    e.preventDefault();
     if (Object.keys(warning).length) {
       toast.error("لطفا مقادیر مورد نیاز را وارد نمایید");
       return setTouched({
+        firstName: true,
+        lastName: true,
         email: true,
         password: true,
         confirmPassword: true,
         isAccepted: true,
       });
     }
-
     try {
-      startLoading("submitForm");
-      const res = await signupAction(formData);
-      console.log(res);
-      stopLoading("submitForm");
-      if (res.error) {
-        return toast.error(res.error);
-      } else {
-        toast.success(res.message);
-        setTouched({
-          email: false,
-          password: false,
-          confirmPassword: false,
-          isAccepted: false,
-        });
-      }
+      const { data } = await mutateAsync(form);
+      setTouched({
+        firstName: false,
+        lastName: false,
+        email: false,
+        password: false,
+        confirmPassword: false,
+        isAccepted: false,
+      });
+      // push("/signin");
+      toast.success(data.message);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.error);
     }
   };
 
   return (
     <div className="h-screen w-full flex items-center justify-center">
       <form
-        action={(formData) => actionHandler(formData)}
-        className="relative w-96 h-fit p-6 space-y-1 md:shadow-medium rounded-lg"
+        onSubmit={actionHandler}
+        className="relative w-96 h-fit p-5 lg:mt-5 space-y-1 md:shadow-medium rounded-lg"
       >
         <Logo className="hidden md:block absolute -translate-y-1/2 top-0 left-0 right-0 mx-auto size-16 text-orange-300" />
-        <h1 className="text-center py-6 md:py-4 text-orange-300 drop-shadow-md text-3xl font-bold">
+        <h1 className="text-center py-6 md:py-2 text-orange-300 drop-shadow-md text-3xl font-bold">
           ثبت نام
         </h1>
         {authFormAmount.map((i, index) => (
@@ -95,7 +96,7 @@ function SignupPage() {
           />
         ))}
 
-        <div className="flex items-center gap-2 pb-5">
+        <div className="flex items-center gap-2 pb-2">
           <input
             type="checkbox"
             name="isAccepted"
@@ -119,7 +120,7 @@ function SignupPage() {
             کافی گلد را میپذیرم
           </p>
         </div>
-        {isLoading.submitForm ? (
+        {isPending ? (
           <Loader color="#FDBA74" size={10} />
         ) : (
           <Button
@@ -131,7 +132,7 @@ function SignupPage() {
             ثبت نام
           </Button>
         )}
-        <div className="flex items-center justify-center gap-1 text-sm pt-3">
+        <div className="flex items-center justify-center gap-1 text-sm pt-4">
           <span className="text-zinc-500 dark:text-zinc-200">
             آیا شما قبلا حساب ایجاد کرده اید؟
           </span>

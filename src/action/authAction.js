@@ -3,18 +3,19 @@
 import connectDB from "@/DB/connectDB";
 import User from "@/models/User";
 import { hashingPassword } from "@/utils/validation/auth";
-import { revalidatePath } from "next/cache";
 
 export const signupAction = async (formData) => {
+  const firstName = formData.get("firstName");
+  const lastName = formData.get("lastName");
   const email = formData.get("email");
   const password = formData.get("password");
 
   try {
     await connectDB();
 
-    if (!email || !password) {
+    if (!email || !password || !firstName || !lastName) {
       return {
-        error: "لطفا ایمیل و پسورد خود را وارد نمایید",
+        error: "لطفا اطلاعات مورد نیاز را کامل وارد نمایید",
         status: 422,
       };
     }
@@ -30,11 +31,12 @@ export const signupAction = async (formData) => {
 
     const hashedPassword = await hashingPassword(password);
 
-    const newUser = await User.create({
+    await User.create({
+      firstName,
+      lastName,
       email,
       password: hashedPassword,
     });
-    revalidatePath("/signin");
     return {
       message: "حساب کاربری با موفقیت ایجاد شد",
       status: 201,
