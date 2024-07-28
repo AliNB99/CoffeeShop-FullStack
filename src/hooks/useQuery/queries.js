@@ -1,16 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
-import { useSearchParams } from "next/navigation";
 import api from "src/configs/api";
 
-export const useUsersData = () => {
-  const searchParams = useSearchParams();
-
-  const page = searchParams.get("page") || 1;
-  const searchValue = searchParams.get("search");
-  const rowsPerPage = searchParams.get("rowsPerPage") || 5;
-
+export const useUsersData = (page, rowsPerPage, searchValue) => {
   return useQuery({
-    queryKey: ["users"],
+    queryKey: ["users", page],
     queryFn: () =>
       api.get(
         `/admin/users?page=${page}&rowsPerPage=${rowsPerPage}&search=${searchValue}`

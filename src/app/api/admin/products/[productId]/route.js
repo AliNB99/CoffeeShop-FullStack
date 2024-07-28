@@ -33,7 +33,8 @@ export async function PATCH(req, context) {
 
     const product = await Product.findOne({ _id: productId });
 
-    product.isAvailable = !product.isAvailable;
+    product.status =
+      product.status === "authorized" ? "unauthorized" : "authorized";
     product.save();
 
     return NextResponse.json({

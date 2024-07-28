@@ -37,11 +37,12 @@ import {
 } from "@/constants/dashboard";
 import { useUsersData } from "src/hooks/useQuery/queries";
 import { useChangeUser, useDeleteUser } from "src/hooks/useQuery/mutations";
-import { useQueryClient } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import CustomModal from "@/molecules/common/Modal";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import TopContentTable from "@/molecules/admin/TopContentTable";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import api from "src/configs/api";
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions", "id"];
 
@@ -63,11 +64,12 @@ export default function UsersTable({ role }) {
   );
   const [fullName, setFullName] = useState({ firstName: "", lastName: "" });
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const query = new URLSearchParams(searchParams.toString());
   const hasSearchFilter = Boolean(searchValue);
+
   const { replace } = useRouter();
   const pathName = usePathname();
   const queryClient = useQueryClient();
-  const query = new URLSearchParams(searchParams.toString());
 
   // get all users
   const {
@@ -75,23 +77,23 @@ export default function UsersTable({ role }) {
     isPending: isPendingUsers,
     isFetching: isFetchingUser,
     isError: isErrorUsers,
-  } = useUsersData();
+  } = useUsersData(page, rowsPerPage, searchValue);
 
   useEffect(() => {
     const result = data?.data.users.find((user) => user.role === "OWNER");
     setIdOwner(result?._id);
 
-    query.set("page", page);
     query.set("rowsPerPage", rowsPerPage);
+    pages > 1 ? query.set("page", page) : query.delete("page", page);
+
     const queries = query.toString();
     replace(`${pathName}?${queries}`);
-    
+    console.log(data?.data.users);
   }, [data?.data.users, page, rowsPerPage]);
 
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: ["users"] });
-    console.log(data?.data.users);
-  }, [searchValue, page, rowsPerPage]);
+  }, [searchValue, rowsPerPage]);
 
   // delete users
   const {
@@ -162,16 +164,6 @@ export default function UsersTable({ role }) {
     return filteredItems.slice(start, end);
   }, [page, filteredItems, rowsPerPage]);
 
-  const sortedItems = useMemo(() => {
-    return [...items].sort((a, b) => {
-      const first = a[sortDescriptor.column];
-      const second = b[sortDescriptor.column];
-      const cmp = first < second ? -1 : first > second ? 1 : 0;
-
-      return sortDescriptor.direction === "descending" ? -cmp : cmp;
-    });
-  }, [sortDescriptor, items]);
-
   const renderCell = useCallback(
     (user, columnKey, index) => {
       const cellValue = user[columnKey];
@@ -206,7 +198,7 @@ export default function UsersTable({ role }) {
         case "status":
           return (
             <div className="px-3">
-              {user.isAvailable ? (
+              {user.status === "authorized" ? (
                 <Tooltip className="text-green-500" content="مجاز برای فعالیت">
                   <CheckCircleIcon className="text-green-500" />
                 </Tooltip>
@@ -320,8 +312,6 @@ export default function UsersTable({ role }) {
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         setPage={setPage}
-        statusFilter={statusFilter}
-        setStatusFilter={setStatusFilter}
         visibleColumns={visibleColumns}
         setVisibleColumns={setVisibleColumns}
         onRowsPerPageChange={onRowsPerPageChange}
@@ -333,7 +323,6 @@ export default function UsersTable({ role }) {
     );
   }, [
     searchValue,
-    statusFilter,
     visibleColumns,
     data?.data.users,
     onSearchChange,
@@ -344,8 +333,12 @@ export default function UsersTable({ role }) {
 
   const bottomContent = useMemo(() => {
     return (
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-        {pages > 0 ? (
+      <div
+        className={`flex flex-col md:flex-row items-center gap-4 ${
+          pages > 1 ? "justify-between" : "justify-center"
+        }`}
+      >
+        {pages > 1 ? (
           <Pagination
             className="z-10"
             classNames={{ next: "scale-x-[-1]", prev: "scale-x-[-1]" }}
@@ -375,7 +368,7 @@ export default function UsersTable({ role }) {
         bottomContent={bottomContent}
         bottomContentPlacement="outside"
         classNames={{
-          wrapper: "max-h-[425px]",
+          wrapper: "max-h-[430px]",
         }}
         selectedKeys={selectedKeys}
         selectionMode="multiple"
@@ -390,7 +383,6 @@ export default function UsersTable({ role }) {
             <TableColumn
               key={column.uid}
               align={column.uid === "actions" ? "center" : "start"}
-              allowsSorting={column.sortable}
             >
               {column.name}
             </TableColumn>
@@ -400,10 +392,10 @@ export default function UsersTable({ role }) {
           isLoading={isPendingUsers || isFetchingUser}
           loadingContent={<Spinner />}
           emptyContent={"کاربری یافت نشد!!!"}
-          items={sortedItems ?? []}
+          items={data?.data.users ?? []}
         >
           {!isErrorUsers
-            ? sortedItems.map((item, index) => (
+            ? data?.data.users.map((item, index) => (
                 <TableRow key={item._id}>
                   {(columnKey) => (
                     <TableCell>{renderCell(item, columnKey, index)}</TableCell>

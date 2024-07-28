@@ -71,7 +71,8 @@ export async function PATCH(req, context) {
 
     switch (data.action) {
       case "changeStatus":
-        targetUser.isAvailable = !targetUser.isAvailable;
+        targetUser.status =
+          targetUser.status === "authorized" ? "unauthorized" : "authorized";
         targetUser.save();
         return NextResponse.json({
           targetUser,

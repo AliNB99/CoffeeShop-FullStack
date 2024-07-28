@@ -25,12 +25,12 @@ export async function GET(req) {
     const page = parseInt(url.searchParams.get("page"));
     const rowsPerPage = parseInt(url.searchParams.get("rowsPerPage"));
 
-    console.log({ page, rowsPerPage });
-
     const totalCountUser = await User.countDocuments();
 
     let users;
-    if (searchTerm === "null") {
+
+    if (!searchTerm) {
+      console.log({ page, rowsPerPage });
       const skipRows = (page - 1) * rowsPerPage;
       users = await User.find({}).skip(skipRows).limit(rowsPerPage);
     } else {
@@ -134,11 +134,11 @@ export async function PATCH(req) {
       ? await User.updateMany({ role: { $ne: "OWNER" } }, [
           {
             $set: {
-              isAvailable: {
+              status: {
                 $cond: {
-                  if: { $eq: ["$isAvailable", true] },
-                  then: false,
-                  else: true,
+                  if: { $eq: ["$status", "authorized"] },
+                  then: "unauthorized",
+                  else: "authorized",
                 },
               },
             },
@@ -147,11 +147,11 @@ export async function PATCH(req) {
       : await User.updateMany({ _id: { $in: ids } }, [
           {
             $set: {
-              isAvailable: {
+              status: {
                 $cond: {
-                  if: { $eq: ["$isAvailable", true] },
-                  then: false,
-                  else: true,
+                  if: { $eq: ["$status", "authorized"] },
+                  then: "unauthorized",
+                  else: "authorized",
                 },
               },
             },

@@ -106,7 +106,7 @@ export async function PATCH(req) {
       images,
       category,
       discount,
-      isAvailable,
+      status,
       advantages,
       disadvantages,
       specifications,
@@ -125,7 +125,7 @@ export async function PATCH(req) {
     product.advantages = advantages;
     product.disadvantages = disadvantages;
     product.specifications = specifications;
-    product.isAvailable = isAvailable;
+    product.status = status;
     product.save();
 
     return NextResponse.json({

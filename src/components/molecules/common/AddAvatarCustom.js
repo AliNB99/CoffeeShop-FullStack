@@ -11,7 +11,7 @@ import {
   useChangeAvatarUser,
 } from "src/hooks/useQuery/mutations";
 
-function AddAvatarCustom({ user, role }) {
+function AddAvatarCustom({ user }) {
   const queryClient = useQueryClient();
   const { refresh } = useRouter();
   const {
@@ -51,7 +51,7 @@ function AddAvatarCustom({ user, role }) {
         size="lg"
         onLoad={(img) => img.target.classList.remove("opacity-0")}
         isBordered
-        color={roleColorMap[role]}
+        color={roleColorMap[user.role]}
       />
       <div className="absolute flex items-center justify-center top-0 w-full h-full">
         <Tooltip placement="left" content="تغییر عکس">

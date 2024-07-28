@@ -41,7 +41,9 @@ function DashboardSidebar({ user }) {
         </button>
       </div>
       <div className="flex flex-col items-center border-b border-zinc-300 space-y-4 dark:border-zinc-600 pb-5">
-        <AddAvatarCustom user={user} role={role} />
+
+        <AddAvatarCustom user={user} />
+
         <div className="flex flex-col items-center">
           <h4>{`${firstName} ${lastName}`}</h4>
           <Chip

@@ -142,7 +142,7 @@ export const headCellProductTable = [
     width: 30,
   },
   {
-    id: "isAvailable",
+    id: "status",
     numeric: false,
     disablePadding: false,
     label: "وضعیت",
@@ -160,15 +160,10 @@ export const headCellProductTable = [
 export const columnsUserTable = [
   { name: "شماره", uid: "id" },
   { name: "نام کاربری", uid: "name" },
-  { name: "نقش", uid: "role", sortable: true },
-  { name: "ایمیل", uid: "email", sortable: true },
-  { name: "وضعیت", uid: "status", sortable: true },
+  { name: "نقش", uid: "role" },
+  { name: "ایمیل", uid: "email" },
+  { name: "وضعیت", uid: "status" },
   { name: "ابزار مدیریت", uid: "actions" },
-];
-
-export const statusOptions = [
-  { name: "مجاز", uid: "مجاز" },
-  { name: "غیرمجاز", uid: "غیرمجاز" },
 ];
 
 export const roleColorMap = {

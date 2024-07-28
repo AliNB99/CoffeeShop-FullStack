@@ -7,13 +7,16 @@ import {
   DropdownItem,
   DropdownTrigger,
   useDisclosure,
+  Tooltip,
 } from "@nextui-org/react";
 import {
   ArrowPathIcon,
+  Bars3BottomRightIcon,
   ChevronDownIcon,
+  TableCellsIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { columnsUserTable, statusOptions } from "@/constants/dashboard";
+import { columnsUserTable } from "@/constants/dashboard";
 import {
   useChangeSomeUser,
   useDeleteSomeUser,
@@ -27,7 +30,6 @@ import { useQueryClient } from "@tanstack/react-query";
 
 function TopContentTable({
   setPage,
-  statusFilter,
   selectedKeys,
   setSelectedKeys,
   filteredItems,
@@ -36,7 +38,6 @@ function TopContentTable({
   isFetchingUser,
   searchValue,
   setSearchValue,
-  setStatusFilter,
   setVisibleColumns,
   onRowsPerPageChange,
   rowsPerPage,
@@ -44,6 +45,7 @@ function TopContentTable({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const queryClient = useQueryClient();
+
   const {
     isError: isErrorDelete,
     isPending: isPendingDelete,
@@ -94,79 +96,59 @@ function TopContentTable({
           setSearchValue={setSearchValue}
           setPage={setPage}
         />
-        <div className="flex gap-3">
-          <Dropdown>
-            <DropdownTrigger className="hidden sm:flex">
-              <Button
-                endContent={<ChevronDownIcon className="text-small" />}
-                variant="flat"
-              >
-                وضعیت
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              disallowEmptySelection
-              aria-label="Table Columns"
-              closeOnSelect={false}
-              selectedKeys={statusFilter}
-              selectionMode="multiple"
-              onSelectionChange={setStatusFilter}
+
+        <Dropdown>
+          <DropdownTrigger className="flex">
+            <Button
+              endContent={<ChevronDownIcon className="text-small" />}
+              variant="flat"
             >
-              {statusOptions.map((status) => (
-                <DropdownItem key={status.uid} className="capitalize">
-                  {capitalize(status.name)}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
-          <Dropdown>
-            <DropdownTrigger className="hidden sm:flex">
-              <Button
-                endContent={<ChevronDownIcon className="text-small" />}
-                variant="flat"
-              >
-                ستون ها
-              </Button>
-            </DropdownTrigger>
-            <DropdownMenu
-              disallowEmptySelection
-              aria-label="Table Columns"
-              closeOnSelect={false}
-              selectedKeys={visibleColumns}
-              selectionMode="multiple"
-              onSelectionChange={setVisibleColumns}
-            >
-              {columnsUserTable.map((column) => (
-                <DropdownItem key={column.uid} className="capitalize">
-                  {capitalize(column.name)}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </Dropdown>
-        </div>
+              <Bars3BottomRightIcon />
+              <span className="hidden sm:inline">ستون ها</span>
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            disallowEmptySelection
+            aria-label="Table Columns"
+            closeOnSelect={false}
+            selectedKeys={visibleColumns}
+            selectionMode="multiple"
+            onSelectionChange={setVisibleColumns}
+          >
+            {columnsUserTable.map((column) => (
+              <DropdownItem key={column.uid} className="capitalize">
+                {capitalize(column.name)}
+              </DropdownItem>
+            ))}
+          </DropdownMenu>
+        </Dropdown>
       </div>
       <div className="flex justify-between items-center">
         <div className="relative w-[50%] flex gap-4 items-center">
           {!!selectedKeys.size || selectedKeys === "all" ? (
             <div className="flex gap-2 items-center">
-              <Button
-                className=" text-red-500"
-                onClick={() => onOpen()}
-                isLoading={isPendingDelete}
-                isIconOnly
-                variant="flat"
-              >
-                <TrashIcon />
-              </Button>
-              <Button
-                className=" text-blue-400"
-                onClick={changeStatusSelectedUsersHandler}
-                isLoading={isPendingStatus}
-                isIconOnly
-                variant="flat"
-              >
-                <ArrowPathIcon />
-              </Button>
+              <Tooltip className=" text-red-500" content="حذف کاربران">
+                <Button
+                  className=" text-red-500"
+                  onClick={() => onOpen()}
+                  isLoading={isPendingDelete}
+                  isIconOnly
+                  variant="flat"
+                >
+                  <TrashIcon />
+                </Button>
+              </Tooltip>
+              <Tooltip content="تغییر وضعیت کاربران">
+                <Button
+                  className=" text-zinc-500 dark:text-zinc-300"
+                  onClick={changeStatusSelectedUsersHandler}
+                  isLoading={isPendingStatus}
+                  isIconOnly
+                  variant="flat"
+                >
+                  <ArrowPathIcon />
+                </Button>
+              </Tooltip>
             </div>
           ) : null}
           <span className="text-xs md:text-sm font-bold text-default-400">
@@ -178,7 +160,7 @@ function TopContentTable({
         <label className="flex items-center text-default-400 text-xs md:text-sm font-bold">
           ردیف در هر صفحه:
           <select
-            className="bg-transparent outline-none text-default-400 text-xs md:text-sm font-bold"
+            className="bg-transparent outline-none text-default-400 text-xs md:text-sm font-bold cursor-pointer"
             onChange={onRowsPerPageChange}
             defaultValue={rowsPerPage}
           >

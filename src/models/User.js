@@ -15,9 +15,9 @@ const userSchema = new Schema(
       default: "USER",
     },
 
-    isAvailable: {
-      type: Boolean,
-      default: true,
+    status: {
+      type: String,
+      default: "authorized",
     },
 
     avatar: String,

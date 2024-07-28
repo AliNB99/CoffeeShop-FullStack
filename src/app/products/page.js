@@ -15,8 +15,8 @@ async function Products(context) {
   } = context;
 
   const products = category
-    ? await Product.find({ isAvailable: true, category })
-    : await Product.find({ isAvailable: true });
+    ? await Product.find({ status: "authorized", category })
+    : await Product.find({ status: "authorized" });
 
   return (
     <main className="space-top">
