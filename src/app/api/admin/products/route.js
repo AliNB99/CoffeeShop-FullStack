@@ -250,7 +250,6 @@ export async function DELETE(req) {
     }
 
     const { ids, selectedKeys } = await req.json();
-    console.log({ ids, selectedKeys });
 
     selectedKeys === "all"
       ? await Product.deleteMany({})

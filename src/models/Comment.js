@@ -18,6 +18,12 @@ const CommentSchema = new Schema(
       type: Object,
       required: true,
     },
+
+    productInfo: {
+      type: Object,
+      required: true,
+    },
+
     status: {
       type: String,
       default: "pending",

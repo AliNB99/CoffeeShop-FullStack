@@ -78,7 +78,6 @@ export async function DELETE(req) {
     }
 
     const { ids, selectedKeys } = await req.json();
-    console.log({ ids, selectedKeys });
 
     selectedKeys === "all"
       ? await Comment.deleteMany({})
@@ -119,9 +118,10 @@ export async function PATCH(req) {
         error: "دسترسی شما برای این کار محدود شده است",
       });
     }
-    const {
-      data: { ids, selectedKeys },
-    } = await req.json();
+
+    const { ids, selectedKeys, statusValue } = await req.json();
+
+    console.log({ ids, selectedKeys, statusValue });
 
     if (!ids || !selectedKeys)
       return NextResponse.json({
@@ -130,32 +130,22 @@ export async function PATCH(req) {
       });
 
     selectedKeys === "all"
-      ? await User.updateMany({}, [
+      ? await Comment.updateMany(
+          {},
           {
             $set: {
-              status: {
-                $cond: {
-                  if: { $eq: ["$status", "authorized"] },
-                  then: "unauthorized",
-                  else: "authorized",
-                },
-              },
+              status: statusValue,
             },
-          },
-        ])
-      : await User.updateMany({ _id: { $in: ids } }, [
+          }
+        )
+      : await Comment.updateMany(
+          { _id: { $in: ids } },
           {
             $set: {
-              status: {
-                $cond: {
-                  if: { $eq: ["$status", "authorized"] },
-                  then: "unauthorized",
-                  else: "authorized",
-                },
-              },
+              status: statusValue,
             },
-          },
-        ]);
+          }
+        );
 
     return NextResponse.json({
       status: 200,

@@ -86,8 +86,8 @@ export const useDeleteSomeData = ({ queryClient, route }) => {
 
 export const useChangeSomeData = ({ queryClient, route }) => {
   return useMutation({
-    mutationFn: ({ ids, action, selectedKeys }) =>
-      api.patch(`/admin/${route}`, { ids, selectedKeys, action }),
+    mutationFn: ({ ids, action, selectedKeys, statusValue }) =>
+      api.patch(`/admin/${route}`, { ids, selectedKeys, action, statusValue }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey: [route] }),
   });
 };

@@ -125,9 +125,7 @@ export async function PATCH(req) {
         error: "دسترسی شما برای این کار محدود شده است",
       });
     }
-    const {
-      data: { ids, selectedKeys },
-    } = await req.json();
+    const { ids, selectedKeys } = await req.json();
 
     if (!ids || !selectedKeys)
       return NextResponse.json({

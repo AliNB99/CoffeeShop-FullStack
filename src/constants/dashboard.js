@@ -130,8 +130,8 @@ export const columnsCommentsTable = [
   { name: "شماره", uid: "id" },
   { name: "نویسنده", uid: "userInfo" },
   { name: "متن دیدگاه", uid: "description" },
-  { name: "وضعیت", uid: "status" },
   { name: "امتیاز", uid: "rate" },
+  { name: "وضعیت", uid: "status" },
   { name: "ابزار مدیریت", uid: "actions" },
 ];
 

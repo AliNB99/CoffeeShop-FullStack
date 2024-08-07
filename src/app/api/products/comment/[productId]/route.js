@@ -35,14 +35,12 @@ export async function POST(req, context) {
     const { data } = await req.json();
 
     const {
-      user: { firstName, lastName, avatar, _id },
+      user: { firstName, lastName, email, avatar, _id: userId },
       comment: { description, rate },
-      product,
+      product: { title, category, images },
     } = data;
 
-    console.log(product);
-
-    if (!_id) {
+    if (!userId) {
       return NextResponse.json({
         status: 422,
         error: "لطفا ابتدا وارد حساب کاربری شوید",
@@ -52,7 +50,8 @@ export async function POST(req, context) {
     const comment = await Comment.create({
       description,
       rate,
-      userInfo: { firstName, lastName, avatar },
+      userInfo: { firstName, lastName, email, avatar },
+      productInfo: { title, category, images },
       productId,
     });
 

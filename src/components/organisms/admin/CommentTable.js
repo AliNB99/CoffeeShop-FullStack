@@ -30,18 +30,12 @@ import { useGetData } from "src/hooks/useQuery/queries";
 import { useChangeData, useDeleteData } from "src/hooks/useQuery/mutations";
 import { useQueryClient } from "@tanstack/react-query";
 import ModalDeleteCustom from "@/molecules/common/ModalDeleteCustom";
-import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import { EllipsisHorizontalIcon, StarIcon } from "@heroicons/react/24/solid";
 import TopContentTable from "@/molecules/admin/TopContentTable";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ModalShowInfoCommentCustom from "@/molecules/admin/ModalShowInfoCommentCustom";
 
-const INITIAL_VISIBLE_COLUMNS = [
-  "description",
-  "id",
-  "status",
-  "actions",
-  "userInfo",
-];
+const INITIAL_VISIBLE_COLUMNS = ["id", "status", "actions", "userInfo", "rate"];
 
 function CommentsTable() {
   const searchParams = useSearchParams();
@@ -57,7 +51,7 @@ function CommentsTable() {
   const [visibleColumns, setVisibleColumns] = useState(
     new Set(INITIAL_VISIBLE_COLUMNS)
   );
-  const [textCommentModal, setTextCommentModal] = useState("");
+  const [commentInfoModal, setCommentInfoModal] = useState({});
 
   const {
     isOpen: isOpenDeleteModal,
@@ -92,8 +86,6 @@ function CommentsTable() {
 
     const queries = query.toString();
     replace(`${pathName}?${queries}`);
-
-    console.log(data?.data.comments);
   }, [data?.data.comments, page, rowsPerPage]);
 
   useEffect(() => {
@@ -208,6 +200,13 @@ function CommentsTable() {
               name={`${comment.userInfo.firstName} ${comment.userInfo.lastName}`}
             />
           );
+        case "rate":
+          return (
+            <div className="flex items-center justify-center gap-1 text-yellow-400">
+              <span className="text-xl">{comment.rate}</span>
+              <StarIcon className="w-3 h-3" />
+            </div>
+          );
         case "actions":
           return (
             <Dropdown>
@@ -230,7 +229,10 @@ function CommentsTable() {
                 <DropdownItem
                   onClick={() => {
                     onOpenShowInfo();
-                    setTextCommentModal(comment.description);
+                    setCommentInfoModal({
+                      description: comment.description,
+                      productInfo: comment.productInfo,
+                    });
                     setCommentId(comment._id);
                   }}
                   key="details comment"
@@ -398,9 +400,10 @@ function CommentsTable() {
         clickHandler={() => deleteCommentHandler(commentId)}
       />
       <ModalShowInfoCommentCustom
+        title="جزئیات دیدگاه"
         isOpen={isOpenShowInfo}
         isPending={isPendingChangeComment}
-        textComment={textCommentModal}
+        commentInfo={commentInfoModal}
         onOpenChange={onOpenChangeShowInfo}
         clickHandler={changeCommentHandler}
       />

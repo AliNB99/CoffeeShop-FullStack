@@ -27,6 +27,7 @@ import SearchTable from "@/atoms/SearchTable";
 import { capitalize } from "@/utils/helper/helper";
 import { useQueryClient } from "@tanstack/react-query";
 import Link from "next/link";
+import ModalShowInfoCommentCustom from "./ModalShowInfoCommentCustom";
 
 const typeTitleMap = {
   products: "محصول",
@@ -94,11 +95,12 @@ function TopContentTable({
     }
   };
 
-  const changeStatusSelectedDataHandler = async () => {
+  const changeStatusSelectedDataHandler = async (item) => {
     const res = await mutateAsyncStatus({
       ids,
       selectedKeys,
       action: "changeStatus",
+      statusValue: item.status,
     });
     if (res.data.error || isErrorStatus) {
       return toast.error(res.data.error);
@@ -185,7 +187,11 @@ function TopContentTable({
               <Tooltip content="تغییر وضعیت کاربران">
                 <Button
                   className=" text-zinc-500 dark:text-zinc-300"
-                  onClick={changeStatusSelectedDataHandler}
+                  onClick={
+                    type === "comments"
+                      ? onOpenShowInfo
+                      : changeStatusSelectedDataHandler
+                  }
                   isLoading={isPendingStatus}
                   isIconOnly
                   variant="flat"
@@ -222,6 +228,13 @@ function TopContentTable({
         isPending={isPendingDelete}
         onOpenChange={onOpenChangeDeleteModal}
         clickHandler={deleteSelectedDataHandler}
+      />
+      <ModalShowInfoCommentCustom
+        title="تغییر وضعیت نمایش"
+        isOpen={isOpenShowInfo}
+        isPending={isPendingStatus}
+        onOpenChange={onOpenChangeShowInfo}
+        clickHandler={changeStatusSelectedDataHandler}
       />
     </div>
   );
