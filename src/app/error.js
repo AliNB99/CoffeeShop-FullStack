@@ -4,6 +4,7 @@ import { ArrowPathIcon, HomeIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { LogoType } from "@/utils/svg";
+import { Button, Tooltip } from "@nextui-org/react";
 
 function Error({ error, reset }) {
   useEffect(() => {
@@ -20,21 +21,23 @@ function Error({ error, reset }) {
         مشکلی پیش آمده است. لطفا دقایقی بعد مجددا امتحان نمایید.
       </h2>
       <div className="flex gap-3">
-        <button
-          title="ریست کردن"
-          className="text-orange-300 border-2 border-orange-300 shadow-sm transition-all p-2 rounded-3xl font-semibold"
-          onClick={() => reset()}
-        >
-          <ArrowPathIcon className="size-7" />
-        </button>
-        {pathName && (
+        <Tooltip placement="bottom" content="تلاش مجدد">
           <button
-            title="صفحه اصلی"
-            className="text-orange-300 border-2 p-2 border-orange-300 shadow-sm transition-all rounded-full font-semibold"
-            onClick={() => push("/")}
+            className="text-orange-300 border-2 border-orange-300 shadow-sm transition-all p-2 rounded-3xl font-semibold"
+            onClick={() => reset()}
           >
-            <HomeIcon className="size-7" />
+            <ArrowPathIcon className="size-7" />
           </button>
+        </Tooltip>
+        {pathName && (
+          <Tooltip placement="bottom" content="برگشت به صفحه اصلی">
+            <button
+              className="text-orange-300 border-2 p-2 border-orange-300 shadow-sm transition-all rounded-full font-semibold"
+              onClick={() => push("/")}
+            >
+              <HomeIcon className="size-7" />
+            </button>
+          </Tooltip>
         )}
       </div>
     </div>

@@ -9,7 +9,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
-export default function CustomModal({
+function ModalDeleteCustom({
   warningMessage,
   title,
   isOpen,
@@ -61,3 +61,5 @@ export default function CustomModal({
     </>
   );
 }
+
+export default ModalDeleteCustom;

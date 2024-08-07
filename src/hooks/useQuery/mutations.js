@@ -3,20 +3,37 @@ import { UploadClient } from "@uploadcare/upload-client";
 import { signIn } from "next-auth/react";
 import api from "src/configs/api";
 
-export const useSubmitSignup = () => {
-  return useMutation({
-    mutationFn: (form) => api.post("/auth/signup", form),
-  });
+export const useSubmitAuth = (action) => {
+  if (action === "signup") {
+    return useMutation({
+      mutationFn: (form) => api.post("/auth/signup", form),
+    });
+  } else if (action === "signin") {
+    return useMutation({
+      mutationFn: async (form) =>
+        await signIn("credentials", {
+          ...form,
+          redirect: false,
+        }),
+    });
+  }
 };
 
-export const useSubmitSignin = () => {
-  return useMutation({
-    mutationFn: async (form) =>
-      await signIn("credentials", {
-        ...form,
-        redirect: false,
-      }),
-  });
+export const useSubmitProduct = (action) => {
+  if (action === "addProduct") {
+    return useMutation({
+      mutationFn: (form) => api.post("/admin/products", form),
+    });
+  } else if (action === "editProduct") {
+    return useMutation({
+      mutationFn: ({ form, id }) =>
+        api.patch("/admin/products", {
+          action,
+          form,
+          id,
+        }),
+    });
+  }
 };
 
 export const useAddImages = () => {
@@ -29,7 +46,7 @@ export const useAddImages = () => {
   });
 };
 
-export const useChangeAvatarUser = (queryClient) => {
+export const useChangeDataAvatarUser = (queryClient) => {
   return useMutation({
     mutationFn: ({ id, img }) =>
       api.patch(`/admin/users/${id}`, {
@@ -40,36 +57,46 @@ export const useChangeAvatarUser = (queryClient) => {
   });
 };
 
-export const useDeleteUser = (queryClient) => {
+export const useDeleteData = ({ queryClient, route }) => {
   return useMutation({
-    mutationFn: (id) => api.delete(`/admin/users/${id}`),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+    mutationFn: (id) => api.delete(`/admin/${route}/${id}`),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [route] }),
   });
 };
 
-export const useChangeUser = (queryClient) => {
+export const useChangeData = ({ queryClient, route }) => {
   return useMutation({
-    mutationFn: ({ id, img, action }) =>
-      api.patch(`/admin/users/${id}`, {
+    mutationFn: ({ id, img, action, status }) =>
+      api.patch(`/admin/${route}/${id}`, {
         action,
         img,
+        status,
       }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [route] }),
   });
 };
 
-export const useDeleteSomeUser = (queryClient) => {
+export const useDeleteSomeData = ({ queryClient, route }) => {
   return useMutation({
     mutationFn: ({ ids, selectedKeys }) =>
-      api.delete(`/admin/users`, { data: { ids, selectedKeys } }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+      api.delete(`/admin/${route}`, { data: { ids, selectedKeys } }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [route] }),
   });
 };
 
-export const useChangeSomeUser = (queryClient) => {
+export const useChangeSomeData = ({ queryClient, route }) => {
   return useMutation({
-    mutationFn: ({ ids, selectedKeys }) =>
-      api.patch(`/admin/users`, { data: { ids, selectedKeys } }),
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["users"] }),
+    mutationFn: ({ ids, action, selectedKeys }) =>
+      api.patch(`/admin/${route}`, { ids, selectedKeys, action }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: [route] }),
+  });
+};
+
+export const useSubmitComment = () => {
+  return useMutation({
+    mutationFn: ({ user, comment, product }) =>
+      api.post(`/products/comment/${product._id}`, {
+        data: { user, comment, product },
+      }),
   });
 };

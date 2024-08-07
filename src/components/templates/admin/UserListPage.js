@@ -1,8 +1,8 @@
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import TitlePage from "@/atoms/TitlePage";
 import User from "@/models/User";
-import UsersTable from "@/organisms/admin/UsersTable";
+import TitlePage from "@/atoms/TitlePage";
 import { getServerSession } from "next-auth";
+import UsersTable from "@/organisms/admin/UsersTable";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 async function UserListPage() {
   const {

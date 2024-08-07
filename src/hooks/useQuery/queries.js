@@ -1,12 +1,20 @@
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import api from "src/configs/api";
 
-export const useUsersData = (page, rowsPerPage, searchValue) => {
+export const useGetData = ({ route, page, rowsPerPage, searchValue }) => {
   return useQuery({
-    queryKey: ["users", page],
+    queryKey: [route, page],
     queryFn: () =>
       api.get(
-        `/admin/users?page=${page}&rowsPerPage=${rowsPerPage}&search=${searchValue}`
+        `/admin/${route}?page=${page}&rowsPerPage=${rowsPerPage}&search=${searchValue}`
       ),
+    placeholderData: keepPreviousData,
+  });
+};
+
+export const useGetCommentsProduct = (productId) => {
+  return useQuery({
+    queryKey: ["comment", productId],
+    queryFn: () => api.get(`/products/comment/${productId}`),
   });
 };

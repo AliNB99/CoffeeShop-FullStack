@@ -22,13 +22,13 @@ function CartProduct({ data }) {
     >
       <div className="relative flex justify-center">
         {images.length ? (
-          <div className="w-32 h-32 lg:w-64 lg:h-64 flex items-center justify-center">
+          <div className="w-full h-32 lg:w-64 lg:min-h-64 flex items-center justify-center ">
             <CustomImage
               src={images[0]}
               width={300}
               height={300}
               alt="product image"
-              className="w-32 h-32 lg:w-64 lg:h-64 rounded-2xl transition-opacity opacity-0 duration-[1s]"
+              className="w-full h-32 lg:h-full rounded-lg transition-opacity opacity-0 duration-[1s]"
             />
           </div>
         ) : (

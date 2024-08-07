@@ -13,25 +13,18 @@ import {
   Dropdown,
   DropdownMenu,
   DropdownItem,
-  Chip,
   Pagination,
-  Tooltip,
   Spinner,
   useDisclosure,
+  Chip,
+  User,
 } from "@nextui-org/react";
-import {
-  ArrowPathIcon,
-  CheckCircleIcon,
-  EyeIcon,
-  NoSymbolIcon,
-  PencilSquareIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
+import { EyeIcon, TrashIcon, UserIcon } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 import {
-  columnsProductsTable,
-  CategoryColorMap,
-  categoryTitle,
+  columnsCommentsTable,
+  statusCommentColorMap,
+  statusCommentTitle,
 } from "@/constants/dashboard";
 import { useGetData } from "src/hooks/useQuery/queries";
 import { useChangeData, useDeleteData } from "src/hooks/useQuery/mutations";
@@ -40,26 +33,21 @@ import ModalDeleteCustom from "@/molecules/common/ModalDeleteCustom";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import TopContentTable from "@/molecules/admin/TopContentTable";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { Logo } from "@/utils/svg";
-import CustomImage from "@/atoms/CustomImage";
-import { sp } from "@/utils/helper/replaceNumber";
-import Link from "next/link";
+import ModalShowInfoCommentCustom from "@/molecules/admin/ModalShowInfoCommentCustom";
 
 const INITIAL_VISIBLE_COLUMNS = [
-  "title",
-  "category",
-  "images",
+  "description",
   "id",
-  "quantity",
   "status",
   "actions",
+  "userInfo",
 ];
 
-function ProductsTable() {
+function CommentsTable() {
   const searchParams = useSearchParams();
 
   const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
-  const [deleteId, setDeleteId] = useState(null);
+  const [commentId, setCommentId] = useState(null);
   const [rowsPerPage, setRowsPerPage] = useState(
     parseInt(searchParams.get("rowsPerPage")) || 5
   );
@@ -69,8 +57,20 @@ function ProductsTable() {
   const [visibleColumns, setVisibleColumns] = useState(
     new Set(INITIAL_VISIBLE_COLUMNS)
   );
-  const [titleProduct, setTitleProduct] = useState();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [textCommentModal, setTextCommentModal] = useState("");
+
+  const {
+    isOpen: isOpenDeleteModal,
+    onOpen: onOpenDeleteModal,
+    onOpenChange: onOpenChangeDeleteModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenShowInfo,
+    onOpen: onOpenShowInfo,
+    onOpenChange: onOpenChangeShowInfo,
+  } = useDisclosure();
+
   const query = new URLSearchParams(searchParams.toString());
   const hasSearchFilter = Boolean(searchValue);
 
@@ -81,10 +81,10 @@ function ProductsTable() {
   // get all products
   const {
     data,
-    isPending: isPendingProducts,
-    isFetching: isFetchingProducts,
-    isError: isErrorProducts,
-  } = useGetData({ route: "products", page, rowsPerPage, searchValue });
+    isPending: isPendingComment,
+    isFetching: isFetchingComment,
+    isError: isErrorComment,
+  } = useGetData({ route: "comments", page, rowsPerPage, searchValue });
 
   useEffect(() => {
     query.set("rowsPerPage", rowsPerPage);
@@ -92,59 +92,62 @@ function ProductsTable() {
 
     const queries = query.toString();
     replace(`${pathName}?${queries}`);
-  }, [data?.data.products, page, rowsPerPage]);
+
+    console.log(data?.data.comments);
+  }, [data?.data.comments, page, rowsPerPage]);
 
   useEffect(() => {
-    queryClient.invalidateQueries({ queryKey: ["products"] });
+    queryClient.invalidateQueries({ queryKey: ["comments"] });
   }, [searchValue, rowsPerPage]);
 
   // mutation
   const {
-    isError: isErrorDeleteProduct,
-    isPending: isPendingDeleteProduct,
-    mutateAsync: mutateAsyncDeleteProduct,
-  } = useDeleteData({ queryClient, route: "products" });
+    isError: isErrorDeleteComment,
+    isPending: isPendingDeleteComment,
+    mutateAsync: mutateAsyncDeleteComment,
+  } = useDeleteData({ queryClient, route: "comments" });
   const {
-    variables: variablesChangeProduct,
-    isPending: isPendingChangeProduct,
-    isError: isErrorChangeProduct,
-    mutateAsync: mutateAsyncChangeProduct,
-  } = useChangeData({ queryClient, route: "products" });
+    variables: variablesChangeComment,
+    isPending: isPendingChangeComment,
+    isError: isErrorChangeComment,
+    mutateAsync: mutateAsyncChangeComment,
+  } = useChangeData({ queryClient, route: "comments" });
 
-  const deleteProductHandler = async (id) => {
-    const res = await mutateAsyncDeleteProduct(id);
-    if (res.data.error || isErrorDeleteProduct) {
-      toast.error("محصول حذف نشد.مجدد تلاش کنید.");
+  const deleteCommentHandler = async (id) => {
+    const res = await mutateAsyncDeleteComment(id);
+    if (res.data.error || isErrorDeleteComment) {
+      toast.error(res.data.error);
     } else {
       toast.success(res.data.message);
       setSelectedKeys(new Set([]));
     }
   };
 
-  const changeProductHandler = async ({ id, action }) => {
-    const res = await mutateAsyncChangeProduct({
-      id,
+  const changeCommentHandler = async ({ status, action }) => {
+    const res = await mutateAsyncChangeComment({
+      status,
       action,
-      route: "products",
+      id: commentId,
     });
-    if (res.data.error || isErrorChangeProduct) {
-      toast.error("وضعیت کاربر تغییر نکرد. مجدد تلاش کنید.");
+    if (res.data.error || isErrorChangeComment) {
+      toast.error(res.data.error);
     } else {
       toast.success(res.data.message);
+      console.log(res.data);
     }
   };
 
   const headerColumns = useMemo(() => {
-    if (visibleColumns === "all") return columnsProductsTable;
+    if (visibleColumns === "all") return columnsCommentsTable;
 
-    return columnsProductsTable.filter((column) =>
+    return columnsCommentsTable.filter((column) =>
       Array.from(visibleColumns).includes(column.uid)
     );
   }, [visibleColumns]);
 
   const filteredItems = useMemo(() => {
-    return data?.data.products ? [...data?.data.products] : [];
-  }, [data?.data.products, page]);
+    return data?.data.comments ? [...data?.data.comments] : [];
+  }, [data?.data.comments, page]);
 
   const onRowsPerPageChange = useCallback((e) => {
     setRowsPerPage(Number(e.target.value));
@@ -153,13 +156,13 @@ function ProductsTable() {
 
   const pages = useMemo(() => {
     if (searchParams.get("search")) {
-      return Math.ceil(data?.data.products / rowsPerPage);
+      return Math.ceil(data?.data.comments / rowsPerPage);
     } else if (data?.data.totalCountProducts) {
       return Math.ceil(data?.data.totalCountProducts / rowsPerPage);
     } else {
       return 0;
     }
-  }, [data?.data.products, rowsPerPage, searchValue]);
+  }, [data?.data.comments, rowsPerPage, searchValue]);
 
   const items = useMemo(() => {
     const start = (page - 1) * rowsPerPage;
@@ -169,72 +172,50 @@ function ProductsTable() {
   }, [page, filteredItems, rowsPerPage]);
 
   const renderCell = useCallback(
-    (product, columnKey, index) => {
-      const cellValue = product[columnKey];
+    (comment, columnKey, index) => {
+      const cellValue = comment[columnKey];
       const iconClasses =
         "text-xl text-default-500 pointer-events-none flex-shrink-0";
 
       switch (columnKey) {
-        case "images":
+        case "description":
           return (
-            <div className="flex items-center justify-center">
-              {product.images.length ? (
-                <CustomImage
-                  src={product.images[0]}
-                  width={60}
-                  height={60}
-                  alt="products image"
-                />
-              ) : (
-                <Logo className="opacity-30 w-full h-full md:max-h-10 md:max-w-10" />
-              )}
-            </div>
+            <p className="max-w-44 whitespace-nowrap overflow-hidden text-ellipsis">
+              {comment.description}
+            </p>
           );
-        case "title":
-          return (
-            <Tooltip content={product.title}>
-              <h1 className="max-w-44 whitespace-nowrap overflow-hidden text-ellipsis">
-                {product.title}
-              </h1>
-            </Tooltip>
-          );
-        case "category":
+        case "status":
           return (
             <Chip
               className="capitalize px-2"
-              color={CategoryColorMap[product.category]}
+              color={statusCommentColorMap[comment.status]}
               size="sm"
               variant="flat"
             >
-              {categoryTitle[cellValue]}
+              {statusCommentTitle[cellValue]}
             </Chip>
           );
-        case "price":
-          return <p>{sp(product.price)}</p>;
-        case "status":
+        case "userInfo":
           return (
-            <div className="px-3 flex items-center justify-center">
-              {product.status === "available" ? (
-                <Tooltip className="text-green-500" content="نمایش محصول">
-                  <CheckCircleIcon className="text-green-500" />
-                </Tooltip>
-              ) : (
-                <Tooltip className="text-red-500" content="عدم نمایش محصول">
-                  <NoSymbolIcon className="text-red-500" />
-                </Tooltip>
-              )}
-            </div>
+            <User
+              avatarProps={{
+                src: comment.userInfo.avatar,
+                radius: "full",
+                fallback: <UserIcon className="opacity-50" />,
+                showFallback: true,
+              }}
+              description={comment.userInfo.email}
+              name={`${comment.userInfo.firstName} ${comment.userInfo.lastName}`}
+            />
           );
-        case "discount":
-          return <p>%{product.discount}</p>;
         case "actions":
           return (
             <Dropdown>
               <DropdownTrigger>
                 <Button
                   isLoading={
-                    variablesChangeProduct?.id === product._id &&
-                    isPendingChangeProduct
+                    variablesChangeComment?.id === comment._id &&
+                    isPendingChangeComment
                   }
                   isIconOnly
                   variant="light"
@@ -247,56 +228,32 @@ function ProductsTable() {
                 aria-label="Dropdown menu with description"
               >
                 <DropdownItem
-                  key="details product"
-                  description="نمایش تمام اطلاعات محصول"
+                  onClick={() => {
+                    onOpenShowInfo();
+                    setTextCommentModal(comment.description);
+                    setCommentId(comment._id);
+                  }}
+                  key="details comment"
+                  showDivider
+                  description="مشاهده دیدگاه و تغییر وضعیت نمایش"
                   startContent={<EyeIcon className={iconClasses} />}
                 >
-                  <Link
-                    className="absolute left-0 top-0 block w-full h-full"
-                    href={`/products/${product._id}`}
-                  />
                   نمایش جزئیات
                 </DropdownItem>
                 <DropdownItem
-                  onClick={() =>
-                    changeProductHandler({
-                      id: product._id,
-                      action: "changeStatus",
-                    })
-                  }
-                  key="change status"
-                  description="مدیریت وضعیت نمایش محصول"
-                  startContent={<ArrowPathIcon className={iconClasses} />}
-                >
-                  تغییر وضعیت
-                </DropdownItem>
-                <DropdownItem
-                  key="edit"
-                  showDivider
-                  description="ویرایش و تغییر اطلاعات محصول"
-                  startContent={<PencilSquareIcon className={iconClasses} />}
-                >
-                  <Link
-                    className="absolute left-0 top-0 block w-full h-full"
-                    href={`products-list/edit-product/${product._id}`}
-                  />
-                  ویرایش محصول
-                </DropdownItem>
-                <DropdownItem
                   onClick={() => {
-                    onOpen();
-                    setDeleteId(product._id);
-                    setTitleProduct(product.title);
+                    onOpenDeleteModal();
+                    setCommentId(comment._id);
                   }}
                   key="delete"
                   className="text-red-500"
-                  description="حذف محصول و اطلاعات مربوطه"
+                  description="حذف دیدگاه و اطلاعات مربوطه"
                   color="inherit"
                   startContent={
                     <TrashIcon className="text-xl pointer-events-none flex-shrink-0 text-red-500" />
                   }
                 >
-                  حذف محصول
+                  حذف دیدگاه
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -311,7 +268,7 @@ function ProductsTable() {
           return cellValue;
       }
     },
-    [page, isPendingChangeProduct, data?.data.products]
+    [page, isPendingChangeComment, data?.data.comments]
   );
 
   const onSearchChange = (value) => {
@@ -326,9 +283,9 @@ function ProductsTable() {
   const topContent = useMemo(() => {
     return (
       <TopContentTable
-        type="products"
-        isPending={isPendingProducts}
-        isFetching={isFetchingProducts}
+        type="comments"
+        isPending={isPendingComment}
+        isFetching={isFetchingComment}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
         setPage={setPage}
@@ -339,13 +296,13 @@ function ProductsTable() {
         selectedKeys={selectedKeys}
         setSelectedKeys={setSelectedKeys}
         filteredItems={filteredItems}
-        columnsTable={columnsProductsTable}
+        columnsTable={columnsCommentsTable}
       />
     );
   }, [
     searchValue,
     visibleColumns,
-    data?.data.products,
+    data?.data.comments,
     onSearchChange,
     hasSearchFilter,
     selectedKeys,
@@ -403,7 +360,9 @@ function ProductsTable() {
             <TableColumn
               key={column.uid}
               align={
-                column.uid === "title" || column.uid === "id"
+                column.uid === "userInfo" ||
+                column.uid === "id" ||
+                column.uid === "description"
                   ? "start"
                   : "center"
               }
@@ -413,13 +372,13 @@ function ProductsTable() {
           )}
         </TableHeader>
         <TableBody
-          isLoading={isPendingProducts || isFetchingProducts}
+          isLoading={isPendingComment || isFetchingComment}
           loadingContent={<Spinner />}
-          emptyContent={"محصولی یافت نشد!!!"}
-          items={data?.data.products ?? []}
+          emptyContent={"دیدگاهی یافت نشد!!!"}
+          items={data?.data.comments ?? []}
         >
-          {!isErrorProducts
-            ? data?.data.products.map((item, index) => (
+          {!isErrorComment
+            ? data?.data.comments.map((item, index) => (
                 <TableRow className="h-20" key={item._id}>
                   {(columnKey) => (
                     <TableCell>{renderCell(item, columnKey, index)}</TableCell>
@@ -431,15 +390,22 @@ function ProductsTable() {
       </Table>
 
       <ModalDeleteCustom
-        title="حذف محصول"
-        warningMessage={`آیا میخواهید ${titleProduct} را حذف کنید؟ در صورت موافقت تمام اطلاعات مربوط به این محصول حذف خواهد شد`}
-        isOpen={isOpen}
-        isPending={isPendingDeleteProduct}
-        onOpenChange={onOpenChange}
-        clickHandler={() => deleteProductHandler(deleteId)}
+        title="حذف کاربر"
+        isOpen={isOpenDeleteModal}
+        isPending={isPendingDeleteComment}
+        warningMessage={`آیا از حذف این دیدگاه اطمینان دارید؟؟`}
+        onOpenChange={onOpenChangeDeleteModal}
+        clickHandler={() => deleteCommentHandler(commentId)}
+      />
+      <ModalShowInfoCommentCustom
+        isOpen={isOpenShowInfo}
+        isPending={isPendingChangeComment}
+        textComment={textCommentModal}
+        onOpenChange={onOpenChangeShowInfo}
+        clickHandler={changeCommentHandler}
       />
     </>
   );
 }
 
-export default ProductsTable;
+export default CommentsTable;

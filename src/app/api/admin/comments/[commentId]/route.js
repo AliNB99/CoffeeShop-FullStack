@@ -1,4 +1,5 @@
 import connectDB from "@/DB/connectDB";
+import Comment from "@/models/Comment";
 import User from "@/models/User";
 import { getServerSession } from "next-auth";
 import { NextResponse } from "next/server";
@@ -26,13 +27,13 @@ export async function DELETE(req, context) {
       });
     }
     const {
-      params: { userId },
+      params: { commentId },
     } = context;
 
-    await User.findOneAndDelete({ _id: userId });
+    await Comment.findOneAndDelete({ _id: commentId });
     return NextResponse.json({
       status: 200,
-      message: "کاربر با موفقیت حذف شد",
+      message: "دیدگاه کاربر با موفقیت حذف شد",
     });
   } catch (error) {
     console.log(error);
@@ -63,39 +64,21 @@ export async function PATCH(req, context) {
       });
     }
     const {
-      params: { userId },
+      params: { commentId },
     } = context;
 
-    const { action, img } = await req.json();
-    const targetUser = await User.findOne({ _id: userId });
+    const { action, status } = await req.json();
+    const commentTarget = await Comment.findOne({ _id: commentId });
 
     switch (action) {
       case "changeStatus":
-        targetUser.status =
-          targetUser.status === "authorized" ? "unauthorized" : "authorized";
-        targetUser.save();
+        commentTarget.status = status;
+        commentTarget.save();
         return NextResponse.json({
           status: 200,
-          message: "تغییر وضعیت کاربر با موفقیت انجام شده",
+          message: "وضعیت نمایش دیدگاه با موفقیت تغییر کرد",
         });
 
-      case "changeAvatar":
-        targetUser.avatar = img;
-        targetUser.save();
-        return NextResponse.json({
-          url: data.img,
-          status: 200,
-          message: "تغییر عکس پروفایل با موفقیت انجام شده",
-        });
-
-      case "changeRole":
-        targetUser.role = targetUser.role === "USER" ? "ADMIN" : "USER";
-        targetUser.save();
-        return NextResponse.json({
-          url: data.img,
-          status: 200,
-          message: "تغییر نقش کاربر با موفقیت انجام شده",
-        });
       default:
         return NextResponse.json({
           status: 422,

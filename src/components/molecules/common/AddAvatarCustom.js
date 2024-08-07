@@ -8,7 +8,7 @@ import { PhotoIcon } from "@heroicons/react/24/outline";
 import { Avatar, Spinner, Tooltip } from "@nextui-org/react";
 import {
   useAddImages,
-  useChangeAvatarUser,
+  useChangeDataAvatarUser,
 } from "src/hooks/useQuery/mutations";
 
 function AddAvatarCustom({ user }) {
@@ -24,7 +24,7 @@ function AddAvatarCustom({ user }) {
     isPending: isPendingChangeAvatar,
     isError: isErrorChangeAvatar,
     mutateAsync: mutateAsyncChangeAvatar,
-  } = useChangeAvatarUser(queryClient);
+  } = useChangeDataAvatarUser(queryClient);
 
   const changeAvatarHandler = async (e, id) => {
     const img = Object.values(e.target.files)[0];

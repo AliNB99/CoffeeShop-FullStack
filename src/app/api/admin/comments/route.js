@@ -1,8 +1,9 @@
-import connectDB from "@/DB/connectDB";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
-import { authOptions } from "@/api/auth/[...nextauth]/route";
 import User from "@/models/User";
+import Comment from "@/models/Comment";
+import { NextResponse } from "next/server";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../../auth/[...nextauth]/route";
+import connectDB from "@/DB/connectDB";
 
 export async function GET(req) {
   try {
@@ -25,13 +26,13 @@ export async function GET(req) {
     const page = parseInt(url.searchParams.get("page")) || 1;
     const rowsPerPage = parseInt(url.searchParams.get("rowsPerPage")) || 5;
 
-    const totalCountUsers = await User.countDocuments();
+    const totalCountComments = await Comment.countDocuments();
 
-    let users;
+    let comments;
 
     if (!searchTerm) {
       const skipRows = (page - 1) * rowsPerPage;
-      users = await User.find({}).skip(skipRows).limit(rowsPerPage);
+      comments = await Comment.find({}).skip(skipRows).limit(rowsPerPage);
     } else {
       const words = searchTerm.split(" ").filter(Boolean);
 
@@ -40,23 +41,12 @@ export async function GET(req) {
         "i"
       );
 
-      users = await User.find({
-        $or: [
-          { firstName: regex },
-          { lastName: regex },
-          {
-            $expr: {
-              $regexMatch: {
-                input: { $concat: ["$firstName", " ", "$lastName"] },
-                regex: regex,
-              },
-            },
-          },
-        ],
+      comments = await Comment.find({
+        $or: [{ title: regex }],
       });
     }
 
-    return NextResponse.json({ users, totalCountUsers });
+    return NextResponse.json({ comments, totalCountComments });
   } catch (error) {
     console.log(error);
     return NextResponse.json({ status: 500, error: "مشکلی پیش آمده است" });
@@ -86,15 +76,19 @@ export async function DELETE(req) {
         error: "دسترسی شما برای این کار محدود شده است",
       });
     }
+
     const { ids, selectedKeys } = await req.json();
+    console.log({ ids, selectedKeys });
 
     selectedKeys === "all"
-      ? await User.deleteMany({ role: { $ne: "OWNER" } })
-      : await User.deleteMany({ _id: { $in: ids } });
+      ? await Comment.deleteMany({})
+      : await Comment.deleteMany({
+          _id: { $in: ids },
+        });
 
     return NextResponse.json({
       status: 200,
-      message: "کاربر با موفقیت حذف شد",
+      message: "محصول با موفقیت حذف شد",
     });
   } catch (error) {
     console.log(error);
@@ -136,7 +130,7 @@ export async function PATCH(req) {
       });
 
     selectedKeys === "all"
-      ? await User.updateMany({ role: { $ne: "OWNER" } }, [
+      ? await User.updateMany({}, [
           {
             $set: {
               status: {

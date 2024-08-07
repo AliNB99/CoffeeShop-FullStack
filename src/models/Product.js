@@ -35,8 +35,8 @@ const ProductSchema = new Schema(
     specifications: [{ title: String, value: String }],
 
     status: {
-      type: Boolean,
-      default: true,
+      type: String,
+      default: "available",
     },
   },
   { timestamps: true }

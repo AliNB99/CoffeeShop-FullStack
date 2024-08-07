@@ -2,9 +2,12 @@ import { LogoType } from "@/utils/svg";
 import SliderProductImage from "@/molecules/common/SliderProductImage";
 import CartProductDetails from "@/organisms/product/CartProductDetails";
 import ProductDescription from "@/organisms/product/ProductDescription";
+import AddComment from "@/organisms/product/AddComment";
+import ProductComments from "@/organisms/product/ProductComments";
 
-function ProductDetailPage({ product }) {
+function ProductDetailPage({ product, user }) {
   const {
+    _id,
     title,
     description,
     images,
@@ -65,6 +68,8 @@ function ProductDetailPage({ product }) {
         advantages={advantages}
         disadvantages={disadvantages}
       />
+      <AddComment user={user} product={product} />
+      <ProductComments productId={_id} />
     </section>
   );
 }

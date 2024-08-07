@@ -3,7 +3,7 @@ function Button({
   clickHandler,
   color,
   bgColor,
-  type,
+  type = "button",
   width,
   height = "h-12",
   fontSize = "text-lg",

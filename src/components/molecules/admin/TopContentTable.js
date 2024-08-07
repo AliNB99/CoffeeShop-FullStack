@@ -13,36 +13,55 @@ import {
   ArrowPathIcon,
   Bars3BottomRightIcon,
   ChevronDownIcon,
-  TableCellsIcon,
+  PlusIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { columnsUserTable } from "@/constants/dashboard";
 import {
-  useChangeSomeUser,
-  useDeleteSomeUser,
+  useChangeSomeData,
+  useDeleteSomeData,
 } from "src/hooks/useQuery/mutations";
 import toast from "react-hot-toast";
-import CustomModal from "../common/Modal";
+import ModalDeleteCustom from "../common/ModalDeleteCustom";
 import { useEffect, useState } from "react";
 import SearchTable from "@/atoms/SearchTable";
 import { capitalize } from "@/utils/helper/helper";
 import { useQueryClient } from "@tanstack/react-query";
+import Link from "next/link";
+
+const typeTitleMap = {
+  products: "محصول",
+  users: "کاربر",
+  comments: "نظر",
+};
 
 function TopContentTable({
   setPage,
   selectedKeys,
   setSelectedKeys,
   filteredItems,
-  isPendingUsers,
+  isPending,
+  isFetching,
   visibleColumns,
-  isFetchingUser,
   searchValue,
   setSearchValue,
   setVisibleColumns,
   onRowsPerPageChange,
   rowsPerPage,
+  columnsTable,
+  type,
 }) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [ids, setIds] = useState([]);
+  const {
+    isOpen: isOpenDeleteModal,
+    onOpen: onOpenDeleteModal,
+    onOpenChange: onOpenChangeDeleteModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenShowInfo,
+    onOpen: onOpenShowInfo,
+    onOpenChange: onOpenChangeShowInfo,
+  } = useDisclosure();
 
   const queryClient = useQueryClient();
 
@@ -50,15 +69,13 @@ function TopContentTable({
     isError: isErrorDelete,
     isPending: isPendingDelete,
     mutateAsync: mutateAsyncDelete,
-  } = useDeleteSomeUser(queryClient);
+  } = useDeleteSomeData({ queryClient, route: type });
 
   const {
     isError: isErrorStatus,
     isPending: isPendingStatus,
     mutateAsync: mutateAsyncStatus,
-  } = useChangeSomeUser(queryClient);
-
-  const [ids, setIds] = useState([]);
+  } = useChangeSomeData({ queryClient, route: type });
 
   useEffect(() => {
     setIds([]);
@@ -67,7 +84,7 @@ function TopContentTable({
     }
   }, [selectedKeys]);
 
-  const deleteSelectedUsersHandler = async () => {
+  const deleteSelectedDataHandler = async () => {
     const res = await mutateAsyncDelete({ ids, selectedKeys });
     if (res.data.error || isErrorDelete) {
       return toast.error(res.data.error);
@@ -77,8 +94,12 @@ function TopContentTable({
     }
   };
 
-  const changeStatusSelectedUsersHandler = async () => {
-    const res = await mutateAsyncStatus({ ids, selectedKeys });
+  const changeStatusSelectedDataHandler = async () => {
+    const res = await mutateAsyncStatus({
+      ids,
+      selectedKeys,
+      action: "changeStatus",
+    });
     if (res.data.error || isErrorStatus) {
       return toast.error(res.data.error);
     } else {
@@ -88,40 +109,63 @@ function TopContentTable({
 
   return (
     <div className="flex flex-col gap-4 mt-7">
-      <div className="flex justify-between gap-3 items-end">
+      <div
+        className={`flex ${
+          type === "products" && "flex-col-reverse"
+        } md:flex-row justify-between gap-3 items-end`}
+      >
         <SearchTable
-          isPendingUser={isPendingUsers}
-          isFetchingUser={isFetchingUser}
+          isFetching={isFetching}
+          isPending={isPending}
           searchValue={searchValue}
           setSearchValue={setSearchValue}
           setPage={setPage}
         />
-
-        <Dropdown>
-          <DropdownTrigger className="flex">
-            <Button
-              endContent={<ChevronDownIcon className="text-small" />}
-              variant="flat"
-            >
-              <Bars3BottomRightIcon />
-              <span className="hidden sm:inline">ستون ها</span>
+        <div
+          className={`${
+            type === "products" ? "w-full" : "w-fit md:w-full"
+          } flex items-center justify-end gap-2`}
+        >
+          {type === "products" && (
+            <Button className="w-full md:w-fit" color="primary" variant="flat">
+              <Link
+                className="flex items-center justify-center gap-2"
+                href="/admin/products-list/add-product"
+              >
+                <PlusIcon />
+                <span>محصول جدید</span>
+              </Link>
             </Button>
-          </DropdownTrigger>
-          <DropdownMenu
-            disallowEmptySelection
-            aria-label="Table Columns"
-            closeOnSelect={false}
-            selectedKeys={visibleColumns}
-            selectionMode="multiple"
-            onSelectionChange={setVisibleColumns}
-          >
-            {columnsUserTable.map((column) => (
-              <DropdownItem key={column.uid} className="capitalize">
-                {capitalize(column.name)}
-              </DropdownItem>
-            ))}
-          </DropdownMenu>
-        </Dropdown>
+          )}
+          <Dropdown>
+            <DropdownTrigger className="flex">
+              <Button
+                className={`${type === "products" && "w-full"} md:w-fit `}
+                endContent={<ChevronDownIcon className="text-small" />}
+                variant="flat"
+              >
+                <Bars3BottomRightIcon />
+                <span className={`${type === "users" && "hidden md:inline"}`}>
+                  ستون ها
+                </span>
+              </Button>
+            </DropdownTrigger>
+            <DropdownMenu
+              disallowEmptySelection
+              aria-label="Table Columns"
+              closeOnSelect={false}
+              selectedKeys={visibleColumns}
+              selectionMode="multiple"
+              onSelectionChange={setVisibleColumns}
+            >
+              {columnsTable.map((column) => (
+                <DropdownItem key={column.uid} className="capitalize">
+                  {capitalize(column.name)}
+                </DropdownItem>
+              ))}
+            </DropdownMenu>
+          </Dropdown>
+        </div>
       </div>
       <div className="flex justify-between items-center">
         <div className="relative w-[50%] flex gap-4 items-center">
@@ -130,7 +174,7 @@ function TopContentTable({
               <Tooltip className=" text-red-500" content="حذف کاربران">
                 <Button
                   className=" text-red-500"
-                  onClick={() => onOpen()}
+                  onClick={() => onOpenDeleteModal()}
                   isLoading={isPendingDelete}
                   isIconOnly
                   variant="flat"
@@ -141,7 +185,7 @@ function TopContentTable({
               <Tooltip content="تغییر وضعیت کاربران">
                 <Button
                   className=" text-zinc-500 dark:text-zinc-300"
-                  onClick={changeStatusSelectedUsersHandler}
+                  onClick={changeStatusSelectedDataHandler}
                   isLoading={isPendingStatus}
                   isIconOnly
                   variant="flat"
@@ -171,13 +215,13 @@ function TopContentTable({
           </select>
         </label>
       </div>
-      <CustomModal
-        title="حذف کاربر"
-        warningMessage={`آیا میخواهید کاربران را حذف کنید؟ در صورت موافقت تمام اطلاعات کاربران حذف خواهد شد`}
-        isOpen={isOpen}
+      <ModalDeleteCustom
+        title={`حذف ${typeTitleMap[type]}`}
+        warningMessage={`آیا میخواهید ${typeTitleMap[type]} را حذف کنید؟ در صورت موافقت تمام اطلاعات ${typeTitleMap[type]} حذف خواهد شد`}
+        isOpen={isOpenDeleteModal}
         isPending={isPendingDelete}
-        onOpenChange={onOpenChange}
-        clickHandler={deleteSelectedUsersHandler}
+        onOpenChange={onOpenChangeDeleteModal}
+        clickHandler={deleteSelectedDataHandler}
       />
     </div>
   );

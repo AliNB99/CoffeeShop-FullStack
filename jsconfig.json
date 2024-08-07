@@ -5,6 +5,7 @@
       "@/public/*": ["public/*"],
       "@/redux/*": ["src/redux/*"],
       "@/app/*": ["src/app/*"],
+      "@/api/*": ["src/app/api/*"],
       "@/DB/*": ["src/DB/*"],
       "@/utils/*": ["src/utils/*"],
       "@/helper/*": ["src/utils/helper/*"],

@@ -31,32 +31,30 @@ import {
 } from "@heroicons/react/24/outline";
 import toast from "react-hot-toast";
 import {
-  columnsUserTable,
+  columnsUsersTable,
   roleColorMap,
   roleTitle,
 } from "@/constants/dashboard";
-import { useUsersData } from "src/hooks/useQuery/queries";
-import { useChangeUser, useDeleteUser } from "src/hooks/useQuery/mutations";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import CustomModal from "@/molecules/common/Modal";
+import { useGetData } from "src/hooks/useQuery/queries";
+import { useChangeData, useDeleteData } from "src/hooks/useQuery/mutations";
+import { useQueryClient } from "@tanstack/react-query";
+import ModalDeleteCustom from "@/molecules/common/ModalDeleteCustom";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import TopContentTable from "@/molecules/admin/TopContentTable";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import api from "src/configs/api";
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions", "id"];
 
-export default function UsersTable({ role }) {
+function UsersTable({ role }) {
   const searchParams = useSearchParams();
 
   const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
   const [idOwner, setIdOwner] = useState("");
-  const [deleteId, setDeleteId] = useState(null);
+  const [userId, setUserId] = useState(null);
   const [rowsPerPage, setRowsPerPage] = useState(
     parseInt(searchParams.get("rowsPerPage")) || 5
   );
   const [searchValue, setSearchValue] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
   const [sortDescriptor, setSortDescriptor] = useState({});
   const [selectedKeys, setSelectedKeys] = useState(new Set([]));
   const [visibleColumns, setVisibleColumns] = useState(
@@ -77,7 +75,7 @@ export default function UsersTable({ role }) {
     isPending: isPendingUsers,
     isFetching: isFetchingUser,
     isError: isErrorUsers,
-  } = useUsersData(page, rowsPerPage, searchValue);
+  } = useGetData({ page, rowsPerPage, searchValue, route: "users" });
 
   useEffect(() => {
     const result = data?.data.users.find((user) => user.role === "OWNER");
@@ -88,30 +86,27 @@ export default function UsersTable({ role }) {
 
     const queries = query.toString();
     replace(`${pathName}?${queries}`);
-    console.log(data?.data.users);
   }, [data?.data.users, page, rowsPerPage]);
 
   useEffect(() => {
     queryClient.invalidateQueries({ queryKey: ["users"] });
   }, [searchValue, rowsPerPage]);
 
-  // delete users
   const {
     isError: isErrorDeleteUser,
     isPending: isPendingDeleteUser,
     mutateAsync: mutateAsyncDeleteUser,
-  } = useDeleteUser(queryClient);
+  } = useDeleteData({ queryClient, route: "users" });
 
   const {
     variables: variablesChangeUser,
     isPending: isPendingChangeUser,
     isError: isErrorChangeUser,
     mutateAsync: mutateAsyncChangeUser,
-  } = useChangeUser(queryClient);
+  } = useChangeData({ queryClient, route: "users" });
 
   const deleteUserHandler = async (id) => {
     const res = await mutateAsyncDeleteUser(id);
-
     if (res.data.error || isErrorDeleteUser) {
       toast.error("کاربر حذف نشد.مجدد تلاش کنید.");
     } else {
@@ -120,9 +115,8 @@ export default function UsersTable({ role }) {
     }
   };
 
-  const changeUserHandler = async (id, action) => {
+  const changeUserHandler = async ({ id, action }) => {
     const res = await mutateAsyncChangeUser({ id, action });
-    console.log(res);
     if (res.data.error || isErrorChangeUser) {
       toast.error("وضعیت کاربر تغییر نکرد. مجدد تلاش کنید.");
     } else {
@@ -131,9 +125,9 @@ export default function UsersTable({ role }) {
   };
 
   const headerColumns = useMemo(() => {
-    if (visibleColumns === "all") return columnsUserTable;
+    if (visibleColumns === "all") return columnsUsersTable;
 
-    return columnsUserTable.filter((column) =>
+    return columnsUsersTable.filter((column) =>
       Array.from(visibleColumns).includes(column.uid)
     );
   }, [visibleColumns]);
@@ -150,8 +144,8 @@ export default function UsersTable({ role }) {
   const pages = useMemo(() => {
     if (searchParams.get("search")) {
       return Math.ceil(data?.data.users / rowsPerPage);
-    } else if (data?.data.totalCountUser) {
-      return Math.ceil(data?.data.totalCountUser / rowsPerPage);
+    } else if (data?.data.totalCountUsers) {
+      return Math.ceil(data?.data.totalCountUsers / rowsPerPage);
     } else {
       return 0;
     }
@@ -237,7 +231,9 @@ export default function UsersTable({ role }) {
 
                 {role === "OWNER" && user.role !== "OWNER" && (
                   <DropdownItem
-                    onClick={() => changeUserHandler(user._id, "changeRole")}
+                    onClick={() =>
+                      changeUserHandler({ id: user._id, action: "changeRole" })
+                    }
                     key="copy"
                     description="تغییر سطح دسترسی به اطلاعات"
                     startContent={
@@ -250,8 +246,14 @@ export default function UsersTable({ role }) {
 
                 {user.role !== "OWNER" && (
                   <DropdownItem
-                    onClick={() => changeUserHandler(user._id, "changeStatus")}
+                    onClick={() =>
+                      changeUserHandler({
+                        id: user._id,
+                        action: "changeStatus",
+                      })
+                    }
                     key="new"
+                    showDivider
                     description="بن کردن کاربر"
                     startContent={<ArrowPathIcon className={iconClasses} />}
                   >
@@ -262,7 +264,7 @@ export default function UsersTable({ role }) {
                   <DropdownItem
                     onClick={() => {
                       onOpen();
-                      setDeleteId(user._id);
+                      setUserId(user._id);
                       setFullName({
                         firstName: user.firstName,
                         lastName: user.lastName,
@@ -307,6 +309,7 @@ export default function UsersTable({ role }) {
   const topContent = useMemo(() => {
     return (
       <TopContentTable
+        type="users"
         isPendingUsers={isPendingUsers}
         isFetchingUser={isFetchingUser}
         searchValue={searchValue}
@@ -319,6 +322,7 @@ export default function UsersTable({ role }) {
         selectedKeys={selectedKeys}
         setSelectedKeys={setSelectedKeys}
         filteredItems={filteredItems}
+        columnsTable={columnsUsersTable}
       />
     );
   }, [
@@ -353,7 +357,7 @@ export default function UsersTable({ role }) {
           />
         ) : null}
         <span className="text-default-400 text-xs md:text-sm font-bold">
-          تعداد کاربران سایت : {data?.data.totalCountUser}
+          تعداد کاربران سایت : {data?.data.totalCountUsers}
         </span>
       </div>
     );
@@ -382,7 +386,11 @@ export default function UsersTable({ role }) {
           {(column) => (
             <TableColumn
               key={column.uid}
-              align={column.uid === "actions" ? "center" : "start"}
+              align={
+                column.uid === "actions" || column.uid === "role"
+                  ? "center"
+                  : "start"
+              }
             >
               {column.name}
             </TableColumn>
@@ -396,7 +404,7 @@ export default function UsersTable({ role }) {
         >
           {!isErrorUsers
             ? data?.data.users.map((item, index) => (
-                <TableRow key={item._id}>
+                <TableRow className="h-16" key={item._id}>
                   {(columnKey) => (
                     <TableCell>{renderCell(item, columnKey, index)}</TableCell>
                   )}
@@ -406,14 +414,16 @@ export default function UsersTable({ role }) {
         </TableBody>
       </Table>
 
-      <CustomModal
+      <ModalDeleteCustom
         title="حذف کاربر"
         warningMessage={`آیا میخواهید ${fullName.firstName} ${fullName.lastName} را حذف کنید؟ در صورت موافقت تمام اطلاعات مربوط به این شخص حذف خواهد شد`}
         isOpen={isOpen}
         isPending={isPendingDeleteUser}
         onOpenChange={onOpenChange}
-        clickHandler={() => deleteUserHandler(deleteId)}
+        clickHandler={() => deleteUserHandler(userId)}
       />
     </>
   );
 }
+
+export default UsersTable;

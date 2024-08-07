@@ -10,8 +10,8 @@ function SearchTable({
   searchValue,
   setSearchValue,
   setPage,
-  isFetchingUser,
-  isPendingUser,
+  isFetching,
+  isPending,
 }) {
   const { replace } = useRouter();
   const pathName = usePathname();
@@ -40,10 +40,10 @@ function SearchTable({
   return (
     <Input
       isClearable
-      className="border-2 border-gray-300 dark:border-gray-500 rounded-xl sm:max-w-[44%]"
+      className={`border-2 border-gray-300 dark:border-gray-500 rounded-xl w-full md:min-w-[44%]`}
       placeholder="جستجو بر اساس نام کاربری..."
       startContent={
-        !isPendingUser && searchValue.length && isFetchingUser ? (
+        !isPending && searchValue.length && isFetching ? (
           <Spinner size="sm" color="inherit" className="text-red-500" />
         ) : (
           <MagnifyingGlassIcon />

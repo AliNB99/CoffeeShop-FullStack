@@ -4,6 +4,7 @@ import Header from "@/layout/Header";
 import User from "@/models/User";
 import Overlay from "@/molecules/common/Overlay";
 import { getServerSession } from "next-auth";
+import Footer from "./Footer";
 // import Footer from "@/layout/Footer";
 
 async function Layout({ children }) {
@@ -20,6 +21,7 @@ async function Layout({ children }) {
       <Header role={user?.role} />
       <div>{children}</div>
       <Overlay />
+      <Footer />
     </>
   );
 }

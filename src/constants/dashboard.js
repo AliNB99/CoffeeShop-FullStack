@@ -38,8 +38,8 @@ export const adminDashboardItem = [
     icon: <UsersIcon />,
   },
   {
-    title: "کامنت ها",
-    link: "/",
+    title: "نظرات",
+    link: "/admin/comment-list",
     icon: <ChatBubbleLeftRightIcon />,
   },
   {
@@ -105,64 +105,33 @@ export const addAccessoryItem = [
   { title: "وزن محصول (گرم)", value: "", placeholder: "مثلا: 250 گرم" },
 ];
 
-export const headCellProductTable = [
-  {
-    id: "id",
-    numeric: true,
-    disablePadding: false,
-    label: "شماره",
-    width: 20,
-  },
-  {
-    id: "title",
-    numeric: false,
-    disablePadding: true,
-    label: "نام محصول",
-    width: 200,
-  },
-  {
-    id: "quantity",
-    numeric: true,
-    disablePadding: false,
-    label: "تعداد",
-    width: 30,
-  },
-  {
-    id: "price",
-    numeric: true,
-    disablePadding: false,
-    label: "قیمت(تومان)",
-    width: 100,
-  },
-  {
-    id: "discount",
-    numeric: true,
-    disablePadding: false,
-    label: "تخفیف(درصد)",
-    width: 30,
-  },
-  {
-    id: "status",
-    numeric: false,
-    disablePadding: false,
-    label: "وضعیت",
-    width: 30,
-  },
-  {
-    id: "image",
-    numeric: true,
-    disablePadding: false,
-    label: "عکس",
-    width: 100,
-  },
+export const columnsProductsTable = [
+  { name: "شماره", uid: "id" },
+  { name: "عکس", uid: "images" },
+  { name: "نام محصول", uid: "title" },
+  { name: "دسته بندی", uid: "category" },
+  { name: "قیمت (تومان)", uid: "price" },
+  { name: "تعداد", uid: "quantity" },
+  { name: "وضعیت", uid: "status" },
+  { name: "تخفیف (درصد)", uid: "discount" },
+  { name: "ابزار مدیریت", uid: "actions" },
 ];
 
-export const columnsUserTable = [
+export const columnsUsersTable = [
   { name: "شماره", uid: "id" },
   { name: "نام کاربری", uid: "name" },
   { name: "نقش", uid: "role" },
   { name: "ایمیل", uid: "email" },
   { name: "وضعیت", uid: "status" },
+  { name: "ابزار مدیریت", uid: "actions" },
+];
+
+export const columnsCommentsTable = [
+  { name: "شماره", uid: "id" },
+  { name: "نویسنده", uid: "userInfo" },
+  { name: "متن دیدگاه", uid: "description" },
+  { name: "وضعیت", uid: "status" },
+  { name: "امتیاز", uid: "rate" },
   { name: "ابزار مدیریت", uid: "actions" },
 ];
 
@@ -172,8 +141,30 @@ export const roleColorMap = {
   USER: "warning",
 };
 
+export const CategoryColorMap = {
+  coffee: "warning",
+  accessory: "secondary",
+};
+
 export const roleTitle = {
   OWNER: "مالک",
   ADMIN: "مدیر",
   USER: "کاربر",
+};
+
+export const categoryTitle = {
+  coffee: "قهوه",
+  accessory: "لوازم جانبی",
+};
+
+export const statusCommentTitle = {
+  pending: "در انتظار تایید",
+  accepted: "تایید شد",
+  unaccepted: "تایید نشد",
+};
+
+export const statusCommentColorMap = {
+  pending: "warning",
+  accepted: "success",
+  unaccepted: "danger",
 };

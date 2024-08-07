@@ -13,7 +13,7 @@ import Loader from "@/atoms/Loader";
 import Button from "@/atoms/Button";
 import { Logo } from "@/utils/svg/index";
 import { useRouter } from "next/navigation";
-import { useSubmitSignup } from "src/hooks/useQuery/mutations";
+import { useSubmitAuth } from "src/hooks/useQuery/mutations";
 
 function SignupPage() {
   const [warning, setWarning] = useState({});
@@ -30,7 +30,7 @@ function SignupPage() {
     isAccepted: false,
   });
 
-  const { isPending, mutateAsync } = useSubmitSignup();
+  const { isPending, mutateAsync } = useSubmitAuth("signup");
 
   useEffect(() => {
     setWarning(formRegisterValidation(form, "signup"));

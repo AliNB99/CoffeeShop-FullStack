@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import InputForm from "@/molecules/form/InputForm";
 import { formRegisterValidation } from "@/utils/validation/auth";
-import { useSubmitSignin } from "src/hooks/useQuery/mutations";
+import { useSubmitAuth } from "src/hooks/useQuery/mutations";
 
 function SignInPage() {
   const [warning, setWarning] = useState({});
@@ -21,7 +21,7 @@ function SignInPage() {
 
   const { push, refresh } = useRouter();
 
-  const { isPending, mutateAsync } = useSubmitSignin();
+  const { isPending, mutateAsync } = useSubmitAuth("signin");
 
   useEffect(() => {
     setWarning(formRegisterValidation(form));

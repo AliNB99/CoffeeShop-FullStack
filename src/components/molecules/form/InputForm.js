@@ -2,6 +2,7 @@
 
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
+// import EditorText from "../common/EditorText";
 
 function InputForm({
   id,
@@ -28,11 +29,7 @@ function InputForm({
 
   return (
     <div className="relative">
-      <div
-        className={`flex flex-col w-full ${
-          textarea ? "h-60" : "h-[75px]"
-        } gap-2`}
-      >
+      <div className={`flex flex-col w-full ${!textarea && "h-[75px]"} gap-2`}>
         {textarea ? (
           <textarea
             id={id}

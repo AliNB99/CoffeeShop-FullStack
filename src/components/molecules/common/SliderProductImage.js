@@ -12,7 +12,6 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import { useState } from "react";
-import Image from "next/image";
 import CustomImage from "@/atoms/CustomImage";
 
 function SliderProductImage({ images }) {
@@ -43,7 +42,7 @@ function SliderProductImage({ images }) {
                 width={300}
                 height={300}
                 alt={img}
-                className="transition-opacity opacity-0 duration-[1s]"
+                className="transition-opacity opacity-0 duration-[1s] rounded-lg"
               />
             </div>
           </SwiperSlide>
@@ -60,13 +59,13 @@ function SliderProductImage({ images }) {
       >
         {images.map((img, index) => (
           <SwiperSlide key={index}>
-            <div className="flex justify-center items-center h-full p-1">
+            <div className="flex justify-center items-center h-full p-2 md:p-0 mx-1">
               <CustomImage
                 src={img}
                 width={100}
                 height={100}
                 alt={img}
-                className="transition-opacity opacity-0 duration-[1s]"
+                className="transition-opacity opacity-0 duration-[1s] rounded-lg"
               />
             </div>
           </SwiperSlide>

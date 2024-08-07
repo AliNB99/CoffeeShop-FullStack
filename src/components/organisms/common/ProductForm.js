@@ -4,20 +4,20 @@ import toast from "react-hot-toast";
 import Button from "@/atoms/Button";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-import useLoading from "src/hooks/useLoading";
 import Loader from "src/components/atoms/Loader";
 import { addProductForm } from "@/constants/dashboard";
 import AddImage from "src/components/molecules/form/AddImage";
 import InputForm from "src/components/molecules/form/InputForm";
 import { formProductValidation } from "@/utils/validation/dashboard";
-import { addProductService, editProductService } from "src/services/admin";
 import AddSpecifications from "src/components/organisms/admin/AddSpecifications";
 import AddPropertyList from "src/components/organisms/admin/AddPropertyList";
+import { useSubmitProduct } from "src/hooks/useQuery/mutations";
+import { useRouter } from "next/navigation";
 
 function ProductForm({ product }) {
-  const { isLoading, startLoading, stopLoading } = useLoading({
-    submitForm: false,
-  });
+  const [action, setAction] = useState(product ? "editProduct" : "addProduct");
+  const { isPending, isError, mutateAsync } = useSubmitProduct(action);
+
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
   const [form, setForm] = useState({
@@ -33,6 +33,7 @@ function ProductForm({ product }) {
     specifications: [],
   });
 
+  const { back } = useRouter();
   const { productId } = useParams();
 
   useEffect(() => {
@@ -58,16 +59,20 @@ function ProductForm({ product }) {
         specifications: true,
       });
     }
-    startLoading("submitForm");
-    const data = product
-      ? await editProductService(form, productId)
-      : await addProductService(form);
+    let data;
 
-    stopLoading("submitForm");
+    if (product) {
+      data = await mutateAsync({ form, id: productId });
+    } else {
+      data = await mutateAsync({ form });
+    }
 
-    data.data.error
-      ? toast.error(data.data.error)
-      : toast.success(data.data.message);
+    if (data.data.error || isError) {
+      toast.error(data.data.error);
+    } else {
+      back();
+      toast.success(data.data.message);
+    }
   };
 
   return (
@@ -125,7 +130,7 @@ function ProductForm({ product }) {
 
       <AddImage form={form} setForm={setForm} />
 
-      {isLoading.submitForm ? (
+      {isPending ? (
         product ? (
           <Loader color="#22C55E" size={10} />
         ) : (

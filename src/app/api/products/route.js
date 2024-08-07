@@ -12,6 +12,7 @@ export async function GET(req) {
       data: products,
     });
   } catch (error) {
+    console.log(error);
     return NextResponse.json({
       status: 500,
       error: "مشکلی پیش آمده",
