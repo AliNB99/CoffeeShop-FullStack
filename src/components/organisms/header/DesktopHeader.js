@@ -2,6 +2,7 @@
 
 import { navbarItem } from "@/constants/other";
 import DarkModeToggle from "@/molecules/common/DarkModeToggle";
+import CartDropDown from "@/molecules/header/desktop/CartDropDown";
 import StoreDropDown from "@/molecules/header/desktop/StoreDropDown";
 import UserDropDown from "@/molecules/header/desktop/UserDropDown";
 import {
@@ -50,23 +51,30 @@ function DesktopHeader({ role }) {
           </div>
         </nav>
         {/* loginBtn & ThemeToggle & shoppingCart */}
-        <div className="relative flex items-center gap-x-4 lg:gap-x-5 xl:gap-x-10 text-orange-200 text-xl tracking-tightest">
+        <div className="relative flex items-center gap-x-4 lg:gap-x-5 xl:gap-x-10 text-xl">
           <div className="flex items-center gap-5">
-            <ShoppingCartIcon className="w-8 h-8" />
-            <DarkModeToggle className="w-8 h-8" />
+            <div className="relative py-3 flex items-center group">
+              <Link href="/cart">
+                <ShoppingCartIcon className="w-8 h-8 text-orange-200" />
+              </Link>
+              <CartDropDown />
+            </div>
+            <DarkModeToggle className="w-8 h-8 text-orange-200" />
           </div>
           {/* Divide border*/}
           <span className=" border-l-2 border-white/20 h-14"></span>
 
-          <div className="group">
+          <div className="group tracking-tightest">
             {role ? (
               <>
                 <Link
                   href="/"
                   className="flex items-center gap-2 delay-75 group-hover:bg-orange-200/20 group-hover:px-7 group-hover:py-3 transition-all rounded-full"
                 >
-                  <UserIcon className="w-8 h-8" />
-                  <span className="hidden xl:inline-block">حساب کاربری</span>
+                  <UserIcon className="w-8 h-8 text-orange-200" />
+                  <span className="hidden xl:inline-block text-orange-200">
+                    حساب کاربری
+                  </span>
                 </Link>
                 <UserDropDown role={role} />
               </>
@@ -76,7 +84,9 @@ function DesktopHeader({ role }) {
                 className="flex items-center gap-2 delay-75 hover:bg-orange-200/20 hover:px-7 hover:py-3 transition-all rounded-full"
               >
                 <ArrowLeftEndOnRectangleIcon className="w-8 h-8 rotate-180" />
-                <span className="hidden xl:inline-block">ورود | ثبت نام</span>
+                <span className="hidden xl:inline-block text-orange-200">
+                  ورود | ثبت نام
+                </span>
               </Link>
             )}
           </div>

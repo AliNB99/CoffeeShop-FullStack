@@ -15,6 +15,7 @@ function InputForm({
   setTouched,
   placeholder,
   textarea,
+  className,
 }) {
   const [showPass, setShowPass] = useState(false);
 
@@ -33,7 +34,7 @@ function InputForm({
         {textarea ? (
           <textarea
             id={id}
-            className={`input-form h-52 ${
+            className={`input-form h-52 ${className} ${
               error && touched[name]
                 ? "dark:border-red-400 border-red-300"
                 : "dark:border-zinc-700 focus:border-blue-400 dark:focus:border-blue-300"
@@ -48,7 +49,7 @@ function InputForm({
           <input
             id={id}
             type={type === "password" ? (showPass ? "text" : "password") : type}
-            className={`input-form h-12 ${
+            className={`input-form  ${className} h-12 ${
               error && touched[name]
                 ? "dark:border-red-400 border-red-300"
                 : "dark:border-zinc-700 focus:border-blue-400 dark:focus:border-blue-400"

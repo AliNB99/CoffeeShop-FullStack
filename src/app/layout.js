@@ -19,6 +19,14 @@ export const metadata = {
   icons: { icon: "./images/fav-icon.png" },
 };
 
+const toastOptions = {
+  className: "",
+  style: {
+    fontSize: "14px",
+    fontWeight: "bold",
+  },
+};
+
 export default async function RootLayout({ children }) {
   return (
     <html lang="fa" dir="rtl">
@@ -29,7 +37,7 @@ export default async function RootLayout({ children }) {
               <ReduxProvider>
                 <ReactQueryProvider>
                   <Layout>{children}</Layout>
-                  <Toaster />
+                  <Toaster toastOptions={toastOptions} />
                   <ReactQueryDevtools />
                 </ReactQueryProvider>
               </ReduxProvider>

@@ -37,6 +37,7 @@ function WriteComment({ user, product }) {
           }}
         />
         <textarea
+          maxLength={500}
           onChange={(e) =>
             setComment((i) => ({ ...i, description: e.target.value }))
           }

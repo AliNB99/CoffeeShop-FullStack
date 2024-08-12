@@ -6,7 +6,7 @@ import { useContext } from "react";
 import { LogoType } from "@/utils/svg";
 import { showContext } from "@/context/ShowContextProvider";
 
-function AdminHeader() {
+function DashboardHeader() {
   const { onShowElement } = useContext(showContext);
   return (
     <header className="fixed top-0 left-0 right-0 flex lg:hidden z-30 items-center justify-between mx-auto h-16 px-2 shadow-medium bg-white dark:bg-zinc-700">
@@ -33,4 +33,4 @@ function AdminHeader() {
   );
 }
 
-export default AdminHeader;
+export default DashboardHeader;

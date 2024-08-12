@@ -19,7 +19,7 @@ async function ProductsListPage() {
   const { role } = await User.findOne({ email });
 
   return (
-    <div className="admin-page">
+    <div className="dashboard-page">
       <TitlePage color="text-violet-700" borderColor="border-violet-700">
         جدول مدیریت محصولات
       </TitlePage>

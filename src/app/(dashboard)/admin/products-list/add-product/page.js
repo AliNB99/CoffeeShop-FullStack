@@ -4,7 +4,7 @@ import React from "react";
 
 function AddProduct() {
   return (
-    <div className="admin-page space-y-5">
+    <div className="dashboard-page space-y-5">
       <TitlePage color="text-blue-500" borderColor="border-blue-500">
         ثبت محصول
       </TitlePage>

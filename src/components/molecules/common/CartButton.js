@@ -12,52 +12,53 @@ import {
   removeItem,
   increase,
   decrease,
+  manageCart,
 } from "@/redux/features/cart/CartSlice";
 import { productCount } from "@/utils/helper/helper";
 
 function CartButton({ data }) {
-  const store = useSelector((store) => store.cart);
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
-  const quantity = productCount(store, data._id);
+  const quantity = productCount(cart, data._id);
 
-
-  const clickHandler = (e, type) => {
+  const clickHandler = (e, action) => {
     e.stopPropagation();
-    dispatch(type(data));
+
+    dispatch(action(data));
   };
-  
+
   return (
     <div className="flex items-center gap-4">
       {quantity === 0 ? (
         <button
           onClick={(e) => clickHandler(e, addItem)}
-          className="cart-btn group"
+          className="cart-btn group/button"
         >
-          <ShoppingCartIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all" />
+          <ShoppingCartIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover/button:text-white transition-all" />
         </button>
       ) : (
         <button
           onClick={(e) => clickHandler(e, increase)}
-          className="cart-btn group"
+          className="cart-btn group/button"
         >
-          <PlusIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all" />
+          <PlusIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover/button:text-white transition-all" />
         </button>
       )}
       <span className="text-orange-300">{!!quantity && quantity}</span>
       {quantity === 1 && (
         <button
           onClick={(e) => clickHandler(e, removeItem)}
-          className="cart-btn group"
+          className="cart-btn group/button"
         >
-          <TrashIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all" />
+          <TrashIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover/button:text-white transition-all" />
         </button>
       )}
       {quantity > 1 && (
         <button
           onClick={(e) => clickHandler(e, decrease)}
-          className="cart-btn group"
+          className="cart-btn group/button"
         >
-          <MinusIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover:text-white transition-all" />
+          <MinusIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover/button:text-white transition-all" />
         </button>
       )}
     </div>

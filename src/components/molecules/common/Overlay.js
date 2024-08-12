@@ -34,7 +34,7 @@ function Overlay() {
       onClick={hiddenOverlay}
       className={`${
         showElement.overlay ? "block" : "hidden"
-      } fixed inset-0 bg-black/40 z-10 backdrop-blur`}
+      } fixed inset-0 bg-black/40 z-20 backdrop-blur`}
     ></div>
   );
 }

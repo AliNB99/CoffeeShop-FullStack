@@ -1,4 +1,6 @@
 import Banner from "@/organisms/home/Banner";
+import CategoryCoffee from "@/organisms/home/CategoryCoffee";
+import CategoryProduct from "@/organisms/home/CategoryProduct";
 import NewProducts from "@/organisms/home/NewProducts";
 
 function HomePage() {
@@ -6,6 +8,8 @@ function HomePage() {
     <>
       <Banner />
       <NewProducts />
+      <CategoryCoffee />
+      <CategoryProduct />
     </>
   );
 }

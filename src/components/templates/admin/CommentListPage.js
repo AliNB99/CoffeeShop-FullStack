@@ -3,7 +3,7 @@ import React from "react";
 
 function CommentListPage() {
   return (
-    <div className="admin-page">
+    <div className="dashboard-page">
       <CommentsTable />
     </div>
   );

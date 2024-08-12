@@ -253,14 +253,14 @@ function UsersTable({ role }) {
                       })
                     }
                     key="new"
-                    showDivider
+                    showDivider={role === "OWNER"}
                     description="بن کردن کاربر"
                     startContent={<ArrowPathIcon className={iconClasses} />}
                   >
                     تغییر وضعیت
                   </DropdownItem>
                 )}
-                {user.role !== "OWNER" && (
+                {user.role !== "OWNER" && role === "OWNER" && (
                   <DropdownItem
                     onClick={() => {
                       onOpen();

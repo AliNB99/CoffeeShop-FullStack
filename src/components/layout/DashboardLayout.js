@@ -1,11 +1,11 @@
 import DashboardSidebar from "@/organisms/common/DashboardSidebar";
-import AdminHeader from "src/components/organisms/admin/AdminHeader";
+import DashboardHeader from "src/components/organisms/admin/DashboardHeader";
 
-function AdminLayout({ children, user }) {
+function DashboardLayout({ children, user }) {
   return (
     <div className="lg:flex h-screen">
       <div>
-        <AdminHeader />
+        <DashboardHeader />
         <DashboardSidebar user={user} />
       </div>
       <div className="w-full flex justify-center mt-16 lg:mt-0">{children}</div>
@@ -13,4 +13,4 @@ function AdminLayout({ children, user }) {
   );
 }
 
-export default AdminLayout;
+export default DashboardLayout;

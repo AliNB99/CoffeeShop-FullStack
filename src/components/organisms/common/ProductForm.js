@@ -138,7 +138,7 @@ function ProductForm({ product }) {
         )
       ) : product ? (
         <Button
-          type="submit"
+          type="button"
           color="text-green-500"
           bgColor="bg-green-100"
           clickHandler={submitHandler}
@@ -147,7 +147,7 @@ function ProductForm({ product }) {
         </Button>
       ) : (
         <Button
-          type="submit"
+          type="button"
           color="text-blue-500"
           bgColor="bg-blue-100"
           clickHandler={submitHandler}

@@ -1,8 +1,12 @@
 "use client";
 
+import { showContext } from "@/context/ShowContextProvider";
+import SidebarCart from "@/molecules/header/mobile/SidebarCart";
+import SidebarItem from "@/molecules/header/mobile/SidebarItem";
 import DesktopHeader from "@/organisms/header/DesktopHeader";
 import MobileHeader from "@/organisms/header/MobileHeader";
 import { usePathname } from "next/navigation";
+import { useContext } from "react";
 
 function Header({ role }) {
   // To not display the header in the admin sections and the login and registration form
@@ -10,14 +14,30 @@ function Header({ role }) {
   if (
     pathName
       .split("/")
-      .find((i) => i === "admin" || i === "signin" || i === "signup")
+      .find(
+        (i) =>
+          i === "admin" || i === "signin" || i === "signup" || i === "dashboard"
+      )
   )
     return;
+
+  const { showElement, onShowElement } = useContext(showContext);
 
   return (
     <>
       <DesktopHeader role={role} />
-      <MobileHeader role={role} />
+      <MobileHeader
+        showElement={showElement}
+        onShowElement={onShowElement}
+        role={role}
+      />
+      {/* sidebar in homePage for mobile size */}
+      <SidebarItem
+        showElement={showElement}
+        onShowElement={onShowElement}
+        role={role}
+      />
+      <SidebarCart showElement={showElement} onShowElement={onShowElement} />
     </>
   );
 }

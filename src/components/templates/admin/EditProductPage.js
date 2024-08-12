@@ -3,7 +3,7 @@ import ProductForm from "@/organisms/common/ProductForm";
 
 function EditProductPage({ data }) {
   return (
-    <div className="admin-page space-y-5">
+    <div className="dashboard-page space-y-5">
       <TitlePage color="text-green-500" borderColor="border-green-500">
         ویرایش محصول
       </TitlePage>

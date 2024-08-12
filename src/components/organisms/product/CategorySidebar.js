@@ -1,4 +1,4 @@
-import { categoryList } from "@/constants/other";
+import { categoryCoffeeList } from "@/constants/other";
 import { Squares2X2Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -18,7 +18,7 @@ function CategorySidebar({ category }) {
         >
           <Link href="/products">همه</Link>
         </li>
-        {Object.keys(categoryList).map((i, index) => (
+        {Object.keys(categoryCoffeeList).map((i, index) => (
           <li
             className={`${
               category === i &&
@@ -27,7 +27,7 @@ function CategorySidebar({ category }) {
             key={index}
           >
             <Link href={{ pathname: "/products", query: { category: i } }}>
-              {categoryList[i]}
+              {categoryCoffeeList[i]}
             </Link>
           </li>
         ))}

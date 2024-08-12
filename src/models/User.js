@@ -20,12 +20,19 @@ const userSchema = new Schema(
       default: "authorized",
     },
 
+    cart: {
+      selectedItems: [Object],
+      counterItems: { type: Number, default: 0 },
+      totalPrice: { type: Number, default: 0 },
+    },
+
     avatar: String,
     firstName: String,
     lastName: String,
     address: String,
     phone: String,
     bankInfo: String,
+    postalCode: String,
   },
   { timestamps: true }
 );

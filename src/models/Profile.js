@@ -7,25 +7,6 @@ const ProductSchema = new Schema(
       ref: "User",
     },
 
-    cart: [
-      {
-        productId: Number,
-        quantity: Number,
-        name: String,
-        price: Number,
-        image: String,
-      },
-    ],
-
-    favorites: [
-      {
-        productId: Number,
-        name: String,
-        price: Number,
-        image: String,
-      },
-    ],
-
     history: [
       {
         products: [

@@ -2,7 +2,7 @@ import { getServerSession } from "next-auth";
 import User from "@/models/User";
 import connectDB from "@/DB/connectDB";
 import { redirect } from "next/navigation";
-import AdminLayout from "@/layout/AdminLayout";
+import DashboardLayout from "@/layout/DashboardLayout";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
 async function layout({ children }) {
@@ -18,12 +18,11 @@ async function layout({ children }) {
   const user = await User.findOne({ email: session.user.email }).select(
     "-password"
   );
-  if (user?.role === "USER") redirect("/");
 
   return (
-    <AdminLayout user={JSON.parse(JSON.stringify(user))}>
+    <DashboardLayout user={JSON.parse(JSON.stringify(user))}>
       {children}
-    </AdminLayout>
+    </DashboardLayout>
   );
 }
 

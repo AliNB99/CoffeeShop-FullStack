@@ -56,18 +56,20 @@ export async function PATCH(req, context) {
     if (!user) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
+
+    const {
+      params: { userId },
+    } = context;
+
+    const { action } = await req.json();
+    const targetUser = await User.findOne({ _id: userId });
+
     if (user.role === "USER") {
       return NextResponse.json({
         status: 403,
         error: "دسترسی شما برای این کار محدود شده است",
       });
     }
-    const {
-      params: { userId },
-    } = context;
-
-    const { action, img } = await req.json();
-    const targetUser = await User.findOne({ _id: userId });
 
     switch (action) {
       case "changeStatus":
@@ -79,23 +81,14 @@ export async function PATCH(req, context) {
           message: "تغییر وضعیت کاربر با موفقیت انجام شده",
         });
 
-      case "changeAvatar":
-        targetUser.avatar = img;
-        targetUser.save();
-        return NextResponse.json({
-          url: data.img,
-          status: 200,
-          message: "تغییر عکس پروفایل با موفقیت انجام شده",
-        });
-
       case "changeRole":
         targetUser.role = targetUser.role === "USER" ? "ADMIN" : "USER";
         targetUser.save();
         return NextResponse.json({
-          url: data.img,
           status: 200,
           message: "تغییر نقش کاربر با موفقیت انجام شده",
         });
+
       default:
         return NextResponse.json({
           status: 422,

@@ -49,7 +49,7 @@ export const useAddImages = () => {
 export const useChangeDataAvatarUser = (queryClient) => {
   return useMutation({
     mutationFn: ({ id, img }) =>
-      api.patch(`/admin/users/${id}`, {
+      api.patch(`/user/${id}`, {
         action: "changeAvatar",
         img,
       }),
@@ -97,6 +97,17 @@ export const useSubmitComment = () => {
     mutationFn: ({ user, comment, product }) =>
       api.post(`/products/comment/${product._id}`, {
         data: { user, comment, product },
+      }),
+  });
+};
+
+export const useChangeUserInformation = () => {
+  return useMutation({
+    mutationFn: ({ id, form, action }) =>
+      api.patch(`/user/${id}`, {
+        action,
+        form,
+        id,
       }),
   });
 };

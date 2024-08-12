@@ -7,7 +7,7 @@ function Banner() {
     <section className="relative bg-home-mobile md:bg-home-desktop h-[200px] xs:h-auto xs:aspect-[2/1] lg:aspect-auto bg-no-repeat bg-cover bg-center">
       <div className="container relative overflow-y-hidden h-full md:min-h-screen flex justify-end items-center">
         <div className="text-white">
-          <h1 className="font-Morabba font-bold text-2xl md:text-6xl mb-0.5">
+          <h1 className="font-Morabba font-bold text-2xl md:text-6xl mb-0.5 md:mb-5">
             قهوه عربیکا تانزانیا
           </h1>
           <h3 className="font-Morabba font-light text-xl md:text-5xl">

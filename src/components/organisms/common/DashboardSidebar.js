@@ -41,7 +41,6 @@ function DashboardSidebar({ user }) {
         </button>
       </div>
       <div className="flex flex-col items-center border-b border-zinc-300 space-y-4 dark:border-zinc-600 pb-5">
-
         <AddAvatarCustom user={user} />
 
         <div className="flex flex-col items-center">
@@ -59,21 +58,20 @@ function DashboardSidebar({ user }) {
       <div className="border-b border-zinc-300 dark:border-zinc-600 pb-7">
         <div>
           <ul className="space-y-6 pt-7">
-            {(role === "OWNER" || role === "ADMIN"
-              ? adminDashboardItem
-              : userDashboardItem
-            ).map((i, index) => (
-              <li
-                key={index}
-                className={`${
-                  pathname === i.link &&
-                  "bg-orange-200/20 text-orange-300 w-full py-2 rounded-lg"
-                } pr-4 flex items-center gap-2 hover:text-orange-300 active:text-orange-400 transition-all w-fit`}
-              >
-                {i.icon}
-                <Link href={i.link}>{i.title}</Link>
-              </li>
-            ))}
+            {(role === "USER" ? userDashboardItem : adminDashboardItem).map(
+              (i, index) => (
+                <li
+                  key={index}
+                  className={`${
+                    pathname === i.link &&
+                    "bg-orange-200/20 text-orange-300 w-full py-2 rounded-lg"
+                  } pr-4 flex items-center gap-2 hover:text-orange-300 active:text-orange-400 transition-all w-fit`}
+                >
+                  {i.icon}
+                  <Link href={i.link}>{i.title}</Link>
+                </li>
+              )
+            )}
           </ul>
         </div>
       </div>

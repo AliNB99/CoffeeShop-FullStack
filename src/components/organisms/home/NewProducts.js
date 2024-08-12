@@ -11,8 +11,7 @@ async function NewProducts() {
     console.log(error);
     return toast.error("خطا در دریافت اطلاعات");
   }
-
-  const data = await Product.find({}).sort({ createAt: 1 }).limit(8);
+  const data = await Product.find({}).sort({ createAt: -1 }).limit(8);
   return (
     <section id="newP" className="products pt-8 lg:pt-48">
       <TitleSection

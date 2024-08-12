@@ -1,22 +1,38 @@
 import {
+  AtSymbolIcon,
   BriefcaseIcon,
+  BuildingOffice2Icon,
   ChatBubbleLeftRightIcon,
   ClipboardDocumentCheckIcon,
+  CreditCardIcon,
   EnvelopeIcon,
   HeartIcon,
   HomeIcon,
-  IdentificationIcon,
+  MapPinIcon,
+  PhoneIcon,
   ShoppingBagIcon,
   ShoppingCartIcon,
+  SwatchIcon,
+  UserGroupIcon,
+  UserIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
 
 export const userDashboardItem = [
-  { title: "داشبورد", link: "/", icon: <HomeIcon /> },
-  { title: "سفارش ها", link: "/", icon: <ShoppingCartIcon /> },
-  { title: "علاقه مندی ها", link: "/", icon: <HeartIcon /> },
-  { title: "جزئیات اکانت", link: "/", icon: <IdentificationIcon /> },
-  { title: "لیست پیام ها", link: "/", icon: <EnvelopeIcon /> },
+  { title: "داشبورد", link: "/dashboard", icon: <HomeIcon /> },
+  { title: "سفارش ها", link: "/dashboard/orders", icon: <ShoppingCartIcon /> },
+  { title: "علاقه مندی ها", link: "/dashboard/favorites", icon: <HeartIcon /> },
+  { title: "لیست پیام ها", link: "/dashboard/ticket", icon: <EnvelopeIcon /> },
+];
+
+export const userInformation = [
+  { name: "firstName", title: "نام", icon: <UserIcon /> },
+  { name: "lastName", title: "نام خانوادگی", icon: <UserGroupIcon /> },
+  { name: "email", title: "ایمیل", icon: <AtSymbolIcon /> },
+  { name: "phone", title: "شماره تلفن", icon: <PhoneIcon /> },
+  { name: "bankInfo", title: "شماره شبا", icon: <CreditCardIcon /> },
+  { name: "postalCode", title: "کد پستی", icon: <BuildingOffice2Icon /> },
+  { name: "address", title: "آدرس", icon: <MapPinIcon /> },
 ];
 
 ////// ADMIN CONSTANT /////

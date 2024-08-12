@@ -127,7 +127,28 @@
       url("../../public/images/products-bg.png");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 900px;
+    min-height: 900px;
+  }
+
+  .category-banner__item1 {
+    background: linear-gradient(
+        270deg,
+        rgba(0, 0, 0, 0.6) 33.85%,
+        rgba(243, 244, 246, 0.1) 100%
+      ),
+      url("../../public/images/categories/category-right.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .category-banner__item2 {
+    background: linear-gradient(
+        270deg,
+        rgba(0, 0, 0, 0.6) 33.85%,
+        rgba(243, 244, 246, 0.1) 100%
+      ),
+      url("../../public/images/categories/category-left.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
   }
 
   .offer {
@@ -208,42 +229,6 @@
     height: 100%;
     object-fit: cover;
   }
-  /* detail page */
-  .details::-webkit-scrollbar {
-    width: 3px;
-  }
-
-  .details::-webkit-scrollbar-track {
-    background-color: rgb(214, 211, 211);
-  }
-  .details::-webkit-scrollbar-thumb {
-    background-color: gray;
-  }
-
-  html.dark .details::-webkit-scrollbar-thumb {
-    background-color: gray;
-  }
-  html.dark .details::-webkit-scrollbar-track {
-    background-color: rgb(61, 61, 61);
-  }
-  /* add products page */
-  .add-products::-webkit-scrollbar {
-    width: 3px;
-  }
-
-  .add-products::-webkit-scrollbar-track {
-    background-color: rgb(214, 211, 211);
-  }
-  .add-products::-webkit-scrollbar-thumb {
-    background-color: gray;
-  }
-
-  html.dark .add-products::-webkit-scrollbar-thumb {
-    background-color: gray;
-  }
-  html.dark .add-products::-webkit-scrollbar-track {
-    background-color: rgb(61, 61, 61);
-  }
 
   .truncate-multiline {
     display: -webkit-box;
@@ -259,8 +244,17 @@
     @apply container mt-5 md:mt-48;
   }
 
-  .admin-page {
+  /* class for all page in dashboard */
+  .dashboard-page {
     @apply container px-4 py-6 min-h-screen lg:overflow-y-auto;
+  }
+
+  .user-info {
+    @apply flex items-center gap-5 px-2 min-h-11 tracking-wide shadow-medium shadow-zinc-200 dark:shadow-white/10 rounded-lg text-black/60 dark:text-white/60;
+  }
+
+  .user-info h4 {
+    @apply font-bold;
   }
 
   /* for change main image in add product form */
@@ -297,5 +291,33 @@
   .editor-container_classic-editor .editor-container__editor {
     min-width: 795px;
     max-width: 795px;
+  }
+}
+
+@layer utilities {
+  .scrollbarCustom::-webkit-scrollbar {
+    width: 3px;
+  }
+
+  .scrollbarCustom::-webkit-scrollbar-track {
+    background-color: rgb(214, 211, 211);
+  }
+  .scrollbarCustom::-webkit-scrollbar-thumb {
+    background-color: gray;
+  }
+
+  html.dark .scrollbarCustom::-webkit-scrollbar-thumb {
+    background-color: gray;
+  }
+  html.dark .scrollbarCustom::-webkit-scrollbar-track {
+    background-color: rgb(61, 61, 61);
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

@@ -47,7 +47,7 @@ function ProductDetailPage({ product, user }) {
             >
               مشخصات
             </h4>
-            <ul className="details w-full p-3 h-64 child:flex child:justify-between overflow-y-auto child:p-3 divide-y-2 dark:divide-zinc-800">
+            <ul className="scrollbarCustom w-full p-3 h-64 child:flex child:justify-between overflow-y-auto child:p-3 divide-y-2 dark:divide-zinc-800">
               {specifications.map((i, index) => (
                 <li key={index}>
                   <span className="font-bold">{i.title}</span>

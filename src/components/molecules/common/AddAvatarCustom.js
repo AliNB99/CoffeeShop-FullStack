@@ -32,8 +32,8 @@ function AddAvatarCustom({ user }) {
     const res = await mutateAsyncAddImage(img);
     if (isErrorAddImage) return toast.error("عکس پروفایل با موفقیت اضافه نشد.");
     const { data } = await mutateAsyncChangeAvatar({ id, img: res.cdnUrl });
-    if (isErrorChangeAvatar) {
-      toast.error(data.data.error);
+    if (data.error || isErrorChangeAvatar) {
+      toast.error(data.error);
     } else {
       toast.success(data.message);
       refresh();

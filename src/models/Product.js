@@ -19,9 +19,20 @@ const ProductSchema = new Schema(
       required: true,
     },
 
+    finalPrice: {
+      type: Number,
+      required: true,
+    },
+
     category: {
       type: String,
       required: true,
+    },
+
+    rate: {
+      type: Number,
+      required: true,
+      default: 2,
     },
 
     images: [String],

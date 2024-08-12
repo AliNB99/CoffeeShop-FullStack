@@ -1,5 +1,3 @@
-import { compare, hash } from "bcryptjs";
-
 const RegexEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 const RegexName = /^[ آابپتثجچحخدذرزژسشصضطظعغفقکگلمنوهیئs]+$/;
 
@@ -34,7 +32,7 @@ export function formRegisterValidation(form, type) {
     } else {
       delete warning.firstName;
     }
-    
+
     if (!lastName) {
       warning.lastName = "لطفا نام خانوادگی خود را وارد نمایید";
     } else if (!RegexName.test(lastName)) {
@@ -59,16 +57,4 @@ export function formRegisterValidation(form, type) {
   }
 
   return warning;
-}
-
-// codding password by using hash
-export async function hashingPassword(password) {
-  const result = await hash(password, 12);
-  return result;
-}
-
-// Verify that the password is correct
-export async function verifyPassword(password, hashedPassword) {
-  const isValid = await compare(password, hashedPassword);
-  return isValid;
 }

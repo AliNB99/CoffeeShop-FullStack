@@ -12,7 +12,7 @@ async function UserListPage() {
   const { role } = await User.findOne({ email });
 
   return (
-    <div className="admin-page">
+    <div className="dashboard-page">
       <TitlePage color="text-blue-400" borderColor="border-blue-400">
         جدول مدیریت کاربران
       </TitlePage>

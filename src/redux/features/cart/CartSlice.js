@@ -1,22 +1,26 @@
+import { counterTotal } from "@/utils/helper/helper";
 import { createSlice } from "@reduxjs/toolkit";
+
+const items = localStorage.getItem("cart");
 
 const initialState = {
   selectedItems: [],
   counterItems: 0,
   totalPrice: 0,
-  checkOut: false,
+  isCheckout: false,
 };
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState,
+  initialState: items ? JSON.parse(items) : initialState,
   reducers: {
     addItem: (state, action) => {
       if (!state.selectedItems.find((p) => p._id === action.payload._id)) {
         state.selectedItems.push({ ...action.payload, quantity: 1 });
-        state.checkOut = false;
-        // state.counterItems = counterItems(state);
-        // state.totalPrice = counterTotal(state);
+        state.isCheckout = false;
+        state.counterItems = counterTotal({ state, type: "totalItem" });
+        state.totalPrice = counterTotal({ state, type: "totalPrice" });
+        localStorage.setItem("cart", JSON.stringify(state));
       }
     },
 
@@ -26,8 +30,9 @@ const cartSlice = createSlice({
       );
 
       state.selectedItems = newSelectedItems;
-      // state.counterItems = counterItems(state);
-      // state.totalPrice = counterTotal(state);
+      state.counterItems = counterTotal({ state, type: "totalItem" });
+      state.totalPrice = counterTotal({ state, type: "totalPrice" });
+      localStorage.setItem("cart", JSON.stringify(state));
     },
 
     increase: (state, action) => {
@@ -35,8 +40,9 @@ const cartSlice = createSlice({
         (p) => p._id === action.payload._id
       );
       state.selectedItems[index].quantity++;
-      // state.counterItems = counterItems(state);
-      // state.totalPrice = counterTotal(state);
+      state.counterItems = counterTotal({ state, type: "totalItem" });
+      state.totalPrice = counterTotal({ state, type: "totalPrice" });
+      localStorage.setItem("cart", JSON.stringify(state));
     },
 
     decrease: (state, action) => {
@@ -44,19 +50,20 @@ const cartSlice = createSlice({
         (p) => p._id === action.payload._id
       );
       state.selectedItems[index].quantity--;
-      // state.counterItems = counterItems(state);
-      // state.totalPrice = counterTotal(state);
+      state.counterItems = counterTotal({ state, type: "totalItem" });
+      state.totalPrice = counterTotal({ state, type: "totalPrice" });
+      localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    checkOut: (state) => {
+    isCheckout: (state) => {
       state.selectedItems = [];
       state.counterItems = 0;
       state.totalPrice = 0;
-      state.checkOut = true;
+      state.isCheckout = true;
     },
   },
 });
 
 export default cartSlice.reducer;
-export const { addItem, removeItem, increase, decrease, checkOut } =
+export const { addItem, removeItem, increase, decrease, isCheckout } =
   cartSlice.actions;
