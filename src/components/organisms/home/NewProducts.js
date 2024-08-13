@@ -2,7 +2,9 @@ import CartProduct from "../common/CartProduct";
 import connectDB from "@/DB/connectDB";
 import toast from "react-hot-toast";
 import Product from "@/models/Product";
-import TitleSection from "@/molecules/common/TitleSection";
+import Link from "next/link";
+import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import TitleSection from "@/atoms/home/TitleSection";
 
 async function NewProducts() {
   try {
@@ -14,14 +16,22 @@ async function NewProducts() {
   const data = await Product.find({}).sort({ createAt: -1 }).limit(8);
   return (
     <section id="newP" className="products pt-8 lg:pt-48">
-      <TitleSection
-        title="جدید ترین محصولات"
-        subTitle="فرآوری شده از دانه قهوه"
-        link="/products"
-      />
+      <div className="container flex items-center justify-between mb-10">
+        <TitleSection
+          title="جدید ترین محصولات"
+          subTitle="فرآوری شده از دانه قهوه"
+        />
+        <Link
+          className="text-orange-300 w-32 h-10 flex items-center justify-center rounded-md gap-1 hover:bg-orange-200/20 transition-all"
+          href="/products"
+        >
+          <span>مشاهده همه</span>
+          <ChevronLeftIcon className="w-4 h-4" />
+        </Link>
+      </div>
 
       {!!data.length ? (
-        <div className="container grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-5 mt-12">
+        <div className="container grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
           {JSON.parse(JSON.stringify(data)).map((i) => (
             <CartProduct key={i._id} data={i} />
           ))}

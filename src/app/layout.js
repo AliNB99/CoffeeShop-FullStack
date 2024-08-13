@@ -1,5 +1,7 @@
 // main styles
 import "./globals.css";
+// swiper global style
+import "swiper/css";
 // components
 import Layout from "@/layout/Layout";
 // fonts

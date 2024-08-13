@@ -1,7 +1,7 @@
 import { counterTotal } from "@/utils/helper/helper";
 import { createSlice } from "@reduxjs/toolkit";
 
-const items = localStorage.getItem("cart");
+// const items = localStorage.getItem("cart");
 
 const initialState = {
   selectedItems: [],
@@ -12,7 +12,7 @@ const initialState = {
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: items ? JSON.parse(items) : initialState,
+  initialState: initialState,
   reducers: {
     addItem: (state, action) => {
       if (!state.selectedItems.find((p) => p._id === action.payload._id)) {

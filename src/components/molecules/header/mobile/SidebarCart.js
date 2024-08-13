@@ -8,9 +8,7 @@ import { Divider } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 
 function SidebarCart({ showElement, onShowElement }) {
-  const { selectedItems, counterItems, totalPrice } = useSelector(
-    (state) => state.cart
-  );
+  const { selectedItems, totalPrice } = useSelector((state) => state.cart);
 
   return (
     <nav

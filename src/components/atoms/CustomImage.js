@@ -39,8 +39,11 @@ function CustomImage({
           className={className}
         />
       </div>
-
-      {isLoading.loadedImg && <Logo className="w-1/2 h-1/2 opacity-30" />}
+      {isLoading.loadedImg && (
+        <div className="w-full h-full flex items-center justify-center">
+          <Logo className="w-1/2 h-1/2 opacity-30" />
+        </div>
+      )}
     </>
   );
 }

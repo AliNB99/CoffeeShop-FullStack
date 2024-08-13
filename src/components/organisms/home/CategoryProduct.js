@@ -12,13 +12,13 @@ function CategoryProduct() {
             <div className="text-center">
               <Link href={i.link}>
                 <CustomImage
-                  className="w-24 h-24 md:w-full md:h-full"
+                  className="w-24 h-24 md:w-full md:h-full transition-opacity opacity-0 duration-[1s]"
                   src={i.image}
                   width={200}
                   height={200}
                   alt="image category"
                 />
-                <span className="inline-block w-24 md:w-48 font-DanaDemiBold text-sm md:text-xl text-zinc-700 dark:text-white mt-1.5 md:mt-2.5">
+                <span className="inline-block w-24 md:w-48 font-Dana font-bold text-sm md:text-xl text-zinc-700 dark:text-white mt-1.5 md:mt-2.5">
                   {i.title}
                 </span>
               </Link>

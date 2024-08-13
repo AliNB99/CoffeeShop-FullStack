@@ -13,8 +13,10 @@ import {
 
 import Image from "next/image";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 function DesktopHeader({ role }) {
+  const { counterItems } = useSelector((state) => state.cart);
   return (
     <header className="hidden md:flex items-center fixed top-9 right-0 left-0 z-50 w-[98%] lg:w-[90%] h-24 px-5 lg:px-10 py-5 mx-auto bg-black/50 rounded-3xl backdrop-blur">
       <div className="w-full flex justify-between items-center">
@@ -56,6 +58,11 @@ function DesktopHeader({ role }) {
             <div className="relative py-3 flex items-center group">
               <Link href="/cart">
                 <ShoppingCartIcon className="w-8 h-8 text-orange-200" />
+                {!!counterItems && (
+                  <span className="absolute top-7 left-4 flex items-center justify-center text-xs text-white bg-red-500 w-5 h-5 pt-1 rounded-full">
+                    {counterItems}
+                  </span>
+                )}
               </Link>
               <CartDropDown />
             </div>
@@ -81,12 +88,10 @@ function DesktopHeader({ role }) {
             ) : (
               <Link
                 href="/signin"
-                className="flex items-center gap-2 delay-75 hover:bg-orange-200/20 hover:px-7 hover:py-3 transition-all rounded-full"
+                className="flex items-center gap-2 delay-75 hover:bg-orange-200/20 hover:px-7 hover:py-3 transition-all text-orange-200 rounded-full"
               >
                 <ArrowLeftEndOnRectangleIcon className="w-8 h-8 rotate-180" />
-                <span className="hidden xl:inline-block text-orange-200">
-                  ورود | ثبت نام
-                </span>
+                <span className="hidden xl:inline-block">ورود | ثبت نام</span>
               </Link>
             )}
           </div>
