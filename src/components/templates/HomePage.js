@@ -6,7 +6,7 @@ import CategoryProduct from "@/organisms/home/CategoryProduct";
 import CoffeeClub from "@/organisms/home/CoffeeClub";
 import NewProducts from "@/organisms/home/NewProducts";
 import OptionsStore from "@/organisms/home/OptionsStore";
-import OrderRegistration from "@/organisms/home/OrderRegistration";
+import OrderRegistrationByPhone from "@/organisms/home/OrderRegistrationByPhone";
 
 function HomePage() {
   return (
@@ -18,7 +18,7 @@ function HomePage() {
       <BestSellerProducts />
       <CoffeeClub />
       <BlogList />
-      <OrderRegistration />
+      <OrderRegistrationByPhone />
       <OptionsStore />
     </>
   );

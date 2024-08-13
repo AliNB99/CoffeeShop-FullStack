@@ -1,5 +1,12 @@
+import CircleTag from "@/atoms/CircleTag";
 import ButtonCenter from "@/atoms/home/ButtonCenter";
-import { Curve, Logo, LogoType } from "@/utils/svg";
+import { Curve, Instagram, Logo, LogoType, Telegram } from "@/utils/svg";
+import {
+  EnvelopeIcon,
+  MapPinIcon,
+  PhoneIcon,
+} from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 function Footer() {
   return (
@@ -98,9 +105,7 @@ function Footer() {
             <div>
               <div class="mb-6 md:mb-10">
                 <span class="flex items-center gap-x-2 md:gap-x-3 mb-4 md:mb-5">
-                  <svg class="shrink-0 w-5 md:w-6 h-6 md:h-6">
-                    <use href="#map-pin"></use>
-                  </svg>
+                  <MapPinIcon />
                   بلوار میرداماد، خیابان البرز، کوچه قبادیان شرقی، پلاک ۳۳
                 </span>
                 <div class="flex flex-wrap gap-x-5 gap-y-4 font-DanaMedium">
@@ -108,59 +113,52 @@ function Footer() {
                     href="mailto:info@coffee.com"
                     class="flex items-center gap-x-2 md:gap-x-3 text-orange-300"
                   >
-                    <svg class="w-5 md:w-6 h-6 md:h-6">
-                      <use href="#envelope"></use>
-                    </svg>
+                    <EnvelopeIcon />
                     info@coffee.com
                   </a>
                   <div class="flex items-center gap-x-2 md:gap-x-3">
-                    <svg class="w-5 md:w-6 h-6 md:h-6">
-                      <use href="#phone"></use>
-                    </svg>
+                    <PhoneIcon />
                     <span class="ltr-text">0902 123 6628</span>
                     <span class="ltr-text">021 - 6789012</span>
                   </div>
                 </div>
               </div>
               <div class="flex gap-x-1.5 md:gap-x-6 ltr-text font-DanaMedium">
-                <a
+                <Link
                   href="#"
-                  class="flex-center gap-x-2 h-12 text-zinc-700 bg-gradient-to-r from-orange-200 to-orange-300 rounded-xl flex-grow"
+                  class="flex items-center justify-center gap-x-2 h-12 text-zinc-700 bg-gradient-to-r from-orange-200 to-orange-300 rounded-xl flex-grow"
                 >
+                  <Telegram class="w-6 h-6 md:w-9 md:h-9" />
                   @golden_coffee
-                  <svg class="w-[26px] h-[26px] md:w-[38px] md:h-[38px]">
-                    <use href="#telegram"></use>
-                  </svg>
-                </a>
-                <a
+                </Link>
+                <Link
                   href="#"
-                  class="flex-center gap-x-2 h-12 border border-orange-200 text-orange-200 rounded-xl flex-grow"
+                  class="flex items-center justify-center gap-x-2 h-12 border border-orange-200 text-orange-200 rounded-xl flex-grow"
                 >
+                  <Instagram class="w-7 h-7 md:w-9 md:h-9" />
                   @golden_coffee
-                  <svg class="w-[26px] h-[26px] md:w-[38px] md:h-[38px]">
-                    <use href="#instgram"></use>
-                  </svg>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
         </div>
 
-        <div class="flex flex-wrap justify-between text-xs/5 md:text-base gap-x-4 border-t border-t-white/10 pt-10 md:pt-11 mt-10 md:mt-11">
+        <div class="flex items-center justify-between flex-wrap text-xs/5 md:text-base gap-x-4 border-t border-t-white/10 pt-10 md:pt-11 mt-10 md:mt-11">
           <div class="flex items-center gap-x-2.5">
-            <div class="flex-center shrink-0 w-[30px] h-[30px] border border-white/10 rounded-full">
-              <div class="flex-center w-5 h-5 rounded-full border border-white/20">
-                <div class="w-2.5 h-2.5 rounded-full bg-gradient-to-t from-orange-200 to-orange-300"></div>
-              </div>
+            <CircleTag />
+            <div className="flex items-center gap-1">
+              <span>توسعه داده شده با ❤️ توسط</span>
+              <Link
+                target="_blank"
+                href="https://github.com/AliNB99"
+                class="text-orange-200 hover:underline transition-all"
+              >
+                AliNB99
+              </Link>
             </div>
-            <p>
-              تمام حقوق این رابط کاربری متعلق به
-              <span class="text-orange-200">سبزلرن</span> میباشد و دانشجوی این
-              دوره اجازه استفاده آن را در مصارف شخصی و تجاری ندارد.
-            </p>
           </div>
           <span class="ltr-text mr-auto">
-            Copyright © 2023 Golden Coffee. All rights reserved.
+            Copyright © 2024 Golden Coffee. All rights reserved.
           </span>
         </div>
       </div>

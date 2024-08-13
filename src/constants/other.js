@@ -87,25 +87,27 @@ export const listOptionStore = [
   {
     title: "پشتیبانی شبانه روزی",
     subTitle: "7 روز هفته ، 24 ساعته",
-    iconLight: <Support class="hidden dark:inline-block w-16 h-20" />,
-    iconDark: <SupportDark class="dark:hidden w-16 h-20" />,
+    iconLight: <Support class="dark:hidden w-20 h-20" />,
+    iconDark: <SupportDark class="hidden dark:inline-block w-20 h-20" />,
   },
   {
     title: "امکان تحویل اکسپرس",
     subTitle: "ارسال بسته با سرعت باد",
-    iconLight: <ExpressDelivery class="hidden dark:inline-block w-20 h-24" />,
-    iconDark: <ExpressDeliveryDark class="dark:hidden w-20 h-24" />,
+    iconLight: <ExpressDelivery class="dark:hidden w-24 h-20" />,
+    iconDark: (
+      <ExpressDeliveryDark class="hidden dark:inline-block w-24 h-20" />
+    ),
   },
   {
     title: "اکسسوری قهوه",
     subTitle: "وسایل و ادوات دم آوری",
-    iconLight: <Pitcher class="hidden dark:inline-block w-16 h-20" />,
-    iconDark: <PitcherDark class="dark:hidden w-16 h-20" />,
+    iconLight: <Pitcher class="dark:hidden w-20 h-20" />,
+    iconDark: <PitcherDark class="hidden dark:inline-block w-20 h-20" />,
   },
   {
     title: "رست تخصصی",
     subTitle: "تازه برشته شده و با کیفیت",
-    iconLight: <Coffee class="hidden dark:inline-block w-16 h-20" />,
-    iconDark: <CoffeeDark class="dark:hidden w-16 h-20" />,
+    iconLight: <Coffee class="dark:hidden w-20 h-20" />,
+    iconDark: <CoffeeDark class="hidden dark:inline-block w-20 h-20" />,
   },
 ];

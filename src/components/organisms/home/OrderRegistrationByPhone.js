@@ -1,6 +1,7 @@
 import { PhoneIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
-function OrderRegistration() {
+function OrderRegistrationByPhone() {
   return (
     <section class="contact-us mb-16 md:mb-28">
       <div class="container">
@@ -24,13 +25,13 @@ function OrderRegistration() {
               است، امتحان کنند. فضای داخلی شیک و کارکنان خوش برخورد ما روز شما
               را می سازد!
             </p>
-            <a
+            <Link
               href="#"
-              class="inline-flex items-center justify-center gap-x-2 h-[50px] md:h-[60px] px-6 mt-5 md:mt-6 border md:border-2 border-orange-300 rounded-full md:text-xl tracking-tightest text-orange-300"
+              class="inline-flex items-center justify-center gap-x-2 h-12 md:h-14 px-6 mt-5 md:mt-6 border md:border-2 border-orange-300 rounded-full md:text-xl font-medium tracking-tightest text-orange-300"
             >
-              <PhoneIcon />
+              <PhoneIcon className="md:w-6 md:h-6"/>
               ثبت سفارش تلفنی
-            </a>
+            </Link>
           </div>
         </div>
       </div>
@@ -38,4 +39,4 @@ function OrderRegistration() {
   );
 }
 
-export default OrderRegistration;
+export default OrderRegistrationByPhone;
