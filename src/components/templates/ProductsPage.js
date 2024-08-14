@@ -1,4 +1,4 @@
-import CartProduct from "@/organisms/common/CartProduct";
+import CardProduct from "@/organisms/common/CardProduct";
 import { NoData } from "@/utils/svg";
 
 function ProductsPage({ products }) {
@@ -7,7 +7,7 @@ function ProductsPage({ products }) {
       {products.length ? (
         <div className="w-full grid grid-cols-2 sm:grid-cols-3 gap-5">
           {products.map((i) => (
-            <CartProduct key={i._id} data={i} />
+            <CardProduct key={i._id} data={i} />
           ))}
         </div>
       ) : (

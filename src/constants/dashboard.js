@@ -19,7 +19,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 export const userDashboardItem = [
-  { title: "داشبورد", link: "/dashboard", icon: <HomeIcon /> },
+  { title: "داشبورد", link: "/dashboard/cart", icon: <HomeIcon /> },
   { title: "سفارش ها", link: "/dashboard/orders", icon: <ShoppingCartIcon /> },
   { title: "علاقه مندی ها", link: "/dashboard/favorites", icon: <HeartIcon /> },
   { title: "لیست پیام ها", link: "/dashboard/ticket", icon: <EnvelopeIcon /> },

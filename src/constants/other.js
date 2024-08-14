@@ -3,17 +3,12 @@ import {
   NewspaperIcon,
   PhoneArrowUpRightIcon,
   UserGroupIcon,
+  BanknotesIcon,
+  CreditCardIcon,
+  ReceiptPercentIcon,
+  SparklesIcon,
 } from "@heroicons/react/24/outline";
-import {
-  Coffee,
-  CoffeeDark,
-  ExpressDelivery,
-  ExpressDeliveryDark,
-  Pitcher,
-  PitcherDark,
-  Support,
-  SupportDark,
-} from "@/utils/svg";
+import { Coffee, ExpressDelivery, Pitcher, Support } from "@/utils/svg";
 
 export const navbarItem = [
   { title: "دیکشنری", link: "/", icon: <ChatBubbleLeftEllipsisIcon /> },
@@ -88,26 +83,43 @@ export const listOptionStore = [
     title: "پشتیبانی شبانه روزی",
     subTitle: "7 روز هفته ، 24 ساعته",
     iconLight: <Support class="dark:hidden w-20 h-20" />,
-    iconDark: <SupportDark class="hidden dark:inline-block w-20 h-20" />,
   },
   {
     title: "امکان تحویل اکسپرس",
     subTitle: "ارسال بسته با سرعت باد",
     iconLight: <ExpressDelivery class="dark:hidden w-24 h-20" />,
-    iconDark: (
-      <ExpressDeliveryDark class="hidden dark:inline-block w-24 h-20" />
-    ),
   },
   {
     title: "اکسسوری قهوه",
     subTitle: "وسایل و ادوات دم آوری",
     iconLight: <Pitcher class="dark:hidden w-20 h-20" />,
-    iconDark: <PitcherDark class="hidden dark:inline-block w-20 h-20" />,
   },
   {
     title: "رست تخصصی",
     subTitle: "تازه برشته شده و با کیفیت",
     iconLight: <Coffee class="dark:hidden w-20 h-20" />,
-    iconDark: <CoffeeDark class="hidden dark:inline-block w-20 h-20" />,
+  },
+];
+
+export const listCheckout = [
+  {
+    title: "قیمت کل(تومان)",
+    icon: <BanknotesIcon />,
+    keyValue: "totalPrice",
+  },
+  {
+    title: "تعداد محصولات",
+    icon: <SparklesIcon />,
+    keyValue: "counterItems",
+  },
+  {
+    title: "مقدار تخفیف(تومان)",
+    icon: <ReceiptPercentIcon />,
+    keyValue: "totalDiscount",
+  },
+  {
+    title: "قیمت نهایی(تومان)",
+    icon: <CreditCardIcon />,
+    keyValue: "finalPrice",
   },
 ];

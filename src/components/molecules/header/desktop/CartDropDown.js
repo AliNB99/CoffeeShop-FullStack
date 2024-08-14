@@ -1,5 +1,5 @@
 import Button from "@/atoms/Button";
-import CartProductBasket from "@/organisms/common/CartProductBasket";
+import CardProductBasket from "@/organisms/common/CardProductBasket";
 import { sp } from "@/utils/helper/replaceNumber";
 import { ChevronLeftIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { Divider } from "@nextui-org/react";
@@ -24,7 +24,7 @@ function CartDropDown() {
           <div className="flex flex-col gap-5 h-64 overflow-auto no-scrollbar">
             {selectedItems.map((p, index) => (
               <>
-                <CartProductBasket product={p} />
+                <CardProductBasket product={p} />
                 {index + 1 < selectedItems.length && <Divider />}
               </>
             ))}

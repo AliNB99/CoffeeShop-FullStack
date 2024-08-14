@@ -7,6 +7,8 @@ const initialState = {
   selectedItems: [],
   counterItems: 0,
   totalPrice: 0,
+  totalDiscount: 0,
+  finalPrice: 0,
   isCheckout: false,
 };
 
@@ -20,6 +22,8 @@ const cartSlice = createSlice({
         state.isCheckout = false;
         state.counterItems = counterTotal({ state, type: "totalItem" });
         state.totalPrice = counterTotal({ state, type: "totalPrice" });
+        state.totalDiscount = counterTotal({ state, type: "totalDiscount" });
+        state.finalPrice = counterTotal({ state, type: "finalPrice" });
         localStorage.setItem("cart", JSON.stringify(state));
       }
     },
@@ -32,6 +36,8 @@ const cartSlice = createSlice({
       state.selectedItems = newSelectedItems;
       state.counterItems = counterTotal({ state, type: "totalItem" });
       state.totalPrice = counterTotal({ state, type: "totalPrice" });
+      state.totalDiscount = counterTotal({ state, type: "totalDiscount" });
+      state.finalPrice = counterTotal({ state, type: "finalPrice" });
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
@@ -42,6 +48,8 @@ const cartSlice = createSlice({
       state.selectedItems[index].quantity++;
       state.counterItems = counterTotal({ state, type: "totalItem" });
       state.totalPrice = counterTotal({ state, type: "totalPrice" });
+      state.totalDiscount = counterTotal({ state, type: "totalDiscount" });
+      state.finalPrice = counterTotal({ state, type: "finalPrice" });
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
@@ -52,6 +60,8 @@ const cartSlice = createSlice({
       state.selectedItems[index].quantity--;
       state.counterItems = counterTotal({ state, type: "totalItem" });
       state.totalPrice = counterTotal({ state, type: "totalPrice" });
+      state.totalDiscount = counterTotal({ state, type: "totalDiscount" });
+      state.finalPrice = counterTotal({ state, type: "finalPrice" });
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
@@ -59,6 +69,8 @@ const cartSlice = createSlice({
       state.selectedItems = [];
       state.counterItems = 0;
       state.totalPrice = 0;
+      totalDiscount = 0;
+      finalPrice = 0;
       state.isCheckout = true;
     },
   },

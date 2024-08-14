@@ -19,11 +19,6 @@ const ProductSchema = new Schema(
       required: true,
     },
 
-    finalPrice: {
-      type: Number,
-      required: true,
-    },
-
     category: {
       type: String,
       required: true,

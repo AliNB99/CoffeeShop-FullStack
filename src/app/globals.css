@@ -126,7 +126,7 @@
       ),
       url("../../public/images/products-bg.png");
     background-repeat: no-repeat;
-    background-size: auto;
+    background-size: contain;
   }
 
   .category-banner {

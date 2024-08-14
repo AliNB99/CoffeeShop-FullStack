@@ -56,7 +56,7 @@ function DesktopHeader({ role }) {
         <div className="relative flex items-center gap-x-4 lg:gap-x-5 xl:gap-x-10 text-xl">
           <div className="flex items-center gap-5">
             <div className="relative py-3 flex items-center group">
-              <Link href="/cart">
+              <Link href="/dashboard/cart">
                 <ShoppingCartIcon className="w-8 h-8 text-orange-200" />
                 {!!counterItems && (
                   <span className="absolute top-7 left-4 flex items-center justify-center text-xs text-white bg-red-500 w-5 h-5 pt-1 rounded-full">

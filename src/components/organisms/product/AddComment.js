@@ -1,17 +1,14 @@
 "use client";
 
-import { Logo } from "@/utils/svg";
 import WriteComment from "@/molecules/product/WriteComment";
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import TitleDescription from "@/atoms/TitleDescription";
 
 function AddComment({ user, product }) {
   return (
     <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-medium space-y-4">
-      <div className="text-orange-300 w-1/2 flex items-center gap-2 border-b-2 p-2 border-orange-300 font-Morabba text-2xl font-medium">
-        <Logo />
-        <h4>ثبت دیدگاه</h4>
-      </div>
+      <TitleDescription title="ثبت دیدگاه" />
       {user ? (
         <WriteComment user={user} product={product} />
       ) : (

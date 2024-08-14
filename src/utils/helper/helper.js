@@ -20,6 +20,16 @@ export const counterTotal = ({ state, type }) => {
       (acc, cur) => acc + cur.price * cur.quantity,
       0
     );
+  } else if (type === "totalDiscount") {
+    return state.selectedItems.reduce(
+      (acc, cur) => acc + (cur.price * cur.discount) / 100,
+      0
+    );
+  } else if (type === "finalPrice") {
+    return state.selectedItems.reduce(
+      (acc, cur) => acc + (cur.price * (cur.discount - 100)) / 100,
+      0
+    );
   }
 };
 

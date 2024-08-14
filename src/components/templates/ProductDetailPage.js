@@ -1,6 +1,6 @@
 import { LogoType } from "@/utils/svg";
 import SliderProductImage from "@/molecules/common/SliderProductImage";
-import CartProductDetails from "@/organisms/product/CartProductDetails";
+import CardProductDetails from "@/organisms/product/CardProductDetails";
 import ProductDescription from "@/organisms/product/ProductDescription";
 import AddComment from "@/organisms/product/AddComment";
 import ProductComments from "@/organisms/product/ProductComments";
@@ -59,7 +59,7 @@ function ProductDetailPage({ product, user }) {
             </ul>
           </div>
           {/* price and Btb add product */}
-          <CartProductDetails product={product} />
+          <CardProductDetails product={product} />
         </div>
       </div>
       {/* Description */}

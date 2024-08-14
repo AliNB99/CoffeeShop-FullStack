@@ -1,6 +1,6 @@
 "use client";
 
-import CartProduct from "@/organisms/common/CartProduct";
+import CardProduct from "@/organisms/common/CardProduct";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef } from "react";
 import TitleSection from "@/atoms/home/TitleSection";
@@ -35,7 +35,6 @@ function SliderVisibility({ data }) {
       </div>
       <Swiper
         ref={swiperRef}
-        navigation
         loop
         slidesPerView={2}
         spaceBetween={12}
@@ -43,7 +42,7 @@ function SliderVisibility({ data }) {
       >
         {data.map((p, index) => (
           <SwiperSlide className="my-1" virtualIndex={index}>
-            <CartProduct data={p} />
+            <CardProduct data={p} />
           </SwiperSlide>
         ))}
       </Swiper>

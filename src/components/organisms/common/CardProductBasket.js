@@ -1,10 +1,9 @@
 import CustomImage from "@/atoms/CustomImage";
-import CartButton from "@/molecules/common/CartButton";
+import CardButton from "@/molecules/common/CardButton";
 import { sp } from "@/utils/helper/replaceNumber";
 
-function CartProductBasket({ product }) {
+function CardProductBasket({ product, cartPage }) {
   const { title, images, price, discount } = product;
-  console.log(discount);
   return (
     <div className="w-full flex items-center justify-between font-Dana gap-5">
       <CustomImage
@@ -18,22 +17,32 @@ function CartProductBasket({ product }) {
           {title}
         </h1>
 
-        <div className="w-full md:flex items-center justify-between">
+        <div
+          className={`w-full ${
+            cartPage && "flex"
+          } md:flex items-center justify-between`}
+        >
           <div className="mb-4 md:mb-0">
             <div className="text-xs font-medium text-teal-600 dark:text-emerald-500">
               <span>{sp((price * discount) / 100)}</span>
               <span>تومان تخفیف</span>
             </div>
-            <div className="text-zinc-700 dark:text-white/80">
+            <div className="w-fit offer text-xs">
               <span className="font-semibold">{sp(price)}</span>
               <span className="text-xs font-semibold">تومان</span>
             </div>
+            <div className="text-sm text-zinc-700 dark:text-white/80">
+              <span className="font-semibold md:text-lg">
+                {sp((price * (discount - 100)) / 100)}
+              </span>
+              <span className="text-xs font-semibold">تومان</span>
+            </div>
           </div>
-          <CartButton data={product} />
+          <CardButton data={product} />
         </div>
       </div>
     </div>
   );
 }
 
-export default CartProductBasket;
+export default CardProductBasket;

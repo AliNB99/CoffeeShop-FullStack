@@ -30,7 +30,7 @@ export default function ModalShowInfoCommentCustom({
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
-        <ModalContent>
+        <ModalContent className="scrollbarCustom">
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>

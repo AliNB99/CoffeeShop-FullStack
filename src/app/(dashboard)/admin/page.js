@@ -1,5 +1,7 @@
+import AdminPanelPage from "@/templates/admin/AdminPanelPage";
+
 function AdminPanel() {
-  return <div>AdminPanel</div>;
+  return <AdminPanelPage />;
 }
 
 export default AdminPanel;

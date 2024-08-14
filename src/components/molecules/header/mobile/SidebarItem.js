@@ -103,7 +103,7 @@ function SidebarItem({ showElement, onShowElement, role }) {
           </Link>
         )}
         <DarkModeToggle label={true} />
-        <Link href="/">
+        <Link href="/dashboard/cart">
           <Bars3Icon />
           <span>سبد خرید</span>
         </Link>

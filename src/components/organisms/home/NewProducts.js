@@ -1,4 +1,4 @@
-import CartProduct from "../common/CartProduct";
+import CardProduct from "../common/CardProduct";
 import connectDB from "@/DB/connectDB";
 import toast from "react-hot-toast";
 import Product from "@/models/Product";
@@ -15,7 +15,7 @@ async function NewProducts() {
   }
   const data = await Product.find({}).sort({ createAt: -1 }).limit(8);
   return (
-    <section id="newP" className="products pt-8 lg:pt-48">
+    <section className="products pt-8 lg:pt-48">
       <div className="container flex items-center justify-between mb-10">
         <TitleSection
           title="جدید ترین محصولات"
@@ -33,7 +33,7 @@ async function NewProducts() {
       {!!data.length ? (
         <div className="container grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-5">
           {JSON.parse(JSON.stringify(data)).map((i) => (
-            <CartProduct key={i._id} data={i} />
+            <CardProduct key={i._id} data={i} />
           ))}
         </div>
       ) : (

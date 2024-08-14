@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/atoms/Button";
-import CartProductBasket from "@/organisms/common/CartProductBasket";
+import CardProductBasket from "@/organisms/common/CardProductBasket";
 import { sp } from "@/utils/helper/replaceNumber";
 import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Divider } from "@nextui-org/react";
@@ -37,7 +37,7 @@ function SidebarCart({ showElement, onShowElement }) {
           <div className="overflow-scroll no-scrollbar space-y-3">
             {selectedItems.map((p, index) => (
               <>
-                <CartProductBasket product={p} />
+                <CardProductBasket product={p} />
                 {index + 1 < selectedItems.length && <Divider />}
               </>
             ))}

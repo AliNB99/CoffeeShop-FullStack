@@ -5,7 +5,7 @@ function OrderRegistrationByPhone() {
   return (
     <section class="contact-us mb-16 md:mb-28">
       <div class="container">
-        <div class="flex flex-col lg:flex-row items-center lg:items-start gap-y-8 lg:gap-x-6">
+        <div class="flex flex-col lg:flex-row items-center lg:items-start gap-y-8 lg:gap-x-12">
           <img class="w-80 shrink-0" src="/images/contact.png" alt="contact" />
           <div class="text-zinc-700 dark:text-white">
             <h3 class="font-Morabba font-medium text-2xl md:text-5xl mb-0.5 md:mb-1.5">

@@ -1,5 +1,5 @@
+import TitleDescription from "@/atoms/TitleDescription";
 import ProsAndCons from "@/molecules/product/ProsAndCons";
-import { Logo } from "@/utils/svg";
 import {
   HandThumbDownIcon,
   HandThumbUpIcon,
@@ -8,10 +8,7 @@ import {
 function ProductDescription({ description, advantages, disadvantages }) {
   return (
     <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-medium">
-      <div className="text-orange-300 w-1/2 flex items-center gap-2 border-b-2 p-2 border-orange-300 font-Morabba text-2xl font-medium">
-        <Logo />
-        <h4>توضیحات</h4>
-      </div>
+      <TitleDescription title="توضیحات" />
       <div className="p-4 space-y-10">
         <p className="leading-10 text-justify">{description}</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-10">

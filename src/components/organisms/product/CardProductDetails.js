@@ -9,9 +9,9 @@ import { StarIcon } from "@heroicons/react/24/solid";
 
 import { Logo } from "@/utils/svg";
 import StoreFeatures from "../../molecules/product/StoreFeatures";
-import CartButton from "@/molecules/common/CartButton";
+import CardButton from "@/molecules/common/CardButton";
 
-function CartProductDetails({ product }) {
+function CardProductDetails({ product }) {
   const { discount, price } = product;
   return (
     <div className="bg-white border-2 dark:border-zinc-700 dark:bg-zinc-700/60 w-full lg:w-72 flex flex-col justify-between rounded-2xl p-4">
@@ -58,7 +58,7 @@ function CartProductDetails({ product }) {
         </div>
       </div>
       <div className="flex items-center justify-between">
-        <CartButton data={product} />
+        <CardButton data={product} />
         <div className="flex gap-1 text-yellow-500">
           <span className="text-xs md:text-lg">2.5</span>
           <StarIcon className="w-3 h-3 md:w-5 md:h-5" />
@@ -68,4 +68,4 @@ function CartProductDetails({ product }) {
   );
 }
 
-export default CartProductDetails;
+export default CardProductDetails;

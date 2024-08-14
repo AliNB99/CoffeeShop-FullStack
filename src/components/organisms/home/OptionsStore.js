@@ -1,3 +1,5 @@
+"use client";
+
 import { listOptionStore } from "@/constants/other";
 
 function OptionsStore() {
@@ -10,7 +12,6 @@ function OptionsStore() {
               key={index}
               class="flex items-center flex-col sm:flex-row gap-x-4 gap-y-5 text-center lg:text-right"
             >
-              {i.iconDark}
               {i.iconLight}
               <div>
                 <h5 class="font-bold text-sm md:text-lg/6 mb-1 md:mb-3.5">

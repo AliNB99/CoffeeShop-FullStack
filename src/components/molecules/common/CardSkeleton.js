@@ -1,6 +1,6 @@
 import { Skeleton } from "@mui/material";
 
-function CartSkeleton() {
+function CardSkeleton() {
   return (
     <div className="rounded-2xl shadow-normal p-2 md:p-5">
       <div className="w-full h-32 lg:w-full lg:h-64 mb-9">
@@ -24,4 +24,4 @@ function CartSkeleton() {
   );
 }
 
-export default CartSkeleton;
+export default CardSkeleton;

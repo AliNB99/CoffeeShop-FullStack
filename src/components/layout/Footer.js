@@ -1,3 +1,5 @@
+"use client";
+
 import CircleTag from "@/atoms/CircleTag";
 import ButtonCenter from "@/atoms/home/ButtonCenter";
 import { Curve, Instagram, Logo, LogoType, Telegram } from "@/utils/svg";
@@ -7,12 +9,36 @@ import {
   PhoneIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const list = [
+  "حریم خصوصی",
+  "شرایط استفاده",
+  "پرسش های متداول",
+  "ضمانت نامه",
+  "عودت کالا",
+  "ثبت سفارش",
+  "فرصت های شغلی",
+  "ارتباط با ما",
+];
 
 function Footer() {
+  // To not display the header in the admin sections and the login and registration form
+  const pathName = usePathname();
+  if (
+    pathName
+      .split("/")
+      .find(
+        (i) =>
+          i === "admin" || i === "signin" || i === "signup" || i === "dashboard"
+      )
+  )
+    return;
+
   return (
-    <footer class="relative bg-zinc-700 py-8 md:pb-11 md:pt-[62px]">
+    <footer class="relative bg-zinc-700 py-8 md:pb-11 md:pt-16 mt-20">
       <Curve
-        class="absolute top-0 right-0 left-0 mx-auto hidden md:inline-block text-gray-100 dark:text-zinc-800 w-[100px] h-[22px] rotate-180
+        class="absolute -top-px right-0 left-0 mx-auto hidden md:inline-block text-gray-100 dark:text-zinc-800 w-[100px] h-[22px] rotate-180
       "
       />
       <div class="absolute top-0 right-0 left-0 mx-auto -translate-y-2/4 hidden md:flex items-center justify-center">
@@ -21,7 +47,7 @@ function Footer() {
       <div class="px-4 md:px-0 text-gray-300 sm:w-[94%] lg:w-[90%] mx-auto">
         <div class="flex justify-between flex-wrap">
           <div>
-            <div class="flex ga-x-5 mb-6 md:mb-4.5 text-gray-300">
+            <div class="flex gap-x-5 mb-6 md:mb-4.5 text-gray-300">
               <Logo class="w-[57px] h-[54px]" />
               <LogoType class="w-[138px] h-[54px]" />
             </div>
@@ -39,62 +65,16 @@ function Footer() {
               دسترسی سریع
             </h4>
             <div class="grid grid-cols-2 gap-y-2.5 md:gap-y-5 gap-x-10 md:gap-x-16">
-              <a
-                href="#"
-                class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
-              >
-                <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
-                حریم خصوصی
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
-              >
-                <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
-                عودت کالا
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
-              >
-                <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
-                شرایط استفاده
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
-              >
-                <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
-                ثبت سفارش
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
-              >
-                <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
-                پرسش های متداول
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
-              >
-                <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
-                فرصت های شغلی
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
-              >
-                <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
-                ضمانت نامه
-              </a>
-              <a
-                href="#"
-                class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
-              >
-                <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
-                ارتباط با ما
-              </a>
+              {list.map((i, index) => (
+                <Link
+                  key={index}
+                  href="#"
+                  class="flex items-center gap-x-2 md:gap-x-3 hover:text-orange-300 transition-colors"
+                >
+                  <span class="inline-block w-2 md:w-2.5 h-1 bg-current rounded-full"></span>
+                  {i}
+                </Link>
+              ))}
             </div>
           </div>
 
@@ -151,7 +131,7 @@ function Footer() {
               <Link
                 target="_blank"
                 href="https://github.com/AliNB99"
-                class="text-orange-200 hover:underline transition-all"
+                class="text-orange-200 cursor-pointer hover:underline transition-all"
               >
                 AliNB99
               </Link>

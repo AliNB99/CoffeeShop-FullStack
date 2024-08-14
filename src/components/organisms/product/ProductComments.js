@@ -1,6 +1,7 @@
 "use client";
 
 import Loader from "@/atoms/Loader";
+import TitleDescription from "@/atoms/TitleDescription";
 import { Logo } from "@/utils/svg";
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
@@ -12,10 +13,7 @@ function ProductComments({ productId }) {
   const { data, isPending } = useGetCommentsProduct(productId);
   return (
     <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-medium space-y-4">
-      <div className="text-orange-300 w-1/2 flex items-center gap-2 border-b-2 p-2 border-orange-300 font-Morabba text-2xl font-medium">
-        <Logo />
-        <h4>دیدگاهات کاربران</h4>
-      </div>
+      <TitleDescription title="دیدگاه کاربران" />
       {isPending ? (
         <Loader color="#fdba74" />
       ) : data.data.comments.length ? (

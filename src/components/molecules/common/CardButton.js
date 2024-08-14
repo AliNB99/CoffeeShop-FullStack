@@ -12,11 +12,10 @@ import {
   removeItem,
   increase,
   decrease,
-  manageCart,
 } from "@/redux/features/cart/CartSlice";
 import { productCount } from "@/utils/helper/helper";
 
-function CartButton({ data }) {
+function CardButton({ data }) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const quantity = productCount(cart, data._id);
@@ -65,4 +64,4 @@ function CartButton({ data }) {
   );
 }
 
-export default CartButton;
+export default CardButton;

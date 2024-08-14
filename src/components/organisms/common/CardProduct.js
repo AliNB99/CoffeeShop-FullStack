@@ -1,11 +1,11 @@
 import CustomImage from "@/atoms/CustomImage";
-import CartButton from "@/molecules/common/CartButton";
+import CardButton from "@/molecules/common/CardButton";
 import { sp } from "@/utils/helper/replaceNumber";
 import { LogoType } from "@/utils/svg";
 import { StarIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
-function CartProduct({ data }) {
+function CardProduct({ data }) {
   const { title, price, images, discount, _id } = data;
 
   return (
@@ -58,7 +58,7 @@ function CartProduct({ data }) {
         </div>
       </Link>
       <div className="flex items-center justify-between cursor-default mt-4">
-        <CartButton data={data} />
+        <CardButton data={data} />
         <div className="flex gap-1 text-yellow-500">
           <span className="text-xs md:text-lg">2.5</span>
           <StarIcon className="w-3 h-3 md:w-5 md:h-5" />
@@ -68,4 +68,4 @@ function CartProduct({ data }) {
   );
 }
 
-export default CartProduct;
+export default CardProduct;
