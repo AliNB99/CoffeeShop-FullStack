@@ -25,8 +25,9 @@ function AdminPanelPage() {
     isClient && (
       <div className="dashboard-page flex flex-col">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-2 mb-10">
-          {listCardAdminPanel.map((i) => (
+          {listCardAdminPanel.map((i, index) => (
             <CardAdminPanel
+              key={index}
               title={i.title}
               count={i.count}
               bgColor={i.bgColor}

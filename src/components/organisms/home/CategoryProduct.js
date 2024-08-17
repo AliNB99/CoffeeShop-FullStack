@@ -8,8 +8,8 @@ function CategoryProduct() {
     <section className="products-category mb-10 md:mb-20">
       <div className="container">
         <div className="flex items-center justify-center gap-y-6 gap-x-7 md:gap-16 flex-wrap">
-          {categoryProductList.map((i) => (
-            <div className="text-center">
+          {categoryProductList.map((i, index) => (
+            <div key={index} className="text-center">
               <Link href={i.link}>
                 <CustomImage
                   className="w-24 h-24 md:w-full md:h-full transition-opacity opacity-0 duration-[1s]"

@@ -62,19 +62,19 @@ export const categoryProductList = [
 export const blogList = [
   {
     title: "طرز تهیه کیک و شیرینی کنار با قهوه خط دوم اسم طولانی",
-    image: "images/blogs/blog-1.png",
+    image: "/images/blogs/blog-1.png",
   },
   {
     title: "طرز تهیه قهوه دمی با دستگاه اروپرس خط دوم اسم طولانی",
-    image: "images/blogs/blog-2.png",
+    image: "/images/blogs/blog-2.png",
   },
   {
     title: "طرز تهیه یک فنجان کافه زینو برزیلی",
-    image: "images/blogs/blog-3.png",
+    image: "/images/blogs/blog-3.png",
   },
   {
     title: "طرز تهیه قهوه دالگونا مناسب روز‌های کرونایی",
-    image: "images/blogs/blog-4.png",
+    image: "/images/blogs/blog-4.png",
   },
 ];
 

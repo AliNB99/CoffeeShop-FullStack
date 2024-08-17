@@ -16,7 +16,9 @@ function AddSpecifications({ product, form, setForm, warning, touched }) {
     if (product) {
       setForm({ ...form, specifications: [...product.specifications] });
       setListCategory(
-        product.category === "coffee" ? addCoffeeItem : addAccessoryItem
+        product.category === "coffee"
+          ? [...addCoffeeItem]
+          : [...addAccessoryItem]
       );
     }
   }, [product]);
@@ -28,18 +30,18 @@ function AddSpecifications({ product, form, setForm, warning, touched }) {
         specifications:
           product?.category === "coffee"
             ? product.specifications
-            : addCoffeeItem,
+            : [...addCoffeeItem],
       });
-      setListCategory(addCoffeeItem);
+      setListCategory([...addCoffeeItem]);
     } else {
       setForm({
         ...form,
         specifications:
           product?.category === "accessory"
             ? product.specifications
-            : addAccessoryItem,
+            : [...addAccessoryItem],
       });
-      setListCategory(addAccessoryItem);
+      setListCategory([...addAccessoryItem]);
     }
   }, [form.category]);
 

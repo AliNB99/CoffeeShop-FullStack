@@ -179,12 +179,14 @@ function ProductsTable() {
           return (
             <div className="flex items-center justify-center">
               {product.images.length ? (
-                <CustomImage
-                  src={product.images[0]}
-                  width={60}
-                  height={60}
-                  alt="products image"
-                />
+                <div className="w-24 h-20 flex items-center justify-center">
+                  <CustomImage
+                    src={product.images[0]}
+                    width={60}
+                    height={60}
+                    alt="products image"
+                  />
+                </div>
               ) : (
                 <Logo className="opacity-30 w-full h-full md:max-h-10 md:max-w-10" />
               )}

@@ -3,37 +3,37 @@ import { UploadClient } from "@uploadcare/upload-client";
 import { signIn } from "next-auth/react";
 import api from "src/configs/api";
 
-export const useSubmitAuth = (action) => {
-  if (action === "signup") {
-    return useMutation({
-      mutationFn: (form) => api.post("/auth/signup", form),
-    });
-  } else if (action === "signin") {
-    return useMutation({
-      mutationFn: async (form) =>
-        await signIn("credentials", {
-          ...form,
-          redirect: false,
-        }),
-    });
-  }
+export const useSubmitSignup = () => {
+  return useMutation({
+    mutationFn: (form) => api.post("/auth/signup", form),
+  });
 };
 
-export const useSubmitProduct = (action) => {
-  if (action === "addProduct") {
-    return useMutation({
-      mutationFn: (form) => api.post("/admin/products", form),
-    });
-  } else if (action === "editProduct") {
-    return useMutation({
-      mutationFn: ({ form, id }) =>
-        api.patch("/admin/products", {
-          action,
-          form,
-          id,
-        }),
-    });
-  }
+export const useSubmitSignIn = () => {
+  return useMutation({
+    mutationFn: async (form) =>
+      await signIn("credentials", {
+        ...form,
+        redirect: false,
+      }),
+  });
+};
+
+export const useSubmitAddProduct = () => {
+  return useMutation({
+    mutationFn: (form) => api.post("/admin/products", form),
+  });
+};
+
+export const useSubmitEditProduct = () => {
+  return useMutation({
+    mutationFn: ({ form, id }) =>
+      api.patch("/admin/products", {
+        action: "editProduct",
+        form,
+        id,
+      }),
+  });
 };
 
 export const useAddImages = () => {

@@ -11,12 +11,25 @@ import InputForm from "src/components/molecules/form/InputForm";
 import { formProductValidation } from "@/utils/validation/dashboard";
 import AddSpecifications from "src/components/organisms/admin/AddSpecifications";
 import AddPropertyList from "src/components/organisms/admin/AddPropertyList";
-import { useSubmitProduct } from "src/hooks/useQuery/mutations";
+import {
+  useSubmitAddProduct,
+  useSubmitEditProduct,
+} from "src/hooks/useQuery/mutations";
 import { useRouter } from "next/navigation";
 
 function ProductForm({ product }) {
   const [action, setAction] = useState(product ? "editProduct" : "addProduct");
-  const { isPending, isError, mutateAsync } = useSubmitProduct(action);
+  const {
+    isPending: isPendingAddProduct,
+    isError: isErrorAddProduct,
+    mutateAsync: mutateAsyncAddProduct,
+  } = useSubmitAddProduct();
+
+  const {
+    isPending: isPendingEditProduct,
+    isError: isErrorEditProduct,
+    mutateAsync: mutateAsyncEditProduct,
+  } = useSubmitEditProduct();
 
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
@@ -62,15 +75,16 @@ function ProductForm({ product }) {
     let data;
 
     if (product) {
-      data = await mutateAsync({ form, id: productId });
+      data = await mutateAsyncEditProduct({ form, id: productId });
     } else {
-      data = await mutateAsync(form);
+      data = await mutateAsyncAddProduct(form);
     }
 
-    if (data.data.error || isError) {
+    if (data.data.error || isErrorAddProduct || isErrorEditProduct) {
+      console.log("error");
       toast.error(data.data.error);
     } else {
-      // back();
+      back();
       toast.success(data.data.message);
     }
   };
@@ -130,7 +144,7 @@ function ProductForm({ product }) {
 
       <AddImage form={form} setForm={setForm} />
 
-      {isPending ? (
+      {isPendingAddProduct || isPendingEditProduct ? (
         product ? (
           <Loader color="#22C55E" size={10} />
         ) : (

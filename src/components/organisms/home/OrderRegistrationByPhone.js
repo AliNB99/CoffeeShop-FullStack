@@ -1,4 +1,5 @@
 import { PhoneIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 
 function OrderRegistrationByPhone() {
@@ -6,7 +7,9 @@ function OrderRegistrationByPhone() {
     <section className="contact-us mb-16 md:mb-28">
       <div className="container">
         <div className="flex flex-col lg:flex-row items-center lg:items-start gap-y-8 lg:gap-x-12">
-          <img
+          <Image
+            width={500}
+            height={500}
             className="w-80 shrink-0"
             src="/images/contact.png"
             alt="contact"

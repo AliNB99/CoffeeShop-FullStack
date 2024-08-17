@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import InputForm from "@/molecules/form/InputForm";
 import { formRegisterValidation } from "@/utils/validation/auth";
-import { useSubmitAuth } from "src/hooks/useQuery/mutations";
+import { useSubmitSignIn } from "src/hooks/useQuery/mutations";
 
 function SignInPage() {
   const [warning, setWarning] = useState({});
@@ -21,7 +21,7 @@ function SignInPage() {
 
   const { push, refresh } = useRouter();
 
-  const { isPending, mutateAsync } = useSubmitAuth("signin");
+  const { isPending, mutateAsync } = useSubmitSignIn("signin");
 
   useEffect(() => {
     setWarning(formRegisterValidation(form));
@@ -115,10 +115,10 @@ function SignInPage() {
           </Link>
         </div>
       </form>
-      <div className="w-80 border-2 space-y-5 border-orange-300 rounded-lg text-sm font-bold p-3">
-        <div className="flex flex-col items-center justify-center gap-2">
-          <h4 className="text-red-500">توجه</h4>
-          <span className="text-zinc-600 text-xs font-medium dark:text-white">
+      <div className="w-[350px] border-2 space-y-5 border-orange-300 rounded-lg text-sm font-bold p-3">
+        <div className="flex items-center justify-center gap-2">
+          <h4 className="text-red-500">توجه:</h4>
+          <span className="text-zinc-600 text-xs dark:text-white">
             ادمین و مالک امکان خرید از سایت برایشان فراهم نشده
           </span>
         </div>

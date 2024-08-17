@@ -1,5 +1,6 @@
 import { LogoType } from "@/utils/svg";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import Image from "next/image";
 import Link from "next/link";
 
 function BlogCart({ blog }) {
@@ -7,7 +8,12 @@ function BlogCart({ blog }) {
   return (
     <div className="group cursor-pointer flex gap-x-2.5 sm:block p-2.5 md:pb-2 bg-white dark:bg-zinc-700 shadow-normal rounded-xl">
       <div className="relative w-32 h-32 shrink-0 sm:w-auto sm:h-auto sm:mb-4 rounded-2xl rounded-bl-[40px] overflow-hidden">
-        <img src={image} className="h-full object-cover" />
+        <Image
+          src={image}
+          width={500}
+          height={500}
+          className="h-full object-cover"
+        />
         <div className="absolute inset-0 w-full hidden md:flex md:justify-center md:items-center invisible opacity-0 group-hover:opacity-100 group-hover:visible bg-gradient-to-t from-orange-200/80 to-orange-300/80 transition-all delay-100">
           <LogoType className="w-[138px] h-[54px] text-amber-900" />
         </div>

@@ -30,7 +30,7 @@ function ShowContextProvider({ children }) {
   const [showElement, setShowElement] = useState(initialValue);
   return (
     <showContext.Provider
-      value={{ showElement, setShowElement, onShowElement }}
+      value={{ showElement, onShowElement, setShowElement }}
     >
       {children}
     </showContext.Provider>

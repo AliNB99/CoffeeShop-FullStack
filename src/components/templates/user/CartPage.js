@@ -109,8 +109,8 @@ function CartPage({ user }) {
           </div>
           <div className="flex flex-col gap-3">
             <div className="min-w-80 space-y-5 h-fit border-2 dark:border-zinc-700 p-4 bg-white dark:bg-zinc-700 rounded-lg shadow-medium">
-              {listCheckout.map((i) => (
-                <div className="flex items-center justify-between">
+              {listCheckout.map((i, index) => (
+                <div key={index} className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-zinc-700 dark:text-zinc-300">
                     <span className="text-orange-300">{i.icon}</span>
                     <span className="text-xs md:text-sm font-bold">

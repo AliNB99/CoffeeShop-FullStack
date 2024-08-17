@@ -10,6 +10,7 @@ import { useContext } from "react";
 
 function Header({ role }) {
   // To not display the header in the admin sections and the login and registration form
+  const { showElement, onShowElement } = useContext(showContext);
   const pathName = usePathname();
   if (
     pathName
@@ -20,8 +21,6 @@ function Header({ role }) {
       )
   )
     return;
-
-  const { showElement, onShowElement } = useContext(showContext);
 
   return (
     <>

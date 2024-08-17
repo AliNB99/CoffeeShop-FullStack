@@ -19,8 +19,8 @@ function BlogList() {
           </Link>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 md:gap-5">
-          {blogList.map((blog) => (
-            <BlogCart blog={blog} />
+          {blogList.map((blog, index) => (
+            <BlogCart key={index} blog={blog} />
           ))}
         </div>
       </div>
