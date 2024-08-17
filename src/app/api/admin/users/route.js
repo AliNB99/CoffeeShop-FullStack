@@ -14,6 +14,13 @@ export async function GET(req) {
 
     const user = await User.findOne({ email });
 
+    if (user.status !== "authorized") {
+      return NextResponse.json({
+        status: 403,
+        error: "دسترسی شما به سایت مسدود شده است",
+      });
+    }
+
     if (user.role !== "OWNER" && user.role !== "ADMIN") {
       return NextResponse.json({
         status: 422,
@@ -80,6 +87,13 @@ export async function DELETE(req) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
 
+    if (user.status !== "authorized") {
+      return NextResponse.json({
+        status: 403,
+        error: "دسترسی شما به سایت مسدود شده است",
+      });
+    }
+
     if (user.role === "USER") {
       return NextResponse.json({
         status: 403,
@@ -117,6 +131,13 @@ export async function PATCH(req) {
 
     if (!user) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
+    }
+
+    if (user.status !== "authorized") {
+      return NextResponse.json({
+        status: 403,
+        error: "دسترسی شما به سایت مسدود شده است",
+      });
     }
 
     if (user.role === "USER") {

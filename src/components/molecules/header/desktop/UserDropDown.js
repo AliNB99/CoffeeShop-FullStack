@@ -21,17 +21,17 @@ function UserDropDown({ role }) {
           <>
             <li>
               <Cog6ToothIcon />
-              <Link href="/user">اطلاعات کاربری</Link>
+              <Link href="/dashboard">اطلاعات کاربری</Link>
             </li>
             <li>
               <ShoppingBagIcon />
-              <Link href="/user/order">سفارشات من</Link>
+              <Link href="/dashboard/order">سفارشات من</Link>
             </li>
           </>
         )}
         <li>
           <EnvelopeIcon />
-          <Link href="/user/ticket">لیست پیام ها</Link>
+          <Link href="/dashboard/ticket">لیست پیام ها</Link>
         </li>
       </ul>
       <button

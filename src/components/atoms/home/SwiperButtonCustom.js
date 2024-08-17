@@ -2,14 +2,12 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 function SwiperButtonCustom({ swiperRef }) {
   const nextHandler = () => {
-    console.log(swiperRef);
     if (swiperRef.current) {
       swiperRef.current.swiper.slideNext();
     }
   };
 
   const prevHandler = () => {
-    console.log(swiperRef);
     if (swiperRef.current) {
       swiperRef.current.swiper.slidePrev();
     }

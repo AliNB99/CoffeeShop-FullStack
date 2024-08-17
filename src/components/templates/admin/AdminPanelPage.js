@@ -5,10 +5,10 @@ import AmountOfSalesChart from "@/organisms/admin/chart/AmountOfSalesChart";
 import AmountVisitSiteChart from "@/organisms/admin/chart/AmountVisitSiteChart";
 import WarehouseStockChart from "@/organisms/admin/chart/WarehouseStockChart";
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import useIsClient from "src/hooks/useIsClient";
 
 const listCardAdminPanel = [
-  { title: "آمار بازدید امروز سایت", bgColor: "bg-purple-500", count: 310 },
+  { title: "آمار بازدید امروز سایت", bgColor: "bg-orange-400", count: 310 },
   {
     title: "میزان فروش امروز سایت(تومان)",
     bgColor: "bg-emerald-500",
@@ -19,15 +19,11 @@ const listCardAdminPanel = [
 ];
 
 function AdminPanelPage() {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const isClient = useIsClient();
 
   return (
     isClient && (
-      <div className="dashboard-page flex flex-col justify-between">
+      <div className="dashboard-page flex flex-col">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-2 mb-10">
           {listCardAdminPanel.map((i) => (
             <CardAdminPanel

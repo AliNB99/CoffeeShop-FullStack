@@ -148,6 +148,14 @@
     top: -2px;
   }
 
+  /* for empty cart in cartPage */
+  .empty-cart {
+    background-image: url("../../public/images/empty-cart.png");
+    background-size: cover;
+    height: 200px;
+    width: 200px;
+  }
+
   /* style custom Swiper */
   .swiper {
     width: 100%;

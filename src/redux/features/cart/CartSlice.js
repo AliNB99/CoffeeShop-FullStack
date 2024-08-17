@@ -1,8 +1,6 @@
 import { counterTotal } from "@/utils/helper/helper";
 import { createSlice } from "@reduxjs/toolkit";
 
-// const items = localStorage.getItem("cart");
-
 const initialState = {
   selectedItems: [],
   counterItems: 0,
@@ -14,7 +12,7 @@ const initialState = {
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: initialState,
+  initialState,
   reducers: {
     addItem: (state, action) => {
       if (!state.selectedItems.find((p) => p._id === action.payload._id)) {
@@ -69,13 +67,28 @@ const cartSlice = createSlice({
       state.selectedItems = [];
       state.counterItems = 0;
       state.totalPrice = 0;
-      totalDiscount = 0;
-      finalPrice = 0;
+      state.totalDiscount = 0;
+      state.finalPrice = 0;
       state.isCheckout = true;
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
+    setCart: (state, action) => {
+      state.selectedItems = action.payload.selectedItems;
+      state.counterItems = action.payload.counterItems;
+      state.totalPrice = action.payload.totalDiscount;
+      state.totalDiscount = action.payload.totalDiscount;
+      state.finalPrice = action.payload.finalPrice;
+      state.isCheckout = action.payload.isCheckout;
+
+      if (action.payload) {
+        localStorage.setItem("cart", JSON.stringify(state));
+      } else {
+        localStorage.remove("cart");
+      }
     },
   },
 });
 
 export default cartSlice.reducer;
-export const { addItem, removeItem, increase, decrease, isCheckout } =
+export const { addItem, removeItem, increase, decrease, isCheckout, setCart } =
   cartSlice.actions;

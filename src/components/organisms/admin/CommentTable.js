@@ -125,7 +125,6 @@ function CommentsTable() {
       toast.error(res.data.error);
     } else {
       toast.success(res.data.message);
-      console.log(res.data);
     }
   };
 
@@ -149,8 +148,8 @@ function CommentsTable() {
   const pages = useMemo(() => {
     if (searchParams.get("search")) {
       return Math.ceil(data?.data.comments / rowsPerPage);
-    } else if (data?.data.totalCountProducts) {
-      return Math.ceil(data?.data.totalCountProducts / rowsPerPage);
+    } else if (data?.data.totalCountComments) {
+      return Math.ceil(data?.data.totalCountComments / rowsPerPage);
     } else {
       return 0;
     }
@@ -232,6 +231,7 @@ function CommentsTable() {
                     setCommentInfoModal({
                       description: comment.description,
                       productInfo: comment.productInfo,
+                      userInfo: comment.userInfo,
                     });
                     setCommentId(comment._id);
                   }}
@@ -333,7 +333,7 @@ function CommentsTable() {
           />
         ) : null}
         <span className="text-default-400 text-xs md:text-sm font-bold">
-          تعداد کاربران سایت : {data?.data.totalCountProducts}
+          تعداد نظرات : {data?.data.totalCountComments}
         </span>
       </div>
     );

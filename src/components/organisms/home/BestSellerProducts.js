@@ -10,7 +10,9 @@ async function BestSellerProducts() {
     console.log(error);
     return toast.error("خطا در دریافت اطلاعات");
   }
-  const data = await Product.find({}).sort({ createAt: -1 }).limit(8);
+  const data = await Product.find({ quantity: { $ne: 0 } })
+    .sort({ createAt: -1 })
+    .limit(8);
 
   return (
     <div className="mb-20">

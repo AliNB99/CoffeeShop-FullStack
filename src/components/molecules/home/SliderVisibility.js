@@ -41,7 +41,7 @@ function SliderVisibility({ data }) {
         breakpoints={breakpoints}
       >
         {data.map((p, index) => (
-          <SwiperSlide className="my-1" virtualIndex={index}>
+          <SwiperSlide key={index} className="my-1" virtualIndex={index}>
             <CardProduct data={p} />
           </SwiperSlide>
         ))}

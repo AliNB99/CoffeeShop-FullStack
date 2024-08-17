@@ -5,7 +5,8 @@ import SelectCategory from "@/atoms/SelectCategory";
 import { addAccessoryItem, addCoffeeItem } from "@/constants/dashboard";
 import AddMoreSpecification from "@/molecules/form/AddMoreSpecification";
 import { TrashIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import CustomDatePicker from "./CustomDatePicker";
 
 function AddSpecifications({ product, form, setForm, warning, touched }) {
   // set specification value based on category
@@ -44,11 +45,67 @@ function AddSpecifications({ product, form, setForm, warning, touched }) {
 
   // change value in specification input in form
   const changeHandler = (e, index) => {
-    const { value } = e.target;
-    const newList = [...form.specifications];
-    newList[index].value = value;
-    setForm({ ...form, specifications: newList });
+    if (!e.target) {
+      const date = new Date(e);
+      const newList = [...form.specifications];
+      newList[index].value = date;
+      setForm({ ...form, specifications: newList });
+    } else {
+      const newList = [...form.specifications];
+      newList[index].value = e.target.value;
+      setForm({ ...form, specifications: newList });
+    }
   };
+
+  const createInput = useCallback(
+    (item, index) => {
+      switch (item.name) {
+        case "productionDate":
+          return (
+            <li key={index}>
+              <div className="flex items-end gap-1">
+                <CustomDatePicker
+                  value={item.value}
+                  changeHandler={(e) => changeHandler(e, index)}
+                  title={item.title}
+                />
+              </div>
+            </li>
+          );
+        default:
+          return (
+            <li key={index}>
+              <div className="flex items-end gap-1">
+                <Input
+                  name={item.name}
+                  touched={touched.specifications}
+                  warning={warning}
+                  required={index < listCategory.length ? true : false}
+                  label={item.title}
+                  placeholder={item.placeholder}
+                  type="text"
+                  value={item.value}
+                  changeHandler={(e) => changeHandler(e, index)}
+                />
+
+                {index + 1 > listCategory.length && (
+                  <Button
+                    color="text-red-500"
+                    bgColor="bg-red-100"
+                    borderColor="border-red-200"
+                    clickHandler={() => deleteMoreItemHandler(index)}
+                    type="button"
+                  >
+                    <TrashIcon />
+                  </Button>
+                )}
+              </div>
+            </li>
+          );
+      }
+    },
+    [listCategory, warning, touched]
+  );
 
   // delete the added item
   const deleteMoreItemHandler = (index) => {
@@ -67,34 +124,7 @@ function AddSpecifications({ product, form, setForm, warning, touched }) {
       </div>
       {form.specifications.length ? (
         <ul className="w-full grid sm:grid-cols-2 gap-6 sm:gap-4">
-          {form.specifications.map((i, index) => (
-            <li key={index}>
-              <div className="flex items-end gap-1">
-                <Input
-                  touched={touched.specifications}
-                  warning={warning}
-                  required={index < 6 ? true : false}
-                  label={i.title}
-                  placeholder={i.placeholder}
-                  type="text"
-                  value={i.value}
-                  changeHandler={(e) => changeHandler(e, index)}
-                />
-
-                {index + 1 > listCategory.length && (
-                  <Button
-                    color="text-red-500"
-                    bgColor="bg-red-100"
-                    borderColor="border-red-200"
-                    clickHandler={() => deleteMoreItemHandler(index)}
-                    type="button"
-                  >
-                    <TrashIcon />
-                  </Button>
-                )}
-              </div>
-            </li>
-          ))}
+          {form.specifications.map((item, index) => createInput(item, index))}
         </ul>
       ) : (
         <div className="w-full flex items-center justify-center">

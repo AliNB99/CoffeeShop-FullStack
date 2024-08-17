@@ -50,10 +50,21 @@ function ProductDetailPage({ product, user }) {
             <ul className="scrollbarCustom w-full p-3 h-64 child:flex child:justify-between overflow-y-auto child:p-3 divide-y-2 dark:divide-zinc-800">
               {specifications.map((i, index) => (
                 <li key={index}>
-                  <span className="font-bold">{i.title}</span>
-                  <span className="text-zinc-600 dark:text-zinc-400">
-                    {i.value}
-                  </span>
+                  {i.name === "productionDate" ? (
+                    <>
+                      <span className="font-bold">{i.title}</span>
+                      <span className="text-zinc-600 dark:text-zinc-400">
+                        {new Date(i.value).toLocaleDateString("fa")}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="font-bold">{i.title}</span>
+                      <span className="text-zinc-600 dark:text-zinc-400">
+                        {i.value}
+                      </span>
+                    </>
+                  )}
                 </li>
               ))}
             </ul>

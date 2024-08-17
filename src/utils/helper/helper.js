@@ -1,25 +1,40 @@
 import { compare, hash } from "bcryptjs";
 
 // manage Cart ReduxToolkit
-export const productCount = (store, id) => {
-  const index = store.selectedItems.findIndex((p) => p._id === id);
+export const productCount = (state, id) => {
+  const index = state.selectedItems.findIndex((p) => p._id === id);
 
   if (index === -1) {
     return 0;
   } else {
-    return store.selectedItems[index].quantity;
+    return state.selectedItems[index].quantity;
   }
 };
 
 // Calculate counter Product
 export const counterTotal = ({ state, type }) => {
+  switch (type) {
+    case "totalItem":
+      return state.selectedItems.reduce((acc, cur) => acc + cur.quantity, 0);
+    case "totalPrice":
+      return state.selectedItems.reduce(
+        (acc, cur) => acc + cur.price * cur.quantity,
+        0
+      );
+    case "totalDiscount":
+      return state.selectedItems.reduce(
+        (acc, cur) => acc + (cur.price * cur.quantity * cur.discount) / 100,
+        0
+      );
+    case "finalPrice":
+      return state.selectedItems.reduce(
+        (acc, cur) => acc + (cur.price * (cur.discount - 100)) / 100,
+        0
+      );
+  }
   if (type === "totalItem") {
     return state.selectedItems.reduce((acc, cur) => acc + cur.quantity, 0);
   } else if (type === "totalPrice") {
-    return state.selectedItems.reduce(
-      (acc, cur) => acc + cur.price * cur.quantity,
-      0
-    );
   } else if (type === "totalDiscount") {
     return state.selectedItems.reduce(
       (acc, cur) => acc + (cur.price * cur.discount) / 100,

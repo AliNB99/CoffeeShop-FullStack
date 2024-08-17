@@ -1,5 +1,5 @@
 import { sp } from "@/utils/helper/replaceNumber";
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip } from "recharts";
+import { BarChart, Bar, XAxis, CartesianGrid, Tooltip } from "recharts";
 
 const data = [
   {
@@ -15,7 +15,7 @@ const data = [
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white flex flex-col items-center justify-center p-3 rounded-lg shadow-medium">
+      <div className="bg-white text-black flex flex-col items-center justify-center p-3 rounded-lg shadow-medium">
         <span>{`${label} :`}</span>
         <span>{sp(payload[0].value)} تومان</span>
       </div>
@@ -23,6 +23,18 @@ const CustomTooltip = ({ active, payload, label }) => {
   }
 
   return null;
+};
+
+const renderCustomBarLabel = ({ payload, x, y, width, height, value }) => {
+  return (
+    <text
+      x={x + width / 2}
+      y={y}
+      fill="#6b7280"
+      textAnchor="middle"
+      dy={-6}
+    >{`مبلغ: ${sp(value)}`}</text>
+  );
 };
 
 export default function AmountOfSalesChart() {
@@ -40,15 +52,14 @@ export default function AmountOfSalesChart() {
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" scale="point" padding={{ left: 50, right: 60 }} />
-        <YAxis />
         <Tooltip className="bg-zinc-300" content={<CustomTooltip />} />
         <Bar
           barSize={30}
           dataKey="amt"
           fill="#6366f1"
           background={{ fill: "#eee" }}
+          label={renderCustomBarLabel}
         />
       </BarChart>
       <h1 className="text-lg font-bold text-zinc-700 dark:text-zinc-300">

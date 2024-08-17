@@ -374,7 +374,7 @@ function ProductsTable() {
           />
         ) : null}
         <span className="text-default-400 text-xs md:text-sm font-bold">
-          تعداد کاربران سایت : {data?.data.totalCountProducts}
+          تعداد محصولات سایت : {data?.data.totalCountProducts}
         </span>
       </div>
     );

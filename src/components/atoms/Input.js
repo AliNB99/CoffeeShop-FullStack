@@ -14,7 +14,7 @@ function Input({
       {label && (
         <label
           className={`${
-            warning && required && touched
+            warning && required && touched && !value
               ? "after:content-['*'] after:text-red-500 after:text-2xl after:absolute after:-top-2"
               : ""
           } block mb-1`}
@@ -29,6 +29,7 @@ function Input({
         type={type}
         value={value}
         onChange={changeHandler}
+        onWheel={(e) => e.target.blur()}
       />
     </div>
   );

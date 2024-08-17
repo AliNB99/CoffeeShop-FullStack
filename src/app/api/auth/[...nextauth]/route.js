@@ -25,6 +25,9 @@ export const authOptions = {
 
         if (!user) throw new Error("لطفا ابتدا حساب کاربری ایجاد کنید");
 
+        if (user.status !== "authorized")
+          throw new Error("دسترسی شما به سایت مسدود شده است");
+
         const isValid = await verifyPassword(password, user.password);
 
         if (!isValid) throw new Error("ایمیل یا رمز عبور اشتباه است");

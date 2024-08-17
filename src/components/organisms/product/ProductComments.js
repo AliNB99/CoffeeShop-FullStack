@@ -15,7 +15,9 @@ function ProductComments({ productId }) {
     <div className="bg-white dark:bg-zinc-900 p-4 rounded-2xl shadow-medium space-y-4">
       <TitleDescription title="دیدگاه کاربران" />
       {isPending ? (
-        <Loader color="#fdba74" />
+        <div className="py-10">
+          <Loader color="#fdba74" />
+        </div>
       ) : data.data.comments.length ? (
         data.data.comments.map((i) => (
           <div className="p-3 rounded-xl space-y-3">

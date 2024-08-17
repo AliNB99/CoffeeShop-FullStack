@@ -64,13 +64,13 @@ function ProductForm({ product }) {
     if (product) {
       data = await mutateAsync({ form, id: productId });
     } else {
-      data = await mutateAsync({ form });
+      data = await mutateAsync(form);
     }
 
     if (data.data.error || isError) {
       toast.error(data.data.error);
     } else {
-      back();
+      // back();
       toast.success(data.data.message);
     }
   };

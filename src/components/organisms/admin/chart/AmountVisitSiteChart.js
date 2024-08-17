@@ -60,7 +60,7 @@ const data = [
 
 export default function AmountVisitSiteChart() {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex text-black flex-col items-center justify-center">
       <LineChart
         className="pr-10"
         width={550}

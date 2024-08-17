@@ -54,7 +54,7 @@ function AddImage({ form, setForm }) {
           <p className="text-zinc-700 dark:text-white text-xs md:text-sm font-bold">
             برای نمایش بهتر عکس ها بهتر است سایز آنها حداکثر
             <span className="text-red-400 px-2">500x500</span> و حجم عکس حداکثر
-            <span className="text-red-400 px-2">3MG</span> باشد.
+            <span className="text-red-400 px-2">1MG</span> باشد.
           </p>
         </div>
       </div>

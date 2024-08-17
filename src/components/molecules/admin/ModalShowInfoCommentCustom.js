@@ -1,5 +1,6 @@
 import CustomImage from "@/atoms/CustomImage";
 import { CategoryColorMap } from "@/constants/dashboard";
+import { UserIcon } from "@heroicons/react/24/outline";
 import {
   Modal,
   ModalContent,
@@ -8,6 +9,7 @@ import {
   ModalFooter,
   Button,
   Chip,
+  User,
 } from "@nextui-org/react";
 import { useState } from "react";
 
@@ -30,33 +32,45 @@ export default function ModalShowInfoCommentCustom({
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
-        <ModalContent className="scrollbarCustom">
+        <ModalContent>
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-col gap-1">{title}</ModalHeader>
-              <ModalBody>
+              <ModalBody className="scrollbarCustom flex flex-col gap-6">
                 {commentInfo ? (
                   <>
                     <div>
-                      <span className="text-sm font-bold text-blue-400">
+                      <h4 className="title-modal mb-2">
+                        نویسنده دیدگاه
+                      </h4>
+                      <User
+                        avatarProps={{
+                          src: commentInfo.userInfo.avatar,
+                          radius: "full",
+                          fallback: <UserIcon className="opacity-50" />,
+                          showFallback: true,
+                        }}
+                        description={commentInfo.userInfo.email}
+                        name={`${commentInfo.userInfo.firstName} ${commentInfo.userInfo.lastName}`}
+                      />
+                    </div>
+
+                    <div>
+                      <h4 className="title-modal">
                         متن دیدگاه:
-                      </span>
+                      </h4>
                       <p>{commentInfo.description}</p>
                     </div>
                     <div className="space-y-5">
-                      <span className="text-sm font-bold text-blue-400">
+                      <h4 className="title-modal">
                         جزئیات محصول
-                      </span>
+                      </h4>
                       <div className="flex items-center justify-between gap-1">
-                        <span className="text-xs text-blue-400">
-                          عنوان محصول:
-                        </span>
+                        <h6 className="text-xs text-blue-400">عنوان محصول:</h6>
                         <p>{commentInfo.productInfo.title}</p>
                       </div>
                       <div className="flex items-center justify-between gap-1">
-                        <span className="text-xs text-blue-400">
-                          دسته بندی:
-                        </span>
+                        <h6 className="text-xs text-blue-400">دسته بندی:</h6>
                         <Chip
                           className="px-2"
                           size="sm"
@@ -69,7 +83,7 @@ export default function ModalShowInfoCommentCustom({
                         </Chip>
                       </div>
                       {!!commentInfo.productInfo.images.length && (
-                        <div className="flex items-enter justify-center py-5">
+                        <div className="flex items-enter justify-center py-5 w-full h-48">
                           <CustomImage
                             className="rounded-md"
                             src={commentInfo.productInfo.images[0]}

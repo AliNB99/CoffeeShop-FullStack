@@ -1,11 +1,11 @@
-import { PieChart, Pie, Cell } from "recharts";
+import { PieChart, Pie, Cell, Scatter, Legend } from "recharts";
 
 const data = [
   { name: "قهوه", value: 400 },
   { name: "لوازم جانبی", value: 300 },
 ];
 
-const COLORS = ["#0088FE", "#FFBB28"];
+const COLORS = ["#0088FE", "#facc15"];
 
 const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = ({
@@ -51,6 +51,7 @@ export default function WarehouseStockChart() {
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
+        <Legend width={300} />
       </PieChart>
       <h1 className="text-lg font-bold text-zinc-700 dark:text-zinc-300">
         نمودار موجودی انبار

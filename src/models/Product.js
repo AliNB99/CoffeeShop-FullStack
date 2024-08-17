@@ -24,12 +24,6 @@ const ProductSchema = new Schema(
       required: true,
     },
 
-    rate: {
-      type: Number,
-      required: true,
-      default: 2,
-    },
-
     images: [String],
 
     discount: Number,
@@ -38,7 +32,7 @@ const ProductSchema = new Schema(
 
     disadvantages: [String],
 
-    specifications: [{ title: String, value: String }],
+    specifications: [{ title: String, value: String, name: String }],
 
     status: {
       type: String,

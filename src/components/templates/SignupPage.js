@@ -64,7 +64,7 @@ function SignupPage() {
         confirmPassword: false,
         isAccepted: false,
       });
-      // push("/signin");
+      push("/signin");
       toast.success(data.message);
     } catch (error) {
       toast.error(error.response.data.error);

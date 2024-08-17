@@ -1,15 +1,13 @@
 import TitleSection from "@/atoms/home/TitleSection";
 import { blogList } from "@/constants/other";
 import BlogCart from "@/molecules/home/BlogCart";
-import { LogoType } from "@/utils/svg";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
 import Link from "next/link";
 
 function BlogList() {
   return (
-    <section class="blogs mb-8 md:mb-28">
-      <div class="container">
+    <section className="blogs mb-12 md:mb-28">
+      <div className="container">
         <div className="flex items-center justify-between mb-10">
           <TitleSection title="مطالب خواندنی" />
           <Link
@@ -20,7 +18,7 @@ function BlogList() {
             <ChevronLeftIcon className="w-4 h-4" />
           </Link>
         </div>
-        <div class="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 md:gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-3.5 md:gap-5">
           {blogList.map((blog) => (
             <BlogCart blog={blog} />
           ))}

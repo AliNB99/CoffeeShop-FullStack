@@ -15,6 +15,13 @@ export async function GET(req) {
 
     const user = await User.findOne({ email });
 
+    if (user.status !== "authorized") {
+      return NextResponse.json({
+        status: 403,
+        error: "دسترسی شما به سایت مسدود شده است",
+      });
+    }
+
     if (user.role !== "OWNER" && user.role !== "ADMIN") {
       return NextResponse.json({
         status: 422,
@@ -42,7 +49,20 @@ export async function GET(req) {
       );
 
       comments = await Comment.find({
-        $or: [{ title: regex }],
+        $or: [
+          { "userInfo.firstName": regex },
+          { "userInfo.lastName": regex },
+          {
+            $expr: {
+              $regexMatch: {
+                input: {
+                  $concat: ["$userInfo.firstName", " ", "$userInfo.lastName"],
+                },
+                regex: regex,
+              },
+            },
+          },
+        ],
       });
     }
 
@@ -120,8 +140,6 @@ export async function PATCH(req) {
     }
 
     const { ids, selectedKeys, statusValue } = await req.json();
-
-    console.log({ ids, selectedKeys, statusValue });
 
     if (!ids || !selectedKeys)
       return NextResponse.json({

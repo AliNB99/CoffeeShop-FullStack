@@ -20,6 +20,13 @@ export async function PATCH(req, context) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
 
+    if (user.status !== "authorized") {
+      return NextResponse.json({
+        status: 403,
+        error: "دسترسی شما به سایت مسدود شده است",
+      });
+    }
+
     const {
       params: { userId },
     } = context;

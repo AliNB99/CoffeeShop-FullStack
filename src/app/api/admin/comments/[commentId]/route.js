@@ -20,6 +20,14 @@ export async function DELETE(req, context) {
     if (!user) {
       return NextResponse.json({ status: 404, error: "حساب کاربری یافت نشد" });
     }
+
+    if (user.status !== "authorized") {
+      return NextResponse.json({
+        status: 403,
+        error: "دسترسی شما به سایت مسدود شده است",
+      });
+    }
+
     if (user.role === "USER") {
       return NextResponse.json({
         status: 403,

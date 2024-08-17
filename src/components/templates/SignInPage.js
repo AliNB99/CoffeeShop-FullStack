@@ -57,7 +57,7 @@ function SignInPage() {
   };
 
   return (
-    <div className="h-screen w-full flex items-center justify-center">
+    <div className="h-screen w-full flex flex-col gap-5 items-center justify-center">
       <form
         onSubmit={submitHandler}
         className="relative w-96 h-fit p-5 space-y-1 md:shadow-medium rounded-lg"
@@ -115,6 +115,28 @@ function SignInPage() {
           </Link>
         </div>
       </form>
+      <div className="w-80 border-2 space-y-5 border-orange-300 rounded-lg text-sm font-bold p-3">
+        <div className="flex flex-col items-center justify-center gap-2">
+          <h4 className="text-red-500">توجه</h4>
+          <span className="text-zinc-600 text-xs font-medium dark:text-white">
+            ادمین و مالک امکان خرید از سایت برایشان فراهم نشده
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <h4 className="text-orange-300">ایمیل پنل مالک</h4>
+          <span className="text-zinc-600 dark:text-white">
+            alinb99.dev@gmail.com
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <h4 className="text-orange-300">ایمیل پنل ادمین</h4>
+          <span className="text-zinc-600 dark:text-white">reza@gmail.com</span>
+        </div>
+        <div className="flex items-center justify-between">
+          <h4 className="text-orange-300">رمز عبور</h4>
+          <span className="text-zinc-600 dark:text-white">12345678</span>
+        </div>
+      </div>
     </div>
   );
 }

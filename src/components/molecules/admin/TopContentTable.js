@@ -50,6 +50,7 @@ function TopContentTable({
   rowsPerPage,
   columnsTable,
   type,
+  role,
 }) {
   const [ids, setIds] = useState([]);
   const {
@@ -173,17 +174,19 @@ function TopContentTable({
         <div className="relative w-[50%] flex gap-4 items-center">
           {!!selectedKeys.size || selectedKeys === "all" ? (
             <div className="flex gap-2 items-center">
-              <Tooltip className=" text-red-500" content="حذف کاربران">
-                <Button
-                  className=" text-red-500"
-                  onClick={() => onOpenDeleteModal()}
-                  isLoading={isPendingDelete}
-                  isIconOnly
-                  variant="flat"
-                >
-                  <TrashIcon />
-                </Button>
-              </Tooltip>
+              {type === "users" && role !== "OWNER" ? null : (
+                <Tooltip className=" text-red-500" content="حذف کاربران">
+                  <Button
+                    className=" text-red-500"
+                    onClick={() => onOpenDeleteModal()}
+                    isLoading={isPendingDelete}
+                    isIconOnly
+                    variant="flat"
+                  >
+                    <TrashIcon />
+                  </Button>
+                </Tooltip>
+              )}
               <Tooltip content="تغییر وضعیت کاربران">
                 <Button
                   className=" text-zinc-500 dark:text-zinc-300"

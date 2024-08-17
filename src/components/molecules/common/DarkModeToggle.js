@@ -3,14 +3,11 @@
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
+import useIsClient from "src/hooks/useIsClient";
 
 function DarkModeToggle({ className, label }) {
   const { theme, setTheme } = useTheme();
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
+  const isClient = useIsClient();
 
   return isClient && theme === "dark" ? (
     <button onClick={() => setTheme("light")}>

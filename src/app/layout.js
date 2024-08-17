@@ -14,6 +14,7 @@ import ShowContextProvider from "@/context/ShowContextProvider";
 import ReduxProvider from "@/redux/ReduxProvider";
 import ReactQueryProvider from "@/providers/ReactQueryProvider";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import AuthInitializerReduxProvider from "@/providers/AuthInitializerReduxProvider";
 
 export const metadata = {
   title: "Golden Coffee",
@@ -38,9 +39,11 @@ export default async function RootLayout({ children }) {
             <ShowContextProvider>
               <ReduxProvider>
                 <ReactQueryProvider>
-                  <Layout>{children}</Layout>
-                  <Toaster toastOptions={toastOptions} />
-                  <ReactQueryDevtools />
+                  <AuthInitializerReduxProvider>
+                    <Layout>{children}</Layout>
+                    <Toaster toastOptions={toastOptions} />
+                    <ReactQueryDevtools />
+                  </AuthInitializerReduxProvider>
                 </ReactQueryProvider>
               </ReduxProvider>
             </ShowContextProvider>

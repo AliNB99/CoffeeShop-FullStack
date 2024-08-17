@@ -35,27 +35,27 @@ export const categoryProductList = [
   {
     title: "قهوه ترک",
     image: "/images/categories/category5.png",
-    link: "/products",
+    link: "/products?category=coffee",
   },
   {
     title: "اسپرسو ساز",
     image: "/images/categories/category3.png",
-    link: "/products",
+    link: "/products?category=accessory",
   },
   {
     title: "پک تستر قهوه",
     image: "/images/categories/category4.png",
-    link: "/products",
+    link: "/products?category=coffee",
   },
   {
     title: "قهوه دمی و اسپرسو",
     image: "/images/categories/category1.png",
-    link: "/products",
+    link: "/products?category=coffee",
   },
   {
     title: "لوازم جانبی و تجهیزات",
     image: "/images/categories/category2.png",
-    link: "/products",
+    link: "/products?category=accessory",
   },
 ];
 
@@ -82,22 +82,22 @@ export const listOptionStore = [
   {
     title: "پشتیبانی شبانه روزی",
     subTitle: "7 روز هفته ، 24 ساعته",
-    iconLight: <Support class="dark:hidden w-20 h-20" />,
+    iconLight: <Support className="dark:hidden w-20 h-20" />,
   },
   {
     title: "امکان تحویل اکسپرس",
     subTitle: "ارسال بسته با سرعت باد",
-    iconLight: <ExpressDelivery class="dark:hidden w-24 h-20" />,
+    iconLight: <ExpressDelivery className="dark:hidden w-24 h-20" />,
   },
   {
     title: "اکسسوری قهوه",
     subTitle: "وسایل و ادوات دم آوری",
-    iconLight: <Pitcher class="dark:hidden w-20 h-20" />,
+    iconLight: <Pitcher className="dark:hidden w-20 h-20" />,
   },
   {
     title: "رست تخصصی",
     subTitle: "تازه برشته شده و با کیفیت",
-    iconLight: <Coffee class="dark:hidden w-20 h-20" />,
+    iconLight: <Coffee className="dark:hidden w-20 h-20" />,
   },
 ];
 

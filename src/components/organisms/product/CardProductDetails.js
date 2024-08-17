@@ -12,7 +12,7 @@ import StoreFeatures from "../../molecules/product/StoreFeatures";
 import CardButton from "@/molecules/common/CardButton";
 
 function CardProductDetails({ product }) {
-  const { discount, price } = product;
+  const { discount, price, quantity } = product;
   return (
     <div className="bg-white border-2 dark:border-zinc-700 dark:bg-zinc-700/60 w-full lg:w-72 flex flex-col justify-between rounded-2xl p-4">
       <div className="divide-y-2 dark:divide-zinc-700">
@@ -26,27 +26,37 @@ function CardProductDetails({ product }) {
           </StoreFeatures>
         </div>
         <div className="p-2 lg:py-4 flex flex-col items-end gap-2">
-          <div className="pt-2">
-            <span className="text-2xl font-bold">
-              {discount ? sp((price * (discount - 100)) / 100) : sp(price)}
-            </span>
-            <span className="mr-1">تومان</span>
-          </div>
-          <div>
-            {!!discount && (
-              <div className="flex items-center gap-3">
-                <div className="offer">
-                  <span className="font-bold text-sm md:text-lg">
-                    {sp(price)}
-                  </span>
-                  <span className="text-xs md:text-base mr-1">تومان</span>
-                </div>
-                <span className="bg-red-400 px-4 py-1 text-white text-sm rounded-2xl">
-                  {discount}%
+          {quantity > 0 ? (
+            <>
+              <div className="pt-2">
+                <span className="text-2xl font-bold">
+                  {discount ? sp((price * (discount - 100)) / 100) : sp(price)}
                 </span>
+                <span className="mr-1">تومان</span>
               </div>
-            )}
-          </div>
+              <div>
+                {!!discount && (
+                  <div className="flex items-center gap-3">
+                    <div className="offer">
+                      <span className="font-bold text-sm md:text-lg">
+                        {sp(price)}
+                      </span>
+                      <span className="text-xs md:text-base mr-1">تومان</span>
+                    </div>
+                    <span className="bg-red-400 px-4 py-1 text-white text-sm rounded-2xl">
+                      {discount}%
+                    </span>
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <div className="w-full py-3 text-center">
+              <h1 className="text-red-400 text-xl font-bold">
+                متاسفانه فعلا موجود نیست
+              </h1>
+            </div>
+          )}
         </div>
         <div className="py-4 space-y-2">
           <StoreFeatures icon={<TruckIcon className="text-blue-400" />}>

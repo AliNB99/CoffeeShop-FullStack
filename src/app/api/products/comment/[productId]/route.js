@@ -35,7 +35,7 @@ export async function POST(req, context) {
     const { data } = await req.json();
 
     const {
-      user: { firstName, lastName, email, avatar, _id: userId },
+      user: { firstName, lastName, email, avatar, status, _id: userId },
       comment: { description, rate },
       product: { title, category, images },
     } = data;
@@ -44,6 +44,13 @@ export async function POST(req, context) {
       return NextResponse.json({
         status: 422,
         error: "لطفا ابتدا وارد حساب کاربری شوید",
+      });
+    }
+
+    if (status !== "authorized") {
+      return NextResponse.json({
+        status: 403,
+        error: "دسترسی شما به سایت مسدود شده است",
       });
     }
 

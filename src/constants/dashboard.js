@@ -19,19 +19,30 @@ import {
 } from "@heroicons/react/24/outline";
 
 export const userDashboardItem = [
-  { title: "داشبورد", link: "/dashboard/cart", icon: <HomeIcon /> },
-  { title: "سفارش ها", link: "/dashboard/orders", icon: <ShoppingCartIcon /> },
+  { title: "داشبورد", link: "/dashboard", icon: <HomeIcon /> },
+  { title: "سفارش ها", link: "/dashboard/orders", icon: <ShoppingBagIcon /> },
   { title: "علاقه مندی ها", link: "/dashboard/favorites", icon: <HeartIcon /> },
   { title: "لیست پیام ها", link: "/dashboard/ticket", icon: <EnvelopeIcon /> },
+  { title: "سبد خرید", link: "/dashboard/cart", icon: <ShoppingCartIcon /> },
 ];
 
 export const userInformation = [
   { name: "firstName", title: "نام", icon: <UserIcon /> },
   { name: "lastName", title: "نام خانوادگی", icon: <UserGroupIcon /> },
   { name: "email", title: "ایمیل", icon: <AtSymbolIcon /> },
-  { name: "phone", title: "شماره تلفن", icon: <PhoneIcon /> },
-  { name: "bankInfo", title: "شماره شبا", icon: <CreditCardIcon /> },
-  { name: "postalCode", title: "کد پستی", icon: <BuildingOffice2Icon /> },
+  { name: "phone", title: "شماره تلفن", type: "number", icon: <PhoneIcon /> },
+  {
+    name: "bankInfo",
+    title: "شماره شبا",
+    type: "number",
+    icon: <CreditCardIcon />,
+  },
+  {
+    name: "postalCode",
+    title: "کد پستی",
+    type: "number",
+    icon: <BuildingOffice2Icon />,
+  },
   { name: "address", title: "آدرس", icon: <MapPinIcon /> },
 ];
 
@@ -60,7 +71,7 @@ export const adminDashboardItem = [
   },
   {
     title: "تیکت ها",
-    link: "/",
+    link: "/admin/ticket-list",
     icon: <ClipboardDocumentCheckIcon />,
   },
 ];
@@ -104,16 +115,37 @@ export const addProductForm = [
 ];
 
 export const addCoffeeItem = [
-  { title: "برنده", value: "", placeholder: "مثلا: بن مانو" },
-  { title: "وزن (گرم)", value: "", placeholder: "مثلا: 250 گرم" },
-  { title: "تاریخ تولید", value: "", placeholder: "مثلا: 1402/01/05" },
-  { title: "نوع قهوه", value: "", placeholder: "مثلا: قهوه آسیاب شده " },
+  { name: "brand", title: "برنده", value: "", placeholder: "مثلا: بن مانو" },
   {
+    name: "weight",
+    title: "وزن (گرم)",
+    value: "",
+    placeholder: "مثلا: 250 گرم",
+  },
+  {
+    name: "productionDate",
+    title: "تاریخ تولید",
+    value: "",
+    placeholder: "مثلا: 1402/01/05",
+  },
+  {
+    name: "coffeeType",
+    title: "نوع قهوه",
+    value: "",
+    placeholder: "مثلا: قهوه آسیاب شده ",
+  },
+  {
+    name: "coffeeRatio",
     title: "نسبت قهوه (عربیکا / روبستا)",
     value: "",
     placeholder: "مثلا: 70/30",
   },
-  { title: "دستگاه سازگار", value: "", placeholder: "مثلا: موکاپات" },
+  {
+    name: "device",
+    title: "دستگاه سازگار",
+    value: "",
+    placeholder: "مثلا: موکاپات",
+  },
 ];
 
 export const addAccessoryItem = [
@@ -147,7 +179,7 @@ export const columnsCommentsTable = [
   { name: "نویسنده", uid: "userInfo" },
   { name: "متن دیدگاه", uid: "description" },
   { name: "امتیاز", uid: "rate" },
-  { name: "وضعیت", uid: "status" },
+  { name: "وضعیت", uid: "status", sortable: true },
   { name: "ابزار مدیریت", uid: "actions" },
 ];
 
@@ -184,3 +216,11 @@ export const statusCommentColorMap = {
   accepted: "success",
   unaccepted: "danger",
 };
+
+export const listUserInfo = [
+  { name: "user" },
+  { name: "phone", title: "شماره تلفن", icon: <PhoneIcon /> },
+  { name: "bankInfo", title: "شماره شبا", icon: <CreditCardIcon /> },
+  { name: "postalCode", title: "کد پستی", icon: <BuildingOffice2Icon /> },
+  { name: "address", title: "آدرس", icon: <MapPinIcon /> },
+];

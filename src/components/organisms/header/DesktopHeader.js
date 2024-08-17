@@ -41,7 +41,7 @@ function DesktopHeader({ role }) {
               className="h-full flex items-center gap-x-4 lg:gap-x-9 text-zinc-200 child-hover:text-orange-300 child:transition-colors child:leading-[56px]"
             >
               <li className="relative group group-hover:text-orange-300">
-                <Link href="/">فروشگاه</Link>
+                <Link href="/products">فروشگاه</Link>
                 <StoreDropDown />
               </li>
               {navbarItem.map((item, index) => (

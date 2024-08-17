@@ -59,6 +59,8 @@ function InputForm({
             onBlur={fucusHandler}
             onChange={changeHandler}
             placeholder={placeholder}
+            onWheel={(e) => e.target.blur()}
+            min={0}
           />
         )}
         {/* show error text in under input */}

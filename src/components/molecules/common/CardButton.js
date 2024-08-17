@@ -15,7 +15,7 @@ import {
 } from "@/redux/features/cart/CartSlice";
 import { productCount } from "@/utils/helper/helper";
 
-function CardButton({ data }) {
+function CardButton({ data, disabled }) {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   const quantity = productCount(cart, data._id);
@@ -30,6 +30,7 @@ function CardButton({ data }) {
     <div className="flex items-center gap-4">
       {quantity === 0 ? (
         <button
+          disabled={disabled}
           onClick={(e) => clickHandler(e, addItem)}
           className="cart-btn group/button"
         >
@@ -37,6 +38,7 @@ function CardButton({ data }) {
         </button>
       ) : (
         <button
+          disabled={disabled}
           onClick={(e) => clickHandler(e, increase)}
           className="cart-btn group/button"
         >
@@ -46,6 +48,7 @@ function CardButton({ data }) {
       <span className="text-orange-300">{!!quantity && quantity}</span>
       {quantity === 1 && (
         <button
+          disabled={disabled}
           onClick={(e) => clickHandler(e, removeItem)}
           className="cart-btn group/button"
         >
@@ -54,6 +57,7 @@ function CardButton({ data }) {
       )}
       {quantity > 1 && (
         <button
+          disabled={disabled}
           onClick={(e) => clickHandler(e, decrease)}
           className="cart-btn group/button"
         >

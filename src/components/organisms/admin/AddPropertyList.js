@@ -44,7 +44,7 @@ function AddPropertyList({ color, bgColor, name, title, form, setForm }) {
               changeHandler={(e) => changeHandler(e, index)}
             />
             <Button
-              clickHandler={deleteHandler}
+              clickHandler={() => deleteHandler(index)}
               type="button"
               color="text-orange-500"
               bgColor="bg-orange-100"

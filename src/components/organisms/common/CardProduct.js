@@ -6,7 +6,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
 
 function CardProduct({ data }) {
-  const { title, price, images, discount, _id } = data;
+  const { title, price, images, discount, _id, quantity } = data;
 
   return (
     <div className="w-full relative bg-white dark:bg-zinc-700 hover:shadow-medium dark:hover:shadow-zinc-500 rounded-2xl cursor-pointer p-2 md:p-5 transition-all">
@@ -27,7 +27,7 @@ function CardProduct({ data }) {
               <LogoType className="w-fit h-32 lg:w-52 lg:h-64 opacity-20" />
             </div>
           )}
-          {!!discount && (
+          {!!discount && quantity > 0 && (
             <span className="absolute top-0 right-0 bg-orange-300 px-3 lg:px-4 py-1 rounded-full font-bold text-white text-xs lg:text-base dark:text-zinc-700">
               {discount}%
             </span>
@@ -37,28 +37,34 @@ function CardProduct({ data }) {
           <h3 className="font-DanaMedium text-sm md:text-base lg:text-xl h-10 md:h-14 text-zinc-700 dark:text-white line-clamp-2">
             {title}
           </h3>
-          <div className="flex items-center gap-2.5">
-            <div className="text-base md:text-xl text-teal-600 dark:text-emerald-500">
-              <span className="font-bold">
-                {discount ? sp((price * (discount - 100)) / 100) : sp(price)}
-              </span>
-              <span className="text-xs md:text-base mr-1">تومان</span>
-            </div>
-            {discount && (
-              <div className="offer">
-                <span className="font-bold text-sm md:text-lg">
-                  {sp(price)}
+          {quantity > 0 ? (
+            <div className="flex items-center gap-2.5">
+              <div className="text-base md:text-xl text-teal-600 dark:text-emerald-500">
+                <span className="font-bold">
+                  {discount ? sp((price * (discount - 100)) / 100) : sp(price)}
                 </span>
-                <span className="text-xs hidden lg:inline md:text-base mr-1">
-                  تومان
-                </span>
+                <span className="text-xs md:text-base mr-1">تومان</span>
               </div>
-            )}
-          </div>
+              {discount && (
+                <div className="offer">
+                  <span className="font-bold text-sm md:text-lg">
+                    {sp(price)}
+                  </span>
+                  <span className="text-xs hidden lg:inline md:text-base mr-1">
+                    تومان
+                  </span>
+                </div>
+              )}
+            </div>
+          ) : (
+            <h1 className="text-red-400 text-xs md:text-base font-bold">
+              متاسفانه فعلا موجود نیست
+            </h1>
+          )}
         </div>
       </Link>
       <div className="flex items-center justify-between cursor-default mt-4">
-        <CardButton data={data} />
+        <CardButton disabled={quantity === 0} data={data} />
         <div className="flex gap-1 text-yellow-500">
           <span className="text-xs md:text-lg">2.5</span>
           <StarIcon className="w-3 h-3 md:w-5 md:h-5" />

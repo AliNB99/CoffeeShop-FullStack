@@ -30,7 +30,7 @@ function FormUserInformation({ user, form, setForm }) {
                 value={form[item.name]}
                 placeholder={`${item.title} خود را وارد نمایید`}
                 className="w-full h-3/4 text-sm pr-3 pl-7 bg-inherit outline-none border-r-2 border-zinc-300 dark:border-zinc-700"
-                type="text"
+                type="number"
               />
             </div>
           );
@@ -65,7 +65,7 @@ function FormUserInformation({ user, form, setForm }) {
                 onChange={changeHandler}
                 placeholder={`${item.title} خود را وارد نمایید`}
                 className="w-full h-3/4 text-sm px-3 bg-inherit outline-none border-r-2 border-zinc-300 dark:border-zinc-700"
-                type="text"
+                type={item.type ? item.type : "text"}
               />
             </div>
           );

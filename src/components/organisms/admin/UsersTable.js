@@ -42,6 +42,7 @@ import ModalDeleteCustom from "@/molecules/common/ModalDeleteCustom";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import TopContentTable from "@/molecules/admin/TopContentTable";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import ModalShowInfoUserCustom from "@/molecules/admin/ModalShowInfoUserCustom";
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions", "id"];
 
@@ -51,6 +52,7 @@ function UsersTable({ role }) {
   const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
   const [idOwner, setIdOwner] = useState("");
   const [userId, setUserId] = useState(null);
+  const [userInfo, setUserInfo] = useState({});
   const [rowsPerPage, setRowsPerPage] = useState(
     parseInt(searchParams.get("rowsPerPage")) || 5
   );
@@ -61,7 +63,16 @@ function UsersTable({ role }) {
     new Set(INITIAL_VISIBLE_COLUMNS)
   );
   const [fullName, setFullName] = useState({ firstName: "", lastName: "" });
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: isOpenDeleteModal,
+    onOpen: onOpenDeleteModal,
+    onOpenChange: onOpenChangeDeleteModal,
+  } = useDisclosure();
+  const {
+    isOpen: isOpenUserInfo,
+    onOpen: onOpenUserInfo,
+    onOpenChange: onOpenChangeUserInfo,
+  } = useDisclosure();
   const query = new URLSearchParams(searchParams.toString());
   const hasSearchFilter = Boolean(searchValue);
 
@@ -222,6 +233,10 @@ function UsersTable({ role }) {
                 aria-label="Dropdown menu with description"
               >
                 <DropdownItem
+                  onClick={() => {
+                    setUserInfo(user);
+                    onOpenUserInfo();
+                  }}
                   key="show"
                   description="نمایش تمام اطلاعات کاربر"
                   startContent={<EyeIcon className={iconClasses} />}
@@ -263,7 +278,7 @@ function UsersTable({ role }) {
                 {user.role !== "OWNER" && role === "OWNER" && (
                   <DropdownItem
                     onClick={() => {
-                      onOpen();
+                      onOpenDeleteModal();
                       setUserId(user._id);
                       setFullName({
                         firstName: user.firstName,
@@ -305,11 +320,11 @@ function UsersTable({ role }) {
       setSearchValue("");
     }
   };
-
   const topContent = useMemo(() => {
     return (
       <TopContentTable
         type="users"
+        role={role}
         isPendingUsers={isPendingUsers}
         isFetchingUser={isFetchingUser}
         searchValue={searchValue}
@@ -417,10 +432,16 @@ function UsersTable({ role }) {
       <ModalDeleteCustom
         title="حذف کاربر"
         warningMessage={`آیا میخواهید ${fullName.firstName} ${fullName.lastName} را حذف کنید؟ در صورت موافقت تمام اطلاعات مربوط به این شخص حذف خواهد شد`}
-        isOpen={isOpen}
+        isOpen={isOpenDeleteModal}
         isPending={isPendingDeleteUser}
-        onOpenChange={onOpenChange}
+        onOpenChange={onOpenChangeDeleteModal}
         clickHandler={() => deleteUserHandler(userId)}
+      />
+
+      <ModalShowInfoUserCustom
+        isOpen={isOpenUserInfo}
+        onOpenChange={onOpenChangeUserInfo}
+        userInfo={userInfo}
       />
     </>
   );

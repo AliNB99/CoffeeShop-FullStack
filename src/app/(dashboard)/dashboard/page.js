@@ -3,6 +3,7 @@ import connectDB from "@/DB/connectDB";
 import User from "@/models/User";
 import UserPage from "@/templates/user/UserPage";
 import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
 
 async function UserInfo() {
   try {
@@ -15,6 +16,8 @@ async function UserInfo() {
     user: { email },
   } = await getServerSession(authOptions);
   const user = await User.findOne({ email });
+
+  if (user.role !== "USER") redirect("/");
 
   return <UserPage user={JSON.parse(JSON.stringify(user))} />;
 }

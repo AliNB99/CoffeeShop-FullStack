@@ -5,6 +5,7 @@ import CardProductBasket from "@/organisms/common/CardProductBasket";
 import { sp } from "@/utils/helper/replaceNumber";
 import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Divider } from "@nextui-org/react";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 
 function SidebarCart({ showElement, onShowElement }) {
@@ -36,21 +37,21 @@ function SidebarCart({ showElement, onShowElement }) {
         <div className="h-full flex flex-col justify-between">
           <div className="overflow-scroll no-scrollbar space-y-3">
             {selectedItems.map((p, index) => (
-              <>
-                <CardProductBasket product={p} />
-                {index + 1 < selectedItems.length && <Divider />}
-              </>
+              <CardProductBasket
+                list={selectedItems}
+                key={index}
+                index={index}
+                product={p}
+              />
             ))}
           </div>
           <div className="p-3 flex items-center justify-between border-t border-gray-300 dark:border-white/10 mt-5 pb-3">
-            <Button
-              height="h-10"
-              color="text-white"
-              bgColor="bg-teal-600"
-              fontSize="text-sm"
+            <Link
+              href="/dashboard/cart"
+              className="flex items-center justify-center rounded-lg px-3 text-white h-10 bg-teal-600 hover:bg-teal-500 text-sm"
             >
               ثبت سفارش
-            </Button>
+            </Link>
             <div>
               <span className="text-zinc-400 text-xs">مبلغ قابل پرداخت</span>
               <div>

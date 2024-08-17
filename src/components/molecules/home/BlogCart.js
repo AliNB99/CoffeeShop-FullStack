@@ -5,7 +5,7 @@ import Link from "next/link";
 function BlogCart({ blog }) {
   const { title, image } = blog;
   return (
-    <div class="group cursor-pointer flex gap-x-2.5 sm:block p-2.5 md:pb-2 bg-white dark:bg-zinc-700 shadow-normal rounded-xl">
+    <div className="group cursor-pointer flex gap-x-2.5 sm:block p-2.5 md:pb-2 bg-white dark:bg-zinc-700 shadow-normal rounded-xl">
       <div className="relative w-32 h-32 shrink-0 sm:w-auto sm:h-auto sm:mb-4 rounded-2xl rounded-bl-[40px] overflow-hidden">
         <img src={image} className="h-full object-cover" />
         <div className="absolute inset-0 w-full hidden md:flex md:justify-center md:items-center invisible opacity-0 group-hover:opacity-100 group-hover:visible bg-gradient-to-t from-orange-200/80 to-orange-300/80 transition-all delay-100">
