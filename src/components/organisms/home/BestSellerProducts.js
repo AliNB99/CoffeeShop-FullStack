@@ -15,7 +15,7 @@ async function BestSellerProducts() {
     .limit(8);
 
   return (
-    <div className="mb-20">
+    <div className="w-full mb-20">
       <SliderVisibility data={JSON.parse(JSON.stringify(data))} />
     </div>
   );

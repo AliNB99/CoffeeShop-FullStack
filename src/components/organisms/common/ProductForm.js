@@ -90,7 +90,7 @@ function ProductForm({ product }) {
   };
 
   return (
-    <form className="flex flex-col gap-5 lg:w-[75%]">
+    <form className="w-full lg:w-[75%] flex flex-col gap-5">
       {addProductForm.map((i, index) => (
         <div key={index} className="space-y-2">
           <label htmlFor={i.name} className="font-bold">

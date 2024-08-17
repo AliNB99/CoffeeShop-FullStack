@@ -46,8 +46,8 @@ function CardProduct({ data }) {
                 <span className="text-xs md:text-base mr-1">تومان</span>
               </div>
               {discount && (
-                <div className="offer">
-                  <span className="font-bold text-sm md:text-lg">
+                <div className="offer hidden md:block">
+                  <span className="font-bold text-sm lg:text-lg">
                     {sp(price)}
                   </span>
                   <span className="text-xs hidden lg:inline md:text-base mr-1">

@@ -6,11 +6,32 @@ import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 
+const listCoffeeClub = [
+  {
+    title: "چرخ و بخت",
+    icon: (
+      <Discovery className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
+    ),
+  },
+  {
+    title: "ماموریت ها",
+    icon: (
+      <Activity className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
+    ),
+  },
+  {
+    title: "جایزه ها",
+    icon: (
+      <TicketStar className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
+    ),
+  },
+];
+
 function CoffeeClub() {
   const { status } = useSession();
 
   return (
-    <section className="mb-8 md:mb-20">
+    <section className="w-full mb-8 md:mb-20">
       <div className="container">
         <div className="flex items-center lg:gap-x-4 xl:gap-x-24 gap-y-9 bg-gradient-to-r flex-wrap lg:flex-nowrap from-emerald-500 to-emerald-600 text-white py-8 lg:py-0 lg:h-36 px-3 lg:px-5 xl:px-11 rounded-2xl">
           <div className="flex items-center md:shrink-0 gap-x-3 lg:gap-x-4 xl:gap-x-6">
@@ -30,20 +51,17 @@ function CoffeeClub() {
               </p>
             </div>
           </div>
-          <div className="flex justify-between w-full">
+          <div className="w-full flex flex-col items-center gap-3 xs:gap-0 xs:flex-row xs:justify-between">
             <div className="flex gap-x-2 lg:gap-x-3 xl:gap-x-5">
-              <div className="w-[72px] h-[72px] md:w-[98px] md:h-[98px] text-center text-emerald-600 bg-white py-1.5 md:pt-5 md:pb-1 rounded-2xl">
-                <Discovery className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
-                <span className="text-xs md:text-sm">چرخ و بخت</span>
-              </div>
-              <div className="w-[72px] h-[72px] md:w-[98px] md:h-[98px] text-center text-emerald-600 bg-white py-1.5 md:pt-5 md:pb-1 rounded-2xl">
-                <Activity className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
-                <span className="text-xs md:text-sm">ماموریت ها</span>
-              </div>
-              <div className="w-[72px] h-[72px] md:w-[98px] md:h-[98px] text-center text-emerald-600 bg-white py-1.5 md:pt-5 md:pb-1 rounded-2xl">
-                <TicketStar className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
-                <span className="text-xs md:text-sm">جایزه ها</span>
-              </div>
+              {listCoffeeClub.map((i, index) => (
+                <div
+                  key={index}
+                  className="w-[72px] h-[72px] md:w-[98px] md:h-[98px] text-center text-emerald-600 bg-white py-1.5 md:pt-5 md:pb-1 rounded-2xl"
+                >
+                  {i.icon}
+                  <span className="text-xs md:text-sm">{i.title}</span>
+                </div>
+              ))}
             </div>
             <div className="flex flex-col items-center justify-center">
               {status === "authenticated" ? (

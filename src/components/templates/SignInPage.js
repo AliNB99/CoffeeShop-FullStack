@@ -60,7 +60,7 @@ function SignInPage() {
     <div className="h-screen w-full flex flex-col gap-5 items-center justify-center">
       <form
         onSubmit={submitHandler}
-        className="relative w-96 h-fit p-5 space-y-1 md:shadow-medium rounded-lg"
+        className="relative w-full md:w-96 h-fit p-5 space-y-1 md:shadow-medium rounded-lg"
       >
         <Logo className="hidden md:block absolute -translate-y-1/2 top-0 left-0 right-0 mx-auto size-16 text-orange-300" />
         <h1 className="text-center py-6 md:py-4 text-orange-300 drop-shadow-md text-3xl font-bold">

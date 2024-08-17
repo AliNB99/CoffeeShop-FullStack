@@ -17,7 +17,7 @@ async function NewProducts() {
     .sort({ createAt: -1 })
     .limit(8);
   return (
-    <section className="products pt-8 lg:pt-48">
+    <section className="products w-full pt-8 lg:pt-48">
       <div className="container flex items-center justify-between mb-10">
         <TitleSection
           title="جدید ترین محصولات"

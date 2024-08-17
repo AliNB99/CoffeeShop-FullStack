@@ -18,7 +18,7 @@ const ItemList = [
 
 function CategoryCoffee() {
   return (
-    <Element name="targetElement" className="mt-8 mb-10 md:my-20">
+    <Element name="targetElement" className="w-full mt-8 mb-10 md:my-20">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-white">
           {ItemList.map((i, index) => (

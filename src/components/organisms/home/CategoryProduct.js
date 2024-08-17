@@ -5,7 +5,7 @@ import React from "react";
 
 function CategoryProduct() {
   return (
-    <section className="products-category mb-10 md:mb-20">
+    <section className="w-full mb-10 md:mb-20">
       <div className="container">
         <div className="flex items-center justify-center gap-y-6 gap-x-7 md:gap-16 flex-wrap">
           {categoryProductList.map((i, index) => (
