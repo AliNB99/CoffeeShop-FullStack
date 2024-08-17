@@ -5,6 +5,12 @@ import { redirect } from "next/navigation";
 import DashboardLayout from "@/layout/DashboardLayout";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 
+export const metadata = {
+  title: "Golden Coffee | پنل کاربری",
+  description: "خرید و فروش قهوه و لوازم ساخت قهوه",
+  icons: { icon: "./images/fav-icon.png" },
+};
+
 async function layout({ children }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/signin");

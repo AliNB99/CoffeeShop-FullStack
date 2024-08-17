@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import React from "react";
+import { Element } from "react-scroll";
 
 const ItemList = [
   {
@@ -16,7 +18,7 @@ const ItemList = [
 
 function CategoryCoffee() {
   return (
-    <section className="mt-8 mb-10 md:my-20">
+    <Element name="targetElement" className="mt-8 mb-10 md:my-20">
       <div className="container">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5 text-white">
           {ItemList.map((i, index) => (
@@ -38,7 +40,7 @@ function CategoryCoffee() {
           ))}
         </div>
       </div>
-    </section>
+    </Element>
   );
 }
 

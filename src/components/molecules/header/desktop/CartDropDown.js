@@ -16,7 +16,7 @@ function CartDropDown() {
         <div>
           <div className="flex items-center justify-between font-medium  text-xs mb-2">
             <span className="text-zinc-300">{counterItems}مورد</span>
-            <Link className="flex items-center text-orange-300" href="/cart">
+            <Link className="flex items-center text-orange-300" href="/dashboard/cart">
               مشاهده سبد خرید
               <ChevronLeftIcon />
             </Link>

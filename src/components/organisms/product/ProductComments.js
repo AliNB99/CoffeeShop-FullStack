@@ -2,7 +2,6 @@
 
 import Loader from "@/atoms/Loader";
 import TitleDescription from "@/atoms/TitleDescription";
-import { Logo } from "@/utils/svg";
 import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { User } from "@nextui-org/react";
@@ -19,8 +18,8 @@ function ProductComments({ productId }) {
           <Loader color="#fdba74" />
         </div>
       ) : data.data.comments.length ? (
-        data.data.comments.map((i) => (
-          <div className="p-3 rounded-xl space-y-3">
+        data.data.comments.map((i, index) => (
+          <div key={index} className="p-3 rounded-xl space-y-3">
             <div className="flex justify-between items-center">
               <User
                 name={`${i.userInfo.firstName} ${i.userInfo.lastName}`}

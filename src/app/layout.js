@@ -17,9 +17,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AuthInitializerReduxProvider from "@/providers/AuthInitializerReduxProvider";
 
 export const metadata = {
-  title: "Golden Coffee",
+  title: "Golden Coffee | کافه گلد",
   description: "خرید و فروش قهوه و لوازم ساخت قهوه",
-  icons: { icon: "./images/fav-icon.png" },
+  icons: { icon: "/images/fav-icon.png" },
 };
 
 const toastOptions = {

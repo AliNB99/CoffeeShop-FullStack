@@ -35,3 +35,25 @@ async function ProductDetail({ params: { slug } }) {
 }
 
 export default ProductDetail;
+
+export const generateMetadata = async ({ params: { slug } }) => {
+  const [id] = slug;
+  try {
+    await connectDB();
+  } catch (error) {
+    console.log(error);
+  }
+
+  let product;
+  try {
+    product = await Product.findOne({ _id: id });
+  } catch (error) {
+    console.log(error);
+  }
+  return {
+    title: product.title,
+    description: product.description,
+    category: product.category,
+    icons: { icon: "/images/fav-icon.png" },
+  };
+};
