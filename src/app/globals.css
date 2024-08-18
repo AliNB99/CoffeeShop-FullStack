@@ -236,7 +236,7 @@
   }
 
   .user-info {
-    @apply flex items-center gap-5 px-2 min-h-11 tracking-wide shadow-medium shadow-zinc-200 dark:shadow-white/10 rounded-lg text-black/60 dark:text-white/60;
+    @apply flex flex-col xs:flex-row items-start justify-end xs:justify-start xs:items-center gap-5 py-3 px-4 min-h-11 tracking-wide shadow-medium shadow-zinc-200 dark:shadow-white/10 rounded-lg text-black/60 dark:text-white/60;
   }
 
   .user-info h4 {

@@ -6,9 +6,9 @@ import { useRouter } from "next/navigation";
 function DevelopingPage() {
   const { back } = useRouter();
   return (
-    <div className="flex flex-col items-center justify-center gap-5">
-      <DevelopingIcon className="w-96 h-96" />
-      <h1 className="font-bold">
+    <div className="h-screen flex flex-col items-center mt-16 sm:mt-0 justify-start sm:justify-center gap-5">
+      <DevelopingIcon />
+      <h1 className="font-bold text-sm md:text-lg">
         این صفحه در حال توسعه میباشد و در دسترس نمیباشد.
       </h1>
       <button

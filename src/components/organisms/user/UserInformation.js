@@ -99,12 +99,13 @@ function UserInformation({ user }) {
           {showEditForm ? (
             <Tooltip content="ثبت تغییرات">
               <Button
+              className="flex items-center"
                 isLoading={isPending}
                 onPress={submitFormHandler}
-                isIconOnly
                 variant="flat"
                 color="success"
               >
+                <span className="text-xs font-bold">ثبت تغییرات</span>
                 <CheckCircleIcon />
               </Button>
             </Tooltip>
