@@ -1,12 +1,12 @@
 "use client";
 
 import Loader from "@/atoms/Loader";
-import TitleDescription from "@/atoms/TitleDescription";
-import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
-import { StarIcon } from "@heroicons/react/24/solid";
 import { User } from "@nextui-org/react";
+import { StarIcon } from "@heroicons/react/24/solid";
 import ReactStars from "react-rating-stars-component";
+import TitleDescription from "@/atoms/TitleDescription";
 import { useGetCommentsProduct } from "src/hooks/useQuery/queries";
+import { ChatBubbleLeftRightIcon } from "@heroicons/react/24/outline";
 
 function ProductComments({ productId }) {
   const { data, isPending } = useGetCommentsProduct(productId);

@@ -27,7 +27,7 @@ function CardButton({ data, disabled }) {
   };
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-2 md:gap-4">
       {quantity === 0 ? (
         <button
           disabled={disabled}
@@ -45,7 +45,7 @@ function CardButton({ data, disabled }) {
           <PlusIcon className="w-4 h-4 md:w-6 md:h-6 text-gray-400 group-hover/button:text-white transition-all" />
         </button>
       )}
-      <span className="text-orange-300">{!!quantity && quantity}</span>
+      <span className="text-orange-300 md:text-lg">{!!quantity && quantity}</span>
       {quantity === 1 && (
         <button
           disabled={disabled}

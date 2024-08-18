@@ -28,7 +28,8 @@ export const counterTotal = ({ state, type }) => {
       );
     case "finalPrice":
       return state.selectedItems.reduce(
-        (acc, cur) => acc + (cur.price * (cur.discount - 100)) / 100,
+        (acc, cur) =>
+          acc + (cur.price * (cur.discount - 100) * cur.quantity) / 100,
         0
       );
   }

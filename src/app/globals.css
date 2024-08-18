@@ -109,7 +109,7 @@
   }
 
   .cart-btn {
-    @apply bg-gray-100 dark:bg-zinc-800 flex items-center justify-center w-8 h-8 md:w-10 md:h-10 rounded-full;
+    @apply bg-gray-100 dark:bg-zinc-800 flex items-center justify-center w-9 h-9 md:w-12 md:h-12 rounded-full;
   }
 
   .cart-btn:hover {

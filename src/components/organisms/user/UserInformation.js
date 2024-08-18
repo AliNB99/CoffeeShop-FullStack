@@ -94,12 +94,14 @@ function UserInformation({ user }) {
   return (
     <>
       <div className="flex items-center justify-between mb-3 px-2">
-        <h1 className="text-orange-300 text-base md:text-xl font-bold">مشخصات کاربر</h1>
+        <h1 className="text-orange-300 font-bold">
+          مشخصات کاربر
+        </h1>
         <div className="flex items-center gap-3">
           {showEditForm ? (
             <Tooltip content="ثبت تغییرات">
               <Button
-              className="flex items-center"
+                className="flex items-center"
                 isLoading={isPending}
                 onPress={submitFormHandler}
                 variant="flat"
@@ -121,12 +123,6 @@ function UserInformation({ user }) {
               </Button>
             </Tooltip>
           )}
-
-          <Tooltip content="تغییر رمز عبور">
-            <Button isIconOnly variant="flat" color="primary">
-              <FingerPrintIcon />
-            </Button>
-          </Tooltip>
         </div>
       </div>
 

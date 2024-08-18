@@ -88,7 +88,7 @@ export const addProductForm = [
     type: "text",
     label: "توضیحات",
     textarea: true,
-    placeholder: "خصوصیاتی در مورد محصول و توضیحات مورد نیاز مشتری ...",
+    placeholder: "خصوصیاتی در مورد محصول و توضیحات ...",
   },
   {
     name: "quantity",
