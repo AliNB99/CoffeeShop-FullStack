@@ -103,7 +103,7 @@ function SignInPage() {
             </Button>
           </div>
         )}
-        <div className="flex items-center justify-center gap-1 text-sm pt-4">
+        <div className="flex items-center justify-center gap-1 text-sm pt-4 pb-5">
           <span className="text-zinc-500 dark:text-zinc-200">
             آیا شما ثبت نام نکرده اید؟
           </span>
@@ -114,28 +114,31 @@ function SignInPage() {
             ثبت نام
           </Link>
         </div>
+        <div className="space-y-5 p-5 md:p-3 md:border-t-2 md:pt-5 shadow-medium md:shadow-none rounded-lg font-bold text-xs text-zinc-500 dark:text-white">
+          <div className="flex items-center justify-between">
+            <h4 className="text-orange-300">ایمیل پنل مالک</h4>
+            <span>alinb99.dev@gmail.com</span>
+          </div>
+          <div className="flex items-center justify-between">
+            <h4 className="text-orange-300">ایمیل پنل ادمین</h4>
+            <span className="text-zinc-600 dark:text-white">
+              reza@gmail.com
+            </span>
+          </div>
+          <div className="flex items-center justify-between">
+            <h4 className="text-orange-300">رمز عبور</h4>
+            <span className="text-zinc-600 dark:text-white">12345678</span>
+          </div>
+          <div className="flex items-center justify-center gap-2">
+            <span>ادمین و مالک امکان خرید از سایت را ندارند</span>
+          </div>
+          <div className="text-center">
+            <span className="text-blue-400 text-sm">
+              ترجیحا با VPN وارد شوید
+            </span>
+          </div>
+        </div>
       </form>
-      <div className="w-80 md:w-96 space-y-5 shadow-medium rounded-lg text-sm font-bold p-3">
-        <div className="flex items-center justify-center gap-2">
-          <span className="text-xs dark:text-white">
-            ادمین و مالک امکان خرید از سایت را ندارند
-          </span>
-        </div>
-        <div className="flex items-center justify-between">
-          <h4 className="text-orange-300">ایمیل پنل مالک</h4>
-          <span className="text-zinc-600 dark:text-white">
-            alinb99.dev@gmail.com
-          </span>
-        </div>
-        <div className="flex items-center justify-between">
-          <h4 className="text-orange-300">ایمیل پنل ادمین</h4>
-          <span className="text-zinc-600 dark:text-white">reza@gmail.com</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <h4 className="text-orange-300">رمز عبور</h4>
-          <span className="text-zinc-600 dark:text-white">12345678</span>
-        </div>
-      </div>
     </div>
   );
 }

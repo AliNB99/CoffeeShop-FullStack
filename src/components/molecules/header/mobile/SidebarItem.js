@@ -48,7 +48,7 @@ function SidebarItem({ showElement, onShowElement, role }) {
           <li>
             <div className="flex justify-between items-center" href="/">
               <Link
-                href="/"
+                href="/products"
                 className="flex gap-x-2 hover:text-orange-300 transition-colors"
               >
                 <ShoppingBagIcon />

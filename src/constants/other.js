@@ -8,7 +8,15 @@ import {
   ReceiptPercentIcon,
   SparklesIcon,
 } from "@heroicons/react/24/outline";
-import { Coffee, ExpressDelivery, Pitcher, Support } from "@/utils/svg";
+import {
+  Coffee,
+  ExpressDelivery,
+  Pitcher,
+  Support,
+  Activity,
+  Discovery,
+  TicketStar,
+} from "@/utils/svg";
 
 export const navbarItem = [
   { title: "دیکشنری", link: "/", icon: <ChatBubbleLeftEllipsisIcon /> },
@@ -18,12 +26,21 @@ export const navbarItem = [
 ];
 
 export const storeDesktopItem = [
-  { title: "قهوه ویژه", link: "/" },
-  { title: "ویژه در سطح جهانی", link: "/" },
-  { title: "قهوه درجه یک", link: "/" },
-  { title: "ترکیبات تجاری", link: "/" },
-  { title: "کپسول قهوه", link: "/" },
-  { title: "قهوه زینو برزیلی", link: "/" },
+  { title: "قهوه ویژه", link: "/products" },
+  { title: "ویژه در سطح جهانی", link: "/products" },
+  { title: "قهوه درجه یک", link: "/products" },
+  { title: "ترکیبات تجاری", link: "/products" },
+  { title: "کپسول قهوه", link: "/products" },
+  { title: "قهوه زینو برزیلی", link: "/products" },
+];
+
+export const storeDropDownMobile = [
+  { title: "قهوه ویژه", link: "/products" },
+  { title: "ویژه در سطح جهانی", link: "/products" },
+  { title: "قهو درجه یک", link: "/products" },
+  { title: "ترکیبات تجاری", link: "/products" },
+  { title: "کپسول قهوه", link: "/products" },
+  { title: "قهوه زیپو برزیلی", link: "/products" },
 ];
 
 export const categoryCoffeeList = {
@@ -121,5 +138,26 @@ export const listCheckout = [
     title: "قیمت نهایی(تومان)",
     icon: <CreditCardIcon />,
     keyValue: "finalPrice",
+  },
+];
+
+export const listCoffeeClub = [
+  {
+    title: "چرخ و بخت",
+    icon: (
+      <Discovery className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
+    ),
+  },
+  {
+    title: "ماموریت ها",
+    icon: (
+      <Activity className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
+    ),
+  },
+  {
+    title: "جایزه ها",
+    icon: (
+      <TicketStar className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
+    ),
   },
 ];

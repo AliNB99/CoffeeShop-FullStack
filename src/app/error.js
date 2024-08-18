@@ -4,7 +4,7 @@ import { ArrowPathIcon, HomeIcon } from "@heroicons/react/24/outline";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { LogoType } from "@/utils/svg";
-import { Button, Tooltip } from "@nextui-org/react";
+import { Tooltip } from "@nextui-org/react";
 
 function Error({ error, reset }) {
   useEffect(() => {

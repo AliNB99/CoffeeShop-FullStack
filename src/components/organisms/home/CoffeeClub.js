@@ -1,31 +1,10 @@
 "use client";
 
-import CustomImage from "@/atoms/CustomImage";
-import { Activity, Discovery, TicketStar } from "@/utils/svg";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import CustomImage from "@/atoms/CustomImage";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
-
-const listCoffeeClub = [
-  {
-    title: "چرخ و بخت",
-    icon: (
-      <Discovery className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
-    ),
-  },
-  {
-    title: "ماموریت ها",
-    icon: (
-      <Activity className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
-    ),
-  },
-  {
-    title: "جایزه ها",
-    icon: (
-      <TicketStar className="w-10 h-10 md:w-12 md:h-12 mb-1 md:mb-1.5 mx-auto" />
-    ),
-  },
-];
+import { listCoffeeClub } from "@/constants/other";
 
 function CoffeeClub() {
   const { status } = useSession();
