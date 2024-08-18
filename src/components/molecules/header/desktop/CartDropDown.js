@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
 function CartDropDown() {
-  const { selectedItems, counterItems, totalPrice } = useSelector(
+  const { selectedItems, counterItems, finalPrice } = useSelector(
     (state) => state.cart
   );
   return (
@@ -16,7 +16,10 @@ function CartDropDown() {
         <div>
           <div className="flex items-center justify-between font-medium  text-xs mb-2">
             <span className="text-zinc-300">{counterItems}مورد</span>
-            <Link className="flex items-center text-orange-300" href="/dashboard/cart">
+            <Link
+              className="flex items-center text-orange-300"
+              href="/dashboard/cart"
+            >
               مشاهده سبد خرید
               <ChevronLeftIcon />
             </Link>
@@ -41,7 +44,7 @@ function CartDropDown() {
             <div>
               <span className="text-zinc-400 text-xs">مبلغ قابل پرداخت</span>
               <div>
-                <span>{sp(totalPrice)}</span>
+                <span>{sp(finalPrice)}</span>
                 <span className="text-xs">تومان</span>
               </div>
             </div>

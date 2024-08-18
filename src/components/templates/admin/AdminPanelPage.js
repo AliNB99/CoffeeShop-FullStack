@@ -41,7 +41,7 @@ function AdminPanelPage() {
         </div>
         <div className="bg-white dark:bg-zinc-700 shadow-medium flex sm:hidden flex-col items-center justify-center gap-4 rounded-2xl w-full h-full p-3">
           <ExclamationCircleIcon className="w-16 h-16 text-red-500" />
-          <h1 className="font-bold text-sm">
+          <h1 className="font-bold text-sm text-center">
             نمایش چارت ها در سایز تبلت یا کامپیوتر امکانپدیر است
           </h1>
         </div>

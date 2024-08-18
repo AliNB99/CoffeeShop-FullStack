@@ -14,6 +14,7 @@ import {
   UserIcon,
 } from "@heroicons/react/24/outline";
 import { User } from "@nextui-org/react";
+import Image from "next/image";
 import Link from "next/link";
 import { useCallback } from "react";
 import toast from "react-hot-toast";
@@ -143,7 +144,7 @@ function CartPage({ user }) {
       ) : (
         <div className="h-96 mt-10 flex flex-col items-center justify-center gap-7">
           <div className="flex flex-col items-center justify-center">
-            <div className="empty-cart"></div>
+            <Image src="/images/empty-cart.png" width={200} height={200} />
             <h1 className="font-bold text-sm md:text-base text-zinc-600 dark:text-zinc-100">
               هیچ محصولی در سبد خرید شما موجود نیست!!
             </h1>

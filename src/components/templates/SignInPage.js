@@ -57,10 +57,10 @@ function SignInPage() {
   };
 
   return (
-    <div className="h-screen w-full flex flex-col gap-5 items-center justify-center">
+    <div className="h-screen w-full flex flex-col gap-5 items-center justify-start md:justify-center">
       <form
         onSubmit={submitHandler}
-        className="relative w-full md:w-96 h-fit p-5 space-y-1 md:shadow-medium rounded-lg"
+        className="relative w-full sm:w-96 h-fit p-5 space-y-1 md:shadow-medium rounded-lg"
       >
         <Logo className="hidden md:block absolute -translate-y-1/2 top-0 left-0 right-0 mx-auto size-16 text-orange-300" />
         <h1 className="text-center py-6 md:py-4 text-orange-300 drop-shadow-md text-3xl font-bold">
@@ -115,11 +115,10 @@ function SignInPage() {
           </Link>
         </div>
       </form>
-      <div className="w-[350px] border-2 space-y-5 border-orange-300 rounded-lg text-sm font-bold p-3">
+      <div className="w-80 md:w-96 space-y-5 shadow-medium rounded-lg text-sm font-bold p-3">
         <div className="flex items-center justify-center gap-2">
-          <h4 className="text-red-500">توجه:</h4>
-          <span className="text-zinc-600 text-xs dark:text-white">
-            ادمین و مالک امکان خرید از سایت برایشان فراهم نشده
+          <span className="text-xs dark:text-white">
+            ادمین و مالک امکان خرید از سایت را ندارند
           </span>
         </div>
         <div className="flex items-center justify-between">

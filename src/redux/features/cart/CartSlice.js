@@ -75,9 +75,9 @@ const cartSlice = createSlice({
     setCart: (state, action) => {
       state.selectedItems = action.payload.selectedItems;
       state.counterItems = action.payload.counterItems;
-      state.totalPrice = action.payload.totalDiscount;
-      state.totalDiscount = action.payload.totalDiscount;
+      state.totalPrice = action.payload.totalPrice;
       state.finalPrice = action.payload.finalPrice;
+      state.totalDiscount = action.payload.totalDiscount;
       state.isCheckout = action.payload.isCheckout;
 
       if (action.payload) {

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 
 function SidebarCart({ showElement, onShowElement }) {
-  const { selectedItems, totalPrice } = useSelector((state) => state.cart);
+  const { selectedItems, finalPrice } = useSelector((state) => state.cart);
 
   return (
     <nav
@@ -55,7 +55,7 @@ function SidebarCart({ showElement, onShowElement }) {
             <div>
               <span className="text-zinc-400 text-xs">مبلغ قابل پرداخت</span>
               <div>
-                <span>{sp(totalPrice)}</span>
+                <span>{sp(finalPrice)}</span>
                 <span className="text-xs">تومان</span>
               </div>
             </div>
