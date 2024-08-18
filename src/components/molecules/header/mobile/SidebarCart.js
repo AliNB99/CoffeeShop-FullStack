@@ -1,10 +1,8 @@
 "use client";
 
-import Button from "@/atoms/Button";
 import CardProductBasket from "@/organisms/common/CardProductBasket";
 import { sp } from "@/utils/helper/replaceNumber";
 import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Divider } from "@nextui-org/react";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
@@ -15,9 +13,9 @@ function SidebarCart({ showElement, onShowElement }) {
     <nav
       className={`fixed ${
         showElement.cartSidebar ? "left-0" : "-left-80"
-      } top-0 bottom-0 p-4 bg-white dark:bg-zinc-700 w-80 overflow-y-auto z-30 transition-all`}
+      } top-0 bottom-0 p-4 bg-white dark:bg-zinc-700 w-80 overflow-y-hidden z-30 transition-all`}
     >
-      <div className="flex items-center justify-between pb-5 mb-5 border-b border-gray-200 dark:border-b-white/20">
+      <div className="flex items-center justify-between pb-5 mb-2 border-b border-gray-200 dark:border-b-white/20">
         <button
           onClick={() => onShowElement({ element: "cartSidebar" })}
           className="bg-zinc-100 dark:bg-zinc-600/50 rounded-full p-1 transition-all"
@@ -45,7 +43,7 @@ function SidebarCart({ showElement, onShowElement }) {
               />
             ))}
           </div>
-          <div className="p-3 flex items-center justify-between border-t border-gray-300 dark:border-white/10 mt-5 pb-3">
+          <div className="absolute bottom-0 left-0 w-full bg-white p-3 flex items-center justify-between shadow-medium mt-5 pb-3">
             <Link
               href="/dashboard/cart"
               className="flex items-center justify-center rounded-lg px-3 text-white h-10 bg-teal-600 hover:bg-teal-500 text-sm"

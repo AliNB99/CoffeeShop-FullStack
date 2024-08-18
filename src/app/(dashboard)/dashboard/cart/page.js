@@ -17,6 +17,7 @@ async function Cart() {
   } = await getServerSession(authOptions);
   const user = await User.findOne({ email });
 
+  if (!user) redirect("/signin");
   if (user.role !== "USER") redirect("/admin");
   return <CartPage user={user} />;
 }
