@@ -43,18 +43,20 @@ function SidebarCart({ showElement, onShowElement }) {
               />
             ))}
           </div>
-          <div className="absolute bottom-0 left-0 w-full bg-white p-3 flex items-center justify-between shadow-medium mt-5 pb-3">
-            <Link
-              href="/dashboard/cart"
-              className="flex items-center justify-center rounded-lg px-3 text-white h-10 bg-teal-600 hover:bg-teal-500 text-sm"
-            >
-              ثبت سفارش
-            </Link>
-            <div>
-              <span className="text-zinc-400 text-xs">مبلغ قابل پرداخت</span>
+          <div className="absolute bottom-0 left-0 w-full bg-white dark:bg-zinc-700 p-3 mt-5">
+            <div className="flex items-center justify-between border-t-2 dark:border-zinc-600 p-3">
+              <Link
+                href="/dashboard/cart"
+                className="flex items-center justify-center rounded-lg px-3 text-white h-10 bg-teal-600 hover:bg-teal-500 text-sm"
+              >
+                ثبت سفارش
+              </Link>
               <div>
-                <span>{sp(finalPrice)}</span>
-                <span className="text-xs">تومان</span>
+                <span className="text-zinc-400 text-xs">مبلغ قابل پرداخت</span>
+                <div>
+                  <span>{sp(finalPrice)}</span>
+                  <span className="text-xs">تومان</span>
+                </div>
               </div>
             </div>
           </div>

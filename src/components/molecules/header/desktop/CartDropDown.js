@@ -1,10 +1,9 @@
+import Link from "next/link";
 import Button from "@/atoms/Button";
-import CardProductBasket from "@/organisms/common/CardProductBasket";
+import { useSelector } from "react-redux";
 import { sp } from "@/utils/helper/replaceNumber";
 import { ChevronLeftIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
-import { Divider } from "@nextui-org/react";
-import Link from "next/link";
-import { useSelector } from "react-redux";
+import CardProductBasket from "@/organisms/common/CardProductBasket";
 
 function CartDropDown() {
   const { selectedItems, counterItems, finalPrice } = useSelector(
@@ -14,7 +13,7 @@ function CartDropDown() {
     <div className="absolute opacity-0 invisible group-hover:opacity-100 group-hover:visible top-full left-0 w-[450px] max-h-[410px] p-5 shadow-lg rounded-2xl border-t-2 border-orange-300 bg-white dark:bg-zinc-700 transition-all">
       {selectedItems.length ? (
         <div>
-          <div className="flex items-center justify-between font-medium  text-xs mb-2">
+          <div className="flex items-center justify-between font-medium text-xs mb-2">
             <span className="text-zinc-300">{counterItems}مورد</span>
             <Link
               className="flex items-center text-orange-300"
