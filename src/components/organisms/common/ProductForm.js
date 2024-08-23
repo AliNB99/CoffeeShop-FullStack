@@ -81,7 +81,6 @@ function ProductForm({ product }) {
     }
 
     if (data.data.error || isErrorAddProduct || isErrorEditProduct) {
-      console.log("error");
       toast.error(data.data.error);
     } else {
       back();

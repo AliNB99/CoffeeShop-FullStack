@@ -17,8 +17,8 @@ function AddSpecifications({ product, form, setForm, warning, touched }) {
       setForm({ ...form, specifications: [...product.specifications] });
       setListCategory(
         product.category === "coffee"
-          ? [...addCoffeeItem]
-          : [...addAccessoryItem]
+          ? JSON.parse(JSON.stringify(addCoffeeItem))
+          : JSON.parse(JSON.stringify(addAccessoryItem))
       );
     }
   }, [product]);
@@ -30,18 +30,18 @@ function AddSpecifications({ product, form, setForm, warning, touched }) {
         specifications:
           product?.category === "coffee"
             ? product.specifications
-            : [...addCoffeeItem],
+            : JSON.parse(JSON.stringify(addCoffeeItem)),
       });
-      setListCategory([...addCoffeeItem]);
+      setListCategory(JSON.parse(JSON.stringify(addCoffeeItem)));
     } else {
       setForm({
         ...form,
         specifications:
           product?.category === "accessory"
             ? product.specifications
-            : [...addAccessoryItem],
+            : JSON.parse(JSON.stringify(addAccessoryItem)),
       });
-      setListCategory([...addAccessoryItem]);
+      setListCategory(JSON.parse(JSON.stringify(addAccessoryItem)));
     }
   }, [form.category]);
 

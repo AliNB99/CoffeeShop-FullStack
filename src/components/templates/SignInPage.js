@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import InputForm from "@/molecules/form/InputForm";
 import { formRegisterValidation } from "@/utils/validation/auth";
 import { useSubmitSignIn } from "src/hooks/useQuery/mutations";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { Tooltip } from "@nextui-org/react";
 
 function SignInPage() {
   const [warning, setWarning] = useState({});
@@ -103,18 +105,25 @@ function SignInPage() {
             </Button>
           </div>
         )}
-        <div className="flex items-center justify-center gap-1 text-sm pt-4 pb-5">
-          <span className="text-zinc-500 dark:text-zinc-200">
-            آیا شما ثبت نام نکرده اید؟
-          </span>
-          <Link
-            className="text-blue-400 hover:underline transition-all"
-            href="/signup"
-          >
-            ثبت نام
-          </Link>
+        <div className="flex items-center justify-between pt-4 pb-5">
+          <div className="flex items-center justify-center gap-1 text-sm">
+            <span className="text-zinc-500 dark:text-zinc-200">
+              آیا شما ثبت نام نکرده اید؟
+            </span>
+            <Link
+              className="text-blue-400 hover:underline transition-all"
+              href="/signup"
+            >
+              ثبت نام
+            </Link>
+          </div>
+          <Tooltip content="صفحه اصلی">
+            <Link className="text-orange-400" href="/">
+              <ArrowLeftIcon />
+            </Link>
+          </Tooltip>
         </div>
-        <div className="space-y-5 p-5 md:p-3 md:border-t-2 md:pt-5 shadow-medium md:shadow-none rounded-lg font-bold text-xs text-zinc-500 dark:text-white">
+        <div className="space-y-5 p-5 md:p-3 md:border-t-2 md:pt-5 shadow-medium md:shadow-none rounded-lg md:rounded-none font-bold text-xs text-zinc-500 dark:text-white">
           <div className="flex items-center justify-between">
             <h4 className="text-orange-300">ایمیل پنل مالک</h4>
             <span>alinb99.dev@gmail.com</span>

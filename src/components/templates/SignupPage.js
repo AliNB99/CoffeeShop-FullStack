@@ -13,7 +13,9 @@ import Loader from "@/atoms/Loader";
 import Button from "@/atoms/Button";
 import { Logo } from "@/utils/svg/index";
 import { useRouter } from "next/navigation";
-import { useSubmitAuth, useSubmitSignup } from "src/hooks/useQuery/mutations";
+import { useSubmitSignup } from "src/hooks/useQuery/mutations";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { Tooltip } from "@nextui-org/react";
 
 function SignupPage() {
   const [warning, setWarning] = useState({});
@@ -132,16 +134,23 @@ function SignupPage() {
             ثبت نام
           </Button>
         )}
-        <div className="flex items-center justify-center gap-1 text-sm pt-4">
-          <span className="text-zinc-500 dark:text-zinc-200">
-            آیا شما قبلا حساب ایجاد کرده اید؟
-          </span>
-          <Link
-            className="text-blue-400 hover:underline transition-all"
-            href="/signin"
-          >
-            ورود
-          </Link>
+        <div className="flex items-center justify-between px-1 pt-4">
+          <div className="flex items-center justify-center gap-1 text-sm">
+            <span className="text-zinc-500 dark:text-zinc-200">
+              آیا شما قبلا حساب ایجاد کرده اید؟
+            </span>
+            <Link
+              className="text-blue-400 hover:underline transition-all"
+              href="/signin"
+            >
+              ورود
+            </Link>
+          </div>
+          <Tooltip content="صفحه اصلی">
+            <Link className="text-orange-400" href="/">
+              <ArrowLeftIcon />
+            </Link>
+          </Tooltip>
         </div>
       </form>
     </div>

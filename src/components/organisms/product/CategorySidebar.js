@@ -4,7 +4,7 @@ import Link from "next/link";
 
 function CategorySidebar({ category }) {
   return (
-    <sidebar className="min-w-[300px] h-fit bg-white dark:bg-zinc-700 p-5 rounded-2xl shadow-medium ">
+    <sidebar className="min-w-[300px] h-fit bg-white dark:bg-zinc-700 p-5 rounded-2xl shadow-medium">
       <div className="mb-3 flex items-center gap-2 text-orange-200">
         <Squares2X2Icon />
         <h3 className="font-bold">دسته بندی</h3>

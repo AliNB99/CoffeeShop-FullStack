@@ -55,9 +55,12 @@ function CartDropDown() {
           <p className="tracking-tightest font-bold text-base text-zinc-700 dark:text-white/80">
             هنوز محصولی به سبد خرید اضافه نشده
           </p>
-          <Button color="text-white" bgColor="bg-teal-600">
+          <Link
+            href="/products"
+            className="text-white bg-teal-600 text-lg px-3 py-2 rounded-lg"
+          >
             مشاهده صفحه فروشگاه
-          </Button>
+          </Link>
         </div>
       )}
     </div>
