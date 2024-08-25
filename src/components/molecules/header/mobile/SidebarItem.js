@@ -21,7 +21,7 @@ function SidebarItem({ showElement, onShowElement, role }) {
     <nav
       className={`fixed ${
         showElement.sidebar ? "right-0" : "-right-64"
-      } top-0 p-4 z-30 bg-white dark:bg-zinc-700 w-64 h-screen overflow-y-auto transition-all`}
+      } top-0 p-4 z-30 bg-white dark:bg-zinc-700 w-64 h-screen overflow-y-auto scrollbarCustom transition-all`}
     >
       {/* logo and cross Btn */}
       <div className="flex justify-between items-center pb-5 border-b border-gray-200 dark:border-white/10">
@@ -103,10 +103,6 @@ function SidebarItem({ showElement, onShowElement, role }) {
           </Link>
         )}
         <DarkModeToggle label={true} />
-        <Link href="/dashboard/cart">
-          <Bars3Icon />
-          <span>سبد خرید</span>
-        </Link>
       </div>
       {role && (
         <button

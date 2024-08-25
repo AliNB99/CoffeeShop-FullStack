@@ -38,51 +38,6 @@ function CartPage({ user }) {
     }, [1000]);
   };
 
-  const createUserInfo = useCallback(
-    (item, index) => {
-      switch (item.name) {
-        case "user":
-          return (
-            <div className="w-full flex items-center justify-between">
-              <User
-                key={index}
-                avatarProps={{
-                  src: user.avatar,
-                  radius: "full",
-                  fallback: <UserIcon className="opacity-50" />,
-                  showFallback: true,
-                }}
-                description={user.email}
-                name={`${user.firstName} ${user.lastName}`}
-              />
-              <Link
-                className="hover:bg-zinc-200 dark:hover:bg-zinc-800 p-2 rounded-lg transition-all"
-                href="/dashboard"
-              >
-                <PencilSquareIcon />
-              </Link>
-            </div>
-          );
-
-        default:
-          return (
-            <div className="flex flex-col gap-1" key={index}>
-              <div className="font-bold text-orange-300 flex items-center gap-2">
-                {item.icon}
-                <h4 className="font-bold text-black dark:text-zinc-200 text-sm">
-                  {item.title}
-                </h4>
-              </div>
-              <span className="pr-6 text-zinc-700 dark:text-zinc-200">
-                {user[item.name] ? user[item.name] : "-"}
-              </span>
-            </div>
-          );
-      }
-    },
-    [user]
-  );
-
   return (
     <div className="dashboard-page">
       <TitlePage color="text-blue-500" borderColor="border-blue-500">
@@ -99,16 +54,11 @@ function CartPage({ user }) {
                 key={index}
                 className="border-2 dark:border-zinc-600 p-2 rounded-lg"
               >
-                <CardProductBasket
-                  index={index}
-                  list={cart.selectedItems}
-                  product={p}
-                  cartPage
-                />
+                <CardProductBasket product={p} cartPage />
               </div>
             ))}
           </div>
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-3 lg:gap-2">
             <div className="min-w-80 space-y-5 h-fit border-2 dark:border-zinc-700 p-4 bg-white dark:bg-zinc-700 rounded-lg shadow-medium">
               {listCheckout.map((i, index) => (
                 <div key={index} className="flex items-center justify-between">
@@ -136,8 +86,29 @@ function CartPage({ user }) {
                 </Button>
               )}
             </div>
-            <div className="min-w-80 space-y-5 h-fit border-2 dark:border-zinc-700 p-4 bg-white dark:bg-zinc-700 rounded-lg shadow-medium">
-              {listUserInfo.map((item, index) => createUserInfo(item, index))}
+            <div className="min-w-80 space-y-4 h-fit border-2 dark:border-zinc-700 p-4 bg-white dark:bg-zinc-700 rounded-lg shadow-medium">
+              <div className="w-full flex items-center justify-between">
+                <h4 className="font-bold text-orange-300">مشخصات</h4>
+                <Link
+                  className="hover:bg-zinc-200 dark:hover:bg-zinc-800 p-2 rounded-lg transition-all"
+                  href="/dashboard"
+                >
+                  <PencilSquareIcon />
+                </Link>
+              </div>
+              {listUserInfo.map((item, index) => (
+                <div key={index} className="flex flex-col">
+                  <div className="font-bold text-orange-300 flex items-center gap-2">
+                    {item.icon}
+                    <h4 className="font-bold text-black dark:text-zinc-200 text-sm">
+                      {item.title}
+                    </h4>
+                  </div>
+                  <span className="pr-6 text-zinc-700/70 dark:text-zinc-400">
+                    {user[item.name] ? user[item.name] : "-"}
+                  </span>
+                </div>
+              ))}
             </div>
           </div>
         </div>

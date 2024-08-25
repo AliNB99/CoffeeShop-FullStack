@@ -1,8 +1,8 @@
 "use client";
 
 import CardProductBasket from "@/organisms/common/CardProductBasket";
-import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { sp } from "@/utils/helper/replaceNumber";
+import { ShoppingBagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 
@@ -32,7 +32,7 @@ function SidebarCart({ showElement, onShowElement }) {
           </p>
         </div>
       ) : (
-        <div className="h-full flex flex-col justify-between">
+        <div className="h-full flex flex-col justify-between pb-36">
           <div className="overflow-scroll no-scrollbar space-y-3">
             {selectedItems.map((p, index) => (
               <CardProductBasket

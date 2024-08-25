@@ -1,9 +1,8 @@
 import CardButton from "@/molecules/common/CardButton";
 import { sp } from "@/utils/helper/replaceNumber";
 import CustomImage from "@/atoms/CustomImage";
-import { Divider } from "@nextui-org/react";
 
-function CardProductBasket({ product, cartPage, index, list }) {
+function CardProductBasket({ product, cartPage }) {
   const { title, images, price, discount } = product;
   return (
     <>
@@ -50,7 +49,6 @@ function CardProductBasket({ product, cartPage, index, list }) {
           </div>
         </div>
       </div>
-      {index + 1 < list.length && <Divider />}
     </>
   );
 }

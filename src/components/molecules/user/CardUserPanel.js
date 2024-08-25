@@ -1,3 +1,5 @@
+"use client"
+
 import CountUp from "react-countup";
 
 function CardUserPanel({ value, title, bgColor, bgColorIcon, icon, unit }) {

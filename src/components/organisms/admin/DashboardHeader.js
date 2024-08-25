@@ -25,7 +25,7 @@ function DashboardHeader() {
         <button className="transition-all group text-zinc-700 dark:text-white p-2.5 rounded-full">
           <EnvelopeIcon className="size-6 dark:text-white" />
           <div className="absolute top-0 left-6 leading-4 min-h-4 min-w-4 p-px bg-red-500 rounded-full transition-all">
-            <span className="text-white text-xs">0</span>
+            <span className="text-white text-xs">12</span>
           </div>
         </button>
       </div>

@@ -10,12 +10,47 @@ import {
 } from "@heroicons/react/24/outline";
 import FormUserInformation from "../../molecules/user/FormUserInformation";
 import { useChangeUserInformation } from "src/hooks/useQuery/mutations";
-import { listCartUserPanel, userInformation } from "@/constants/dashboard";
+import { userInformation } from "@/constants/dashboard";
 import { Button, Tooltip } from "@nextui-org/react";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import CardUserPanel from "@/molecules/user/CardUserPanel";
+
+const listCartUserPanel = [
+  {
+    title: "مجموع پرداخت",
+    value: 5640000,
+    unit: "تومان",
+    bgColor: "bg-amber-300",
+    bgColorIcon: "bg-amber-200",
+    icon: <CreditCardIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "موجودی حساب",
+    value: 850000,
+    unit: "تومان",
+    bgColor: "bg-green-500",
+    bgColorIcon: "bg-green-400",
+    icon: <CurrencyDollarIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "مجموع تیکت ها",
+    unit: "تیکت",
+    value: 3,
+    bgColor: "bg-rose-600",
+    bgColorIcon: "bg-rose-500",
+    icon: <TicketIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "تعداد سفارش",
+    unit: "بار",
+    value: 15,
+    bgColor: "bg-blue-500",
+    bgColorIcon: "bg-blue-400",
+    icon: <CheckBadgeIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+];
 
 function UserInformation({ user }) {
   const [showEditForm, setShowEditForm] = useState(false);
@@ -97,7 +132,7 @@ function UserInformation({ user }) {
 
   return (
     <div className="space-y-10">
-      <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2">
         {listCartUserPanel.map((i, index) => (
           <CardUserPanel
             key={index}

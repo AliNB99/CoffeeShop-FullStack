@@ -75,7 +75,7 @@ function DesktopHeader({ role }) {
             {role ? (
               <>
                 <Link
-                  href="/"
+                  href="/dashboard"
                   className="flex items-center gap-2 delay-75 group-hover:bg-orange-200/20 group-hover:px-7 group-hover:py-3 transition-all rounded-full"
                 >
                   <UserIcon className="w-8 h-8 text-orange-200" />

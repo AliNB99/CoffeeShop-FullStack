@@ -19,10 +19,12 @@ import {
   roleTitle,
   userDashboardItem,
 } from "@/constants/dashboard";
+import { useSelector } from "react-redux";
 
 function DashboardSidebar({ user }) {
   const { role, lastName, firstName } = user;
   const { showElement, onShowElement } = useContext(showContext);
+  const { counterItems } = useSelector((state) => state.cart);
 
   const pathname = usePathname();
 
@@ -65,10 +67,17 @@ function DashboardSidebar({ user }) {
                   className={`${
                     pathname === i.link &&
                     "bg-orange-200/20 text-orange-300 w-full py-2 rounded-lg"
-                  } pr-4 flex items-center gap-2 hover:text-orange-300 active:text-orange-400 transition-all w-fit`}
+                  } pr-4 pl-2 flex items-center justify-between hover:text-orange-300 active:text-orange-400 transition-all`}
                 >
-                  {i.icon}
-                  <Link href={i.link}>{i.title}</Link>
+                  <Link className="flex items-start gap-2" href={i.link}>
+                    {i.icon}
+                    {i.title}
+                  </Link>
+                  {i.title === "سبد خرید" && counterItems > 0 && (
+                    <span className="bg-red-500 px-2 text-white rounded-md">
+                      {counterItems}
+                    </span>
+                  )}
                 </li>
               )
             )}

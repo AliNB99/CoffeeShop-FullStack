@@ -3,10 +3,52 @@
 import AmountVisitSiteChart from "@/organisms/admin/chart/AmountVisitSiteChart";
 import WarehouseStockChart from "@/organisms/admin/chart/WarehouseStockChart";
 import AmountOfSalesChart from "@/organisms/admin/chart/AmountOfSalesChart";
-import { ExclamationCircleIcon } from "@heroicons/react/24/outline";
+import {
+  BanknotesIcon,
+  ChartPieIcon,
+  ExclamationCircleIcon,
+  PresentationChartLineIcon,
+  UserGroupIcon,
+} from "@heroicons/react/24/outline";
 import CardAdminPanel from "@/molecules/admin/CardAdminPanel";
 import useIsClient from "src/hooks/useIsClient";
-import { listCardAdminPanel } from "@/constants/dashboard";
+
+const listCardAdminPanel = [
+  {
+    title: "بازدید امروز سایت",
+    unit: "نفر",
+    bgColor: "bg-amber-300",
+    bgColorIcon: "bg-amber-200",
+    count: 310,
+    icon: <ChartPieIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "فروش امروز سایت",
+    unit: "تومان",
+    bgColor: "bg-green-500",
+    bgColorIcon: "bg-green-400",
+    count: 23120000,
+    icon: <BanknotesIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "مجموع فروش سایت",
+    unit: "تومان",
+    bgColor: "bg-rose-600",
+    bgColorIcon: "bg-rose-500",
+    count: 540310000,
+    icon: (
+      <PresentationChartLineIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />
+    ),
+  },
+  {
+    title: "کاربران فعال سایت",
+    unit: "نفر",
+    bgColor: "bg-blue-500",
+    bgColorIcon: "bg-blue-400",
+    count: 2310,
+    icon: <UserGroupIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+];
 
 function AdminPanelPage() {
   const isClient = useIsClient();
@@ -14,7 +56,7 @@ function AdminPanelPage() {
   return (
     isClient && (
       <div className="dashboard-page flex flex-col">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-2 mb-10">
+        <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-2 mb-10">
           {listCardAdminPanel.map((i, index) => (
             <CardAdminPanel
               key={index}
