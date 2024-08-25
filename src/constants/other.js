@@ -99,7 +99,7 @@ export const listOptionStore = [
   {
     title: "پشتیبانی شبانه روزی",
     subTitle: "7 روز هفته ، 24 ساعته",
-    iconLight: <Support className="w-20 h-20" />,
+    iconLight: <Support className="w-16 h-20" />,
   },
   {
     title: "امکان تحویل اکسپرس",
@@ -109,12 +109,12 @@ export const listOptionStore = [
   {
     title: "اکسسوری قهوه",
     subTitle: "وسایل و ادوات دم آوری",
-    iconLight: <Pitcher className="w-20 h-20" />,
+    iconLight: <Pitcher className="w-16 h-20" />,
   },
   {
     title: "رست تخصصی",
     subTitle: "تازه برشته شده و با کیفیت",
-    iconLight: <Coffee className="w-20 h-20" />,
+    iconLight: <Coffee className="w-16 h-20" />,
   },
 ];
 
