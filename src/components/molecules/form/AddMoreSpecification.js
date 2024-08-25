@@ -20,7 +20,7 @@ function AddMoreSpecification({ form, setForm }) {
     if (!addItem.title || !addItem.value) {
       return setWarning("لطفا مقادیر را کامل وارد نمایید");
     }
-    console.log(form.specifications)
+    console.log(form.specifications);
     setForm({ ...form, specifications: [...form.specifications, addItem] });
     setAddItem(null);
     setWarning(null);

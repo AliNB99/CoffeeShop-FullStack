@@ -1,5 +1,5 @@
-import TitlePage from "@/atoms/TitlePage";
 import ProductForm from "@/organisms/common/ProductForm";
+import TitlePage from "@/atoms/TitlePage";
 
 function EditProductPage({ data }) {
   return (

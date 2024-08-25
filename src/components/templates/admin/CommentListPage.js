@@ -1,6 +1,5 @@
-import TitlePage from "@/atoms/TitlePage";
 import CommentsTable from "@/organisms/admin/CommentTable";
-import React from "react";
+import TitlePage from "@/atoms/TitlePage";
 
 function CommentListPage() {
   return (

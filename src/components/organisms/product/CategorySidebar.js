@@ -1,5 +1,5 @@
-import { categoryCoffeeList } from "@/constants/other";
 import { Squares2X2Icon } from "@heroicons/react/24/outline";
+import { categoryCoffeeList } from "@/constants/other";
 import Link from "next/link";
 
 function CategorySidebar({ category }) {

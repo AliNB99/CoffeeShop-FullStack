@@ -1,5 +1,5 @@
-import { NoData } from "@/utils/svg";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import { NoData } from "@/utils/svg";
 import Link from "next/link";
 
 function NotFoundProductPage() {

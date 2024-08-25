@@ -46,9 +46,9 @@ function ProductComments({ productId }) {
           </div>
         ))
       ) : (
-        <div className="p-10 flex flex-col items-center justify-center">
-          <ChatBubbleLeftRightIcon className="w-20 h-20 opacity-40" />
-          <h1 className="opacity-50 font-bold">
+        <div className="p-10 flex flex-col items-center justify-center gap-2">
+          <ChatBubbleLeftRightIcon className="w-14 h-14 lg:w-20 lg:h-20 opacity-40" />
+          <h1 className="opacity-50 text-xs font-bold text-center">
             دیدگاهی برای این محصول ثبت نشده!!
           </h1>
         </div>

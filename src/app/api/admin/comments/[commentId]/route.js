@@ -1,8 +1,8 @@
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
 import connectDB from "@/DB/connectDB";
 import Comment from "@/models/Comment";
 import User from "@/models/User";
-import { getServerSession } from "next-auth";
-import { NextResponse } from "next/server";
 
 export async function DELETE(req, context) {
   try {

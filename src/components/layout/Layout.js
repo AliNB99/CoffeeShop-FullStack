@@ -1,9 +1,9 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import Overlay from "@/molecules/common/Overlay";
+import { getServerSession } from "next-auth";
 import connectDB from "@/DB/connectDB";
 import Header from "@/layout/Header";
 import User from "@/models/User";
-import Overlay from "@/molecules/common/Overlay";
-import { getServerSession } from "next-auth";
 import Footer from "./Footer";
 // import Footer from "@/layout/Footer";
 

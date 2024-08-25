@@ -1,6 +1,6 @@
+import EditProductPage from "@/templates/admin/EditProductPage";
 import connectDB from "@/DB/connectDB";
 import Product from "@/models/Product";
-import EditProductPage from "@/templates/admin/EditProductPage";
 
 async function EditProduct(context) {
   const { productId } = context.params;

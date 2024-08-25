@@ -1,11 +1,11 @@
-import Button from "@/atoms/Button";
-import { User } from "@nextui-org/react";
+import { useSubmitComment } from "src/hooks/useQuery/mutations";
 import { StarIcon } from "@heroicons/react/24/outline";
 import ReactStars from "react-rating-stars-component";
-import { useState } from "react";
+import { User } from "@nextui-org/react";
+import Button from "@/atoms/Button";
 import toast from "react-hot-toast";
-import { useSubmitComment } from "src/hooks/useQuery/mutations";
 import Loader from "@/atoms/Loader";
+import { useState } from "react";
 
 function WriteComment({ user, product }) {
   const [comment, setComment] = useState({ description: "", rate: "" });

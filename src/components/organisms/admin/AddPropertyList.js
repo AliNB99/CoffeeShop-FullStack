@@ -1,6 +1,6 @@
+import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Button from "@/atoms/Button";
 import Input from "@/atoms/Input";
-import { PlusCircleIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 function AddPropertyList({ color, bgColor, name, title, form, setForm }) {
   // add new Property

@@ -1,6 +1,6 @@
+import SliderVisibility from "@/molecules/home/SliderVisibility";
 import connectDB from "@/DB/connectDB";
 import Product from "@/models/Product";
-import SliderVisibility from "@/molecules/home/SliderVisibility";
 import toast from "react-hot-toast";
 
 async function BestSellerProducts() {

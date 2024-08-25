@@ -1,5 +1,5 @@
-import CategorySidebar from "@/organisms/product/CategorySidebar";
 import ProductsSkeleton from "@/organisms/product/ProductsSkeleton";
+import CategorySidebar from "@/organisms/product/CategorySidebar";
 
 function LoadingProducts() {
   return (

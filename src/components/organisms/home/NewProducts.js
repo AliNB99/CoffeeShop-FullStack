@@ -1,10 +1,10 @@
-import CardProduct from "../common/CardProduct";
-import connectDB from "@/DB/connectDB";
-import toast from "react-hot-toast";
-import Product from "@/models/Product";
-import Link from "next/link";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import TitleSection from "@/atoms/home/TitleSection";
+import CardProduct from "../common/CardProduct";
+import Product from "@/models/Product";
+import connectDB from "@/DB/connectDB";
+import toast from "react-hot-toast";
+import Link from "next/link";
 
 async function NewProducts() {
   try {

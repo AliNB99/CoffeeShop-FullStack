@@ -1,24 +1,24 @@
 "use client";
 
+import DarkModeToggle from "@/molecules/common/DarkModeToggle";
+import AddAvatarCustom from "@/molecules/common/AddAvatarCustom";
+import { showContext } from "@/context/ShowContextProvider";
+import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
+import { Chip } from "@nextui-org/react";
+import { useContext } from "react";
 import Link from "next/link";
 import {
   ArrowRightStartOnRectangleIcon,
   HomeIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { useContext } from "react";
-import { showContext } from "@/context/ShowContextProvider";
 import {
   adminDashboardItem,
   roleColorMap,
   roleTitle,
   userDashboardItem,
 } from "@/constants/dashboard";
-import { Chip } from "@nextui-org/react";
-import { signOut } from "next-auth/react";
-import { usePathname } from "next/navigation";
-import DarkModeToggle from "@/molecules/common/DarkModeToggle";
-import AddAvatarCustom from "@/molecules/common/AddAvatarCustom";
 
 function DashboardSidebar({ user }) {
   const { role, lastName, firstName } = user;

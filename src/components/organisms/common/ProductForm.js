@@ -1,16 +1,16 @@
 "use client";
 
-import toast from "react-hot-toast";
-import Button from "@/atoms/Button";
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import Loader from "src/components/atoms/Loader";
-import { addProductForm } from "@/constants/dashboard";
-import AddImage from "src/components/molecules/form/AddImage";
-import InputForm from "src/components/molecules/form/InputForm";
-import { formProductValidation } from "@/utils/validation/dashboard";
 import AddSpecifications from "src/components/organisms/admin/AddSpecifications";
 import AddPropertyList from "src/components/organisms/admin/AddPropertyList";
+import { formProductValidation } from "@/utils/validation/dashboard";
+import InputForm from "src/components/molecules/form/InputForm";
+import AddImage from "src/components/molecules/form/AddImage";
+import { addProductForm } from "@/constants/dashboard";
+import Loader from "src/components/atoms/Loader";
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import toast from "react-hot-toast";
+import Button from "@/atoms/Button";
 import {
   useSubmitAddProduct,
   useSubmitEditProduct,
@@ -18,7 +18,6 @@ import {
 import { useRouter } from "next/navigation";
 
 function ProductForm({ product }) {
-  const [action, setAction] = useState(product ? "editProduct" : "addProduct");
   const {
     isPending: isPendingAddProduct,
     isError: isErrorAddProduct,

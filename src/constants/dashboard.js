@@ -1,18 +1,22 @@
 import {
   AtSymbolIcon,
+  BanknotesIcon,
   BriefcaseIcon,
   BuildingOffice2Icon,
+  ChartPieIcon,
   ChatBubbleLeftRightIcon,
+  CheckBadgeIcon,
   ClipboardDocumentCheckIcon,
   CreditCardIcon,
-  EnvelopeIcon,
+  CurrencyDollarIcon,
   HeartIcon,
   HomeIcon,
   MapPinIcon,
   PhoneIcon,
+  PresentationChartLineIcon,
   ShoppingBagIcon,
   ShoppingCartIcon,
-  SwatchIcon,
+  TicketIcon,
   UserGroupIcon,
   UserIcon,
   UsersIcon,
@@ -22,7 +26,11 @@ export const userDashboardItem = [
   { title: "داشبورد", link: "/dashboard", icon: <HomeIcon /> },
   { title: "سفارش ها", link: "/dashboard/orders", icon: <ShoppingBagIcon /> },
   { title: "علاقه مندی ها", link: "/dashboard/favorites", icon: <HeartIcon /> },
-  { title: "لیست پیام ها", link: "/dashboard/ticket", icon: <EnvelopeIcon /> },
+  {
+    title: "تیک های من",
+    link: "/dashboard/ticket",
+    icon: <ChatBubbleLeftRightIcon />,
+  },
   { title: "سبد خرید", link: "/dashboard/cart", icon: <ShoppingCartIcon /> },
 ];
 
@@ -46,7 +54,79 @@ export const userInformation = [
   { name: "address", title: "آدرس", icon: <MapPinIcon /> },
 ];
 
+export const listCartUserPanel = [
+  {
+    title: "مجموع پرداخت",
+    value: 5640000,
+    unit: "تومان",
+    bgColor: "bg-amber-300",
+    bgColorIcon: "bg-amber-200",
+    icon: <CreditCardIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "موجودی حساب",
+    value: 850000,
+    unit: "تومان",
+    bgColor: "bg-green-500",
+    bgColorIcon: "bg-green-400",
+    icon: <CurrencyDollarIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "مجموع تیکت ها",
+    unit: "تیکت",
+    value: 3,
+    bgColor: "bg-rose-600",
+    bgColorIcon: "bg-rose-500",
+    icon: <TicketIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "تعداد سفارش",
+    unit: "بار",
+    value: 15,
+    bgColor: "bg-blue-500",
+    bgColorIcon: "bg-blue-400",
+    icon: <CheckBadgeIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+];
+
 ////// ADMIN CONSTANT /////
+
+export const listCardAdminPanel = [
+  {
+    title: "آمار بازدید امروز سایت",
+    unit: "نفر",
+    bgColor: "bg-amber-300",
+    bgColorIcon: "bg-amber-200",
+    count: 310,
+    icon: <ChartPieIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "میزان فروش امروز سایت",
+    unit: "تومان",
+    bgColor: "bg-green-500",
+    bgColorIcon: "bg-green-400",
+    count: 23120000,
+    icon: <BanknotesIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "مجموع فروش سایت",
+    unit: "تومان",
+    bgColor: "bg-rose-600",
+    bgColorIcon: "bg-rose-500",
+    count: 540310000,
+    icon: (
+      <PresentationChartLineIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />
+    ),
+  },
+  {
+    title: "تعداد کاربران فعال سایت",
+    unit: "نفر",
+    bgColor: "bg-blue-500",
+    bgColorIcon: "bg-blue-400",
+    count: 2310,
+    icon: <UserGroupIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+];
 
 export const adminDashboardItem = [
   {

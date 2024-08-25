@@ -1,5 +1,5 @@
-import DashboardSidebar from "@/organisms/common/DashboardSidebar";
 import DashboardHeader from "src/components/organisms/admin/DashboardHeader";
+import DashboardSidebar from "@/organisms/common/DashboardSidebar";
 
 function DashboardLayout({ children, user }) {
   return (

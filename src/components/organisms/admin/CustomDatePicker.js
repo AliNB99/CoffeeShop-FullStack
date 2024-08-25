@@ -1,9 +1,9 @@
-import DatePicker from "react-multi-date-picker";
-import persian from "react-date-object/calendars/persian";
-import persian_fa from "react-date-object/locales/persian_fa";
-import transition from "react-element-popper/animations/transition";
-import opacity from "react-element-popper/animations/opacity";
 import InputIcon from "react-multi-date-picker/components/input_icon";
+import transition from "react-element-popper/animations/transition";
+import persian_fa from "react-date-object/locales/persian_fa";
+import opacity from "react-element-popper/animations/opacity";
+import persian from "react-date-object/calendars/persian";
+import DatePicker from "react-multi-date-picker";
 
 import "react-multi-date-picker/styles/layouts/mobile.css";
 

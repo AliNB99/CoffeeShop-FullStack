@@ -1,6 +1,6 @@
-import CustomImage from "@/atoms/CustomImage";
 import { CategoryColorMap } from "@/constants/dashboard";
 import { UserIcon } from "@heroicons/react/24/outline";
+import CustomImage from "@/atoms/CustomImage";
 import {
   Modal,
   ModalContent,
@@ -40,9 +40,7 @@ export default function ModalShowInfoCommentCustom({
                 {commentInfo ? (
                   <>
                     <div>
-                      <h4 className="title-modal mb-2">
-                        نویسنده دیدگاه
-                      </h4>
+                      <h4 className="title-modal mb-2">نویسنده دیدگاه</h4>
                       <User
                         avatarProps={{
                           src: commentInfo.userInfo.avatar,
@@ -56,15 +54,11 @@ export default function ModalShowInfoCommentCustom({
                     </div>
 
                     <div>
-                      <h4 className="title-modal">
-                        متن دیدگاه:
-                      </h4>
+                      <h4 className="title-modal">متن دیدگاه:</h4>
                       <p>{commentInfo.description}</p>
                     </div>
                     <div className="space-y-5">
-                      <h4 className="title-modal">
-                        جزئیات محصول
-                      </h4>
+                      <h4 className="title-modal">جزئیات محصول</h4>
                       <div className="flex items-center justify-between gap-1">
                         <h6 className="text-xs text-blue-400">عنوان محصول:</h6>
                         <p>{commentInfo.productInfo.title}</p>

@@ -1,17 +1,21 @@
 "use client";
 
-import { userInformation } from "@/constants/dashboard";
 import {
+  CheckBadgeIcon,
   CheckCircleIcon,
-  FingerPrintIcon,
+  CreditCardIcon,
+  CurrencyDollarIcon,
   PencilSquareIcon,
+  TicketIcon,
 } from "@heroicons/react/24/outline";
-import { Button, Tooltip } from "@nextui-org/react";
-import { useCallback, useState } from "react";
 import FormUserInformation from "../../molecules/user/FormUserInformation";
 import { useChangeUserInformation } from "src/hooks/useQuery/mutations";
-import toast from "react-hot-toast";
+import { listCartUserPanel, userInformation } from "@/constants/dashboard";
+import { Button, Tooltip } from "@nextui-org/react";
+import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
+import CardUserPanel from "@/molecules/user/CardUserPanel";
 
 function UserInformation({ user }) {
   const [showEditForm, setShowEditForm] = useState(false);
@@ -92,50 +96,62 @@ function UserInformation({ user }) {
   };
 
   return (
-    <>
-      <div className="flex items-center justify-between mb-3 px-2">
-        <h1 className="text-orange-300 font-bold">
-          مشخصات کاربر
-        </h1>
-        <div className="flex items-center gap-3">
-          {showEditForm ? (
-            <Tooltip content="ثبت تغییرات">
-              <Button
-                className="flex items-center"
-                isLoading={isPending}
-                onPress={submitFormHandler}
-                variant="flat"
-                color="success"
-              >
-                <span className="text-xs font-bold">ثبت تغییرات</span>
-                <CheckCircleIcon />
-              </Button>
-            </Tooltip>
-          ) : (
-            <Tooltip content="ویرایش پروفایل">
-              <Button
-                onPress={() => setShowEditForm((item) => !item)}
-                isIconOnly
-                variant="flat"
-                color="warning"
-              >
-                <PencilSquareIcon />
-              </Button>
-            </Tooltip>
-          )}
-        </div>
+    <div className="space-y-10">
+      <div className="grid grid-cols-2 sm:grid-cols-2 gap-3 lg:grid-cols-4">
+        {listCartUserPanel.map((i, index) => (
+          <CardUserPanel
+            key={index}
+            title={i.title}
+            value={i.value}
+            bgColor={i.bgColor}
+            bgColorIcon={i.bgColorIcon}
+            icon={i.icon}
+            unit={i.unit}
+          />
+        ))}
       </div>
-
-      {showEditForm ? (
-        <FormUserInformation user={user} form={form} setForm={setForm} />
-      ) : (
-        <div className="bg-white dark:bg-zinc-900 p-5 rounded-lg">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {userInformation.map((item) => createItem(item))}
+      <div className="flex flex-col gap-5">
+        <div className="flex justify-between items-center px-3">
+          <h1 className="text-orange-300 text-xl font-bold">مشخصات کاربر</h1>
+          <div className="flex items-center gap-3">
+            {showEditForm ? (
+              <Tooltip content="ثبت تغییرات">
+                <Button
+                  className="flex items-center"
+                  isLoading={isPending}
+                  onPress={submitFormHandler}
+                  variant="flat"
+                  color="success"
+                >
+                  <span className="text-xs font-bold">ثبت تغییرات</span>
+                  <CheckCircleIcon />
+                </Button>
+              </Tooltip>
+            ) : (
+              <Tooltip content="ویرایش پروفایل">
+                <Button
+                  onPress={() => setShowEditForm((item) => !item)}
+                  isIconOnly
+                  variant="flat"
+                  color="warning"
+                >
+                  <PencilSquareIcon />
+                </Button>
+              </Tooltip>
+            )}
           </div>
         </div>
-      )}
-    </>
+        {showEditForm ? (
+          <FormUserInformation user={user} form={form} setForm={setForm} />
+        ) : (
+          <div className="bg-white dark:bg-zinc-900 p-5 rounded-lg">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {userInformation.map((item) => createItem(item))}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
   );
 }
 

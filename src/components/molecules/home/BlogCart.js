@@ -1,5 +1,5 @@
-import { LogoType } from "@/utils/svg";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import { LogoType } from "@/utils/svg";
 import Image from "next/image";
 import Link from "next/link";
 

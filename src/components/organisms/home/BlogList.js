@@ -1,7 +1,7 @@
-import TitleSection from "@/atoms/home/TitleSection";
-import { blogList } from "@/constants/other";
-import BlogCart from "@/molecules/home/BlogCart";
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
+import TitleSection from "@/atoms/home/TitleSection";
+import BlogCart from "@/molecules/home/BlogCart";
+import { blogList } from "@/constants/other";
 import Link from "next/link";
 
 function BlogList() {

@@ -1,21 +1,21 @@
 "use client";
 
-import Link from "next/link";
-import { useEffect, useState } from "react";
-// toast for show alert
-import toast from "react-hot-toast";
 // function for validate input value
 import { formRegisterValidation } from "@/utils/validation/auth";
 // constants value for from item
+import { useSubmitSignup } from "src/hooks/useQuery/mutations";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { authFormAmount } from "@/constants/auth";
 import InputForm from "@/molecules/form/InputForm";
 import Loader from "@/atoms/Loader";
 import Button from "@/atoms/Button";
 import { Logo } from "@/utils/svg/index";
 import { useRouter } from "next/navigation";
-import { useSubmitSignup } from "src/hooks/useQuery/mutations";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { Tooltip } from "@nextui-org/react";
+
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import Link from "next/link";
 
 function SignupPage() {
   const [warning, setWarning] = useState({});

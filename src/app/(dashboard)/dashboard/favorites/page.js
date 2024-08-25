@@ -1,7 +1,7 @@
 import DevelopingPage from "@/templates/Developing";
 
 function Favorites() {
-  return <DevelopingPage/>;
+  return <DevelopingPage />;
 }
 
 export default Favorites;

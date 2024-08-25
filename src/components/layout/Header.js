@@ -1,8 +1,8 @@
 "use client";
 
-import { showContext } from "@/context/ShowContextProvider";
 import SidebarCart from "@/molecules/header/mobile/SidebarCart";
 import SidebarItem from "@/molecules/header/mobile/SidebarItem";
+import { showContext } from "@/context/ShowContextProvider";
 import DesktopHeader from "@/organisms/header/DesktopHeader";
 import MobileHeader from "@/organisms/header/MobileHeader";
 import { usePathname } from "next/navigation";

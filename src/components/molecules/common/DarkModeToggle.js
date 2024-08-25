@@ -1,9 +1,8 @@
 "use client";
 
-import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@heroicons/react/24/outline";
-import { useEffect, useState } from "react";
 import useIsClient from "src/hooks/useIsClient";
+import { useTheme } from "next-themes";
 
 function DarkModeToggle({ className, label }) {
   const { theme, setTheme } = useTheme();

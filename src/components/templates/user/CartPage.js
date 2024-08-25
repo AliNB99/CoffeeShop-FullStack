@@ -1,25 +1,25 @@
 "use client";
 
-import Button from "@/atoms/Button";
-import Loader from "@/atoms/Loader";
-import TitlePage from "@/atoms/TitlePage";
-import { listUserInfo } from "@/constants/dashboard";
-import { listCheckout } from "@/constants/other";
 import CardProductBasket from "@/organisms/common/CardProductBasket";
 import { isCheckout } from "@/redux/features/cart/CartSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { listUserInfo } from "@/constants/dashboard";
 import { sp } from "@/utils/helper/replaceNumber";
+import { listCheckout } from "@/constants/other";
+import useLoading from "src/hooks/useLoading";
+import TitlePage from "@/atoms/TitlePage";
+import { User } from "@nextui-org/react";
+import Button from "@/atoms/Button";
+import Loader from "@/atoms/Loader";
+import toast from "react-hot-toast";
+import { useCallback } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import {
   PencilSquareIcon,
   ShoppingCartIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { User } from "@nextui-org/react";
-import Image from "next/image";
-import Link from "next/link";
-import { useCallback } from "react";
-import toast from "react-hot-toast";
-import { useDispatch, useSelector } from "react-redux";
-import useLoading from "src/hooks/useLoading";
 
 function CartPage({ user }) {
   const { isLoading, startLoading, stopLoading } = useLoading();

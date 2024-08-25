@@ -1,6 +1,5 @@
-import TitlePage from "@/atoms/TitlePage";
 import ProductForm from "@/organisms/common/ProductForm";
-import React from "react";
+import TitlePage from "@/atoms/TitlePage";
 
 function AddProduct() {
   return (

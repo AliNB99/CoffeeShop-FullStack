@@ -1,9 +1,9 @@
 "use client";
 
 import { ArrowLeftEndOnRectangleIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import TitleDescription from "@/atoms/TitleDescription";
 import WriteComment from "@/molecules/product/WriteComment";
+import TitleDescription from "@/atoms/TitleDescription";
+import Link from "next/link";
 
 function AddComment({ user, product }) {
   return (

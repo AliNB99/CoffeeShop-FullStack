@@ -1,7 +1,7 @@
 import DevelopingPage from "@/templates/Developing";
 
 function Order() {
-  return <DevelopingPage/>;
+  return <DevelopingPage />;
 }
 
 export default Order;

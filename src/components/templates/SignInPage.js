@@ -1,17 +1,17 @@
 "use client";
 
-import Link from "next/link";
+import { formRegisterValidation } from "@/utils/validation/auth";
+import { useSubmitSignIn } from "src/hooks/useQuery/mutations";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import InputForm from "@/molecules/form/InputForm";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Tooltip } from "@nextui-org/react";
 import toast from "react-hot-toast";
 import Button from "@/atoms/Button";
 import Loader from "@/atoms/Loader";
 import { Logo } from "@/utils/svg";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import InputForm from "@/molecules/form/InputForm";
-import { formRegisterValidation } from "@/utils/validation/auth";
-import { useSubmitSignIn } from "src/hooks/useQuery/mutations";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { Tooltip } from "@nextui-org/react";
+import Link from "next/link";
 
 function SignInPage() {
   const [warning, setWarning] = useState({});
@@ -140,11 +140,6 @@ function SignInPage() {
           </div>
           <div className="flex items-center justify-center gap-2">
             <span>ادمین و مالک امکان خرید از سایت را ندارند</span>
-          </div>
-          <div className="text-center">
-            <span className="text-blue-400 text-sm">
-              ترجیحا با VPN وارد شوید
-            </span>
           </div>
         </div>
       </form>

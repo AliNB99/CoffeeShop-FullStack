@@ -1,12 +1,12 @@
-import Button from "@/atoms/Button";
-import Input from "@/atoms/Input";
-import Loader from "@/atoms/Loader";
-import SelectCategory from "@/atoms/SelectCategory";
 import { addAccessoryItem, addCoffeeItem } from "@/constants/dashboard";
 import AddMoreSpecification from "@/molecules/form/AddMoreSpecification";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useCallback, useEffect, useState } from "react";
+import SelectCategory from "@/atoms/SelectCategory";
 import CustomDatePicker from "./CustomDatePicker";
+import Button from "@/atoms/Button";
+import Loader from "@/atoms/Loader";
+import Input from "@/atoms/Input";
 
 function AddSpecifications({ product, form, setForm, warning, touched }) {
   // set specification value based on category

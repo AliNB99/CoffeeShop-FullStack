@@ -1,4 +1,8 @@
+import DarkModeToggle from "../../common/DarkModeToggle";
+import StoreDropDownMobile from "./StoreDropDownMobile";
 import { navbarItem } from "@/constants/other";
+import { Logo, LogoType } from "@/utils/svg";
+import { signOut } from "next-auth/react";
 import {
   HomeIcon,
   XMarkIcon,
@@ -11,10 +15,6 @@ import {
   BriefcaseIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { Logo, LogoType } from "@/utils/svg";
-import DarkModeToggle from "../../common/DarkModeToggle";
-import StoreDropDownMobile from "./StoreDropDownMobile";
-import { signOut } from "next-auth/react";
 
 function SidebarItem({ showElement, onShowElement, role }) {
   return (

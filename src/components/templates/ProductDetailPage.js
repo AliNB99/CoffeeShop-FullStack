@@ -1,9 +1,9 @@
-import { LogoType } from "@/utils/svg";
-import SliderProductImage from "@/molecules/common/SliderProductImage";
 import CardProductDetails from "@/organisms/product/CardProductDetails";
 import ProductDescription from "@/organisms/product/ProductDescription";
-import AddComment from "@/organisms/product/AddComment";
+import SliderProductImage from "@/molecules/common/SliderProductImage";
 import ProductComments from "@/organisms/product/ProductComments";
+import AddComment from "@/organisms/product/AddComment";
+import { LogoType } from "@/utils/svg";
 
 function ProductDetailPage({ product, user }) {
   const {

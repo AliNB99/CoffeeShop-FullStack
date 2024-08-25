@@ -1,10 +1,10 @@
 "use client";
 
-import { useCallback } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Input, Spinner } from "@nextui-org/react";
 import { useDebouncedCallback } from "use-debounce";
+import { Input, Spinner } from "@nextui-org/react";
+import { useCallback } from "react";
 
 function SearchTable({
   searchValue,

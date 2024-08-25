@@ -1,16 +1,15 @@
 "use client";
 
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { useAddImages } from "src/hooks/useQuery/mutations";
+import Loader from "src/components/atoms/Loader";
+import CustomImage from "@/atoms/CustomImage";
+import toast from "react-hot-toast";
 import {
   ExclamationCircleIcon,
   PhotoIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
-import toast from "react-hot-toast";
-import Loader from "src/components/atoms/Loader";
-import CustomImage from "@/atoms/CustomImage";
-import { useAddImages } from "src/hooks/useQuery/mutations";
 
 function AddImage({ form, setForm }) {
   const { isPending, isError, mutateAsync } = useAddImages();

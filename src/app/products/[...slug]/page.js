@@ -1,10 +1,10 @@
+import NotFoundProductPage from "@/templates/NotFoundProductPage";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import ProductDetailPage from "@/templates/ProductDetailPage";
+import { getServerSession } from "next-auth";
 import connectDB from "@/DB/connectDB";
 import Product from "@/models/Product";
 import User from "@/models/User";
-import NotFoundProductPage from "@/templates/NotFoundProductPage";
-import ProductDetailPage from "@/templates/ProductDetailPage";
-import { getServerSession } from "next-auth";
 
 async function ProductDetail({ params: { slug } }) {
   const [id] = slug;

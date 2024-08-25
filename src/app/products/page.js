@@ -1,7 +1,7 @@
+import CategorySidebar from "@/organisms/product/CategorySidebar";
+import ProductsPage from "@/templates/ProductsPage";
 import connectDB from "@/DB/connectDB";
 import Product from "@/models/Product";
-import ProductsPage from "@/templates/ProductsPage";
-import CategorySidebar from "@/organisms/product/CategorySidebar";
 
 async function Products(context) {
   try {

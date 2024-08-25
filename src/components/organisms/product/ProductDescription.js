@@ -1,5 +1,5 @@
-import TitleDescription from "@/atoms/TitleDescription";
 import ProsAndCons from "@/molecules/product/ProsAndCons";
+import TitleDescription from "@/atoms/TitleDescription";
 import {
   HandThumbDownIcon,
   HandThumbUpIcon,

@@ -1,8 +1,8 @@
-import CustomImage from "@/atoms/CustomImage";
 import CardButton from "@/molecules/common/CardButton";
-import { sp } from "@/utils/helper/replaceNumber";
-import { LogoType } from "@/utils/svg";
 import { StarIcon } from "@heroicons/react/24/solid";
+import { sp } from "@/utils/helper/replaceNumber";
+import CustomImage from "@/atoms/CustomImage";
+import { LogoType } from "@/utils/svg";
 import Link from "next/link";
 
 function CardProduct({ data }) {

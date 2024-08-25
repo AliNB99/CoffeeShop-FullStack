@@ -1,15 +1,15 @@
 "use client";
 
-import CircleTag from "@/atoms/CircleTag";
-import ButtonCenter from "@/atoms/home/ButtonCenter";
 import { Curve, Instagram, Logo, LogoType, Telegram } from "@/utils/svg";
+import ButtonCenter from "@/atoms/home/ButtonCenter";
+import CircleTag from "@/atoms/CircleTag";
 import {
   EnvelopeIcon,
   MapPinIcon,
   PhoneIcon,
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 const list = [
   "حریم خصوصی",

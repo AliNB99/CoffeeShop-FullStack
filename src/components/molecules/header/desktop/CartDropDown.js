@@ -1,9 +1,8 @@
 import Link from "next/link";
-import Button from "@/atoms/Button";
 import { useSelector } from "react-redux";
 import { sp } from "@/utils/helper/replaceNumber";
-import { ChevronLeftIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import CardProductBasket from "@/organisms/common/CardProductBasket";
+import { ChevronLeftIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 
 function CartDropDown() {
   const { selectedItems, counterItems, finalPrice } = useSelector(

@@ -1,10 +1,10 @@
 "use client";
 
-import { navbarItem } from "@/constants/other";
-import DarkModeToggle from "@/molecules/common/DarkModeToggle";
-import CartDropDown from "@/molecules/header/desktop/CartDropDown";
 import StoreDropDown from "@/molecules/header/desktop/StoreDropDown";
 import UserDropDown from "@/molecules/header/desktop/UserDropDown";
+import CartDropDown from "@/molecules/header/desktop/CartDropDown";
+import DarkModeToggle from "@/molecules/common/DarkModeToggle";
+import { navbarItem } from "@/constants/other";
 import {
   ShoppingCartIcon,
   ArrowLeftEndOnRectangleIcon,

@@ -1,9 +1,9 @@
-import { getServerSession } from "next-auth";
-import User from "@/models/User";
-import connectDB from "@/DB/connectDB";
-import { redirect } from "next/navigation";
-import DashboardLayout from "@/layout/DashboardLayout";
 import { authOptions } from "../api/auth/[...nextauth]/route";
+import DashboardLayout from "@/layout/DashboardLayout";
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+import connectDB from "@/DB/connectDB";
+import User from "@/models/User";
 
 export const metadata = {
   title: "Golden Coffee | پنل کاربری",

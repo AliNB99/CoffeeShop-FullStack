@@ -1,5 +1,5 @@
-import CustomImage from "@/atoms/CustomImage";
 import { categoryProductList } from "@/constants/other";
+import CustomImage from "@/atoms/CustomImage";
 import Link from "next/link";
 import React from "react";
 

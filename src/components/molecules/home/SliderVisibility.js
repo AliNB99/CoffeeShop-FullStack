@@ -1,10 +1,10 @@
 "use client";
 
+import SwiperButtonCustom from "@/atoms/home/SwiperButtonCustom";
 import CardProduct from "@/organisms/common/CardProduct";
+import TitleSection from "@/atoms/home/TitleSection";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef } from "react";
-import TitleSection from "@/atoms/home/TitleSection";
-import SwiperButtonCustom from "@/atoms/home/SwiperButtonCustom";
 
 const breakpoints = {
   610: {

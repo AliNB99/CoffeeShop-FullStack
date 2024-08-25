@@ -1,9 +1,9 @@
-import User from "@/models/User";
-import connectDB from "@/DB/connectDB";
-import TitlePage from "@/atoms/TitlePage";
-import { getServerSession } from "next-auth";
-import ProductsTable from "@/organisms/admin/ProductsTable";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import ProductsTable from "@/organisms/admin/ProductsTable";
+import { getServerSession } from "next-auth";
+import TitlePage from "@/atoms/TitlePage";
+import connectDB from "@/DB/connectDB";
+import User from "@/models/User";
 
 async function ProductsListPage() {
   try {

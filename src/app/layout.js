@@ -1,20 +1,20 @@
-// main styles
-import "./globals.css";
-// swiper global style
-import "swiper/css";
-// components
-import Layout from "@/layout/Layout";
+import AuthInitializerReduxProvider from "@/providers/AuthInitializerReduxProvider";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import ReactQueryProvider from "@/providers/ReactQueryProvider";
+import ShowContextProvider from "@/context/ShowContextProvider";
+import NextThemeProvider from "@/providers/NextThemeProvider";
+import NextAuthProvider from "@/utils/NextAuthProvider";
+import ReduxProvider from "@/redux/ReduxProvider";
 // fonts
 import { Dana, Morabba } from "@/utils/fonts";
 // for change darkMode
 import { Toaster } from "react-hot-toast";
-import NextAuthProvider from "@/utils/NextAuthProvider";
-import NextThemeProvider from "@/providers/NextThemeProvider";
-import ShowContextProvider from "@/context/ShowContextProvider";
-import ReduxProvider from "@/redux/ReduxProvider";
-import ReactQueryProvider from "@/providers/ReactQueryProvider";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import AuthInitializerReduxProvider from "@/providers/AuthInitializerReduxProvider";
+// components
+import Layout from "@/layout/Layout";
+// main styles
+import "./globals.css";
+// swiper global style
+import "swiper/css";
 
 export const metadata = {
   title: "Golden Coffee | کافه گلد",

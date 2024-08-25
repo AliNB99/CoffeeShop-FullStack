@@ -1,5 +1,5 @@
-import { useMutation } from "@tanstack/react-query";
 import { UploadClient } from "@uploadcare/upload-client";
+import { useMutation } from "@tanstack/react-query";
 import { signIn } from "next-auth/react";
 import api from "src/configs/api";
 

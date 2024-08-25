@@ -1,5 +1,5 @@
+import { BarChart, Bar, XAxis, Tooltip } from "recharts";
 import { sp } from "@/utils/helper/replaceNumber";
-import { BarChart, Bar, XAxis, CartesianGrid, Tooltip } from "recharts";
 
 const data = [
   {

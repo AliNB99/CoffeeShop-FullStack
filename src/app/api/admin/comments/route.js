@@ -1,9 +1,9 @@
-import User from "@/models/User";
-import Comment from "@/models/Comment";
-import { NextResponse } from "next/server";
-import { getServerSession } from "next-auth";
 import { authOptions } from "../../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import { NextResponse } from "next/server";
+import Comment from "@/models/Comment";
 import connectDB from "@/DB/connectDB";
+import User from "@/models/User";
 
 export async function GET(req) {
   try {
