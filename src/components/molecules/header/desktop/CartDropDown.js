@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { useSelector } from "react-redux";
-import { sp } from "@/utils/helper/replaceNumber";
-import CardProductBasket from "@/organisms/common/CardProductBasket";
 import { ChevronLeftIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
+import CardProductBasket from "@/organisms/common/CardProductBasket";
+import { sp } from "@/utils/helper/replaceNumber";
+import { useSelector } from "react-redux";
+import Link from "next/link";
 
 function CartDropDown() {
   const { selectedItems, counterItems, finalPrice } = useSelector(

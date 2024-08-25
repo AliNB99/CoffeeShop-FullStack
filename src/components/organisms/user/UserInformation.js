@@ -10,12 +10,12 @@ import {
 } from "@heroicons/react/24/outline";
 import FormUserInformation from "../../molecules/user/FormUserInformation";
 import { useChangeUserInformation } from "src/hooks/useQuery/mutations";
+import CardUserPanel from "@/molecules/user/CardUserPanel";
 import { userInformation } from "@/constants/dashboard";
 import { Button, Tooltip } from "@nextui-org/react";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import CardUserPanel from "@/molecules/user/CardUserPanel";
 
 const listCartUserPanel = [
   {
