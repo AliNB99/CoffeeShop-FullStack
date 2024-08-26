@@ -7,12 +7,7 @@ async function SignIn() {
   const session = await getServerSession(authOptions);
   if (session) redirect("/");
 
-  return (
-    <div>
-      <SignInPage />
-      
-    </div>
-  );
+  return <SignInPage />;
 }
 
 export default SignIn;

@@ -1,37 +1,27 @@
 "use client";
 
-// function for validate input value
+import QuestionAuthForm from "@/molecules/form/QuestionAuthForm";
 import { formRegisterValidation } from "@/utils/validation/auth";
-// constants value for from item
 import { useSubmitSignup } from "src/hooks/useQuery/mutations";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import { authFormAmount } from "@/constants/auth";
 import InputForm from "@/molecules/form/InputForm";
-import Loader from "@/atoms/Loader";
-import Button from "@/atoms/Button";
-import { Logo } from "@/utils/svg/index";
 import { useRouter } from "next/navigation";
-import { Tooltip } from "@nextui-org/react";
-
 import { useEffect, useState } from "react";
+import { Logo } from "@/utils/svg/index";
+import Button from "@/atoms/Button";
+import Loader from "@/atoms/Loader";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import {
+  authFormSignUp,
+  formSignUpItem,
+  touchedSignUpItem,
+} from "@/constants/authItem";
 
 function SignupPage() {
+  const [form, setForm] = useState(formSignUpItem);
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
-
   const { push } = useRouter();
-
-  const [form, setForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-    isAccepted: false,
-  });
-
   const { isPending, mutateAsync } = useSubmitSignup();
 
   useEffect(() => {
@@ -42,7 +32,6 @@ function SignupPage() {
     const { name, checked } = e.target;
     setForm((form) => ({ ...form, [name]: checked }));
   };
-
   const actionHandler = async (e) => {
     e.preventDefault();
     if (Object.keys(warning).length) {
@@ -56,21 +45,9 @@ function SignupPage() {
         isAccepted: true,
       });
     }
-    try {
-      const { data } = await mutateAsync(form);
-      setTouched({
-        firstName: false,
-        lastName: false,
-        email: false,
-        password: false,
-        confirmPassword: false,
-        isAccepted: false,
-      });
-      push("/signin");
-      toast.success(data.message);
-    } catch (error) {
-      toast.error(error.response.data.error);
-    }
+    await mutateAsync(form);
+    setTouched(touchedSignUpItem);
+    push("/signin");
   };
 
   return (
@@ -83,7 +60,7 @@ function SignupPage() {
         <h1 className="text-center py-6 md:py-2 text-orange-300 drop-shadow-md text-3xl font-bold">
           ثبت نام
         </h1>
-        {authFormAmount.map((i, index) => (
+        {authFormSignUp.map((i, index) => (
           <InputForm
             key={index}
             type={i.type}
@@ -123,9 +100,10 @@ function SignupPage() {
           </p>
         </div>
         {isPending ? (
-          <Loader color="#FDBA74" size={10} />
+          <Loader color="bg-orange-300" size={2} />
         ) : (
           <Button
+            isLoading={isPending}
             width="w-full"
             bgColor="bg-orange-300"
             color="text-white"
@@ -134,24 +112,11 @@ function SignupPage() {
             ثبت نام
           </Button>
         )}
-        <div className="flex items-center justify-between px-1 pt-4">
-          <div className="flex items-center justify-center gap-1 text-sm">
-            <span className="text-zinc-500 dark:text-zinc-200">
-              آیا شما قبلا حساب ایجاد کرده اید؟
-            </span>
-            <Link
-              className="text-blue-400 hover:underline transition-all"
-              href="/signin"
-            >
-              ورود
-            </Link>
-          </div>
-          <Tooltip content="صفحه اصلی">
-            <Link className="text-orange-400" href="/">
-              <ArrowLeftIcon />
-            </Link>
-          </Tooltip>
-        </div>
+        <QuestionAuthForm
+          title="آیا شما قبلا حساب ایجاد کرده اید؟"
+          link="/signin"
+          labelLink="ثبت نام"
+        />
       </form>
     </div>
   );

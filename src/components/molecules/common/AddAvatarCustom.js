@@ -1,11 +1,11 @@
-import React from "react";
+import { Avatar, Spinner, Tooltip } from "@nextui-org/react";
+import { roleColorMap } from "@/constants/dashboardItem";
+import { PhotoIcon } from "@heroicons/react/24/outline";
+import { useQueryClient } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 import { Logo } from "@/utils/svg";
 import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
-import { roleColorMap } from "@/constants/dashboard";
-import { useQueryClient } from "@tanstack/react-query";
-import { PhotoIcon } from "@heroicons/react/24/outline";
-import { Avatar, Spinner, Tooltip } from "@nextui-org/react";
+import React from "react";
 import {
   useAddImages,
   useChangeDataAvatarUser,
@@ -22,7 +22,6 @@ function AddAvatarCustom({ user }) {
 
   const {
     isPending: isPendingChangeAvatar,
-    isError: isErrorChangeAvatar,
     mutateAsync: mutateAsyncChangeAvatar,
   } = useChangeDataAvatarUser(queryClient);
 
@@ -31,13 +30,8 @@ function AddAvatarCustom({ user }) {
 
     const res = await mutateAsyncAddImage(img);
     if (isErrorAddImage) return toast.error("عکس پروفایل با موفقیت اضافه نشد.");
-    const { data } = await mutateAsyncChangeAvatar({ id, img: res.cdnUrl });
-    if (data.error || isErrorChangeAvatar) {
-      toast.error(data.error);
-    } else {
-      toast.success(data.message);
-      refresh();
-    }
+    await mutateAsyncChangeAvatar({ id, img: res.cdnUrl });
+    refresh();
   };
   return (
     <div className="relative group">

@@ -104,6 +104,50 @@
     }
   }
 
+  /* custom skeleton */
+  @keyframes wave {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+
+  .animate-wave {
+    animation: wave 1.5s infinite ease-in-out;
+  }
+
+  /* custom Loader */
+  @keyframes loader {
+    0%,
+    100% {
+      opacity: 0.2;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+
+  .loader {
+    animation: loader 0.7s infinite ease-in-out both;
+  }
+
+  .loader:nth-child(1) {
+    animation-delay: -0.42s;
+  }
+
+  .loader:nth-child(2) {
+    animation-delay: -0.66s;
+  }
+
+  .loader:nth-child(3) {
+    animation-delay: 0.32s;
+  }
+
   .input-form {
     @apply w-full outline-none rounded-lg bg-white dark:bg-zinc-900 px-3 border-2 dark:border-zinc-700 shadow-normal p-2;
   }
@@ -227,7 +271,7 @@
 
   /* space top for all page */
   .space-top {
-    @apply container mt-5 md:mt-48;
+    @apply container mt-5 md:mt-44;
   }
 
   /* class for all page in dashboard */

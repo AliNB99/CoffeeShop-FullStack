@@ -1,4 +1,4 @@
-import { addAccessoryItem, addCoffeeItem } from "@/constants/dashboard";
+import { addAccessoryItem, addCoffeeItem } from "@/constants/dashboardItem";
 import AddMoreSpecification from "@/molecules/form/AddMoreSpecification";
 import { TrashIcon } from "@heroicons/react/24/outline";
 import { useCallback, useEffect, useState } from "react";
@@ -9,7 +9,6 @@ import Loader from "@/atoms/Loader";
 import Input from "@/atoms/Input";
 
 function AddSpecifications({ product, form, setForm, warning, touched }) {
-  // set specification value based on category
   const [listCategory, setListCategory] = useState(null);
 
   useEffect(() => {
@@ -130,7 +129,7 @@ function AddSpecifications({ product, form, setForm, warning, touched }) {
         </ul>
       ) : (
         <div className="w-full flex items-center justify-center">
-          <Loader color="#FDBA74" size={10} />
+          <Loader color="bg-zinc-500" size={2} />
         </div>
       )}
 

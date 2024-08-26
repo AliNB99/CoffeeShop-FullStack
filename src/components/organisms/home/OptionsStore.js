@@ -1,6 +1,6 @@
 "use client";
 
-import { listOptionStore } from "@/constants/other";
+import { listOptionStore } from "@/constants/homePageItem";
 
 function OptionsStore() {
   return (

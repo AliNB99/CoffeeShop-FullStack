@@ -28,14 +28,12 @@ function AddImage({ form, setForm }) {
         : toast.error("مشکلی در افزودن عکس پیش آمده است.");
     });
   };
-
   const deleteHandler = (e, index) => {
     e.stopPropagation();
     const newImages = [...form.images];
     newImages.splice(index, 1);
     setForm({ ...form, images: newImages });
   };
-
   const setMainImgHandler = (index) => {
     const newImages = [...form.images];
     const item = newImages.splice(index, 1)[0];
@@ -49,7 +47,6 @@ function AddImage({ form, setForm }) {
         <h1 className="font-bold mb-2"> عکس</h1>
         <div className="flex items-start sm:items-center gap-1">
           <ExclamationCircleIcon className="text-red-500 w-5 h-5" />
-
           <p className="text-zinc-700 dark:text-white text-xs md:text-sm font-bold">
             برای نمایش بهتر عکس ها بهتر است سایز آنها حداکثر
             <span className="text-red-400 px-2">500x500</span> و حجم عکس حداکثر
@@ -72,7 +69,7 @@ function AddImage({ form, setForm }) {
             className="relative flex items-center justify-center border-2 border-zinc-300 dark:border-zinc-600 group-hover:border-zinc-400 cursor-pointer border-dashed h-32 w-32 rounded-lg transition-all"
           >
             {isPending ? (
-              <Loader color="#EF4444" size={8} />
+              <Loader color="bg-red-500" size={2} />
             ) : (
               <div>
                 <PhotoIcon className="size-10 text-zinc-400 opacity-50 dark:text-zinc-600 group-hover:opacity-100 transition-all" />

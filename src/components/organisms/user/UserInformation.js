@@ -1,63 +1,20 @@
 "use client";
 
-import {
-  CheckBadgeIcon,
-  CheckCircleIcon,
-  CreditCardIcon,
-  CurrencyDollarIcon,
-  PencilSquareIcon,
-  TicketIcon,
-} from "@heroicons/react/24/outline";
+import { CheckCircleIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
 import FormUserInformation from "../../molecules/user/FormUserInformation";
 import { useChangeUserInformation } from "src/hooks/useQuery/mutations";
-import CardUserPanel from "@/molecules/user/CardUserPanel";
-import { userInformation } from "@/constants/dashboard";
+import { listCartUserPanel, userInformation } from "@/constants/dashboardItem";
 import { Button, Tooltip } from "@nextui-org/react";
 import { useCallback, useState } from "react";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-
-const listCartUserPanel = [
-  {
-    title: "مجموع پرداخت",
-    value: 5640000,
-    unit: "تومان",
-    bgColor: "bg-amber-300",
-    bgColorIcon: "bg-amber-200",
-    icon: <CreditCardIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
-  },
-  {
-    title: "موجودی حساب",
-    value: 850000,
-    unit: "تومان",
-    bgColor: "bg-green-500",
-    bgColorIcon: "bg-green-400",
-    icon: <CurrencyDollarIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
-  },
-  {
-    title: "مجموع تیکت ها",
-    unit: "تیکت",
-    value: 3,
-    bgColor: "bg-rose-600",
-    bgColorIcon: "bg-rose-500",
-    icon: <TicketIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
-  },
-  {
-    title: "تعداد سفارش",
-    unit: "بار",
-    value: 15,
-    bgColor: "bg-blue-500",
-    bgColorIcon: "bg-blue-400",
-    icon: <CheckBadgeIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
-  },
-];
+import CardPanel from "@/molecules/common/CardPanel";
 
 function UserInformation({ user }) {
   const [showEditForm, setShowEditForm] = useState(false);
   const [form, setForm] = useState({});
 
-  const { isPending, isError, mutateAsync } = useChangeUserInformation();
-
+  const { isPending, mutateAsync } = useChangeUserInformation();
   const { refresh } = useRouter();
 
   const createItem = useCallback(
@@ -112,29 +69,23 @@ function UserInformation({ user }) {
   );
 
   const submitFormHandler = async () => {
-    const data = await mutateAsync({
+    if (!form.firstName || !form.lastName || !form.email) {
+      return toast.error("لطفا تمامیه مقادیر مورد نیاز را وارد نمایید");
+    }
+    await mutateAsync({
       action: "changeInformation",
       id: user._id,
       form,
     });
-
-    if (!form.firstName || !form.lastName || !form.email) {
-      return toast.error("لطفا تمامیه مقادیر مورد نیاز را وارد نمایید");
-    }
-    if (data.data.error || isError) {
-      toast.error(data.data.error);
-    } else {
-      toast.success(data.data.message);
-      setShowEditForm(false);
-      refresh();
-    }
+    setShowEditForm(false);
+    refresh();
   };
 
   return (
     <div className="space-y-10">
       <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2">
         {listCartUserPanel.map((i, index) => (
-          <CardUserPanel
+          <CardPanel
             key={index}
             title={i.title}
             value={i.value}

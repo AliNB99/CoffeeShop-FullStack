@@ -1,4 +1,4 @@
-import { CategoryColorMap } from "@/constants/dashboard";
+import { CategoryColorMap } from "@/constants/dashboardItem";
 import { UserIcon } from "@heroicons/react/24/outline";
 import CustomImage from "@/atoms/CustomImage";
 import {

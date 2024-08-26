@@ -1,20 +1,27 @@
 import {
   AtSymbolIcon,
+  BanknotesIcon,
   BriefcaseIcon,
   BuildingOffice2Icon,
   ChatBubbleLeftRightIcon,
+  CheckBadgeIcon,
   ClipboardDocumentCheckIcon,
   CreditCardIcon,
+  CurrencyDollarIcon,
   HeartIcon,
   HomeIcon,
   MapPinIcon,
   PhoneIcon,
+  ReceiptPercentIcon,
   ShoppingBagIcon,
-  ShoppingCartIcon,
+  SparklesIcon,
+  TicketIcon,
   UserGroupIcon,
   UserIcon,
   UsersIcon,
 } from "@heroicons/react/24/outline";
+
+////// USER CONSTANT /////
 
 export const userDashboardItem = [
   { title: "داشبورد", link: "/dashboard", icon: <HomeIcon /> },
@@ -25,7 +32,6 @@ export const userDashboardItem = [
     link: "/dashboard/ticket",
     icon: <ChatBubbleLeftRightIcon />,
   },
-  { title: "سبد خرید", link: "/dashboard/cart", icon: <ShoppingCartIcon /> },
 ];
 
 export const userInformation = [
@@ -46,6 +52,64 @@ export const userInformation = [
     icon: <BuildingOffice2Icon />,
   },
   { name: "address", title: "آدرس", icon: <MapPinIcon /> },
+];
+
+export const listCheckout = [
+  {
+    title: "قیمت کل(تومان)",
+    icon: <BanknotesIcon />,
+    keyValue: "totalPrice",
+  },
+  {
+    title: "تعداد محصولات",
+    icon: <SparklesIcon />,
+    keyValue: "counterItems",
+  },
+  {
+    title: "مقدار تخفیف(تومان)",
+    icon: <ReceiptPercentIcon />,
+    keyValue: "totalDiscount",
+  },
+  {
+    title: "قیمت نهایی(تومان)",
+    icon: <CreditCardIcon />,
+    keyValue: "finalPrice",
+  },
+];
+
+export const listCartUserPanel = [
+  {
+    title: "مجموع پرداخت",
+    value: 5640000,
+    unit: "تومان",
+    bgColor: "bg-amber-300",
+    bgColorIcon: "bg-amber-200",
+    icon: <CreditCardIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "موجودی حساب",
+    value: 850000,
+    unit: "تومان",
+    bgColor: "bg-green-500",
+    bgColorIcon: "bg-green-400",
+    icon: <CurrencyDollarIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "مجموع تیکت ها",
+    unit: "تیکت",
+    value: 3,
+    bgColor: "bg-rose-600",
+    bgColorIcon: "bg-rose-500",
+    icon: <TicketIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
+  {
+    title: "تعداد سفارش",
+    unit: "بار",
+    value: 15,
+    bgColor: "bg-blue-500",
+    bgColorIcon: "bg-blue-400",
+    icon: <CheckBadgeIcon className="md:w-7 md:h-7 lg:w-10 lg:h-10" />,
+  },
 ];
 
 ////// ADMIN CONSTANT /////
@@ -78,6 +142,36 @@ export const adminDashboardItem = [
   },
 ];
 
+export const listUserInfo = [
+  { name: "user" },
+  { name: "phone", title: "شماره تلفن", icon: <PhoneIcon /> },
+  { name: "bankInfo", title: "شماره شبا", icon: <CreditCardIcon /> },
+  { name: "postalCode", title: "کد پستی", icon: <BuildingOffice2Icon /> },
+  { name: "address", title: "آدرس", icon: <MapPinIcon /> },
+];
+
+export const ticketMessage = [
+  {
+    category: "orderTracking",
+    title: "درخواست بررسی سفارش",
+    message:
+      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
+  },
+  {
+    category: "finance",
+    title: "درخواست بررسی بازگشت وجه سفارش بنده",
+    message:
+      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
+  },
+  {
+    category: "returns",
+    title: "درخواست بررسی مرجوع کردن محصول",
+    message:
+      "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
+  },
+];
+
+// for add and edit product
 export const addProductForm = [
   {
     name: "title",
@@ -113,6 +207,34 @@ export const addProductForm = [
     placeholder: "میزان درصد تخیف روی محصول از 1 تا 100 درصد (اختیاری)",
     min: 1,
     max: 99,
+  },
+];
+
+export const formItem = {
+  title: "",
+  description: "",
+  quantity: "",
+  price: "",
+  discount: "",
+  category: "coffee",
+  images: [],
+  advantages: [],
+  disadvantages: [],
+  specifications: [],
+};
+
+export const AddPropertyListItem = [
+  {
+    name: "advantages",
+    title: "مزایا",
+    color: "text-green-500",
+    bgColor: "bg-green-100",
+  },
+  {
+    name: "disadvantages",
+    title: "معایب",
+    color: "text-red-500",
+    bgColor: "bg-red-100",
   },
 ];
 
@@ -154,6 +276,8 @@ export const addAccessoryItem = [
   { title: "برنده", value: "", placeholder: "مثلا: دلونگی (delonghi)" },
   { title: "وزن محصول (گرم)", value: "", placeholder: "مثلا: 250 گرم" },
 ];
+
+// for table in admin panel
 
 export const columnsProductsTable = [
   { name: "شماره", uid: "id" },
@@ -219,9 +343,8 @@ export const statusCommentColorMap = {
   unaccepted: "danger",
 };
 
-export const listUserInfo = [
-  { name: "phone", title: "شماره تلفن", icon: <PhoneIcon /> },
-  { name: "bankInfo", title: "شماره شبا", icon: <CreditCardIcon /> },
-  { name: "postalCode", title: "کد پستی", icon: <BuildingOffice2Icon /> },
-  { name: "address", title: "آدرس", icon: <MapPinIcon /> },
-];
+export const typeTitleMap = {
+  products: "محصول",
+  users: "کاربر",
+  comments: "نظر",
+};

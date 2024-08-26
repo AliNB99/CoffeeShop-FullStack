@@ -11,6 +11,7 @@ import Link from "next/link";
 import {
   ArrowRightStartOnRectangleIcon,
   HomeIcon,
+  ShoppingCartIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import {
@@ -18,7 +19,7 @@ import {
   roleColorMap,
   roleTitle,
   userDashboardItem,
-} from "@/constants/dashboard";
+} from "@/constants/dashboardItem";
 import { useSelector } from "react-redux";
 
 function DashboardSidebar({ user }) {
@@ -32,7 +33,7 @@ function DashboardSidebar({ user }) {
     <aside
       className={`fixed lg:relative ${
         showElement.sidebar ? "right-0" : "-right-64"
-      } lg:right-0 top-0 min-h-full overflow-y-auto w-64 lg:w-72 bg-white dark:bg-zinc-700 shadow-xl transition-all z-30 p-4`}
+      } lg:right-0 top-0 min-h-full overflow-y-auto w-64 lg:w-72 bg-white dark:bg-zinc-700 shadow-xl transition-all z-30 p-3`}
     >
       <div className="flex lg:hidden items-center justify-end py-2">
         <button
@@ -57,9 +58,9 @@ function DashboardSidebar({ user }) {
           </Chip>
         </div>
       </div>
-      <div className="border-b border-zinc-300 dark:border-zinc-600 pb-7">
+      <div className="border-b border-zinc-300 dark:border-zinc-600 pb-5">
         <div>
-          <ul className="space-y-6 pt-7">
+          <ul className="space-y-6 pt-5">
             {(role === "USER" ? userDashboardItem : adminDashboardItem).map(
               (i, index) => (
                 <li
@@ -73,9 +74,9 @@ function DashboardSidebar({ user }) {
                     {i.icon}
                     {i.title}
                   </Link>
-                  {i.title === "سبد خرید" && counterItems > 0 && (
-                    <span className="bg-red-500 px-2 text-white rounded-md">
-                      {counterItems}
+                  {i.title === "تیکت ها" && (
+                    <span className="bg-red-500 px-2 py-1 text-white font-bold text-xs rounded-md">
+                      3
                     </span>
                   )}
                 </li>
@@ -84,7 +85,18 @@ function DashboardSidebar({ user }) {
           </ul>
         </div>
       </div>
-      <div className="py-7 space-y-6 child:flex child:items-center child:gap-x-2 pr-4 text-orange-300">
+      <div className="py-5 space-y-6 child:flex child:items-center child:gap-x-2 pr-4 text-orange-300">
+        <div className="flex justify-between items-center pl-2">
+          <Link className="flex items-start gap-2" href="/cart">
+            <ShoppingCartIcon />
+            سبد خرید
+          </Link>
+          {counterItems > 0 && (
+            <span className="bg-red-500 px-2 py-1 text-white text-xs font-bold rounded-md">
+              {counterItems}
+            </span>
+          )}
+        </div>
         <Link href="/">
           <HomeIcon />
           <span>صفحه اصلی</span>

@@ -4,7 +4,7 @@ import StoreDropDown from "@/molecules/header/desktop/StoreDropDown";
 import UserDropDown from "@/molecules/header/desktop/UserDropDown";
 import CartDropDown from "@/molecules/header/desktop/CartDropDown";
 import DarkModeToggle from "@/molecules/common/DarkModeToggle";
-import { navbarItem } from "@/constants/other";
+import { navbarItem } from "@/constants/homePageItem";
 import {
   ShoppingCartIcon,
   ArrowLeftEndOnRectangleIcon,
@@ -56,10 +56,10 @@ function DesktopHeader({ role }) {
         <div className="relative flex items-center gap-x-4 lg:gap-x-5 xl:gap-x-10 text-xl">
           <div className="flex items-center gap-5">
             <div className="relative py-3 flex items-center group">
-              <Link href="/dashboard/cart">
+              <Link href="/cart">
                 <ShoppingCartIcon className="w-8 h-8 text-orange-200" />
                 {!!counterItems && (
-                  <span className="absolute top-7 left-4 flex items-center justify-center text-xs text-white bg-red-500 w-5 h-5 pt-1 rounded-full">
+                  <span className="absolute top-7 left-4 flex items-center justify-center text-xs text-white font-bold bg-red-500 w-5 h-5 pt-1 rounded-full">
                     {counterItems}
                   </span>
                 )}

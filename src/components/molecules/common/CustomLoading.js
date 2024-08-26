@@ -6,7 +6,7 @@ function CustomLoading() {
     <div className="h-screen w-full flex items-center justify-self-center">
       <div className="w-full flex flex-col items-center justify-center">
         <LogoType className="w-52 h-32 text-orange-300" />
-        <Loader color="#fdba74" size={10} />
+        <Loader color="bg-orange-300" size={2} />
       </div>
     </div>
   );

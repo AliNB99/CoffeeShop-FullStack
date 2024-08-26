@@ -1,4 +1,4 @@
-import { categoryProductList } from "@/constants/other";
+import { categoryProductList } from "@/constants/homePageItem";
 import CustomImage from "@/atoms/CustomImage";
 import Link from "next/link";
 import React from "react";

@@ -9,20 +9,15 @@ import { useState } from "react";
 
 function WriteComment({ user, product }) {
   const [comment, setComment] = useState({ description: "", rate: "" });
-  const { isPending, isError, mutateAsync } = useSubmitComment();
+  const { isPending, mutateAsync } = useSubmitComment();
 
   const submitCommentHandler = async () => {
     if (!comment.description || !comment.rate) {
       return toast.error("لطفا متن و امتیاز را وارد نمایید.");
     }
 
-    const data = await mutateAsync({ product, user, comment });
-    if (data.data.error || isError) {
-      toast.error(data.data.error);
-    } else {
-      toast.success(data.data.message);
-      setComment({ description: "", rate: "" });
-    }
+    await mutateAsync({ product, user, comment });
+    setComment({ description: "", rate: "" });
   };
 
   return (
@@ -64,7 +59,7 @@ function WriteComment({ user, product }) {
         </div>
         <div className="flex justify-end">
           {isPending ? (
-            <Loader color="#3F85F6" size={10} />
+            <Loader color="bg-blue-500" size={2} />
           ) : (
             <Button
               clickHandler={submitCommentHandler}

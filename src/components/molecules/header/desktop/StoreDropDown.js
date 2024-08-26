@@ -1,4 +1,4 @@
-import { storeDesktopItem } from "@/constants/other";
+import { storeDesktopItem } from "@/constants/homePageItem";
 import Link from "next/link";
 
 function StoreDropDown() {

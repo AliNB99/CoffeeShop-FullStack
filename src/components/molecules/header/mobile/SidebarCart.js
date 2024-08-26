@@ -10,7 +10,7 @@ function SidebarCart({ showElement, onShowElement }) {
   const { selectedItems, finalPrice } = useSelector((state) => state.cart);
 
   return (
-    <nav
+    <aside
       className={`fixed ${
         showElement.cartSidebar ? "left-0" : "-left-80"
       } top-0 bottom-0 p-4 bg-white dark:bg-zinc-700 w-80 overflow-y-hidden z-30 transition-all`}
@@ -46,7 +46,7 @@ function SidebarCart({ showElement, onShowElement }) {
           <div className="absolute bottom-0 left-0 w-full bg-white dark:bg-zinc-700 p-3 mt-5">
             <div className="flex items-center justify-between border-t-2 dark:border-zinc-600 p-3">
               <Link
-                href="/dashboard/cart"
+                href="/cart"
                 className="flex items-center justify-center rounded-lg px-3 text-white h-10 bg-teal-600 hover:bg-teal-500 text-sm"
               >
                 ثبت سفارش
@@ -62,7 +62,7 @@ function SidebarCart({ showElement, onShowElement }) {
           </div>
         </div>
       )}
-    </nav>
+    </aside>
   );
 }
 

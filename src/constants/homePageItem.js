@@ -3,10 +3,6 @@ import {
   NewspaperIcon,
   PhoneArrowUpRightIcon,
   UserGroupIcon,
-  BanknotesIcon,
-  CreditCardIcon,
-  ReceiptPercentIcon,
-  SparklesIcon,
 } from "@heroicons/react/24/outline";
 import {
   Coffee,
@@ -115,29 +111,6 @@ export const listOptionStore = [
     title: "رست تخصصی",
     subTitle: "تازه برشته شده و با کیفیت",
     iconLight: <Coffee className="w-16 h-20" />,
-  },
-];
-
-export const listCheckout = [
-  {
-    title: "قیمت کل(تومان)",
-    icon: <BanknotesIcon />,
-    keyValue: "totalPrice",
-  },
-  {
-    title: "تعداد محصولات",
-    icon: <SparklesIcon />,
-    keyValue: "counterItems",
-  },
-  {
-    title: "مقدار تخفیف(تومان)",
-    icon: <ReceiptPercentIcon />,
-    keyValue: "totalDiscount",
-  },
-  {
-    title: "قیمت نهایی(تومان)",
-    icon: <CreditCardIcon />,
-    keyValue: "finalPrice",
   },
 ];
 

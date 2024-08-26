@@ -43,7 +43,7 @@ import {
   columnsProductsTable,
   CategoryColorMap,
   categoryTitle,
-} from "@/constants/dashboard";
+} from "@/constants/dashboardItem";
 
 const INITIAL_VISIBLE_COLUMNS = [
   "title",
@@ -83,7 +83,6 @@ function ProductsTable() {
     data,
     isPending: isPendingProducts,
     isFetching: isFetchingProducts,
-    isError: isErrorProducts,
   } = useGetData({ route: "products", page, rowsPerPage, searchValue });
 
   useEffect(() => {
@@ -100,38 +99,26 @@ function ProductsTable() {
 
   // mutation
   const {
-    isError: isErrorDeleteProduct,
     isPending: isPendingDeleteProduct,
     mutateAsync: mutateAsyncDeleteProduct,
   } = useDeleteData({ queryClient, route: "products" });
   const {
     variables: variablesChangeProduct,
     isPending: isPendingChangeProduct,
-    isError: isErrorChangeProduct,
     mutateAsync: mutateAsyncChangeProduct,
   } = useChangeData({ queryClient, route: "products" });
 
   const deleteProductHandler = async (id) => {
-    const res = await mutateAsyncDeleteProduct(id);
-    if (res.data.error || isErrorDeleteProduct) {
-      toast.error("محصول حذف نشد.مجدد تلاش کنید.");
-    } else {
-      toast.success(res.data.message);
-      setSelectedKeys(new Set([]));
-    }
+    await mutateAsyncDeleteProduct(id);
+    setSelectedKeys(new Set([]));
   };
 
   const changeProductHandler = async ({ id, action }) => {
-    const res = await mutateAsyncChangeProduct({
+    await mutateAsyncChangeProduct({
       id,
       action,
       route: "products",
     });
-    if (res.data.error || isErrorChangeProduct) {
-      toast.error("وضعیت کاربر تغییر نکرد. مجدد تلاش کنید.");
-    } else {
-      toast.success(res.data.message);
-    }
   };
 
   const headerColumns = useMemo(() => {
@@ -420,15 +407,13 @@ function ProductsTable() {
           emptyContent={"محصولی یافت نشد!!!"}
           items={data?.data.products ?? []}
         >
-          {!isErrorProducts
-            ? data?.data.products.map((item, index) => (
-                <TableRow className="h-20" key={item._id}>
-                  {(columnKey) => (
-                    <TableCell>{renderCell(item, columnKey, index)}</TableCell>
-                  )}
-                </TableRow>
-              ))
-            : toast.error("مشکلی در دریافت اطلاعات بوجود آمده")}
+          {data?.data.products.map((item, index) => (
+            <TableRow className="h-20" key={item._id}>
+              {(columnKey) => (
+                <TableCell>{renderCell(item, columnKey, index)}</TableCell>
+              )}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
 

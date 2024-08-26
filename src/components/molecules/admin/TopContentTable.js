@@ -26,14 +26,8 @@ import {
   useChangeSomeData,
   useDeleteSomeData,
 } from "src/hooks/useQuery/mutations";
-import toast from "react-hot-toast";
 import Link from "next/link";
-
-const typeTitleMap = {
-  products: "محصول",
-  users: "کاربر",
-  comments: "نظر",
-};
+import { typeTitleMap } from "@/constants/dashboardItem";
 
 function TopContentTable({
   setPage,
@@ -67,17 +61,11 @@ function TopContentTable({
 
   const queryClient = useQueryClient();
 
-  const {
-    isError: isErrorDelete,
-    isPending: isPendingDelete,
-    mutateAsync: mutateAsyncDelete,
-  } = useDeleteSomeData({ queryClient, route: type });
+  const { isPending: isPendingDelete, mutateAsync: mutateAsyncDelete } =
+    useDeleteSomeData({ queryClient, route: type });
 
-  const {
-    isError: isErrorStatus,
-    isPending: isPendingStatus,
-    mutateAsync: mutateAsyncStatus,
-  } = useChangeSomeData({ queryClient, route: type });
+  const { isPending: isPendingStatus, mutateAsync: mutateAsyncStatus } =
+    useChangeSomeData({ queryClient, route: type });
 
   useEffect(() => {
     setIds([]);
@@ -87,27 +75,17 @@ function TopContentTable({
   }, [selectedKeys]);
 
   const deleteSelectedDataHandler = async () => {
-    const res = await mutateAsyncDelete({ ids, selectedKeys });
-    if (res.data.error || isErrorDelete) {
-      return toast.error(res.data.error);
-    } else {
-      toast.success(res.data.message);
-      setSelectedKeys(new Set([]));
-    }
+    await mutateAsyncDelete({ ids, selectedKeys });
+    setSelectedKeys(new Set([]));
   };
 
   const changeStatusSelectedDataHandler = async (item) => {
-    const res = await mutateAsyncStatus({
+    await mutateAsyncStatus({
       ids,
       selectedKeys,
       action: "changeStatus",
       statusValue: item.status,
     });
-    if (res.data.error || isErrorStatus) {
-      return toast.error(res.data.error);
-    } else {
-      toast.success(res.data.message);
-    }
   };
 
   return (

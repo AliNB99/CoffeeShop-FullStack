@@ -15,7 +15,7 @@ import {
   columnsCommentsTable,
   statusCommentColorMap,
   statusCommentTitle,
-} from "@/constants/dashboard";
+} from "@/constants/dashboardItem";
 
 import {
   Table,
@@ -78,7 +78,6 @@ function CommentsTable() {
     data,
     isPending: isPendingComment,
     isFetching: isFetchingComment,
-    isError: isErrorComment,
   } = useGetData({ route: "comments", page, rowsPerPage, searchValue });
 
   useEffect(() => {
@@ -93,40 +92,29 @@ function CommentsTable() {
     queryClient.invalidateQueries({ queryKey: ["comments"] });
   }, [searchValue, rowsPerPage]);
 
-  // mutation
+  // mutations
   const {
-    isError: isErrorDeleteComment,
     isPending: isPendingDeleteComment,
     mutateAsync: mutateAsyncDeleteComment,
   } = useDeleteData({ queryClient, route: "comments" });
   const {
     variables: variablesChangeComment,
     isPending: isPendingChangeComment,
-    isError: isErrorChangeComment,
     mutateAsync: mutateAsyncChangeComment,
   } = useChangeData({ queryClient, route: "comments" });
 
+  // functions
   const deleteCommentHandler = async (id) => {
-    const res = await mutateAsyncDeleteComment(id);
-    if (res.data.error || isErrorDeleteComment) {
-      toast.error(res.data.error);
-    } else {
-      toast.success(res.data.message);
-      setSelectedKeys(new Set([]));
-    }
+    await mutateAsyncDeleteComment(id);
+    setSelectedKeys(new Set([]));
   };
 
   const changeCommentHandler = async ({ status, action }) => {
-    const res = await mutateAsyncChangeComment({
+    await mutateAsyncChangeComment({
       status,
       action,
       id: commentId,
     });
-    if (res.data.error || isErrorChangeComment) {
-      toast.error(res.data.error);
-    } else {
-      toast.success(res.data.message);
-    }
   };
 
   const headerColumns = useMemo(() => {
@@ -380,15 +368,13 @@ function CommentsTable() {
           emptyContent={"دیدگاهی یافت نشد!!!"}
           items={data?.data.comments ?? []}
         >
-          {!isErrorComment
-            ? data?.data.comments.map((item, index) => (
-                <TableRow className="h-20" key={item._id}>
-                  {(columnKey) => (
-                    <TableCell>{renderCell(item, columnKey, index)}</TableCell>
-                  )}
-                </TableRow>
-              ))
-            : toast.error("مشکلی در دریافت اطلاعات بوجود آمده")}
+          {data?.data.comments.map((item, index) => (
+            <TableRow className="h-20" key={item._id}>
+              {(columnKey) => (
+                <TableCell>{renderCell(item, columnKey, index)}</TableCell>
+              )}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
 

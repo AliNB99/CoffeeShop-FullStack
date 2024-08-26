@@ -1,7 +1,7 @@
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
 import TitleSection from "@/atoms/home/TitleSection";
 import BlogCart from "@/molecules/home/BlogCart";
-import { blogList } from "@/constants/other";
+import { blogList } from "@/constants/homePageItem";
 import Link from "next/link";
 
 function BlogList() {

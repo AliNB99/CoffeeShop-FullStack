@@ -1,12 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
-
 import ModalShowInfoUserCustom from "@/molecules/admin/ModalShowInfoUserCustom";
 import { useChangeData, useDeleteData } from "src/hooks/useQuery/mutations";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ModalDeleteCustom from "@/molecules/common/ModalDeleteCustom";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import TopContentTable from "@/molecules/admin/TopContentTable";
 import { useGetData } from "src/hooks/useQuery/queries";
 import { useQueryClient } from "@tanstack/react-query";
@@ -43,7 +42,7 @@ import {
   columnsUsersTable,
   roleColorMap,
   roleTitle,
-} from "@/constants/dashboard";
+} from "@/constants/dashboardItem";
 
 const INITIAL_VISIBLE_COLUMNS = ["name", "role", "status", "actions", "id"];
 
@@ -86,7 +85,6 @@ function UsersTable({ role }) {
     data,
     isPending: isPendingUsers,
     isFetching: isFetchingUser,
-    isError: isErrorUsers,
   } = useGetData({ page, rowsPerPage, searchValue, route: "users" });
 
   useEffect(() => {
@@ -104,36 +102,22 @@ function UsersTable({ role }) {
     queryClient.invalidateQueries({ queryKey: ["users"] });
   }, [searchValue, rowsPerPage]);
 
-  const {
-    isError: isErrorDeleteUser,
-    isPending: isPendingDeleteUser,
-    mutateAsync: mutateAsyncDeleteUser,
-  } = useDeleteData({ queryClient, route: "users" });
+  const { isPending: isPendingDeleteUser, mutateAsync: mutateAsyncDeleteUser } =
+    useDeleteData({ queryClient, route: "users" });
 
   const {
     variables: variablesChangeUser,
     isPending: isPendingChangeUser,
-    isError: isErrorChangeUser,
     mutateAsync: mutateAsyncChangeUser,
   } = useChangeData({ queryClient, route: "users" });
 
   const deleteUserHandler = async (id) => {
-    const res = await mutateAsyncDeleteUser(id);
-    if (res.data.error || isErrorDeleteUser) {
-      toast.error("کاربر حذف نشد.مجدد تلاش کنید.");
-    } else {
-      toast.success(res.data.message);
-      setSelectedKeys(new Set([]));
-    }
+    await mutateAsyncDeleteUser(id);
+    setSelectedKeys(new Set([]));
   };
 
   const changeUserHandler = async ({ id, action }) => {
-    const res = await mutateAsyncChangeUser({ id, action });
-    if (res.data.error || isErrorChangeUser) {
-      toast.error("وضعیت کاربر تغییر نکرد. مجدد تلاش کنید.");
-    } else {
-      toast.success(res.data.message);
-    }
+    await mutateAsyncChangeUser({ id, action });
   };
 
   const headerColumns = useMemo(() => {
@@ -418,15 +402,13 @@ function UsersTable({ role }) {
           emptyContent={"کاربری یافت نشد!!!"}
           items={data?.data.users ?? []}
         >
-          {!isErrorUsers
-            ? data?.data.users.map((item, index) => (
-                <TableRow className="h-16" key={item._id}>
-                  {(columnKey) => (
-                    <TableCell>{renderCell(item, columnKey, index)}</TableCell>
-                  )}
-                </TableRow>
-              ))
-            : toast.error("مشکلی در دریافت اطلاعات بوجود آمده")}
+          {data?.data.users.map((item, index) => (
+            <TableRow className="h-16" key={item._id}>
+              {(columnKey) => (
+                <TableCell>{renderCell(item, columnKey, index)}</TableCell>
+              )}
+            </TableRow>
+          ))}
         </TableBody>
       </Table>
 

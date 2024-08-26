@@ -1,4 +1,4 @@
-import { storeDropDownMobile } from "@/constants/other";
+import { storeDropDownMobile } from "@/constants/homePageItem";
 import Link from "next/link";
 
 function StoreDropDownMobile({ showElement }) {

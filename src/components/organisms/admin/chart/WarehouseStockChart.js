@@ -1,6 +1,6 @@
-import { PieChart, Pie, Cell, Scatter, Legend } from "recharts";
+import { PieChart, Pie, Cell, Legend } from "recharts";
 
-const data = [
+const fakeData = [
   { name: "قهوه", value: 400 },
   { name: "لوازم جانبی", value: 300 },
 ];
@@ -38,7 +38,7 @@ export default function WarehouseStockChart() {
     <div className="flex flex-col items-center justify-center">
       <PieChart width={300} height={400}>
         <Pie
-          data={data}
+          data={fakeData}
           cx="50%"
           cy="50%"
           labelLine={false}
@@ -47,7 +47,7 @@ export default function WarehouseStockChart() {
           fill="#8884d8"
           dataKey="value"
         >
-          {data.map((entry, index) => (
+          {fakeData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>

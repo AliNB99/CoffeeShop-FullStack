@@ -1,10 +1,9 @@
 "use client";
 
-// Icon and Svg
 import { Bars3Icon, ShoppingCartIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { LogoType } from "@/utils/svg";
 import { useSelector } from "react-redux";
+import { LogoType } from "@/utils/svg";
+import Link from "next/link";
 
 function MobileHeader({ onShowElement }) {
   const { counterItems } = useSelector((state) => state.cart);
@@ -23,7 +22,7 @@ function MobileHeader({ onShowElement }) {
         onClick={() => onShowElement({ element: "cartSidebar" })}
       >
         {!!counterItems && (
-          <span className="absolute top-3 left-3 flex items-center justify-center text-xs text-white bg-red-500 w-5 h-5 pt-1 rounded-full">
+          <span className="absolute top-3 left-3 flex items-center justify-center text-xs font-bold text-white bg-red-500 w-5 h-5 pt-1 rounded-full">
             {counterItems}
           </span>
         )}

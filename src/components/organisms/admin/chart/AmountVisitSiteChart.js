@@ -7,7 +7,7 @@ import {
   Tooltip,
 } from "recharts";
 
-const data = [
+const fakeData = [
   {
     name: "فروردین",
     نفر: 2400,
@@ -65,7 +65,7 @@ export default function AmountVisitSiteChart() {
         className="pr-10"
         width={550}
         height={400}
-        data={data}
+        data={fakeData}
         margin={{
           right: 20,
         }}

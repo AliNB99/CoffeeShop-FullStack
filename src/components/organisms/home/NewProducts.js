@@ -5,6 +5,7 @@ import Product from "@/models/Product";
 import connectDB from "@/DB/connectDB";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import NotFoundProductLabel from "@/atoms/home/NotFoundProductLabel";
 
 async function NewProducts() {
   try {
@@ -39,13 +40,7 @@ async function NewProducts() {
           ))}
         </div>
       ) : (
-        <div className="container">
-          <div className="text-center mt-20 p-2 rounded-lg bg-red-100 text-red-400">
-            <h1 className="text-xl lg:text-2xl font-bold">
-              هیچ محصولی یافت نشد؟!
-            </h1>
-          </div>
-        </div>
+        <NotFoundProductLabel label="هیچ محصولی یافت نشد؟!" />
       )}
     </section>
   );

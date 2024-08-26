@@ -12,7 +12,7 @@ import { Toaster } from "react-hot-toast";
 // components
 import Layout from "@/layout/Layout";
 // main styles
-import "./globals.css";
+import "@/styles/globals.css";
 // swiper global style
 import "swiper/css";
 

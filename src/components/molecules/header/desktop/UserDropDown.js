@@ -25,7 +25,7 @@ function UserDropDown({ role }) {
             </li>
             <li>
               <ShoppingBagIcon />
-              <Link href="/dashboard/order">سفارشات من</Link>
+              <Link href="/cart">سفارشات من</Link>
             </li>
           </>
         )}

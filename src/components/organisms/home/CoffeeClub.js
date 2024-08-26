@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeftIcon } from "@heroicons/react/24/outline";
-import { listCoffeeClub } from "@/constants/other";
+import { listCoffeeClub } from "@/constants/homePageItem";
 import CustomImage from "@/atoms/CustomImage";
 import { useSession } from "next-auth/react";
 import Link from "next/link";

@@ -1,17 +1,16 @@
 "use client";
 
+import QuestionAuthForm from "@/molecules/form/QuestionAuthForm";
 import { formRegisterValidation } from "@/utils/validation/auth";
+import { authFormSignIn, loginInfo } from "@/constants/authItem";
 import { useSubmitSignIn } from "src/hooks/useQuery/mutations";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import InputForm from "@/molecules/form/InputForm";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Tooltip } from "@nextui-org/react";
 import toast from "react-hot-toast";
 import Button from "@/atoms/Button";
 import Loader from "@/atoms/Loader";
 import { Logo } from "@/utils/svg";
-import Link from "next/link";
 
 function SignInPage() {
   const [warning, setWarning] = useState({});
@@ -22,7 +21,6 @@ function SignInPage() {
   });
 
   const { push, refresh } = useRouter();
-
   const { isPending, mutateAsync } = useSubmitSignIn("signin");
 
   useEffect(() => {
@@ -38,9 +36,7 @@ function SignInPage() {
         password: true,
       });
     }
-
     const data = await mutateAsync(form);
-
     if (data.error) {
       return toast.error(data.error);
     } else {
@@ -68,31 +64,22 @@ function SignInPage() {
         <h1 className="text-center py-6 md:py-4 text-orange-300 drop-shadow-md text-3xl font-bold">
           ورود
         </h1>
-        <InputForm
-          type="text"
-          name="email"
-          value={form.email}
-          placeholder="ایمیل خود را وارد نمایید"
-          form={form}
-          touched={touched}
-          setForm={setForm}
-          setTouched={setTouched}
-          error={warning.email}
-        />
-        <InputForm
-          type="password"
-          name="password"
-          value={form.password}
-          placeholder="رمز عبور خود را وارد نمایید"
-          form={form}
-          touched={touched}
-          setForm={setForm}
-          setTouched={setTouched}
-          error={warning.password}
-        />
-
+        {authFormSignIn.map((i, index) => (
+          <InputForm
+            key={index}
+            type={i.type}
+            name={i.name}
+            value={form.email}
+            placeholder={i.placeholder}
+            form={form}
+            touched={touched}
+            setForm={setForm}
+            setTouched={setTouched}
+            error={warning[i.name]}
+          />
+        ))}
         {isPending ? (
-          <Loader color="#FDBA74" size={10} />
+          <Loader color="bg-orange-300" size={2} />
         ) : (
           <div>
             <Button
@@ -105,42 +92,18 @@ function SignInPage() {
             </Button>
           </div>
         )}
-        <div className="flex items-center justify-between pt-4 pb-5">
-          <div className="flex items-center justify-center gap-1 text-sm">
-            <span className="text-zinc-500 dark:text-zinc-200">
-              آیا شما ثبت نام نکرده اید؟
-            </span>
-            <Link
-              className="text-blue-400 hover:underline transition-all"
-              href="/signup"
-            >
-              ثبت نام
-            </Link>
-          </div>
-          <Tooltip content="صفحه اصلی">
-            <Link className="text-orange-400" href="/">
-              <ArrowLeftIcon />
-            </Link>
-          </Tooltip>
-        </div>
+        <QuestionAuthForm
+          title="آیا شما ثبت نام نکرده اید؟"
+          link="/signup"
+          labelLink="ثبت نام"
+        />
         <div className="space-y-5 p-5 md:p-3 md:border-t-2 md:pt-5 shadow-medium md:shadow-none rounded-lg md:rounded-none font-bold text-xs text-zinc-500 dark:text-white">
-          <div className="flex items-center justify-between">
-            <h4 className="text-orange-300">ایمیل پنل مالک</h4>
-            <span>alinb99.dev@gmail.com</span>
-          </div>
-          <div className="flex items-center justify-between">
-            <h4 className="text-orange-300">ایمیل پنل ادمین</h4>
-            <span className="text-zinc-600 dark:text-white">
-              reza@gmail.com
-            </span>
-          </div>
-          <div className="flex items-center justify-between">
-            <h4 className="text-orange-300">رمز عبور</h4>
-            <span className="text-zinc-600 dark:text-white">12345678</span>
-          </div>
-          <div className="flex items-center justify-center gap-2">
-            <span>ادمین و مالک امکان خرید از سایت را ندارند</span>
-          </div>
+          {loginInfo.map((i, index) => (
+            <div key={index} className="flex items-center justify-between">
+              <h4 className="text-orange-300">{i.title}</h4>
+              <span>{i.value}</span>
+            </div>
+          ))}
         </div>
       </form>
     </div>

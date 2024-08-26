@@ -1,6 +1,6 @@
 import DarkModeToggle from "../../common/DarkModeToggle";
 import StoreDropDownMobile from "./StoreDropDownMobile";
-import { navbarItem } from "@/constants/other";
+import { navbarItem } from "@/constants/homePageItem";
 import { Logo, LogoType } from "@/utils/svg";
 import { signOut } from "next-auth/react";
 import {

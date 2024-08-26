@@ -1,6 +1,6 @@
 "use client";
 
-import { userInformation } from "@/constants/dashboard";
+import { userInformation } from "@/constants/dashboardItem";
 import { useCallback, useEffect } from "react";
 
 function FormUserInformation({ user, form, setForm }) {

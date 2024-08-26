@@ -25,7 +25,7 @@ export async function GET(req) {
     if (user.role !== "OWNER" && user.role !== "ADMIN") {
       return NextResponse.json({
         status: 422,
-        message: "دسترسی به این بخش برای شما امکان پذیر نیست.",
+        error: "دسترسی به این بخش برای شما امکان پذیر نیست.",
       });
     }
     const url = new URL(req.url);

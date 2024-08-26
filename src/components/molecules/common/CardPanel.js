@@ -1,8 +1,8 @@
 "use client";
 
-import CountUp from "react-countup";
+import CountUp from "./CountUp";
 
-function CardAdminPanel({ count, title, bgColor, bgColorIcon, icon, unit }) {
+function CardPanel({ value, title, bgColor, bgColorIcon, icon, unit }) {
   return (
     <div
       className={`w-full h-14 sm:h-16 lg:h-20 rounded-2xl flex items-center gap-2 md:gap-5 shadow-medium p-2 ${bgColor} text-white`}
@@ -14,7 +14,7 @@ function CardAdminPanel({ count, title, bgColor, bgColorIcon, icon, unit }) {
         <span className="xs:font-bold text-xs lg:text-sm">{title}</span>
         <div>
           <span className="font-bold text-xs md:text-xl">
-            {<CountUp end={count} duration={3} />}
+            {<CountUp end={value} duration={2} />}
           </span>
           <span className="hidden xs:inline text-xs md:font-bold mr-1">
             {unit}
@@ -25,4 +25,4 @@ function CardAdminPanel({ count, title, bgColor, bgColorIcon, icon, unit }) {
   );
 }
 
-export default CardAdminPanel;
+export default CardPanel;

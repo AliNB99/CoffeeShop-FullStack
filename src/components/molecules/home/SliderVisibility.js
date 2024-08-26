@@ -5,6 +5,7 @@ import CardProduct from "@/organisms/common/CardProduct";
 import TitleSection from "@/atoms/home/TitleSection";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef } from "react";
+import NotFoundProductLabel from "@/atoms/home/NotFoundProductLabel";
 
 const breakpoints = {
   610: {
@@ -40,11 +41,15 @@ function SliderVisibility({ data }) {
         spaceBetween={12}
         breakpoints={breakpoints}
       >
-        {data.map((p, index) => (
-          <SwiperSlide key={index} className="my-1" virtualIndex={index}>
-            <CardProduct data={p} />
-          </SwiperSlide>
-        ))}
+        {data.length ? (
+          data.map((p, index) => (
+            <SwiperSlide key={index} className="my-1" virtualIndex={index}>
+              <CardProduct data={p} />
+            </SwiperSlide>
+          ))
+        ) : (
+          <NotFoundProductLabel label="هیچ محصولی یافت نشد؟!" />
+        )}
       </Swiper>
     </div>
   );

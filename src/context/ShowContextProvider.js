@@ -9,6 +9,7 @@ const initialValue = {
   cartSidebar: false,
   storeItem: false,
   details: false,
+  ticketList: false,
   overlay: false,
 };
 

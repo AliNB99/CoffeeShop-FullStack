@@ -15,7 +15,6 @@ export async function GET(req, context) {
     if (comments) {
       return NextResponse.json({
         status: 200,
-        message: "نظرات با موفقیت دریافت شد",
         comments,
       });
     }

@@ -1,11 +1,15 @@
 "use client";
 
+import {
+  addProductForm,
+  AddPropertyListItem,
+  formItem,
+} from "@/constants/dashboardItem";
 import AddSpecifications from "src/components/organisms/admin/AddSpecifications";
 import AddPropertyList from "src/components/organisms/admin/AddPropertyList";
 import { formProductValidation } from "@/utils/validation/dashboard";
 import InputForm from "src/components/molecules/form/InputForm";
 import AddImage from "src/components/molecules/form/AddImage";
-import { addProductForm } from "@/constants/dashboard";
 import Loader from "src/components/atoms/Loader";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
@@ -18,42 +22,22 @@ import {
 import { useRouter } from "next/navigation";
 
 function ProductForm({ product }) {
-  const {
-    isPending: isPendingAddProduct,
-    isError: isErrorAddProduct,
-    mutateAsync: mutateAsyncAddProduct,
-  } = useSubmitAddProduct();
-
-  const {
-    isPending: isPendingEditProduct,
-    isError: isErrorEditProduct,
-    mutateAsync: mutateAsyncEditProduct,
-  } = useSubmitEditProduct();
+  const { isPending: isPendingAdd, mutateAsync: mutateAsyncAdd } =
+    useSubmitAddProduct();
+  const { isPending: isPendingEdit, mutateAsync: mutateAsyncEdit } =
+    useSubmitEditProduct();
 
   const [warning, setWarning] = useState({});
   const [touched, setTouched] = useState({});
-  const [form, setForm] = useState({
-    title: "",
-    description: "",
-    quantity: "",
-    price: "",
-    discount: "",
-    category: "coffee",
-    images: [],
-    advantages: [],
-    disadvantages: [],
-    specifications: [],
-  });
-
-  const { back } = useRouter();
+  const [form, setForm] = useState(formItem);
   const { productId } = useParams();
+  const { back } = useRouter();
 
   useEffect(() => {
     if (product) {
       setForm(product);
     }
   }, []);
-
   useEffect(() => {
     setWarning(formProductValidation(form));
   }, [form]);
@@ -72,21 +56,14 @@ function ProductForm({ product }) {
       });
     }
     let data;
-
     if (product) {
-      data = await mutateAsyncEditProduct({ form, id: productId });
+      data = await mutateAsyncEdit({ form, id: productId });
     } else {
-      data = await mutateAsyncAddProduct(form);
+      data = await mutateAsyncAdd(form);
     }
 
-    if (data.data.error || isErrorAddProduct || isErrorEditProduct) {
-      toast.error(data.data.error);
-    } else {
-      back();
-      toast.success(data.data.message);
-    }
+    back();
   };
-
   return (
     <form className="w-full lg:w-[75%] flex flex-col gap-5">
       {addProductForm.map((i, index) => (
@@ -121,50 +98,29 @@ function ProductForm({ product }) {
         />
       </div>
       <div className="flex flex-col md:flex-row gap-5 my-10">
-        <AddPropertyList
-          color="text-green-500"
-          bgColor="bg-green-100"
-          name="advantages"
-          title="مزایا"
-          form={form}
-          setForm={setForm}
-        />
-        <AddPropertyList
-          color="text-red-500"
-          bgColor="bg-red-100"
-          name="disadvantages"
-          title="معایب"
-          form={form}
-          setForm={setForm}
-        />
+        {AddPropertyListItem.map((i, index) => (
+          <AddPropertyList
+            key={index}
+            color={i.color}
+            bgColor={i.bgColor}
+            name={i.name}
+            title={i.title}
+            form={form}
+            setForm={setForm}
+          />
+        ))}
       </div>
-      {/* add images */}
-
       <AddImage form={form} setForm={setForm} />
-
-      {isPendingAddProduct || isPendingEditProduct ? (
-        product ? (
-          <Loader color="#22C55E" size={10} />
-        ) : (
-          <Loader color="#3B82F6" size={10} />
-        )
-      ) : product ? (
-        <Button
-          type="button"
-          color="text-green-500"
-          bgColor="bg-green-100"
-          clickHandler={submitHandler}
-        >
-          ویرایش
-        </Button>
+      {isPendingAdd || isPendingEdit ? (
+        <Loader color={product ? "bg-green-500" : "bg-blue-500"} size={2} />
       ) : (
         <Button
           type="button"
-          color="text-blue-500"
-          bgColor="bg-blue-100"
+          color={product ? "text-green-500" : "text-blue-500"}
+          bgColor={product ? "bg-green-100" : "bg-blue-100"}
           clickHandler={submitHandler}
         >
-          ثبت
+          {product ? "ویرایش" : "ثبت"}
         </Button>
       )}
     </form>

@@ -1,7 +1,7 @@
 import { BarChart, Bar, XAxis, Tooltip } from "recharts";
 import { sp } from "@/utils/helper/replaceNumber";
 
-const data = [
+const fakeData = [
   {
     name: "قهوه",
     amt: 122030000,
@@ -44,7 +44,7 @@ export default function AmountOfSalesChart() {
         className="pr-5"
         width={300}
         height={400}
-        data={data}
+        data={fakeData}
         margin={{
           top: 5,
           right: 30,

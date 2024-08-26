@@ -1,6 +1,6 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import CartPage from "@/templates/user/CartPage";
 import { getServerSession } from "next-auth";
+import CartPage from "@/templates/CartPage";
 import { redirect } from "next/navigation";
 import connectDB from "@/DB/connectDB";
 import User from "@/models/User";
@@ -18,7 +18,6 @@ async function Cart() {
   const user = await User.findOne({ email });
 
   if (!user) redirect("/signin");
-  if (user.role !== "USER") redirect("/admin");
   return <CartPage user={user} />;
 }
 

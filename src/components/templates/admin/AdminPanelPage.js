@@ -10,8 +10,8 @@ import {
   PresentationChartLineIcon,
   UserGroupIcon,
 } from "@heroicons/react/24/outline";
-import CardAdminPanel from "@/molecules/admin/CardAdminPanel";
 import useIsClient from "src/hooks/useIsClient";
+import CardPanel from "@/molecules/common/CardPanel";
 
 const listCardAdminPanel = [
   {
@@ -58,10 +58,10 @@ function AdminPanelPage() {
       <div className="dashboard-page flex flex-col">
         <div className="grid grid-cols-1 xs:grid-cols-2 lg:grid-cols-4 gap-2 mb-10">
           {listCardAdminPanel.map((i, index) => (
-            <CardAdminPanel
+            <CardPanel
               key={index}
               title={i.title}
-              count={i.count}
+              value={i.count}
               bgColor={i.bgColor}
               icon={i.icon}
               unit={i.unit}
