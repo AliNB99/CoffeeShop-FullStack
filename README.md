@@ -1,7 +1,7 @@
-یک پروژه کافی شاپ به همراه پنل ادمین جهت مدیریت محصولات و کابران و...
-در این پروژه از دیتا بیس mongoDB استفاده شده.
+پروژه کافی شاپ به همراه پنل ادمین جهت مدیریت محصولات و کابران و...
+در این پروژه از react18 , next14, nextAuth, nextui ,... و برای دیتابیس از mongoDB استفاده شده.
 
-برای نمایش سایت روی لینک کلیک کنید : [`coffeeShopFullStack`](https://coffee-shop-full-stack.vercel.app)
+برای بازدید از سایت روی لینک کلیک کنید : [`coffeeShopFullStack`](https://coffee-shop-full-stack.vercel.app)
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
