@@ -6,7 +6,6 @@ import { signOut } from "next-auth/react";
 import {
   HomeIcon,
   XMarkIcon,
-  Bars3Icon,
   ChevronDownIcon,
   ShoppingBagIcon,
   ArrowLeftEndOnRectangleIcon,

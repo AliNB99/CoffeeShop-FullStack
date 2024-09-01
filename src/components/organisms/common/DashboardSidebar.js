@@ -4,6 +4,7 @@ import DarkModeToggle from "@/molecules/common/DarkModeToggle";
 import AddAvatarCustom from "@/molecules/common/AddAvatarCustom";
 import { showContext } from "@/context/ShowContextProvider";
 import { usePathname } from "next/navigation";
+import { useSelector } from "react-redux";
 import { signOut } from "next-auth/react";
 import { Chip } from "@nextui-org/react";
 import { useContext } from "react";
@@ -20,7 +21,6 @@ import {
   roleTitle,
   userDashboardItem,
 } from "@/constants/dashboardItem";
-import { useSelector } from "react-redux";
 
 function DashboardSidebar({ user }) {
   const { role, lastName, firstName } = user;

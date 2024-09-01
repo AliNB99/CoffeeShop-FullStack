@@ -1,6 +1,10 @@
 "use client";
 
-import { PencilSquareIcon, UserIcon } from "@heroicons/react/24/outline";
+import {
+  ArrowLeftEndOnRectangleIcon,
+  PencilSquareIcon,
+  UserIcon,
+} from "@heroicons/react/24/outline";
 import { listUserInfo } from "@/constants/dashboardItem";
 import { User } from "@nextui-org/react";
 import Link from "next/link";
@@ -52,7 +56,22 @@ function BuyerInformation({ user }) {
           <PencilSquareIcon />
         </Link>
       </div>
-      {listUserInfo.map((item, index) => createItem(item, index))}
+      {user ? (
+        listUserInfo.map((item, index) => createItem(item, index))
+      ) : (
+        <div className="flex flex-col justify-center items-center">
+          <h4 className="py-5 text-center font-medium text-xs sm:text-sm">
+            جهت خرید ابتدا وارد حساب کاربری خود شوید
+          </h4>
+          <Link
+            className="w-full rounded-lg flex items-center justify-center gap-2 font-medium p-2 bg-blue-100 text-blue-400"
+            href="/signin"
+          >
+            ورود به حساب کاربری
+            <ArrowLeftEndOnRectangleIcon />
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

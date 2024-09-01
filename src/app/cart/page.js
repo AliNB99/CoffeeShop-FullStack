@@ -12,12 +12,11 @@ async function Cart() {
     console.log(error);
   }
 
-  const {
-    user: { email },
-  } = await getServerSession(authOptions);
-  const user = await User.findOne({ email });
+  const session = await getServerSession(authOptions);
 
-  if (!user) redirect("/signin");
+  const user = session
+    ? await User.findOne({ email: session.user.email })
+    : null;
   return <CartPage user={user} />;
 }
 

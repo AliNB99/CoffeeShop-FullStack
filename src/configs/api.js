@@ -8,7 +8,6 @@ const api = axios.create({
 
 api.interceptors.response.use(
   (res) => {
-    console.log(res);
     if (res.data.message) {
       toast.success(res.data.message);
     } else if (res.data.error) {

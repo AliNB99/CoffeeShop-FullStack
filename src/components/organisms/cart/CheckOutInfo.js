@@ -12,7 +12,14 @@ function CheckOutInfo({ user, cart }) {
   const dispatch = useDispatch();
 
   const checkoutHandler = () => {
-    if (!user.phone || !user.bankInfo || !user.postalCode || !user.address) {
+    if (!user) {
+      return toast.error("لطفا ابتدا وارد حساب کاربری خود شوید");
+    } else if (
+      !user.phone ||
+      !user.bankInfo ||
+      !user.postalCode ||
+      !user.address
+    ) {
       return toast.error("لطفا اطلاعات کاربری خود را تکمیل کنید");
     }
     startLoading();
@@ -34,7 +41,7 @@ function CheckOutInfo({ user, cart }) {
         </div>
       ))}
       {isLoading ? (
-        <Loader size={10} color="#22C55E" />
+        <Loader size={2} color="bg-green-300" />
       ) : (
         <Button
           clickHandler={checkoutHandler}

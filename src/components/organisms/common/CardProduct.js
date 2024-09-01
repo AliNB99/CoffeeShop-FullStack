@@ -10,7 +10,7 @@ function CardProduct({ data }) {
 
   return (
     <div className="w-full relative bg-white dark:bg-zinc-700 hover:shadow-medium dark:hover:shadow-zinc-500 rounded-2xl cursor-pointer p-2 md:p-5 transition-all">
-      <Link target="_blank" className="w-full" href={`/products/${_id}`}>
+      <Link className="w-full" href={`/products/${_id}`}>
         <div className="relative flex justify-center">
           {images.length ? (
             <div className="w-full h-32 lg:w-64 lg:min-h-64 flex items-center justify-center ">

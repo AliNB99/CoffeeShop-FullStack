@@ -1,6 +1,10 @@
 "use client";
 
-import { CheckCircleIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import {
+  CheckCircleIcon,
+  PencilSquareIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import FormUserInformation from "../../molecules/user/FormUserInformation";
 import { useChangeUserInformation } from "src/hooks/useQuery/mutations";
 import { listCartUserPanel, userInformation } from "@/constants/dashboardItem";
@@ -98,21 +102,37 @@ function UserInformation({ user }) {
       </div>
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center px-3">
-          <h1 className="text-orange-300 text-xl font-bold">مشخصات کاربر</h1>
-          <div className="flex items-center gap-3">
+          <h1 className="text-orange-300 text-base md:text-xl font-bold">
+            مشخصات کاربر
+          </h1>
+          <div className="flex items-center gap-1">
             {showEditForm ? (
-              <Tooltip content="ثبت تغییرات">
-                <Button
-                  className="flex items-center"
-                  isLoading={isPending}
-                  onPress={submitFormHandler}
-                  variant="flat"
-                  color="success"
-                >
-                  <span className="text-xs font-bold">ثبت تغییرات</span>
-                  <CheckCircleIcon />
-                </Button>
-              </Tooltip>
+              <>
+                <Tooltip content="ثبت تغییرات">
+                  <Button
+                    className="flex items-center"
+                    isLoading={isPending}
+                    onPress={submitFormHandler}
+                    variant="flat"
+                    color="success"
+                  >
+                    <span className="text-xs font-bold">ثبت تغییرات</span>
+                    <CheckCircleIcon />
+                  </Button>
+                </Tooltip>
+                <Tooltip content="لغو">
+                  <Button
+                    isIconOnly
+                    className="flex items-center"
+                    isLoading={isPending}
+                    onPress={() => setShowEditForm(false)}
+                    variant="flat"
+                    color="danger"
+                  >
+                    <XMarkIcon />
+                  </Button>
+                </Tooltip>
+              </>
             ) : (
               <Tooltip content="ویرایش پروفایل">
                 <Button

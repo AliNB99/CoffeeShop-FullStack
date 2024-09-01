@@ -13,10 +13,16 @@ function UserDropDown({ role }) {
     <div className="absolute left-0 mt-2 opacity-0 invisible group-hover:opacity-100 delay-75 group-hover:visible w-52 text-white bg-white dark:bg-zinc-700 shadow-normal p-3 rounded-2xl transition-all">
       <ul className="space-y-1 text-base border-b border-gray-200 dark:border-white/10 pb-5 child:flex child:items-center child:gap-2.5 child:tracking-normal text-zinc-700 dark:text-white child:h-10 child-hover:bg-orange-200/20 child-hover:text-orange-300 child:pr-2.5 child:rounded-md child:transition-all">
         {role !== "USER" ? (
-          <li>
-            <BriefcaseIcon />
-            <Link href="/admin">پنل ادمین</Link>
-          </li>
+          <>
+            <li>
+              <BriefcaseIcon />
+              <Link href="/admin">پنل ادمین</Link>
+            </li>
+            <li>
+              <EnvelopeIcon />
+              <Link href="/admin/ticket-list">لیست پیام ها</Link>
+            </li>
+          </>
         ) : (
           <>
             <li>
@@ -27,12 +33,12 @@ function UserDropDown({ role }) {
               <ShoppingBagIcon />
               <Link href="/cart">سفارشات من</Link>
             </li>
+            <li>
+              <EnvelopeIcon />
+              <Link href="/dashboard/ticket">لیست پیام ها</Link>
+            </li>
           </>
         )}
-        <li>
-          <EnvelopeIcon />
-          <Link href="/admin/ticket-list">لیست پیام ها</Link>
-        </li>
       </ul>
       <button
         onClick={() => signOut()}
