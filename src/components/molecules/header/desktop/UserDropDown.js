@@ -31,7 +31,7 @@ function UserDropDown({ role }) {
         )}
         <li>
           <EnvelopeIcon />
-          <Link href="/dashboard/ticket">لیست پیام ها</Link>
+          <Link href="/admin/ticket-list">لیست پیام ها</Link>
         </li>
       </ul>
       <button

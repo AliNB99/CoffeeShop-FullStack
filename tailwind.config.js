@@ -26,7 +26,7 @@ module.exports = {
       },
       boxShadow: {
         normal: "0px 1px 10px 0px rgba(0, 0, 0, 0.05)",
-        medium: "0px 1px 10px 0px rgba(0, 0, 0, 0.2)",
+        medium: "0px 1px 5px 0px rgba(0, 0, 0, 0.2)",
       },
       container: {
         center: true,

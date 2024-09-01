@@ -1,5 +1,5 @@
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import UsersTable from "@/organisms/admin/UsersTable";
+import UsersTable from "@/organisms/admin/table/UsersTable";
 import { getServerSession } from "next-auth";
 import TitlePage from "@/atoms/TitlePage";
 import User from "@/models/User";

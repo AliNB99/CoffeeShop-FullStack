@@ -10,7 +10,6 @@ import { useGetData } from "src/hooks/useQuery/queries";
 import { useQueryClient } from "@tanstack/react-query";
 import { sp } from "@/utils/helper/replaceNumber";
 import CustomImage from "@/atoms/CustomImage";
-import toast from "react-hot-toast";
 import { Logo } from "@/utils/svg";
 import Link from "next/link";
 import {

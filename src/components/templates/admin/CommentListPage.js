@@ -1,4 +1,4 @@
-import CommentsTable from "@/organisms/admin/CommentTable";
+import CommentsTable from "@/organisms/admin/table/CommentTable";
 import TitlePage from "@/atoms/TitlePage";
 
 function CommentListPage() {
