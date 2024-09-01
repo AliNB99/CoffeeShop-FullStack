@@ -1,6 +1,8 @@
 یک پروژه کافی شاپ به همراه پنل ادمین جهت مدیریت محصولات و کابران و...
 در این پروژه از دیتا بیس mongoDB استفاده شده.
 
+برای نمایش سایت روی لینک کلیک کنید : coffee-shop-full-stack.vercel.app
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
